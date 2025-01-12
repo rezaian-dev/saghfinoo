@@ -1,0 +1,67 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node.js dependencies
+node_modules/
+package-lock.json
+
+# Output and build files
+dist/
+dist-ssr
+build/
+output.css
+
+# TailwindCSS output
+src/styles/tailwind/output.css
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Vite cache
+.vite
+.vite-inspect
+
+# Editor directories and files
+.vscode/
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Coverage files
+coverage/
+
+# Generated files by linter/prettier
+.eslintcache
+.stylelintcache
+
+# Git merge conflict
+*.orig
+
+# Optional: Ignore test snapshots (if using Jest)
+__snapshots__/
+*.snap
+
+# Ignore public files (if not source-controlled)
+public/*.html
