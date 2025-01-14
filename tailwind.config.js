@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -22,40 +19,41 @@ module.exports = {
           12: "#212121",
           13: "#121212",
         },
-        shade:{
-          1:"#B41818",
-          2:"#9E1515",
-          3:"#871212",
-          4:"#700F0F",
-          5:"#5A0C0C",
-          6:"#430909",
+        shade: {
+          1: "#B41818",
+          2: "#9E1515",
+          3: "#871212",
+          4: "#700F0F",
+          5: "#5A0C0C",
+          6: "#430909",
         },
-        tint:{
-          1:"#FDF1F1",
-          2:"#FCE8E8",
-          3:"#F9D2D2",
-          4:"#F6BBBB",
-          5:"#FCA197",
-          6:"#F66262",
-          7:"#E43434",
+        tint: {
+          1: "#FDF1F1",
+          2: "#FCE8E8",
+          3: "#F9D2D2",
+          4: "#F6BBBB",
+          5: "#FCA197",
+          6: "#F66262",
+          7: "#E43434",
         },
-        elight:{
-         1:"#ED2E2E",
-         2:"#FFF2F2",
+        elight: {
+          1: "#ED2E2E",
+          2: "#FFF2F2",
         },
-        slight:{
-          1:"#00966D",
-          2:"#F3FDFA",
+        slight: {
+          1: "#00966D",
+          2: "#F3FDFA",
         },
-        wlight:{
-          1:"#F4B740",
-          2:"#FFF8E1",
+        wlight: {
+          1: "#F4B740",
+          2: "#FFF8E1",
         },
-        black:"#0C0C0C",
-        primary:"#CB1B1B",
-        error:"#C30000",
-        success:"#00966D",
-        warning:"#A9791C",
+        black: "#0C0C0C",
+        primary: "#CB1B1B",
+        error: "#C30000",
+        success: "#00966D",
+        warning: "#A9791C",
+        info: "#2F80ED",
       },
       container: {
         center: true,
@@ -68,9 +66,18 @@ module.exports = {
         Shabnam: "shabnam",
       },
       backgroundImage: {
-        'home-desktop': "url('../images/backgrounds/background.webp')",
+        "home-desktop": "url('../images/backgrounds/background.webp')",
+      },
+      boxShadow: {
+        custom:
+          "0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 0 4px 0 rgba(47, 128, 237, 0.19)",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addVariant }) {
+      addVariant("child", "&>*");
+      addVariant("child-hover", "&>*:hover");
+    },
+  ],
 };
