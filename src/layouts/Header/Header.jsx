@@ -9,12 +9,12 @@ export default function Header() {
   // Handle menu open/close
   const handleMenuToggle = ({ target }) => {
     // Open menu when hamburger icon is clicked
-    if (target.className === "hamberger-menu") {
+    if (target.className === "menu-desktop__hamburger") {
       setIsOpen(true);
     }
     // Close menu when close button or outside of the menu is clicked
     else if (
-      target.className === "close-circle" ||
+      target.className === "menu-mobile__close-icon" ||
       !menuRef.current.contains(target)
     ) {
       setIsOpen(false);
@@ -37,7 +37,7 @@ export default function Header() {
       <NavHeaderMobile isOpen={isOpen} menuRef={menuRef} handleMenuToggle={handleMenuToggle}/>
 
       {/* Overlay background */}
-      <div className={`fixed ${isOpen ? "block" : "hidden"} inset-0 bg-info opacity-40 z-30`}/>
+      <div className={`overlay  ${isOpen ? "block" : "hidden"}`}/>
     </>
   );
 }

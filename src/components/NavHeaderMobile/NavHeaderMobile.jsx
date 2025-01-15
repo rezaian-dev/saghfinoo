@@ -18,26 +18,26 @@ export default function NavHeaderMobile({ isOpen, handleMenuToggle, menuRef }) {
       <div ref={menuRef} className={`menu-mobile ${isOpen ? "translate-x-0 opacity-100" : "translate-x-[100%] opacity-0"}`}
       >
         {/* Close button */}
-        <div className="flex justify-end px-4 mb-2 cursor-pointer">
-          <span className="close-circle">
+        <div className="menu-mobile__close-button">
+          <span className="menu-mobile__close-icon">
             <CloseCircle size="24" color="#505050" variant="Outline" onClick={handleMenuToggle}/>
           </span>
         </div>
 
-        {/* Profile section */}
-        <div className="py-[29px] bg-gray-1 px-4">
-          <a className="flex gap-x-2 items-center" href="#">
+        {/* Profile section - Login or Sign-up */}
+        <div className="menu-mobile__profile-section">
+          <a className="menu-mobile__profile-link" href="#">
             <ProfileCircle size="20" color="#505050" variant="Outline" />
             <span>ورود یا ثبت‌نام</span>
           </a>
         </div>
 
-        {/* Menu items */}
-        <ul className="pl-4 pr-2 space-y-6 my-6 text-gray-10">
+        {/* Menu items list */}
+        <ul className="menu-mobile__list">
           {menuItemsMobile.map(({ label, icon }) => (
-            <li key={label} className="hover:bg-gray-4 hover:text-gray-13 rounded-lg p-2 transition-all">
+            <li key={label} className="menu-mobile__list-item hover:bg-gray-4 hover:text-gray-13">
               <a href="#" className="flex-center justify-between">
-                <div className="flex items-center gap-x-2">
+                <div className="menu-mobile__link-content">
                   {icon}
                   <span>{label}</span>
                 </div>
