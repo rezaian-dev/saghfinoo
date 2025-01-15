@@ -1,54 +1,43 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import HeaderDesktop from "../../components/NavHeaderDesktop/NavHeaderDesktop";
+import NavHeaderMobile from "../../components/NavHeaderMobile/NavHeaderMobile";
+
 export default function Header() {
-  const menuItems = [
-    { id: 1, name: "اجاره" },
-    { id: 2, name: "خرید" },
-    { id: 3, name: "املاک و مستغلات" },
-    { id: 4, name: "مشاورین املاک" },
-    { id: 5, name: "اخبار روز" },
-  ];
+  const [isOpen, setIsOpen] = useState(false);
+
+  const menuRef = useRef(null);
+  // Handle menu open/close
+  const handleMenuToggle = ({ target }) => {
+    // Open menu when hamburger icon is clicked
+    if (target.className === "hamberger-menu") {
+      setIsOpen(true);
+    }
+    // Close menu when close button or outside of the menu is clicked
+    else if (
+      target.className === "close-circle" ||
+      !menuRef.current.contains(target)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener to detect clicks outside the menu
+    document.addEventListener("click", handleMenuToggle);
+
+    return () => {
+      // Clean up event listener on component unmount
+      document.removeEventListener("click", handleMenuToggle);
+    };
+  }, []);
 
   return (
-    <div className="flex justify-between items-center bg-white text-gray-10 px-9 py-[26px] rounded-2xl">
-      {/* Navigation Menu */}
-      <nav className="flex">
-        {/* Logo */}
-        <img src="images/logos/Logo.webp" loading="lazy" alt="Logo" />
+    <>
+      <HeaderDesktop />
+      <NavHeaderMobile isOpen={isOpen} menuRef={menuRef} handleMenuToggle={handleMenuToggle}/>
 
-        {/* Menu Items */}
-        <ul className="flex items-center mr-11 gap-x-6">
-          {/* Single Menu Item */}
-          {menuItems.map((item) => (
-            <li key={item.id} className="group relative">
-              <a
-                href="#"
-                className="hover:text-red-600 transition-colors duration-300"
-              >
-                {item.name}
-              </a>
-              {/* Underline effect */}
-              <span className="absolute right-0 bottom-[-4px] h-[2px] w-0 bg-primary group-hover:w-full transition-all duration-300"></span>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      {/* User Actions */}
-      <div className="flex items-center gap-x-9">
-        {/* Login Button */}
-        <a
-          href="#"
-          className="hover:text-primary transition-colors duration-300"
-        >
-          ورود
-        </a>
-        {/* Post Ad Button */}
-        <a
-          href="#"
-          className="text-primary py-2 px-4 border border-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
-        >
-          ثبت آگهی
-        </a>
-      </div>
-    </div>
+      {/* Overlay background */}
+      <div className={`fixed ${isOpen ? "block" : "hidden"} inset-0 bg-info opacity-40 z-30`}/>
+    </>
   );
 }

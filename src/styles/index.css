@@ -9,6 +9,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+svg{
+  user-select: none;
+  pointer-events: none;
+}
 
 /* Shabnam Font Face Declarations
   Each weight is checked locally first, then downloads if not found */
@@ -65,4 +69,24 @@ body {
   overflow-x: hidden;
   font-family: "shabnam";
   font-weight: 400;
+}
+@layer components{
+  .flex-center{
+    @apply flex justify-center items-center;
+  }
+  .undeline-effect{
+   @apply absolute right-0 bottom-[-4px] h-[2px] w-0 bg-primary group-hover:w-full transition-all duration-300;
+  }
+  .menu-desktop {
+    @apply absolute left-0 right-0 top-0 md:static flex justify-between items-center bg-white text-gray-10 px-4 h-[58px] md:h-[115px] md:px-9 md:rounded-2xl;
+  }
+  .menu-mobile{
+   @apply overflow-y-auto fixed right-0 top-0 bottom-0 w-full max-w-[360px] bg-white z-40 pt-10 font-medium text-xs text-gray-13 transition-all duration-300 ease-in-out transform ;
+  }
+  .register-ad{
+    @apply text-primary font-medium text-xs flex justify-center items-center w-[72px] h-[34px] border border-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300;
+  }
+  .Register-ad-desktop{
+    @apply text-primary py-2 px-4 border border-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-300
+  }
 }
