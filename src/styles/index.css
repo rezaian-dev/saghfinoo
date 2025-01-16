@@ -153,7 +153,10 @@ bg-white text-gray-10  h-[58px] md:static absolute    md:h-[115px] md:px-9 md:ro
  }
  .menu-mobile__list-item{
   @apply rounded-lg p-2 transition-all;
- } 
+ }
+ .menu-mobile__list-item--active{
+  @apply bg-gray-4 text-gray-13;
+ }
  .menu-mobile__link-content{
   @apply flex items-center gap-x-2;
  }
