@@ -35,7 +35,7 @@ export default function NavHeaderMobile({ isOpen, handleMenuToggle, menuRef }) {
         {/* Menu items list */}
         <ul className="menu-mobile__list">
           {menuItemsMobile.map(({ label, icon }) => (
-            <li key={label} className="menu-mobile__list-item hover:bg-gray-4 hover:text-gray-13">
+            <li key={label} className="menu-mobile__list-item">
               <a href="#" className="flex-center justify-between">
                 <div className="menu-mobile__link-content">
                   {icon}
