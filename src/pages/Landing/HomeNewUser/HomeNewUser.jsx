@@ -25,7 +25,7 @@ export default function HomeNewUser() {
           </div>
         </section>
 
-        <section className="home-new-user__type-houses">
+        <section className="home-new-user__type-houses-section">
           <div className="container">
           {/* Housing Scout Section */}
           <HousingScout/>
