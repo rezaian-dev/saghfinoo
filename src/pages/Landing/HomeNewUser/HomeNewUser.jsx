@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import HeaderContent from "../../../components/HeaderContent/HeaderContent";
 import Header from "../../../layouts/Header/Header";
 import HousingPlanner from "../../../components/HousingPlanner/HousingPlanner";
+import HousingScout from "../../../components/HousingScout/HousingScout";
 
 export default function HomeNewUser() {
   return (
@@ -21,6 +22,12 @@ export default function HomeNewUser() {
           {/* Container for the Housing Planner */}
           <div className="container">
             <HousingPlanner />
+          </div>
+        </section>
+        <section className="home-new-user__type-houses-section">
+          <div className="container">
+          {/* Housing Scout Section */}
+          <HousingScout/>
           </div>
         </section>
       </main>
