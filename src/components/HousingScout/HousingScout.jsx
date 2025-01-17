@@ -21,6 +21,5 @@ export default function HousingScout() {
       {dataCart.map(item => <HousingScoutBox key={item.id} {...item} />)}
     </div>
   </>
-  
   );
 }

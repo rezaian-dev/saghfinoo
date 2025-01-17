@@ -18,6 +18,5 @@ export default function HousingScoutBox({ img, alt, price, caption }) {
       </div>
     </div>
   </>
-  
   );
 }
