@@ -24,8 +24,9 @@ export default function HomeNewUser() {
             <HousingPlanner />
           </div>
         </section>
-        <section className="home-new-user mt-[88px]">
+        <section className="home-new-user__type-houses">
           <div className="container">
+          {/* Housing Scout Section */}
           <HousingScout/>
           </div>
         </section>

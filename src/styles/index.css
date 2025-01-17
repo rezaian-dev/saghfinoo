@@ -200,4 +200,7 @@ body {
   .housing-scout__grid {
     @apply grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6;
   }
+  .home-new-user__type-houses{
+    @apply mt-12 lg:mt-[88px];
+  }
 }
