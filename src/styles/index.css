@@ -81,7 +81,7 @@ body {
     @apply absolute right-0 bottom-[-4px] h-[2px] w-0 bg-primary group-hover:w-full transition-all duration-300;
   }
   .menu-desktop {
-    @apply px-4 flex-center justify-betweenbg-white text-gray-10 h-[58px] md:static absolute md:h-[115px] md:px-9 md:rounded-2xl left-0 right-0 top-0;
+    @apply px-4 flex-center justify-between bg-white text-gray-10 h-[58px] md:static absolute md:h-[115px] md:px-9 md:rounded-2xl left-0 right-0 top-0;
   }
   .menu-mobile {
     @apply overflow-y-auto fixed right-0 top-0 bottom-0 w-full max-w-[360px] bg-white z-40 pt-10 font-medium text-xs text-gray-13 transition-all duration-300 ease-in-out transform;
@@ -200,7 +200,7 @@ body {
   .housing-scout__grid {
     @apply grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6;
   }
-  .home-new-user__type-houses{
+  .home-new-user__type-houses {
     @apply mt-12 lg:mt-[88px];
   }
 }
