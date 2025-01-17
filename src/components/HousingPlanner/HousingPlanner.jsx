@@ -33,7 +33,7 @@ export default function HousingPlanner() {
   ];
   return (
     <>
-    {/* Section Title */}
+      {/* Section Title */}
       <h3 className="housing-planner__title">
         سقفینو چطور به خانه‌دار شدن شما کمک می‌کند
       </h3>

@@ -4,7 +4,7 @@ export default function HousingInfoBox({ title, caption, img, alt, btnContent })
   return (
     <div className="housing-info-box hover:translate-y-[-10px] hover:shadow-2xl">
       {/* Image Container */}
-      <div className="lg:w-[280px] lg:h-[145px]">
+      <div>
         <img className="w-full h-full" src={img} alt={alt} />
       </div>
       {/* Content Section (Title and Caption) */}

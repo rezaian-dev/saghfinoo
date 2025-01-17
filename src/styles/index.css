@@ -81,9 +81,7 @@ body {
     @apply absolute right-0 bottom-[-4px] h-[2px] w-0 bg-primary group-hover:w-full transition-all duration-300;
   }
   .menu-desktop {
-    @apply px-4 
-flex-center justify-between
-bg-white text-gray-10  h-[58px] md:static absolute    md:h-[115px] md:px-9 md:rounded-2xl left-0 right-0 top-0;
+    @apply px-4 flex-center justify-betweenbg-white text-gray-10 h-[58px] md:static absolute md:h-[115px] md:px-9 md:rounded-2xl left-0 right-0 top-0;
   }
   .menu-mobile {
     @apply overflow-y-auto fixed right-0 top-0 bottom-0 w-full max-w-[360px] bg-white z-40 pt-10 font-medium text-xs text-gray-13 transition-all duration-300 ease-in-out transform;
@@ -167,10 +165,10 @@ bg-white text-gray-10  h-[58px] md:static absolute    md:h-[115px] md:px-9 md:ro
     @apply text-[14px] md:text-2xl lg:text-[32px] font-bold text-gray-11 mb-8;
   }
   .housing-planner__grid {
-    @apply grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:auto-rows-[511px];
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
   }
   .housing-info-box {
-    @apply p-6 lg:p-8 bg-gray-2 rounded-2xl flex-center flex-col text-center relative transform transition-transform duration-500;
+    @apply p-6 lg:p-8 bg-gray-2 border border-gray-4 rounded-2xl flex-center flex-col text-center relative transform transition-transform duration-500;
   }
   .housing-info-box__title {
     @apply text-[14px] md:text-lg lg:text-xl text-gray-11 font-bold mb-3;
@@ -180,5 +178,26 @@ bg-white text-gray-10  h-[58px] md:static absolute    md:h-[115px] md:px-9 md:ro
   }
   .housing-info-box__button {
     @apply flex-center w-full h-10 bg-primary transition-all delay-100 text-xs  md:text-sm text-white rounded-lg;
+  }
+  .housing-scout__title {
+    @apply text-[14px] md:text-2xl lg:text-[32px] font-bold text-gray-11 mb-8;
+  }
+  .housing-scout-box {
+    @apply bg-gray-2 rounded-lg border border-gray-5 transform transition-all duration-300;
+  }
+  .housing-scout-box__image {
+    @apply w-full rounded-t-lg;
+  }
+  .housing-scout-box__content {
+    @apply my-4 text-gray-10 text-center;
+  }
+  .housing-scout-box__price {
+    @apply font-bold text-base md:text-lg lg:text-xl;
+  }
+  .housing-scout-box__caption {
+    @apply text-[14px] lg:text-base;
+  }
+  .housing-scout__grid {
+    @apply grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6;
   }
 }
