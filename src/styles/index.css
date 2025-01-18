@@ -81,7 +81,7 @@ body {
     @apply absolute right-0 bottom-[-4px] h-[2px] w-0 bg-primary group-hover:w-full transition-all duration-300;
   }
   .menu-desktop {
-    @apply px-4 flex-center justify-betweenbg-white text-gray-10 h-[58px] md:static absolute md:h-[115px] md:px-9 md:rounded-2xl left-0 right-0 top-0;
+    @apply px-4 flex-center justify-between bg-white text-gray-10 h-[58px] md:static absolute md:h-[115px] md:px-9 md:rounded-2xl left-0 right-0 top-0;
   }
   .menu-mobile {
     @apply overflow-y-auto fixed right-0 top-0 bottom-0 w-full max-w-[360px] bg-white z-40 pt-10 font-medium text-xs text-gray-13 transition-all duration-300 ease-in-out transform;
@@ -102,7 +102,7 @@ body {
     @apply text-xs max-w-[216px] sm:max-w-full text-center sm:text-sm md:text-xl lg:text-2xl;
   }
   .search-box {
-    @apply flex flex-col bg-white gap-y-[7px] md:gap-y-2.5 max-w-[816px] pb-2 md:pb-3 pt-1 md:pt-3.5 pl-4 pr-5 md:px-7 rounded-lg md:rounded-xl mx-auto mt-[55px] md:mt-[72px] border focus-within:shadow-custom focus-within:border-info;
+    @apply flex flex-col bg-white gap-y-[7px] md:gap-y-2.5 max-w-[816px] pb-2 md:pb-3 pt-1 md:pt-3.5 pl-4 pr-5 md:px-7 rounded-lg md:rounded-xl mx-auto mt-[55px] md:mt-[72px] transition-all border focus-within:shadow-info focus-within:border-info;
   }
   .search-box__toggle-buttons {
     @apply flex gap-x-0.5 justify-center text-gray-11 font-medium  text-sm sm:text-base md:text-lg lg:text-2xl child:max-w-[379px] child:w-full child:h-[27px] child:md:h-10;
@@ -231,7 +231,7 @@ body {
     @apply text-base sm:text-lg  md:text-2xl lg:text-[32px] font-bold text-gray-11 mb-8;
   }
   .housing-planner__grid {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center  gap-6;
   }
   .housing-info-box {
     @apply p-6 lg:p-8 bg-gray-2 border border-gray-4 rounded-2xl flex-center flex-col text-center relative transform transition-transform duration-500;
@@ -269,4 +269,25 @@ body {
   .home-new-user__type-houses-section {
     @apply mt-12 lg:mt-[88px];
   }
+  .home-new-user__support-section{
+    @apply mt-12 lg:mt-[88px];
+  }
+  .housing-support__text{
+    @apply text-gray-12 text-right md:text-center;
+  }
+  .housing-support__title{
+    @apply font-medium text-[14px] md:text-[32px];
+  }
+  .housing-support__description{
+    @apply text-xs md:text-2xl;
+  }
+  .housing-support__grid{
+    @apply grid grid-cols-2 sm:grid-cols-[repeat(auto-fit,188px)] auto-rows-[172px] md:auto-rows-[220px] justify-center gap-4 lg:gap-32 mt-5 lg:mt-10;
+  }
+  .housing-support-box{
+    @apply  px-7  md:px-4 rounded-2xl flex-center flex-col shadow-1 border-2 gap-y-1 border-gray-2 transform transition-all duration-300;
+  }
+  .housing-support-box__caption{
+    @apply text-xs md:text-lg text-black text-center;
+  } 
 }

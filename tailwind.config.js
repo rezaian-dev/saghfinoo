@@ -69,8 +69,8 @@ module.exports = {
         "home-desktop": "url('../images/backgrounds/background.webp')",
       },
       boxShadow: {
-        custom:
-          "0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 0 4px 0 rgba(47, 128, 237, 0.19)",
+        info:"0 0 8px 4px rgba(47, 128, 237,.19)",
+        1:"0 2px 8px 0 rgba(0,0,0,.5)"
       },
     },
   },
