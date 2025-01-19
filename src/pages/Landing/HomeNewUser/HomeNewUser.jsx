@@ -4,6 +4,7 @@ import Header from "../../../layouts/Header/Header";
 import HousingPlanner from "../../../components/HousingPlanner/HousingPlanner";
 import HousingScout from "../../../components/HousingScout/HousingScout";
 import HousingSupport from "../../../components/HousingSupport/HousingSupport";
+import HousingNews from "../../../components/HousingNews/HousingNews";
 
 export default function HomeNewUser() {
   return (
@@ -25,7 +26,6 @@ export default function HomeNewUser() {
         {/* Type of Houses Section */}
         <section className="home-new-user__type-houses-section">
           <div className="container">
-            {/* Housing Scout Section */}
             <HousingScout />
           </div>
         </section>
@@ -33,6 +33,12 @@ export default function HomeNewUser() {
         <section className="home-new-user__support-section">
           <div className="container">
             <HousingSupport />
+          </div>
+        </section>
+        {/* Housing News Section */}
+        <section className="home-new-user__news-section">
+          <div className="container">
+          <HousingNews/>
           </div>
         </section>
       </main>
