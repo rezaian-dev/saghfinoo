@@ -230,29 +230,146 @@ body {
   .home-new-user__news-section {
     @apply mt-12 lg:mt-[88px];
   }
-  .housing-news__title{
+  .housing-news__title {
     @apply text-[14px] md:text-2xl lg:text-[32px] font-bold text-gray-11 mb-8;
   }
-  .housing-news__carousel{
+  .housing-news__carousel {
     @apply flex-center justify-between relative;
   }
-  .housing-news__slider-button{
+  .housing-news__slider-button {
     @apply flex-center w-[40px] h-[40px] xl:w-[68px] xl:h-[60px] rounded-full bg-white absolute top-0 bottom-0 m-auto
     z-10 shadow-slider border border-gray-2 cursor-pointer;
   }
-  .housing-news__slider-button--next{
+  .housing-news__slider-button--next {
     @apply left-[-2%] xl:left-[-1%];
   }
-  .housing-news__slider-button--prev{
+  .housing-news__slider-button--prev {
     @apply right-[-2%] xl:right-[-1%];
   }
-  .housing-news-box{
+  .housing-news-box {
     @apply bg-gray-2 pb-[30px] w-full rounded-lg;
   }
-  .housing-news-box__image{
+  .housing-news-box__image {
     @apply rounded-t-lg w-full;
   }
-  .housing-news-box__caption{
+  .housing-news-box__caption {
     @apply text-gray-10 text-xs sm:text-base md:text-lg lg:text-xl font-bold mt-6 px-5 line-clamp-2;
+  }
+  .home-new-user__footer {
+    @apply mt-[104px] bg-gray-2;
+  }
+  .footer-mobile {
+    @apply block md:hidden pt-12;
+  }
+  .footer-mobile__description {
+    @apply flex flex-col gap-y-1 mt-4;
+  }
+  .footer-mobile__title {
+    @apply text-gray-12 text-base;
+  }
+  .footer-mobile__subtitle {
+    @apply text-gray-11 text-xs;
+  }
+  .footer-mobile__categories {
+    @apply flex justify-between mt-4 mb-[29px];
+  }
+  .footer-mobile__description-text {
+    @apply text-[10px] text-gray-9 leading-5 mt-[29px] mb-6;
+  }
+  .footer-mobile__services {
+    @apply flex items-start justify-between mb-7;
+  }
+  .footer-mobile__trust-logo {
+    @apply flex ml-[34px] justify-end mb-6;
+  }
+  .services-section__title {
+    @apply inline-block text-gray-11 text-[14px] mb-2;
+  }
+  .services-section__list {
+    @apply flex flex-col items-start text-gray-9;
+  }
+  .services-section__list--mobile {
+    @apply text-[10px];
+  }
+  .services-section__list--desktop {
+    @apply text-xs;
+  }
+  .services-section__list--with-icons {
+    @apply space-y-[4px];
+  }
+  .services-section__list--no-icons {
+    @apply space-y-[2px];
+  }
+  .services-section__list-item {
+    @apply flex items-center gap-x-[1px] text-[10px] md:text-xs;
+  }
+  .services-section__trust-logo {
+    @apply !mt-[93px];
+  }
+  .home-new-user__footer-copyright {
+    @apply hidden md:block text-center py-4 text-xs bg-gray-3 text-gray-8;
+  }
+  .category-boxes__content {
+    @apply overflow-hidden transition-all duration-300;
+  }
+  .category-boxes__title {
+    @apply inline-block text-xs text-gray-11 mb-2;
+  }
+  .category-boxes__list {
+    @apply flex flex-col items-start justify-start space-y-1;
+  }
+  .category-boxes__list-item {
+    @apply text-gray-9 text-[10px];
+  }
+  .category-boxes__toggle {
+    @apply flex-center text-xs gap-x-[1px] justify-start text-shade-3 cursor-pointer mt-1;
+  }
+  .category-boxes__toggle-icon {
+    @apply transition-transform duration-300;
+  }
+  .contact-info-box__title {
+    @apply text-[14px] text-gray-11 mb-2;
+  }
+  .contact-info-box__list {
+    @apply space-y-1;
+  }
+  .contact-info-box__list-item {
+    @apply text-xs text-gray-11;
+  }
+  .contact-info-box__link {
+    @apply flex items-center gap-x-[1px];
+  }
+  .footer-desktop {
+    @apply hidden md:block;
+  }
+  .footer-desktop__title {
+    @apply text-center text-gray-12 font-bold text-[32px] pt-12 pb-[42px];
+  }
+  .footer-desktop__categories-section {
+    @apply border-b border-gray-5 pb-6 mb-6 xl:pr-[104px] xl:pl-[69px] flex justify-between items-start;
+  }
+  .footer-desktop__services-section {
+    @apply xl:pr-[104px] xl:pl-[83px] flex justify-between items-start;
+  }
+  .footer-desktop__graphic {
+    @apply mt-[27px];
+  }
+  .services-section {
+    @apply flex w-full gap-x-[20px] xl:gap-x-[66px];
+  }
+  .services-section__left {
+    @apply flex-center flex-col items-start;
+  }
+  .services-section__right {
+    @apply flex justify-between flex-grow;
+  }
+  .services-section__description {
+    @apply text-gray-11 text-xs mt-6;
+  }
+  .services-section__subtitle {
+    @apply inline-block mb-2 text-base;
+  }
+  .services-section__text {
+    @apply max-w-[230px] leading-6;
   }
 }

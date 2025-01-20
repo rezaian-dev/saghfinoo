@@ -5,6 +5,7 @@ import HousingPlanner from "../../../components/HousingPlanner/HousingPlanner";
 import HousingScout from "../../../components/HousingScout/HousingScout";
 import HousingSupport from "../../../components/HousingSupport/HousingSupport";
 import HousingNews from "../../../components/HousingNews/HousingNews";
+import Footer from "../../../layouts/Footer/Footer";
 
 export default function HomeNewUser() {
   return (
@@ -16,6 +17,7 @@ export default function HomeNewUser() {
           <HeaderContent />
         </div>
       </header>
+      {/* Main section of the page which contains all the core content */}
       <main className="home-new-user__main">
         {/* Empowerment Section */}
         <section className="home-new-user__empowerment-section">
@@ -38,10 +40,18 @@ export default function HomeNewUser() {
         {/* Housing News Section */}
         <section className="home-new-user__news-section">
           <div className="container">
-          <HousingNews/>
+            <HousingNews />
           </div>
         </section>
       </main>
+        {/* Footer container that holds the Footer component */}
+      <footer className="home-new-user__footer">
+        <div className="container">
+          <Footer />
+        </div>
+         {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
+        <p className="home-new-user__footer-copyright">حقوق این سایت متعلق به سقفینو است</p>
+      </footer>
     </>
   );
 }
