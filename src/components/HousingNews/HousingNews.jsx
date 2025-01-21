@@ -12,11 +12,11 @@ export default function HousingNews() {
   const [swiper, setSwiper] = useState(null); // Store Swiper instance
 
   const dataCard = [
-    { id: 1, caption: "رکود بازار مسکن؛فروشندگان در انتظار خریداران و خریداران در انتظار شکست نرخ فروشندگان", img: "images/landing/rokod_bazaar_maskan.webp", alt: "rokodBazaar"},
-    { id: 2, caption: "خطر ویرانی زلزله در آسمان خراش ها بیشتر است یا", img: "images/landing/khatar_zelze_asemankharash.webp", alt: "khatarZelzeAsemankharash"},
-    { id: 3, caption: "بازار کساد کسب و کار معماران داخلی در پی بالا رفتن قیمت مو", img: "images/landing/kasad_bazaar_memaran.webp", alt: "kasadBazaar"},
-    { id: 4, caption: "شهرک ساحلی زمزم در منطقه نور استان مازندران از سوم شهر", img: "images/landing/shahrek_sahli_mazandaran.webp", alt: "shahrekSahli"},
-    { id: 5, caption: "شهرک ساحلی زمزم در منطقه نور استان مازندران از سوم شهر", img: "images/landing/shahrek_sahli_mazandaran.webp", alt: "shahrekSahli"}
+    { id: 1, caption: "رکود بازار مسکن؛فروشندگان در انتظار خریداران و خریداران در انتظار شکست نرخ فروشندگان", img: "images/landing/homenewuser/rokod_bazaar_maskan.webp", alt: "rokodBazaar"},
+    { id: 2, caption: "خطر ویرانی زلزله در آسمان خراش ها بیشتر است یا", img: "images/landing/homenewuser/khatar_zelze_asemankharash.webp", alt: "khatarZelzeAsemankharash"},
+    { id: 3, caption: "بازار کساد کسب و کار معماران داخلی در پی بالا رفتن قیمت مو", img: "images/landing/homenewuser/kasad_bazaar_memaran.webp", alt: "kasadBazaar"},
+    { id: 4, caption: "شهرک ساحلی زمزم در منطقه نور استان مازندران از سوم شهر", img: "images/landing/homenewuser/shahrek_sahli_mazandaran.webp", alt: "shahrekSahli"},
+    { id: 5, caption: "شهرک ساحلی زمزم در منطقه نور استان مازندران از سوم شهر", img: "images/landing/homenewuser/shahrek_sahli_mazandaran.webp", alt: "shahrekSahli"}
   ];
 
   // Handle previous slide action

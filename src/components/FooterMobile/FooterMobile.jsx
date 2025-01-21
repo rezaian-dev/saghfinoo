@@ -105,7 +105,7 @@ export default function FooterMobile() {
 
         {/* Footer graphic image */}
         <div>
-          <img className='mx-auto' src="images/landing/footer_graphic_city.png" width={324} height={60} loading='lazy' alt="grapphicCity" />
+          <img className='mx-auto' src="images/footer_graphic_city.png" width={324} height={60} loading='lazy' alt="grapphicCity" />
         </div>
       </div>
     </>

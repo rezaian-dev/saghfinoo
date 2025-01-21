@@ -9,7 +9,7 @@ export default function HousingPlanner() {
       caption:
         "در میان صدها آگهی که روزانه به وب‌سایت سقفینو افزوده می‌شود، با استفاده از بیش از ۲۸ فیلتر کاربردی تلاش کرده‌ایم خانه‌ای که در جست‌وجوی آن هستید را هر چه سریعتر پیدا و اجاره کنید.",
       btnContent: "اجاره خانه",
-      img: "images/landing/rent-home-easily.webp",
+      img: "images/landing/homenewuser/rent-home-easily.webp",
       alt: "RentHome",
     },
     {
@@ -18,7 +18,7 @@ export default function HousingPlanner() {
       caption:
         "بالای ۱ میلیون آگهی فروش در وب‌سایت سقفینو وجود دارد. ما علاوه بر آگهی‌های فراوان با به‌کارگیری املاک و مشاورین متخصص در هر شهر، تلاش می‌کنیم در تجربه لذت یک خرید آسان با شما سهیم باشد.",
       btnContent: "خرید خانه",
-      img: "images/landing/buy-your-home.webp",
+      img: "images/landing/homenewuser/buy-your-home.webp",
       alt: "buyHome",
     },
     {
@@ -27,7 +27,7 @@ export default function HousingPlanner() {
       caption:
         "آیا می‌دانید میانگین بازدید از وب‌سایت به‌طور متوسط روزانه بالای هزاران نفر است؟ پس به‌سادگی و با چند کلیک ساده، ملک‌تان را به‌صورت رایگان در سقفینو آگهی و در سریع‌ترین زمان ممکن معامله کنید.",
       btnContent: "ثبت آگهی",
-      img: "images/landing/property-owner.webp",
+      img: "images/landing/homenewuser/property-owner.webp",
       alt: "propertyOwner",
     },
   ];
