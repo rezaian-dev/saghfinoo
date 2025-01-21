@@ -75,6 +75,7 @@ body {
   .flex-center {
     @apply flex justify-center items-center;
   }
+  /* Page HomeNewUser */
   .home-new-user__header {
     @apply bg-home-desktop mt-[58px] md:mt-0 pt-7 pb-3 md:pb-0 bg-no-repeat bg-cover bg-center h-[215px] md:h-[690px] md:pt-10;
   }
@@ -371,5 +372,13 @@ body {
   }
   .services-section__text {
     @apply max-w-[230px] leading-6;
+  }
+
+  /* Page HomeProUser */
+  .home-pro-user__header{
+    @apply bg-home-desktop mt-[58px] md:mt-0 pt-7 pb-3 md:pb-0 bg-no-repeat bg-cover bg-center h-[215px] md:h-[690px] md:pt-10;
+  }
+  .home-pro-user__new-houses-section{
+    @apply mt-[104px]
   }
 }
