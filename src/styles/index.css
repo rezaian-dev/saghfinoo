@@ -313,22 +313,22 @@ body {
     @apply overflow-hidden transition-all duration-300;
   }
   .category-boxes__title {
-    @apply inline-block text-xs text-gray-11 mb-2;
+    @apply inline-block text-xs md:text-[14px] text-gray-11 mb-2;
   }
   .category-boxes__list {
     @apply flex flex-col items-start justify-start space-y-1;
   }
   .category-boxes__list-item {
-    @apply text-gray-9 text-[10px];
+    @apply text-gray-9 text-[10px] md:text-xs;
   }
   .category-boxes__toggle {
-    @apply flex-center text-xs gap-x-[1px] justify-start text-shade-3 cursor-pointer mt-1;
+    @apply flex-center text-[10px] md:text-xs gap-x-[1px] justify-start text-shade-3 cursor-pointer mt-1;
   }
   .category-boxes__toggle-icon {
-    @apply transition-transform duration-300;
+    @apply transition-transform duration-300 w-4 h-4 md:w-5 md:h-5;
   }
   .contact-info-box__title {
-    @apply text-[14px] text-gray-11 mb-2;
+    @apply inline-block text-[14px] text-gray-11 mb-2;
   }
   .contact-info-box__list {
     @apply space-y-1;
