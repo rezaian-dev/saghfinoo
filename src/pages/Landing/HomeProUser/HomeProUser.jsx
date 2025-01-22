@@ -6,7 +6,7 @@ import NewRentalListings from "../../../components/NewRentalListings/NewRentalLi
 export default function HomeProUser() {
   return (
     <>
-      {/* Header component & Header content section */}
+      {/* Header section with Header and HeaderContent components */}
       <header className="home-pro-user__header">
         <div className="container">
           <Header />
@@ -14,12 +14,14 @@ export default function HomeProUser() {
         </div>
       </header>
       <main>
-        {/* <section className="home-pro-user__new-houses-section">
+        {/* New rental listings section */}
+        <section className="home-pro-user__new-houses-section">
           <div className="container">
-          <NewRentalListings/>
+            <NewRentalListings />
           </div>
-        </section> */}
+        </section>
       </main>
     </>
   );
 }
+

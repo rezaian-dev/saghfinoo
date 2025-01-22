@@ -1,4 +1,4 @@
-import React from "react"; // ایمپورت React برای استفاده از JSX
+import React from "react";
 import { lazy } from "react";
 
 // Lazy load components

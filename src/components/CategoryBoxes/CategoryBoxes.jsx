@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ArrowDown2 } from "iconsax-react";
 // CategoryBoxes component that renders a list of categories with a toggle for showing more/less items
-export default function CategoryBoxes({ title, items, mobile }) {
+export default function CategoryBoxes({ title, items}) {
   const [showMore, setShowMore] = useState(false);
 
   return (
