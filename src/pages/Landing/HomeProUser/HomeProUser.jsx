@@ -3,6 +3,7 @@ import Header from "../../../layouts/Header/Header";
 import HeaderContent from "../../../components/HeaderContent/HeaderContent";
 import NewRentalListings from "../../../components/NewRentalListings/NewRentalListings";
 import SaghfinooOpportunity from "../../../components/SaghfinooOpportunity/SaghfinooOpportunity";
+import SuggestedSearches from "../../../components/SuggestedSearches/SuggestedSearches";
 
 export default function HomeProUser() {
   return (
@@ -25,6 +26,12 @@ export default function HomeProUser() {
         <section className="home-pro-user__opportunity-section">
           <div className="container">
             <SaghfinooOpportunity />
+          </div>
+        </section>
+        {/* Suggested searches section */}
+        <section className="home-pro-user__suggested-searches-section">
+          <div className="container">
+            <SuggestedSearches />
           </div>
         </section>
       </main>

@@ -508,4 +508,16 @@ body {
   .saghfinoo-opportunity-box__caption{
     @apply max-w-[264px] text-gray-11 leading-5 text-center text-xs sm:text-base md:text-xl mt-3;
   }
+  .home-pro-user__suggested-searches-section{
+    @apply mt-[88px];
+  }
+  .suggested-searches__title{
+    @apply text-gray-12 font-bold text-base sm:text-lg md:text-2xl lg:text-[32px] mb-8;
+  }
+  .suggested-searches__grid{
+    @apply grid gap-x-24  gap-y-1 grid-cols-2 items-start sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 md:gap-x-4 md:gap-y-1.5 lg:gap-x-6 lg:gap-y-2.5;
+  }
+  .suggested-searches__item.suggested-searches__item--link{
+    @apply text-gray-10 text-xs sm:text-lg md:text-xl lg:text-2xl xl:text-[28px] whitespace-nowrap;
+  }
 }
