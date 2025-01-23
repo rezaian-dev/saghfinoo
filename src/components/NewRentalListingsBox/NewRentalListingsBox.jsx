@@ -4,7 +4,7 @@ export default function NewRentalListingsBox({ size_location, rent, deposit, pos
   return (
     <>
       {/* Main container for rental listing, including hover effects */}
-      <div className="rental-listing hover:shadow-xl hover:scale-105">
+      <div className="rental-listing">
         {/* Image container */}
         <div className="rental-listing__image-container">
           {image ? <img className="rental-listing__image" src={image} loading="lazy" alt={alt} /> : <img className="rental-listing__image" src="images\landing\homeprouser\no-image.webp" loading="lazy" alt={alt} /> }

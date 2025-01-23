@@ -70,7 +70,7 @@ module.exports = {
       },
       boxShadow: {
         info:"0 0 8px 4px rgba(47, 128, 237,.19)",
-        1:"0 2px 8px 0 rgba(0,0,0,.5)",
+        1:"0 2px 8px 0 rgba(0,0,0,.3)",
         slider:"0 3px 10px 0 rgba(0,0,0,.20)"
       },
     },

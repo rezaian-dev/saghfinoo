@@ -24,24 +24,17 @@ export default function HeaderContent() {
         </div>
 
         {/* Search input section */}
-        <div className="flex flex-col item gap-y-3">
+        <div className="search-box__input-container">
           {/* Search input and icon container */}
-          <div className="flex-center gap-x-2">
-            {/* Search icon for larger screens */}
-            <SearchNormal className="hidden md:block" size={24} color="#353535" variant="Outline"/>
-            {/* Search icon for smaller screens */}
-            <SearchNormal className="block md:hidden" size={16} color="#353535" variant="Outline"/>
-            <input
-              className="text-gray-11 w-full h-4 md:h-8 outline-none text-sm sm:text-base md:placeholder:text-gray-11"
-              type="text"
-              placeholder="شهر مورد نظر را جست‌وجو کنید"
-              aria-label="City search"
-            />{" "}
+          <div className="search-box__input-wrapper">
+            {/* Search icon  */}
+            <SearchNormal className="search-box__icon" color="#353535" variant="Outline"/>
             {/* Search input field */}
+            <input className="search-box__input" type="text" placeholder="شهر مورد نظر را جست‌وجو کنید" aria-label="City search"/>
           </div>
 
           {/* Suggested city list (commented out for now) */}
-          {/* <ul className="space-y-3 mr-6">
+          {/* <ul className="search-box__suggestions">
       <li>تهران</li> 
       <li>تبریز</li> 
       <li>تالش</li> 

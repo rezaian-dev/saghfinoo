@@ -4,7 +4,7 @@ export default function HousingScoutBox({ img, alt, price, caption }) {
   return (
     <>
     {/* Property box container with hover effects (translation and shadow) */}
-    <div className="housing-scout-box hover:translate-y-[-8px] hover:shadow-2xl">
+    <div className="housing-scout-box">
       
       {/* Image container for the property */}
       <div>

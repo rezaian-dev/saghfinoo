@@ -52,8 +52,8 @@ export default function HousingNews() {
           modules={[Navigation]}
           onSwiper={setSwiper} // Capture the swiper instance
           onSlideChange={(swiper) => { // Update the beginning and end state on slide change
-            setIsBeginning(swiper.isBeginning);
-            setIsEnd(swiper.isEnd);
+          setIsBeginning(swiper.isBeginning);
+          setIsEnd(swiper.isEnd);
           }}
           breakpoints={{
             320: { slidesPerView: 1, spaceBetween: 16 },
@@ -72,16 +72,14 @@ export default function HousingNews() {
         {/* Prev button - only show when not at the beginning */}
         {!isBeginning && (
           <div onClick={handlePrev} className="housing-news__slider-button housing-news__slider-button--prev">
-            <ArrowRight2 className="hidden xl:block" size="30" color="#353535" variant="Outline" />
-            <ArrowRight2 className="block xl:hidden" size="24" color="#353535" variant="Outline" />
+            <ArrowRight2 className="housing-news__icon" color="#353535" variant="Outline" />
           </div>
         )}
 
         {/* Next button - only show when not at the end */}
         {!isEnd && (
           <div onClick={handleNext} className="housing-news__slider-button housing-news__slider-button--next">
-            <ArrowLeft2 className="hidden xl:block" size="30" color="#353535" variant="Outline" />
-            <ArrowLeft2 className="block xl:hidden" size="24" color="#353535" variant="Outline" />
+            <ArrowLeft2 className="housing-news__icon" color="#353535" variant="Outline" />
           </div>
         )}
       </div>

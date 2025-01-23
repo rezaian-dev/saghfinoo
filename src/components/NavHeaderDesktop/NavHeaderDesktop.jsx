@@ -44,8 +44,8 @@ export default function NavHeaderDesktop() {
   </div>
 
   {/* User actions section (login and register links) */}
-  <div className="menu-desktop__user-actions child:md:flex child:hidden">
-    <a href="#" className="menu-desktop__login-link hover:text-primary">ورود</a>
+  <div className="menu-desktop__user-actions">
+    <a href="#" className="menu-desktop__login-link">ورود</a>
     <a href="#" className="Register-ad-desktop">ثبت آگهی</a>
   </div>
 </div>
