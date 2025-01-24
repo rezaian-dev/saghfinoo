@@ -3,6 +3,13 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: "1rem",
+          lg: "1.75rem",
+        },
+      },
       colors: {
         gray: {
           1: "#FAFAFA",
@@ -55,13 +62,6 @@ module.exports = {
         warning: "#A9791C",
         info: "#2F80ED",
       },
-      container: {
-        center: true,
-        padding: {
-          DEFAULT: "1rem",
-          lg: "1.75rem",
-        },
-      },
       fontFamily: {
         Shabnam: "shabnam",
       },
@@ -69,16 +69,16 @@ module.exports = {
         "home-desktop": "url('../images/backgrounds/background.webp')",
       },
       boxShadow: {
-        info:"0 0 8px 4px rgba(47, 128, 237,.19)",
-        1:"0 2px 8px 0 rgba(0,0,0,.3)",
-        slider:"0 3px 10px 0 rgba(0,0,0,.20)"
+        info: "0 0 8px 4px rgba(47, 128, 237, .19)",
+        1: "0 2px 8px 0 rgba(0, 0, 0, .3)",
+        slider: "0 3px 10px 0 rgba(0, 0, 0, .20)",
       },
     },
   },
   plugins: [
     function ({ addVariant }) {
       addVariant("child", "&>*");
-      addVariant("child-hover", "&>*:hover");
+      addVariant("child-hover", "&*:hover");
     },
   ],
 };

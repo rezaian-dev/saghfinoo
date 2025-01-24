@@ -4,6 +4,8 @@ import HeaderContent from "../../../components/HeaderContent/HeaderContent";
 import NewRentalListings from "../../../components/NewRentalListings/NewRentalListings";
 import SaghfinooOpportunity from "../../../components/SaghfinooOpportunity/SaghfinooOpportunity";
 import SuggestedSearches from "../../../components/SuggestedSearches/SuggestedSearches";
+import PremierRealtors from "../../../components/PremierRealtors/PremierRealtors";
+
 
 export default function HomeProUser() {
   return (
@@ -32,6 +34,12 @@ export default function HomeProUser() {
         <section className="home-pro-user__suggested-searches-section">
           <div className="container">
             <SuggestedSearches />
+          </div>
+        </section>
+        {/* Premier Realtors section */}
+        <section className="home-pro-user__premier-realtors-section">
+          <div className="container">
+            <PremierRealtors/>
           </div>
         </section>
       </main>

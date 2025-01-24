@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import HeaderDesktop from "../../components/NavHeaderDesktop/NavHeaderDesktop";
+import NavHeaderDesktop from "../../components/NavHeaderDesktop/NavHeaderDesktop";
 import NavHeaderMobile from "../../components/NavHeaderMobile/NavHeaderMobile";
 
 export default function Header() {
@@ -33,7 +33,7 @@ export default function Header() {
 
   return (
     <>
-      <HeaderDesktop />
+      <NavHeaderDesktop />
       <NavHeaderMobile isOpen={isOpen} menuRef={menuRef} handleMenuToggle={handleMenuToggle}/>
 
       {/* Overlay background */}
