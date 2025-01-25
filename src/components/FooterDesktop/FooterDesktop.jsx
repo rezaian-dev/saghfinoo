@@ -19,9 +19,9 @@ export default function FooterDesktop() {
       id: 2,
       title: "بیشترین جست‌وجوها", // Most searched category
       items: [
-        { id: 1, content: "آپارتمان کوچک مترو" },
-        { id: 2, content: "خانه ویلایی در اطراف شهر" },
-        { id: 3, content: "آپارتمان‌های تازه‌ساز" },
+        { id: 1, content: "آپارتمان نزدیک مترو" },
+        { id: 2, content: "خانه نزدیک بر اصلی خیابان" },
+        { id: 3, content: "آپارتمان تک واحده" },
       ],
     },
     {

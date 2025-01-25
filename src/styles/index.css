@@ -77,7 +77,7 @@ body {
   }
   /* Page HomeNewUser */
   .home-new-user__header {
-    @apply bg-home-desktop mt-[58px] md:mt-0 pt-7 pb-3 md:pb-0 bg-no-repeat bg-cover bg-center h-[215px] md:h-[690px] md:pt-10;
+    @apply bg-home-desktop mt-[58px] md:mt-0 pt-7 pb-3  bg-no-repeat bg-cover bg-center h-auto md:min-h-[690px] md:pt-10;
   }
   .menu-desktop__underline {
     @apply absolute right-0 bottom-[-4px] h-[2px] w-0 bg-primary group-hover:w-full transition-all duration-300;
@@ -194,7 +194,7 @@ body {
     @apply flex items-center gap-x-2;
   }
   .home-new-user__empowerment-section {
-    @apply mt-14 lg:mt-[104px];
+    @apply mt-14 md:mt-[104px];
   }
   .housing-planner__title {
     @apply text-base sm:text-lg md:text-2xl lg:text-[32px] font-bold text-gray-11 mb-8;
@@ -251,10 +251,10 @@ body {
     @apply grid grid-cols-2 auto-rows-[1fr] lg:grid-cols-4 gap-4 lg:gap-6;
   }
   .home-new-user__type-houses-section {
-    @apply mt-12 lg:mt-[88px];
+    @apply mt-12 md:mt-[88px];
   }
   .home-new-user__support-section {
-    @apply mt-12 lg:mt-[88px];
+    @apply mt-12 md:mt-[88px];
   }
   .housing-support__text {
     @apply text-gray-12 text-right md:text-center;
@@ -284,7 +284,7 @@ body {
     @apply text-xs md:text-lg text-black text-center;
   }
   .home-new-user__news-section {
-    @apply mt-12 lg:mt-[88px];
+    @apply mt-12 md:mt-[88px];
   }
   .housing-news__title {
     @apply text-base sm:text-lg md:text-2xl lg:text-[32px] font-bold text-gray-11 mb-8;
@@ -315,7 +315,7 @@ body {
     @apply text-gray-10 text-xs sm:text-base md:text-lg lg:text-xl font-bold mt-6 px-5 line-clamp-2;
   }
   .home-new-user__footer {
-    @apply mt-[104px] bg-gray-2;
+    @apply mt-14 md:mt-[104px] bg-gray-2;
   }
   .footer-mobile {
     @apply block md:hidden pt-12;
@@ -437,10 +437,10 @@ body {
 
   /* Page HomeProUser */
   .home-pro-user__header {
-    @apply bg-home-desktop mt-[58px] md:mt-0 pt-7 pb-3 md:pb-0 bg-no-repeat bg-cover bg-center h-[215px] md:h-[690px] md:pt-10;
+    @apply bg-home-desktop mt-[58px] md:mt-0 pt-7 pb-3  bg-no-repeat bg-cover bg-center h-auto md:min-h-[690px] md:pt-10;
   }
   .home-pro-user__new-houses-section {
-    @apply mt-[104px];
+    @apply mt-14 md:mt-[104px];
   }
   .rental-listing {
     @apply relative cursor-pointer rounded-[10px] sm:rounded-2xl border border-gray-4 transform transition-all duration-300;
@@ -485,7 +485,7 @@ body {
     @apply grid auto-rows-[1fr] grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-2 sm:gap-x-4 sm:gap-y-[10px] md:gap-x-6 md:gap-y-4;
   }
   .home-pro-user__opportunity-section {
-    @apply mt-[88px];
+    @apply mt-12 md:mt-[88px];
   }
   .saghfinoo-opportunity__header {
     @apply text-center mb-8;
@@ -515,7 +515,7 @@ body {
     @apply max-w-[264px] text-gray-11 leading-5 text-center text-xs sm:text-base md:text-xl mt-3;
   }
   .home-pro-user__suggested-searches-section {
-    @apply mt-[88px];
+    @apply mt-12 md:mt-[88px];
   }
   .suggested-searches__title {
     @apply text-gray-12 font-bold text-base sm:text-lg md:text-2xl lg:text-[32px] mb-8;
@@ -527,7 +527,7 @@ body {
     @apply text-gray-10 text-xs sm:text-lg md:text-xl lg:text-2xl xl:text-[28px] whitespace-nowrap;
   }
   .home-pro-user__premier-realtors-section {
-    @apply mt-[88px];
+    @apply mt-12 md:mt-[88px];
   }
   .premier-realtors__title {
     @apply text-gray-12 font-bold text-base sm:text-lg md:text-2xl lg:text-[32px] mb-8;
@@ -576,7 +576,7 @@ body {
     @apply text-xs sm:text-[14px];
   }
   .home-pro-user__top-consultants {
-    @apply mt-[88px];
+    @apply mt-12 md:mt-[88px];
   }
   .top-consultants__title {
     @apply text-gray-12 font-bold text-base sm:text-lg md:text-2xl lg:text-[32px] mb-8;
@@ -617,5 +617,11 @@ body {
   }
   .consultants-box__button:hover{
     @apply bg-primary text-white;
+  }
+  .home-pro-user__footer{
+    @apply mt-14 md:mt-[104px] bg-gray-2;
+  }
+  .home-pro-user__footer-copyright{
+    @apply hidden md:block text-center py-4 text-xs bg-gray-3 text-gray-8;
   }
 }

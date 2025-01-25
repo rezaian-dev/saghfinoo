@@ -6,6 +6,7 @@ import SaghfinooOpportunity from "../../../components/SaghfinooOpportunity/Saghf
 import SuggestedSearches from "../../../components/SuggestedSearches/SuggestedSearches";
 import PremierRealtors from "../../../components/PremierRealtors/PremierRealtors";
 import TopConsultants from "../../../components/TopConsultants/TopConsultants";
+import Footer from "../../../layouts/Footer/Footer";
 
 export default function HomeProUser() {
   return (
@@ -49,6 +50,14 @@ export default function HomeProUser() {
             </div>
         </section>
       </main>
+      {/* Footer container that holds the Footer component */}
+      <footer className="home-pro-user__footer">
+       <div className="container">
+        <Footer/>
+       </div>
+       {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
+       <p className="home-pro-user__footer-copyright">حقوق این سایت متعلق به سقفینو است</p>
+      </footer>
     </>
   );
 }
