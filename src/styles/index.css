@@ -529,50 +529,93 @@ body {
   .home-pro-user__premier-realtors-section {
     @apply mt-[88px];
   }
-  .premier-realtors__title{
+  .premier-realtors__title {
     @apply text-gray-12 font-bold text-base sm:text-lg md:text-2xl lg:text-[32px] mb-8;
   }
-  .premier-realtors__slider{
+  .premier-realtors__slider {
     @apply w-full h-full relative;
   }
-  .premier-realtors__slide{
+  .premier-realtors__slide {
     @apply p-1;
   }
   .premier-realtors__button {
     @apply flex-center w-[40px] h-[40px] xl:w-[68px] xl:h-[60px] rounded-full bg-white absolute top-0 bottom-0 m-auto
     z-10 shadow-slider border border-gray-2 cursor-pointer;
   }
-  .premier-realtors__button--prev{
+  .premier-realtors__button--prev {
     @apply right-[-2%] xl:right-[-1.9%];
   }
-  .premier-realtors__button--next{
+  .premier-realtors__button--next {
     @apply left-[-2%] xl:left-[-1.9%];
   }
-  .premier-realtors__icon{
+  .premier-realtors__icon {
     @apply w-full h-full max-w-6 max-h-6 xl:w-[30px] xl:h-[30px];
   }
-  .premier-realtors-box{
+  .premier-realtors-box {
     @apply p-4 md:py-7 md:px-5 xl:py-8 xl:px-[47px] flex-center flex-col border border-gray-4 shadow-1 rounded-2xl;
   }
-  .premier-realtors-box__image-container{
+  .premier-realtors-box__image-container {
     @apply max-w-[46px] max-h-[32px] md:max-w-[94px] md:max-h-[66px];
   }
-  .premier-realtors-box__image{
+  .premier-realtors-box__image {
     @apply w-full h-full object-cover;
   }
-  .premier-realtors-box__header{
+  .premier-realtors-box__header {
     @apply flex-center gap-x-2 mt-4 mb-2;
   }
-  .premier-realtors-box__title{
+  .premier-realtors-box__title {
     @apply text-xs sm:text-base md:text-lg lg:text-xl font-bold;
   }
-  .premier-realtors-box__details{
+  .premier-realtors-box__details {
     @apply flex-center flex-col text-xs sm:text-[14px] lg:text-base text-gray-9 space-y-2 whitespace-nowrap;
   }
-  .premier-realtors-box__location{
+  .premier-realtors-box__location {
     @apply text-gray-11 text-xs sm:text-[14px] md:text-base lg:text-lg;
   }
-  .premier-realtors-box__comments{
+  .premier-realtors-box__comments {
     @apply text-xs sm:text-[14px];
+  }
+  .home-pro-user__top-consultants {
+    @apply mt-[88px];
+  }
+  .top-consultants__title {
+    @apply text-gray-12 font-bold text-base sm:text-lg md:text-2xl lg:text-[32px] mb-8;
+  }
+  .top-consultants__slider {
+    @apply w-full h-full relative;
+  }
+  .top-consultants__button {
+    @apply flex-center w-[40px] h-[40px] xl:w-[68px] xl:h-[60px] rounded-full bg-white absolute top-0 bottom-0 m-auto
+    z-10 shadow-slider border border-gray-2 cursor-pointer;
+  }
+  .top-consultants__button--prev {
+    @apply right-[-2%] xl:right-[-1.9%];
+  }
+  .top-consultants__icon {
+    @apply w-full h-full max-w-6 max-h-6 xl:w-[30px] xl:h-[30px];
+  }
+  .top-consultants__button--next {
+    @apply left-[-2%] xl:left-[-1.9%];
+  }
+  .consultants-box {
+    @apply px-3 py-4 xl:px-[68px] xl:pb-6 lg:pt-4 rounded-2xl border border-gray-4 flex-center flex-col;
+  }
+  .consultants-box__image-container {
+    @apply max-w-[81px] md:max-w-max;
+  }
+  .consultants-box__image {
+    @apply w-full;
+  }
+  .consultants-box__name {
+    @apply font-medium md:font-bold text-base md:text-lg lg:text-xl my-1 text-gray-12;
+  }
+  .consultants-box__info {
+    @apply text-gray-9 text-xs sm:text-[14px] md:text-base lg:text-lg space-y-1 flex-center flex-col mb-1;
+  }
+  .consultants-box__button {
+    @apply inline-block whitespace-nowrap rounded-lg text-primary px-[22px] py-[5px] text-xs lg:text-[14px] lg:px-[34px] lg:py-[7.5px] border border-primary transition-all duration-300;
+  }
+  .consultants-box__button:hover{
+    @apply bg-primary text-white;
   }
 }

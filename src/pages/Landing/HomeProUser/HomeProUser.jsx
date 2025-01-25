@@ -5,7 +5,7 @@ import NewRentalListings from "../../../components/NewRentalListings/NewRentalLi
 import SaghfinooOpportunity from "../../../components/SaghfinooOpportunity/SaghfinooOpportunity";
 import SuggestedSearches from "../../../components/SuggestedSearches/SuggestedSearches";
 import PremierRealtors from "../../../components/PremierRealtors/PremierRealtors";
-
+import TopConsultants from "../../../components/TopConsultants/TopConsultants";
 
 export default function HomeProUser() {
   return (
@@ -41,6 +41,12 @@ export default function HomeProUser() {
           <div className="container">
             <PremierRealtors/>
           </div>
+        </section>
+        {/* Top Consultants section */}
+        <section className="home-pro-user__top-consultants">
+            <div className="container">
+            <TopConsultants/>
+            </div>
         </section>
       </main>
     </>
