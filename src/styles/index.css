@@ -624,4 +624,9 @@ body {
   .home-pro-user__footer-copyright{
     @apply hidden md:block text-center py-4 text-xs bg-gray-3 text-gray-8;
   }
+
+/* Page Rent */
+  .rent-page__header{
+    @apply md:pt-10;
+  }
 }

@@ -4,9 +4,9 @@ import HousingSupportBox from "../HousingSupportBox/HousingSupportBox";
 export default function HousingSupport() {
 
     const dataCard = [
-        {id:1, img:"images/landing/homenewuser/kharid_ejare_melk.webp",alt:"kharidEjareMelk",caption:"امکان خرید و اجاره ملک در اکثر نقاط کشور"},
-        {id:2, img:"images/landing/homenewuser/moghayese_baresi_melk.webp",alt:"moghayeseBaresiMelk",caption:"مقایسه و بررسی صدها ملک براحتی و در کمترین زمان"},
-        {id:3, img:"images/landing/homenewuser/ertebat_asan_moshaverin.webp",alt:"ertebatAsanMoshaverin",caption:"ارتباط آسان با برترین املاک و مشاورین کشور"},
+        {id:1, img:"images/landing/home-newuser/kharid_ejare_melk.webp",alt:"kharidEjareMelk",caption:"امکان خرید و اجاره ملک در اکثر نقاط کشور"},
+        {id:2, img:"images/landing/home-newuser/moghayese_baresi_melk.webp",alt:"moghayeseBaresiMelk",caption:"مقایسه و بررسی صدها ملک براحتی و در کمترین زمان"},
+        {id:3, img:"images/landing/home-newuser/ertebat_asan_moshaverin.webp",alt:"ertebatAsanMoshaverin",caption:"ارتباط آسان با برترین املاک و مشاورین کشور"},
     ]
   return (
     <>

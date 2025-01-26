@@ -1,5 +1,6 @@
 import { HambergerMenu } from 'iconsax-react';
 import React from 'react'
+import { useLocation } from 'react-router-dom';
 
 export default function NavHeaderDesktop() {
   // Desktop menu items
@@ -10,16 +11,19 @@ export default function NavHeaderDesktop() {
         { id: 4, name: "مشاورین املاک" },
         { id: 5, name: "اخبار روز" },
       ];
+// Destructuring the 'pathname' from the current URL using the 'useLocation' hook
+      const { pathname } = useLocation();
+      
 
   return (
     <>
    {/* Desktop menu */}
-<div className="menu-desktop">
+<div className={`menu-desktop ${pathname ==="/rent"? "md:bg-gray-2" : ""}`}>
   {/* Navigation container with desktop layout */}
   <div className="child:md:flex child:hidden">
     <nav className="menu-desktop__nav">
       {/* Logo */}
-      <img className="menu-desktop__logo" src="images/logos/Logo.webp" loading="lazy" alt="Logo" />
+      <img className="menu-desktop__logo" src="/images/logos/Logo.png" loading="lazy" alt="Logo" />
 
       {/* Menu Items */}
       <ul className="menu-desktop__items">
@@ -39,7 +43,7 @@ export default function NavHeaderDesktop() {
     <span className="menu-desktop__hamburger">
       <HambergerMenu size="24" color="#353535" variant="Outline" />
     </span>
-    <img src="images/logos/Logo.webp" loading='lazy' alt="Logo" width={72} height={35} />
+    <img src="/images/logos/Logo.png" loading='lazy' alt="Logo" width={72} height={35} />
     <a href="#" className="menu-desktop__register-link">ثبت آگهی</a>
   </div>
 

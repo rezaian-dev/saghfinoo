@@ -9,11 +9,11 @@ import useSwiperSlider from "../../hooks/useSwiperSlider";
 
 export default function PremierRealtors() {
   const dataCard = [
-    {id: 1, title: "مشاور املاک توسی", image: "images/landing/homeprouser/logo-tusi.png", location: "تهران، نیاوران", popularity: "۴/۹ از ۵", activeAd: "بیش از ۴۰۰۰", comment: " (۱۲ نظر)", tikBlue: true, alt: "logoTusi"},
-    {id: 2, title: "مشاوراملاک ولیعصر", image: "images/landing/homeprouser/logo-valiasr.png", location: "تهران، خیابان ولیعصر", popularity: "۴ از ۵", activeAd: "بیش از ۳۵۰۰", comment: " (۱۲ نظر)", tikBlue: true, alt: "logoValiasr"},
-    {id: 3, title: "مشاور املاک فرشته", image: "images/landing/homeprouser/logo-freshteh.png", location: "تهران، خیابان فرشته", popularity: "۴ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۲ نظر)", tikBlue: false, alt: "logoFreshteh"},
-    {id: 4, title: "مشاور املاک سبز", image: "images/landing/homeprouser/logo-sabz.png", location: "تهران، پاسداران", popularity: "۴ از ۵", activeAd: "بیش از  ۲۰۰۰", comment: " (۱۲ نظر)", tikBlue: false, alt: "logoSabz"},
-    {id: 5, title: "مشاور املاک سبز", image: "images/landing/homeprouser/logo-sabz.png", location: "تهران، پاسداران", popularity: "۴ از ۵", activeAd: "بیش از  ۲۰۰۰", comment: " (۱۲ نظر)", tikBlue: false, alt: "logoSabz"},
+    {id: 1, title: "مشاور املاک توسی", image: "images/landing/home-prouser/logo-tusi.png", location: "تهران، نیاوران", popularity: "۴/۹ از ۵", activeAd: "بیش از ۴۰۰۰", comment: " (۱۲ نظر)", tikBlue: true, alt: "logoTusi"},
+    {id: 2, title: "مشاوراملاک ولیعصر", image: "images/landing/home-prouser/logo-valiasr.png", location: "تهران، خیابان ولیعصر", popularity: "۴ از ۵", activeAd: "بیش از ۳۵۰۰", comment: " (۱۲ نظر)", tikBlue: true, alt: "logoValiasr"},
+    {id: 3, title: "مشاور املاک فرشته", image: "images/landing/home-prouser/logo-freshteh.png", location: "تهران، خیابان فرشته", popularity: "۴ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۲ نظر)", tikBlue: false, alt: "logoFreshteh"},
+    {id: 4, title: "مشاور املاک سبز", image: "images/landing/home-prouser/logo-sabz.png", location: "تهران، پاسداران", popularity: "۴ از ۵", activeAd: "بیش از  ۲۰۰۰", comment: " (۱۲ نظر)", tikBlue: false, alt: "logoSabz"},
+    {id: 5, title: "مشاور املاک سبز", image: "images/landing/home-prouser/logo-sabz.png", location: "تهران، پاسداران", popularity: "۴ از ۵", activeAd: "بیش از  ۲۰۰۰", comment: " (۱۲ نظر)", tikBlue: false, alt: "logoSabz"},
   ];
 
   const { isBeginning, setIsBeginning, isEnd, handleNext, handlePrev, setSwiper, setIsEnd } = useSwiperSlider();

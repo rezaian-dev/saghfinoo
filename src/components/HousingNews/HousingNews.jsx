@@ -12,11 +12,11 @@ export default function HousingNews() {
     const {isBeginning, setIsBeginning, isEnd, handleNext, handlePrev,setSwiper,setIsEnd} = useSwiperSlider();
 
   const dataCard = [
-    { id: 1, caption: "رکود بازار مسکن؛فروشندگان در انتظار خریداران و خریداران در انتظار شکست نرخ فروشندگان", img: "images/landing/homenewuser/rokod_bazaar_maskan.webp", alt: "rokodBazaar"},
-    { id: 2, caption: "خطر ویرانی زلزله در آسمان‌خراش‌ها بیشتر است یا در آپارتمان‌های کم‌ارتفاع و یا خانه‌های ویلایی ؟", img: "images/landing/homenewuser/khatar_zelze_asemankharash.webp", alt: "khatarZelzeAsemankharash"},
-    { id: 3, caption: "بازار کساد کسب و کار معماران داخلی در پی بالا رفتن قیمت مواد و متریال اولیه و مصالح خارجی", img: "images/landing/homenewuser/kasad_bazaar_memaran.webp", alt: "kasadBazaar"},
-    { id: 4, caption: "شهرک ساحلی زمزم در منطقه نور استان مازندران از سوم شهریور وارد بازار مزایده شده است.", img: "images/landing/homenewuser/shahrek_sahli_mazandaran.webp", alt: "shahrekSahli"},
-    { id: 5, caption: "شهرک ساحلی زمزم در منطقه نور استان مازندران از سوم شهریور وارد بازار مزایده شده است.", img: "images/landing/homenewuser/shahrek_sahli_mazandaran.webp", alt: "shahrekSahli"}
+    { id: 1, caption: "رکود بازار مسکن؛فروشندگان در انتظار خریداران و خریداران در انتظار شکست نرخ فروشندگان", img: "images/landing/home-newuser/rokod_bazaar_maskan.webp", alt: "rokodBazaar"},
+    { id: 2, caption: "خطر ویرانی زلزله در آسمان‌خراش‌ها بیشتر است یا در آپارتمان‌های کم‌ارتفاع و یا خانه‌های ویلایی ؟", img: "images/landing/home-newuser/khatar_zelze_asemankharash.webp", alt: "khatarZelzeAsemankharash"},
+    { id: 3, caption: "بازار کساد کسب و کار معماران داخلی در پی بالا رفتن قیمت مواد و متریال اولیه و مصالح خارجی", img: "images/landing/home-newuser/kasad_bazaar_memaran.webp", alt: "kasadBazaar"},
+    { id: 4, caption: "شهرک ساحلی زمزم در منطقه نور استان مازندران از سوم شهریور وارد بازار مزایده شده است.", img: "images/landing/home-newuser/shahrek_sahli_mazandaran.webp", alt: "shahrekSahli"},
+    { id: 5, caption: "شهرک ساحلی زمزم در منطقه نور استان مازندران از سوم شهریور وارد بازار مزایده شده است.", img: "images/landing/home-newuser/shahrek_sahli_mazandaran.webp", alt: "shahrekSahli"}
   ];
 
   return (

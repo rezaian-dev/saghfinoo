@@ -9,11 +9,11 @@ import useSwiperSlider from "../../hooks/useSwiperSlider";
 
 export default function TopConsultants() {
   const agents = [
-    {id:1, name: "علی پرتو", image: "images/landing/homeprouser/ali-parto.png", agency: "املاک توسی", ratingText: "امتیاز 5 از 5", alt: "aliParto" },
-    {id:2, name: "زیبا تاجدار", image: "images/landing/homeprouser/zita-tajdar.png", agency: "املاک فرشته", ratingText: "امتیاز 4 از 5", alt: "fereshteh" },
-    {id:3, name: "رز دانش", image: "images/landing/homeprouser/roz-danesh.png", agency: "املاک سبز", ratingText: "امتیاز 4.8 از 5", alt: "rozDanesh" },
-    {id:4, name: "ماندانا تبریزی", image: "images/landing/homeprouser/mandana-tabrizi.png", agency: "املاک ولیعصر", ratingText: "امتیاز 4 از 5", alt: "mandanaTabrizi" },
-    {id:5, name: "ماندانا تبریزی", image: "images/landing/homeprouser/mandana-tabrizi.png", agency: "املاک ولیعصر", ratingText: "امتیاز 4 از 5", alt: "mandanaTabrizi" },
+    {id:1, name: "علی پرتو", image: "images/landing/home-prouser/ali-parto.png", agency: "املاک توسی", ratingText: "امتیاز 5 از 5", alt: "aliParto" },
+    {id:2, name: "زیبا تاجدار", image: "images/landing/home-prouser/zita-tajdar.png", agency: "املاک فرشته", ratingText: "امتیاز 4 از 5", alt: "fereshteh" },
+    {id:3, name: "رز دانش", image: "images/landing/home-prouser/roz-danesh.png", agency: "املاک سبز", ratingText: "امتیاز 4.8 از 5", alt: "rozDanesh" },
+    {id:4, name: "ماندانا تبریزی", image: "images/landing/home-prouser/mandana-tabrizi.png", agency: "املاک ولیعصر", ratingText: "امتیاز 4 از 5", alt: "mandanaTabrizi" },
+    {id:5, name: "ماندانا تبریزی", image: "images/landing/home-prouser/mandana-tabrizi.png", agency: "املاک ولیعصر", ratingText: "امتیاز 4 از 5", alt: "mandanaTabrizi" },
   ];
   
 // Swiper slider hooks and handlers
