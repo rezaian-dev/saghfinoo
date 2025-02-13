@@ -69,7 +69,7 @@ module.exports = {
         "home-desktop": "url('../images/backgrounds/background.webp')",
       },
       boxShadow: {
-        info: "0 0 3px 4px rgba(13, 110, 253, .25)",
+        info: "0 0 4px 0 rgba(47, 128, 23, .19)",
         1: "0 2px 8px 0 rgba(0, 0, 0, .3)",
         slider: "0 3px 10px 0 rgba(0, 0, 0, .20)",
       },

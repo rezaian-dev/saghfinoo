@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "classnames";
 
 export default function ServicesSectionItems({ title, items, mobile }) {
   return (
@@ -10,12 +11,21 @@ export default function ServicesSectionItems({ title, items, mobile }) {
       
       {/* List of items in the service section */}
       <ul
-        className={`services-section__list ${mobile ? " services-section__list--mobile" : " services-section__list--desktop"}${items.some((item) => item.icon) ? " services-section__list--with-icons" : " services-section__list--no-icons"}`}>
+        className={clsx(
+          "services-section__list", 
+          {
+            "services-section__list--mobile": mobile,
+            "services-section__list--desktop": !mobile,
+            "services-section__list--with-icons": items.some(({icon}) => icon),
+            "services-section__list--no-icons": !items.some(({icon}) => icon)
+          }
+        )}
+      >
         {/* Render each item in the list */}
-        {items.map((item) => (
-          <li key={item.id} className="services-section__list-item">
-            {item.icon && item.icon}
-            <a href="#">{item.content}</a>
+        {items.map(({ id, icon, content }) => (
+          <li key={id} className="services-section__list-item">
+            {icon && icon}
+            <a href="#">{content}</a>
           </li>
         ))}
 
@@ -29,4 +39,3 @@ export default function ServicesSectionItems({ title, items, mobile }) {
     </div>
   );
 }
-

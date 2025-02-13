@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-
-
 export default function useSwiperSlider() {
   const [isBeginning, setIsBeginning] = useState(true); // Track if the slider is at the beginning
   const [isEnd, setIsEnd] = useState(false); // Track if the slider is at the end

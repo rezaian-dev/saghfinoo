@@ -20,25 +20,25 @@ export default function HomeProUser() {
       </header>
       <main>
         {/* New rental listings section */}
-        <section className="home-pro-user__new-houses-section">
+        <section className="home-pro-user__new-houses">
           <div className="container">
             <NewRentalListings />
           </div>
         </section>
         {/* Saghfinoo Opportunity Section */}
-        <section className="home-pro-user__opportunity-section">
+        <section className="home-pro-user__opportunity">
           <div className="container">
             <SaghfinooOpportunity />
           </div>
         </section>
         {/* Suggested searches section */}
-        <section className="home-pro-user__suggested-searches-section">
+        <section className="home-pro-user__suggested-searches">
           <div className="container">
             <SuggestedSearches />
           </div>
         </section>
         {/* Premier Realtors section */}
-        <section className="home-pro-user__premier-realtors-section">
+        <section className="home-pro-user__premier-realtors">
           <div className="container">
             <PremierRealtors/>
           </div>

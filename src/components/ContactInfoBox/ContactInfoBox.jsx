@@ -20,12 +20,12 @@ export default function ContactInfoBox() {
 
         {/* List of contact methods */}
         <ul className="contact-info-box__list">
-          {dataItem.map((item) => (
-            <li key={item.id} className="contact-info-box__list-item">
+          {dataItem.map(({id,icon,text}) => (
+            <li key={id} className="contact-info-box__list-item">
               {/* Each contact method with its icon */}
               <a href="#" className="contact-info-box__link">
-                {item.icon}
-                {item.text}
+                {icon}
+                {text}
               </a>
             </li>
           ))}

@@ -20,25 +20,25 @@ export default function HomeNewUser() {
       {/* Main section of the page which contains all the core content */}
       <main className="home-new-user__main">
         {/* Empowerment Section */}
-        <section className="home-new-user__empowerment-section">
+        <section className="home-new-user__empowerment">
           <div className="container">
             <HousingPlanner />
           </div>
         </section>
         {/* Type of Houses Section */}
-        <section className="home-new-user__type-houses-section">
+        <section className="home-new-user__type-houses">
           <div className="container">
             <HousingScout />
           </div>
         </section>
         {/* Housing Support Section */}
-        <section className="home-new-user__support-section">
+        <section className="home-new-user__support">
           <div className="container">
             <HousingSupport />
           </div>
         </section>
         {/* Housing News Section */}
-        <section className="home-new-user__news-section">
+        <section className="home-new-user__news">
           <div className="container">
             <HousingNews />
           </div>
