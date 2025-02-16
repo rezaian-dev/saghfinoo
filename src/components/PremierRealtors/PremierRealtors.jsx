@@ -7,7 +7,8 @@ import { Navigation } from "swiper/modules";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import useSwiperSlider from "../../hooks/useSwiperSlider";
 
-export default function PremierRealtors() {
+export default function PremierRealtors({text}) {
+
   const dataCard = [
     {id: 1, title: "مشاور املاک توسی", image: "images/landing/home-prouser/logo-tusi.png", location: "تهران، نیاوران", popularity: "۴/۹ از ۵", activeAd: "بیش از ۴۰۰۰", comment: " (۱۲ نظر)", tikBlue: true, alt: "logoTusi"},
     {id: 2, title: "مشاوراملاک ولیعصر", image: "images/landing/home-prouser/logo-valiasr.png", location: "تهران، خیابان ولیعصر", popularity: "۴ از ۵", activeAd: "بیش از ۳۵۰۰", comment: " (۱۲ نظر)", tikBlue: true, alt: "logoValiasr"},
@@ -21,7 +22,7 @@ export default function PremierRealtors() {
   return (
     <>
       <h3 className="premier-realtors__title">
-        املاک برتر تهران{" "}
+        {text}
       </h3>
       <div className="premier-realtors__slider">
         {/* Swiper component for displaying the news slides */}

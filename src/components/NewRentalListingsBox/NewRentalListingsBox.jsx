@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function NewRentalListingsBox({ size_location, rent, deposit, posted_at, image, alt }) {
+export default function NewRentalListingsBox({ locationAddress, rent, posted_at, image, alt,mortgage,city }) {
+
+    let convertRent = rent.replaceAll(",","");
+    let convertMortage = mortgage.replaceAll(",","");
+  
   return (
     <>
       {/* Main container for rental listing, including hover effects */}
@@ -19,19 +23,19 @@ export default function NewRentalListingsBox({ size_location, rent, deposit, pos
           <div className="rental-listing__header">
             {/* Title of the listing */}
             <span className="rental-listing__title">
-              رهن و اجاره آپارتمان تهران
+              رهن و اجاره آپارتمان {city}
             </span>
             {/* Archive icon */}
             <img className="rental-listing__archive-icon" src="svgs\icons\archive-minus.svg" loading="lazy" alt="archiveMinus" />
           </div>
           {/* Size and location of the property */}
           <span className="rental-listing__size-location">
-            {size_location}
+            {locationAddress}
           </span>
           {/* Pricing section (deposit and rent) */}
           <div className="rental-listing__pricing">
-            <h6>{deposit}</h6>
-            <h6>{rent}</h6>
+            <h6>{convertMortage.length >= 10 ? `${mortgage} میلیارد رهن`:`${mortgage} میلیون رهن`}</h6>
+            <h6>{convertRent.length <= 10 ? `${rent} میلیون اجاره`:`${rent} میلیارد اجاره`}</h6>
           </div>
         </div>
       </div>

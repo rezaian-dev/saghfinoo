@@ -9,6 +9,7 @@ import TopConsultants from "../../../components/TopConsultants/TopConsultants";
 import Footer from "../../../layouts/Footer/Footer";
 
 export default function HomeProUser() {
+  
   return (
     <>
       {/* Header section with Header and HeaderContent components */}
@@ -40,7 +41,7 @@ export default function HomeProUser() {
         {/* Premier Realtors section */}
         <section className="home-pro-user__premier-realtors">
           <div className="container">
-            <PremierRealtors/>
+            <PremierRealtors text={"املاک برتر تهران"}/>
           </div>
         </section>
         {/* Top Consultants section */}

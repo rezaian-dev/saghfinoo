@@ -1080,8 +1080,11 @@ bg-gray-3;
     @apply grid grid-cols-2 gap-x-4;
   }
   /* styles.css */
+  .rental-property-listing{
+    @apply mb-8;
+  }
   .rental-property-listing__header {
-    @apply flex-center justify-between mb-8;
+    @apply flex-center justify-between mb-2;
   }
 
   .rental-property-listing__title {
@@ -1093,7 +1096,7 @@ bg-gray-3;
   }
 
   .rental-property-listing__sort {
-    @apply flex-center bg-white transition-all w-[104px]  sm:w-[156px] duration-300 relative md:bg-gray-1  py-2 gap-x-[6px] rounded md:rounded-lg h-8 border border-gray-7 cursor-pointer;
+    @apply flex-center bg-white transition-all w-[104px]   md:w-[156px] duration-300 relative md:bg-gray-1  py-2 gap-x-[6px] rounded md:rounded-lg h-8 border border-gray-7 cursor-pointer;
   }
 
   .rental-property-listing__sort:hover {
@@ -1125,7 +1128,7 @@ bg-gray-3;
   }
   /* styles.css */
   .search-bar {
-    @apply relative grid  grid-cols-[3fr_1fr] items-center  lg:max-w-[600px] gap-x-1.5 transition-all duration-300 h-14 md:h-16 w-full border border-gray-7 rounded-[4px] md:rounded-xl pl-4 pr-4 xl:pr-6 focus-within:shadow-info focus-within:border-info;
+    @apply relative grid  grid-cols-[3fr_1fr] items-center  lg:max-w-[600px] gap-x-1.5 transition-all duration-300 h-14 md:h-16 w-full border border-gray-7 rounded-[4px] md:rounded-xl px-2  md:px-4 xl:pr-6 focus-within:shadow-info focus-within:border-info;
   }
 
   .search-bar__input-wrapper {
@@ -1152,7 +1155,7 @@ bg-gray-3;
   }
 
   .search-bar__location-wrapper {
-    @apply flex gap-x-2 justify-end xl:grow whitespace-nowrap;
+    @apply flex gap-x-2 justify-end  xl:grow whitespace-nowrap;
   }
 
   .search-bar__location {
@@ -1160,11 +1163,11 @@ bg-gray-3;
   }
 
   .search-bar__dropdown-wrapper {
-    @apply relative text-xs xl:text-[14px] flex-center cursor-pointer justify-between gap-x-3 w-full max-w-[95px] sm:max-w-[165px] h-full max-h-12 py-1 px-2 xl:px-3 md:py-2 text-gray-11 rounded md:rounded-lg border border-gray-11;
+    @apply relative text-xs xl:text-[14px] flex-center cursor-pointer sm:justify-between grow gap-x-1 w-full max-w-[103px] sm:max-w-[165px] h-full max-h-12 py-1 px-2 xl:px-3 md:py-2 text-gray-11 rounded md:rounded-lg border border-gray-11;
   }
 
   .search-bar__dropdown-icon {
-    @apply w-4 h-4 xl:w-5 xl:h-5 transition-all duration-300 transform;
+    @apply w-4 h-4 xl:w-5 xl:h-5 shrink-0 transition-all duration-300 transform;
   }
 
   .search-bar__dropdown-icon--open {
@@ -1340,7 +1343,7 @@ bg-gray-3;
     @apply rotate-180;
   }
   .rental-property-listing__sort-menu {
-    @apply absolute pr-2 md:pr-5 py-2 space-y-1  border transition-all duration-300 cursor-auto shadow-info border-info rounded md:rounded-lg top-[38px] bg-white left-0 right-0  opacity-0 pointer-events-none;
+    @apply absolute pr-2 md:pr-5 py-2 space-y-1  border transition-all duration-300 z-30 cursor-auto shadow-info border-info rounded md:rounded-lg top-[38px] bg-white left-0 right-0  opacity-0 pointer-events-none;
   }
 
   .rental-property-listing__sort--open {
@@ -1360,4 +1363,57 @@ bg-gray-3;
   .rental-property-listing__sort-arrow--rotated {
     @apply rotate-180;
   }
+
+  .rent-Page__home-listings{
+    @apply mt-8;
+  }
+  .rental-property-listing__results-count{
+    @apply text-[14px] md:text-lg text-primary;
+  }
+  .rental-property-listing__grid{
+    @apply grid auto-rows-[1fr] grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-2 sm:gap-x-4 sm:gap-y-[10px] md:gap-x-6 md:gap-y-4;
+  }
+  .rental-property-listing__loader{
+    @apply flex-center mt-12;
+  }
+  .rental-property-listing__related-listings{
+    @apply mt-12 md:mt-20 bg-gray-2 p-6 md:rounded-2xl;
+  }
+  .rental-property-listing__grid{
+    @apply grid auto-rows-[1fr] grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-2 sm:gap-x-4 sm:gap-y-[10px] md:gap-x-6 md:gap-y-4 mt-12 md:mt-20;
+  }
+  .rental-property-listing__related-links{
+    @apply  mt-12 md:mt-20 bg-gray-2 p-6;
+  }
+  .rental-property-listing__grid{
+    @apply  grid auto-rows-[1fr] grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-2 sm:gap-x-4 sm:gap-y-[10px] md:gap-x-6 md:gap-y-4 mt-12 md:mt-20;
+  }
+  .rental-property-listing__pagination{
+    @apply mt-12 md:mt-14 mb-12 md:mb-[104px] flex-center;
+  }
+  .selected-page{
+    @apply !bg-white !border-info !shadow-info ;
+  }
+  .rotate-arrow{
+    @apply !rotate-180;
+  }
+  .rental-property-listing__pagination-item{
+    @apply !font-Shabnam !font-bold !rounded-lg;
+  }
+  .related-links__title{
+    @apply text-base sm:text-lg md:text-2xl lg:text-[32px] font-bold text-gray-11 mb-8;
+  }
+  .related-links__grid{
+    @apply grid grid-cols-2 items-start sm:grid-cols-3 md:grid-cols-4 gap-x-2 md:gap-x-4 lg:grid-cols-5 xl:grid-cols-6 gap-y-3;
+  }
+  .related-links__item{
+    @apply inline-block text-center px-3 rounded text-gray-10 text-[14px] bg-white sm:text-lg md:text-xl lg:text-2xl xl:text-[28px] whitespace-nowrap;
+  }
+  .rent-page__footer{
+    @apply mt-14 md:mt-[104px] bg-gray-2;
+  }
+  .rent-page__footer-copyright{
+    @apply hidden md:block text-center py-4 text-xs bg-gray-3 text-gray-8;
+  }
+
 }
