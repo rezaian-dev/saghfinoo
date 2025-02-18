@@ -70,6 +70,7 @@ module.exports = {
       },
       boxShadow: {
         info: "0 0 4px 0 rgba(47, 128, 23, .19)",
+        border:"0 0 5px 0 rgba(0,0,0,.25)",
         1: "0 2px 8px 0 rgba(0, 0, 0, .3)",
         slider: "0 3px 10px 0 rgba(0, 0, 0, .20)",
       },
@@ -81,4 +82,8 @@ module.exports = {
       addVariant("child-hover", "&*:hover");
     },
   ],
+  safelist: [
+    "swiper-pagination-bullet",
+    "swiper-pagination-bullet-active"
+  ]
 };

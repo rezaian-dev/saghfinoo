@@ -22,6 +22,7 @@ export default function RentalPropertyListing() {
     { id: 2, name: "قرارداد فوری", value: "urgent" },
   ];
   
+  
   // City and pagination states
   const [selectCity, setSelectCity] = useState("Tehran");
   const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +32,7 @@ export default function RentalPropertyListing() {
   const toPersianDigits = (number) => {
     return number.toString().replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
   };
-
+  
   // Pagination setup
   const itemsPerPage = 28;
   const [currentPage, setCurrentPage] = useState(1);
