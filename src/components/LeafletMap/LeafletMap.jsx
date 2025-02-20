@@ -2,8 +2,10 @@ import React, { useEffect, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import clsx from "classnames";
 
-export default function LeafletMap() {
+export default function LeafletMap({width,height}) {
+  
   const position = [35.6895, 51.3890]; // Tehran coordinates
   const zoomLevel = 12;
   const minZoomLevel = 8;
@@ -63,7 +65,7 @@ export default function LeafletMap() {
   }, []);
 
   return (
-    <div ref={mapRef} className="relative w-[90%] md:w-full h-[357px] mx-auto md:h-[750px] z-10">
+    <div ref={mapRef} className={clsx("leaflet-map", width, height)}>
       <MapContainer
         center={position}
         zoom={zoomLevel}

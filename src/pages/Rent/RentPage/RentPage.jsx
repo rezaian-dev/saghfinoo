@@ -29,7 +29,7 @@ export default function RentPage() {
         </section>
         <section className="rent-page__map">
           <div className="container">
-            <LeafletMap />
+            <LeafletMap width={"w-full"} height={"h-[350px] md:h-[800px]"} />
           </div>
         </section>
         <section className="rent-page__proprty-listing">
@@ -41,7 +41,6 @@ export default function RentPage() {
         <div className="container">
           <Footer />
         </div>
-
         {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
         <p className="rent-page__footer-copyright">
           حقوق این سایت متعلق به سقفینو است

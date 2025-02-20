@@ -1,6 +1,5 @@
 import React from "react";
-
-export default function NewRentalListingsBox({ locationAddress, rent, posted_at, image, alt,mortgage,city }) {
+export default function NewRentalListingsBox({ locationAddress, rent, posted_at, image, alt,mortgage }) {
 
     let convertRent = rent.replaceAll(",","");
     let convertMortage = mortgage.replaceAll(",","");
@@ -23,7 +22,7 @@ export default function NewRentalListingsBox({ locationAddress, rent, posted_at,
           <div className="rental-listing__header">
             {/* Title of the listing */}
             <span className="rental-listing__title">
-              رهن و اجاره آپارتمان {city}
+              رهن و اجاره آپارتمان
             </span>
             {/* Archive icon */}
             <img className="rental-listing__archive-icon" src="svgs\icons\archive-minus.svg" loading="lazy" alt="archiveMinus" />
@@ -34,8 +33,8 @@ export default function NewRentalListingsBox({ locationAddress, rent, posted_at,
           </span>
           {/* Pricing section (deposit and rent) */}
           <div className="rental-listing__pricing">
-            <h6>{convertMortage.length >= 10 ? `${mortgage} میلیارد رهن`:`${mortgage} میلیون رهن`}</h6>
-            <h6>{convertRent.length <= 10 ? `${rent} میلیون اجاره`:`${rent} میلیارد اجاره`}</h6>
+            <h6>{convertMortage.length >= 10 ? `${mortgage} میلیارد تومان رهن`:`${mortgage} میلیون رهن`}</h6>
+            <h6>{convertRent.length <= 10 ? `${rent} میلیون تومان اجاره`:`${rent} میلیارد اجاره`}</h6>
           </div>
         </div>
       </div>

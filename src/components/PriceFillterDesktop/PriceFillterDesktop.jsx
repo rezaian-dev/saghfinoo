@@ -62,7 +62,7 @@ const PriceFilterDesktop = () => {
   // Render input field
   const renderInputField = (name, placeholder, handleInputChange, errorMessage, isError) => (
     <div className="price-filter-desktop__input-field">
-      <span>{placeholder === "حداقل ۵‌۰۰۰‌۰۰۰" ? "از" : "تا"}</span>
+      <span>{placeholder === "حداقل ۵‌,۰۰۰‌,۰۰۰" ? "از" : "تا"}</span>
       <div className="input-field__wrapper group">
         <Controller
           name={name}
