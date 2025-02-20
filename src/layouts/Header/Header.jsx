@@ -42,7 +42,7 @@ export default function Header() {
       <div
         className={clsx("menu-desktop", {
           "md:bg-gray-2": (pathname !== "/" || pathname !== "/home-pro-user"), // Apply background color if on rent page
-        })}
+        "bg-gray-2": pathname ==="/realestates" })}
       >
         {/* Navigation container with desktop layout */}
         <div className="child:md:flex child:hidden">

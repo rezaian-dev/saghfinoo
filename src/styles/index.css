@@ -2880,5 +2880,8 @@ bg-gray-3;
 .property-overview__report-id {
   @apply text-xs sm:text-[14px] md:text-base text-gray-11;
 }
+.realestates__header{
+  @apply md:pt-10;
+}
 
 }
