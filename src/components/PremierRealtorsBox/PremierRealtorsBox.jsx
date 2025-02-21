@@ -1,8 +1,8 @@
 import React from "react";
-
-export default function PremierRealtorsBox({title, image, location, popularity, activeAd, comment, tikBlue, alt}) {
+import clsx from "classnames";
+export default function PremierRealtorsBox({title, image, location, popularity, activeAd, comment, tikBlue, alt, hover}) {
   return (
-    <div className="premier-realtors-box">
+    <div className={clsx("premier-realtors-box", hover && "hover:translate-y-[-10px] hover:shadow-2xl")}>
       {/* Image container for realtor */}
       <div className="premier-realtors-box__image-container">
         {/* Image of the realtor with lazy loading */}

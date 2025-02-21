@@ -66000,4 +66000,27 @@ export const dataCard = [
         "propertySize": "۱۸۸"
     }
 ]
+ export const dataCardRealestates = [
+    { id: 1, title: "مشاور املاک توسی", location: "تهران، نیاوران، سرای یاسر", popularity: "۴/۹ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۵ نظر)", image: "images/landing/home-prouser/logo-tusi.png", tikBlue: true, alt: "logoTusi" },
+    { id: 2, title: "مشاور املاک ولیعصر", location: "تهران، خیابان ولیعصر", popularity: "۴/۲ از ۵", activeAd: "بیش از ۱۰۰۰", comment: " (۱۷ نظر)", image: "images/landing/home-prouser/logo-valiasr.png", tikBlue: true, alt: "logoValiasr" },
+    { id: 3, title: "مشاور املاک محمدی", location: "تهران، خیابان رشتخوار", popularity: "۴/۲ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۷ نظر)", image: "images/landing/home-prouser/logo-mohammadi.png", tikBlue: true, alt: "logoMohammadi" },
+    { id: 4, title: "مشاور املاک خلیج فارس", location: "تهران، میدان حیدریه", popularity: "۴/۵ از ۵", activeAd: "بیش از ۲۵۰۰", comment: " (۱۳ نظر)", image: "images/landing/home-prouser/logo-khalij-fars.png", tikBlue: true, alt: "logoKhalijFars" },
+    { id: 5, title: "مشاور املاک داریوش", location: "تهران، سعادت آباد، بازار دریا", popularity: "۴/۲ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۷ نظر)", image: "images/landing/home-prouser/logo-dariush.png", tikBlue: true, alt: "logoDariush" },
+    { id: 6, title: "مشاور املاک صادقی نیا", location: "تهران، چهارراه سرسبز", popularity: "۴/۲ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۲ نظر)", image: "images/landing/home-prouser/logo-sadeghinia.png", tikBlue: true, alt: "logoSadeghi" },
+    { id: 7, title: "مشاور املاک نیما", location: "تهران، سهروردی شمالی، خرمشهر", popularity: "۴/۲ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۳ نظر)", image: "images/landing/home-prouser/logo-nima.png", tikBlue: true, alt: "logoNima" },
+    { id: 8, title: "مشاور املاک آزاد", location: "تهران، پیروزی، خیابان پرستار", popularity: "۴/۲ از ۵", activeAd: "بیش از ۷۰۰", comment: " (۱۷ نظر)", image: "images/landing/home-prouser/noImage.png", tikBlue: true, alt: "logoAzad" },
+    { id: 9, title: "مشاور املاک ایران مهر", location: "تهران، بازار مرزداران", popularity: "۴/۱ از ۵", activeAd: "بیش از ۵۰۰", comment: " (۱۷ نظر)", image: "images/landing/home-prouser/noImage.png", tikBlue: true, alt: "logoIranMehr" },
+    { id: 10, title: "مشاور املاک البرز", location: "تهران، تهرانپارس، خیابان البرز", popularity: "۴/۲ از ۵", activeAd: "بیش از ۱۲۰۰", comment: " (۱۳ نظر)", image: "images/landing/home-prouser/noImage.png", tikBlue: true, alt: "logoAlborz" },
+    { id: 11, title: "مشاور املاک فدایی", location: "تهران، مسعودیه", popularity: "۴/۵ از ۵", activeAd: "بیش از ۱۵۰۰", comment: " (۲۳ نظر)", image: "images/landing/home-prouser/logo-fadaei.png", tikBlue: true, alt: "logoFadaei" },
+    { id: 12, title: "مشاور املاک رحیمی", location: "تهران، خیابان ونک", popularity: "۴/۲ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۲ نظر)", image: "images/landing/home-prouser/logo-rahimi.png", tikBlue: true, alt: "logoRahimi" },
+    { id: 13, title: "مشاور املاک سلمانی", location: "تهران، اندرزگو، بازار صبا", popularity: "۳ از ۵", activeAd: "بیش از ۵۰۰", comment: " (۱۳ نظر)", image: "images/landing/home-prouser/noImage.png", tikBlue: true, alt: "logoSalmani" },
+    { id: 14, title: "مشاور املاک تهران‌ پارس", location: "تهران، فلکه سوم تهرانپارس", popularity: "۵ از ۵", activeAd: "بیش از ۳۰۰۰", comment: " (۵۰ نظر)", image: "images/landing/home-prouser/noImage.png", tikBlue: true, alt: "logoTehranPars" },
+    { id: 15, title: "مشاور املاک هدایتی", location: "تهران، ستارخان، خیابان سینا", popularity: "۵ از ۳", activeAd: "بیش از ۲۰۰۰", comment: " (۱۷ نظر)", image: "images/landing/home-prouser/noImage.png", tikBlue: true, alt: "logoHedayati" },
+    { id: 16, title: "مشاور املاک گاندی", location: "تهران، خیابان بیستم کندی", popularity: "۴ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۲ نظر)", image: "images/landing/home-prouser/logo-gandi.png", tikBlue: true, alt: "logoKondi" },
+    { id: 17, title: "مشاور املاک محمدیان", location: "تهران، خیابان ولیعصر", popularity: "۴ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۷ نظر)", image: "images/landing/home-prouser/logo-mohammadi.png", tikBlue: true, alt: "logoMohammadian" },
+    { id: 18, title: "مشاور املاک لواسانی", location: "تهران، بازار ارتش", popularity: "۴ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۲ نظر)", image: "images/landing/home-prouser/logo-lavasani.png", tikBlue: true, alt: "logoLavasani" },
+    { id: 19, title: "مشاور املاک شیراز", location: "تهران، میدان ونک، خیابان شیراز", popularity: "۴ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۵ نظر)", image: "images/landing/home-prouser/logo-shiraz.png", tikBlue: true, alt: "logoShiraz" },
+    { id: 20, title: "مشاور املاک کریمی", location: "تهران، خیابان یکم یوسف آباد", popularity: "۴ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۳ نظر)", image: "images/landing/home-prouser/noImage.png", tikBlue: true, alt: "logoKarimi" },
+    { id: 21, title: "مشاور املاک توچال", location: "تهران، زعفرانیه، خیابان الف", popularity: "۴ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۶۰ نظر)", image: "images/landing/home-prouser/logo-tochal.png", tikBlue: true, alt: "logoNiochal" }
+  ];
     

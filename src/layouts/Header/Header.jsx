@@ -7,21 +7,21 @@ import clsx from "classnames";
 export default function Header() {
   // Desktop menu items
   const menuItemsDesktop = [
-    { id: 1, name: "اجاره" },
-    { id: 2, name: "خرید" },
-    { id: 3, name: "املاک و مستغلات" },
-    { id: 4, name: "مشاورین املاک" },
-    { id: 5, name: "اخبار روز" },
+    { id: 1, name: "اجاره",path:"/rent" },
+    { id: 2, name: "خرید",path:"/buy" },
+    { id: 3, name: "املاک و مستغلات",path:"/realestates" },
+    { id: 4, name: "مشاورین املاک",path:"/realator" },
+    { id: 5, name: "اخبار روز",path:"/news" },
   ];
 
   // Mobile menu items with icons
   const menuItemsMobile = [
-    { id: 1, label: "ثبت آگهی", icon: <AddCircle size="20" /> },
-    { id: 2, label: "اجاره خانه", icon: <House size="20" /> },
-    { id: 3, label: "خرید خانه", icon: <Key size="20" /> },
-    { id: 4, label: "املاک و مستغلات", icon: <House2 size="20" /> },
-    { id: 5, label: "مشاورین املاک", icon: <People size="20" /> },
-    { id: 6, label: "اخبار روز", icon: <Receipt21 size="20" /> },
+    { id: 1, label: "ثبت آگهی",path:"" , icon: <AddCircle size="20" /> },
+    { id: 2, label: "اجاره خانه",path:"/rent" , icon: <House size="20" /> },
+    { id: 3, label: "خرید خانه",path:"/buy" , icon: <Key size="20" /> },
+    { id: 4, label: "املاک و مستغلات",path:"/realestates" , icon: <House2 size="20" /> },
+    { id: 5, label: "مشاورین املاک",path:"/realator" , icon: <People size="20" /> },
+    { id: 6, label: "اخبار روز",path:"/news" , icon: <Receipt21 size="20" /> },
   ];
 
   // Get current path from react-router
@@ -52,8 +52,8 @@ export default function Header() {
 
             {/* Desktop Menu Items */}
             <ul className="menu-desktop__items">
-              {menuItemsDesktop.map(({ name, id }) => (
-                <li key={id} className="group relative">
+              {menuItemsDesktop.map(({ name, id,path }) => (
+                <li key={id} className={clsx("group relative", pathname === path && "menu-desktop__link-desktop--active")}>
                   <a href="#" className="menu-desktop__link">{name}</a>
                   {/* Underline effect on hover */}
                   <span className="menu-desktop__underline"></span>
@@ -108,9 +108,9 @@ export default function Header() {
 
         {/* Mobile Menu Items */}
         <ul className="menu-mobile__list">
-          {menuItemsMobile.map(({ label, icon, id }) => (
+          {menuItemsMobile.map(({ label, icon, id,path }) => (
             <li key={id} className="menu-mobile__list-item">
-              <a href="#" className="menu-mobile__link">
+              <a href="#" className={clsx("menu-mobile__link",pathname === path && "menu-mobile__link-mobile--active")}>
                 <div className="menu-mobile__link-content">
                   {icon} {/* Icon for mobile menu item */}
                   <span>{label}</span>
