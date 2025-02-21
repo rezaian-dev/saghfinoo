@@ -2915,6 +2915,8 @@ bg-gray-3;
 .realestates-listing__show-more-btn:hover{
   @apply bg-shade-2
 } 
-
+.Realators__header{
+  @apply md:pt-10;
+}
 
 }

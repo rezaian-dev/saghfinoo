@@ -10,7 +10,7 @@ export default function Header() {
     { id: 1, name: "اجاره",path:"/rent" },
     { id: 2, name: "خرید",path:"/buy" },
     { id: 3, name: "املاک و مستغلات",path:"/realestates" },
-    { id: 4, name: "مشاورین املاک",path:"/realator" },
+    { id: 4, name: "مشاورین املاک",path:"/realators" },
     { id: 5, name: "اخبار روز",path:"/news" },
   ];
 
@@ -20,7 +20,7 @@ export default function Header() {
     { id: 2, label: "اجاره خانه",path:"/rent" , icon: <House size="20" /> },
     { id: 3, label: "خرید خانه",path:"/buy" , icon: <Key size="20" /> },
     { id: 4, label: "املاک و مستغلات",path:"/realestates" , icon: <House2 size="20" /> },
-    { id: 5, label: "مشاورین املاک",path:"/realator" , icon: <People size="20" /> },
+    { id: 5, label: "مشاورین املاک",path:"/realators" , icon: <People size="20" /> },
     { id: 6, label: "اخبار روز",path:"/news" , icon: <Receipt21 size="20" /> },
   ];
 
@@ -42,7 +42,7 @@ export default function Header() {
       <div
         className={clsx("menu-desktop", {
           "md:bg-gray-2": (pathname !== "/" || pathname !== "/home-pro-user"), // Apply background color if on rent page
-        "bg-gray-2": pathname ==="/realestates" })}
+        "bg-gray-2": pathname ==="/realestates" || pathname ==="/realators" })}
       >
         {/* Navigation container with desktop layout */}
         <div className="child:md:flex child:hidden">
