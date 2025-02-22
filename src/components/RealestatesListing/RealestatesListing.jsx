@@ -1,20 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import PremierRealtorsBox from "../PremierRealtorsBox/PremierRealtorsBox";
 import { dataCardRealestates } from "../../data/realEstateData";
+import useShowItem from "../../hooks/useShowItem";
 
 export default function RealestatesListing() {
-  const [isCountShowItem, setIsCountShowItem] = useState(6);
-
-  // Toggle item count (Show More / Show Less)
-  const handlerShowItem = () => {
-    // Reset to 6 items if all items are shown
-    if (isCountShowItem > dataCardRealestates.length) {
-      setIsCountShowItem(6);
-    } else {
-      // Increase item count by 6
-      setIsCountShowItem((prev) => prev + 6);
-    }
-  };
+ const {isCountShowItem, handlerShowItem} = useShowItem(6,dataCardRealestates);
 
   return (
     <>

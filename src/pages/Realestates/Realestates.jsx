@@ -13,11 +13,11 @@ export default function Realestates() {
         </div>
       </header>
 
-        {/* Main section containing city listing and real estate items */}
+      {/* Main section containing city listing and real estate items */}
       <main>
         <section className="realestates__city-listing-search">
           <div className="container">
-            <ListingHeader />
+            <ListingHeader title={"املاک و مستغلات"} />
           </div>
         </section>
         <section className="realestates__listing">
@@ -26,7 +26,7 @@ export default function Realestates() {
           </div>
         </section>
       </main>
-
+      {/* Footer section containing site credits and copyright information */}
       <footer className="realestates__footer">
         <div className="container">
           <Footer />
@@ -39,4 +39,3 @@ export default function Realestates() {
     </>
   );
 }
-

@@ -617,7 +617,7 @@ body {
     @apply left-[-11px] md:left-[-14px] xl:left-[-19px];
   }
   .consultants-box {
-    @apply px-3 py-4 xl:px-[68px] xl:pb-6 lg:pt-4 rounded-2xl border border-gray-4 flex-center flex-col;
+    @apply px-3 py-4 xl:px-[68px] xl:pb-6 lg:pt-4 transition-all duration-300 cursor-pointer rounded-lg md:rounded-2xl border border-gray-4 flex-center flex-col;
   }
   .consultants-box__image-container {
     @apply max-w-[81px] md:max-w-max;
@@ -626,13 +626,13 @@ body {
     @apply w-full;
   }
   .consultants-box__name {
-    @apply font-medium md:font-bold text-base md:text-lg lg:text-xl my-1 text-gray-12;
+    @apply font-medium md:font-bold text-base md:text-lg lg:text-xl my-1 text-gray-12 line-clamp-1;
   }
   .consultants-box__info {
     @apply text-gray-9 text-xs sm:text-[14px] md:text-base lg:text-lg space-y-1 flex-center flex-col mb-1;
   }
   .consultants-box__button {
-    @apply inline-block whitespace-nowrap rounded-lg text-primary px-[22px] py-[5px] text-xs lg:text-[14px] lg:px-[34px] lg:py-[7.5px] border border-primary transition-all duration-300;
+    @apply inline-block whitespace-nowrap rounded md:rounded-lg text-primary px-[22px] py-[5px] text-xs lg:text-[14px] lg:px-[34px] lg:py-[7.5px] border border-primary transition-all duration-300;
   }
   .consultants-box__button:hover {
     @apply bg-primary text-white;
@@ -1825,9 +1825,6 @@ bg-gray-3;
     @apply w-full h-full max-w-6 max-h-6 xl:w-[30px] xl:h-[30px];
   }
 
-  .consultants-box {
-    @apply px-3 py-4 xl:px-[68px] xl:pb-6 lg:pt-4 rounded-2xl border border-gray-4 flex-center flex-col;
-  }
   .consultants-box__image-container {
     @apply max-w-[81px] md:max-w-max;
   }
@@ -1839,12 +1836,6 @@ bg-gray-3;
   }
   .consultants-box__info {
     @apply text-gray-9 text-xs sm:text-[14px] md:text-base lg:text-lg space-y-1 flex-center flex-col mb-1;
-  }
-  .consultants-box__button {
-    @apply inline-block whitespace-nowrap rounded-lg text-primary px-[22px] py-[5px] text-xs lg:text-[14px] lg:px-[34px] lg:py-[7.5px] border border-primary transition-all duration-300;
-  }
-  .consultants-box__button:hover {
-    @apply bg-primary text-white;
   }
   .home-pro-user__footer {
     @apply mt-14 md:mt-[104px] bg-gray-2;
@@ -2907,16 +2898,31 @@ bg-gray-3;
   @apply text-base sm:text-lg md:text-2xl lg:text-[32px] font-bold text-gray-11 mb-8;
 }
 .realestates-listing__grid{
-  @apply grid sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4;
+  @apply grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-x-6 gap-y-4;
 }
-.realestates-listing__show-more-btn{
+.realestates-listing__show-more-btn,.realators-listing__show-more-btn{
   @apply cursor-pointer transition-all duration-300 flex-center mx-auto rounded-lg w-full max-w-[156px] md:max-w-[232px] h-8  md:h-12 font-medium text-xs md:text-[14px] bg-primary text-white mt-10 md:mt-[56px];
 }
-.realestates-listing__show-more-btn:hover{
+.realators-listing__show-more-btn:hover,.realestates-listing__show-more-btn:hover{
   @apply bg-shade-2
 } 
-.Realators__header{
+.realators__header{
   @apply md:pt-10;
+}
+.realators__city-listing-search{
+  @apply mt-[90px] md:mt-[67px];
+}
+.realators__listing{
+  @apply mt-6 md:mt-8;
+}
+.realators-listing__grid{
+  @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-2  md:gap-x-6 md:gap-y-4;
+}
+.realators__footer{
+  @apply bg-gray-2 mt-14 md:mt-[104px];
+}
+.realators__footer-copyright{
+  @apply hidden md:block text-center py-4 text-xs bg-gray-3 text-gray-8;
 }
 
 }
