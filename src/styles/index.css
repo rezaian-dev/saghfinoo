@@ -2924,5 +2924,37 @@ bg-gray-3;
 .realators__footer-copyright{
   @apply hidden md:block text-center py-4 text-xs bg-gray-3 text-gray-8;
 }
+/* 📌 Real Estate Header Section */
+.realestate__header {
+  @apply relative bg-realestate-banner bg-cover bg-center bg-no-repeat min-h-[215px] h-[50vw] md:h-[795px] md:pt-10;
+}
+
+/* 📌 Social Media Box (Hidden on small screens) */
+.realestate__social-box {
+  @apply hidden md:absolute md:block w-[391px] pl-8 pt-8 h-[296px] left-[6%] bottom-16 bg-white border border-gray-4 shadow-inner backdrop-blur-[9px] rounded-2xl space-y-6;
+}
+
+.realestate__social-item {
+  @apply flex justify-end;
+}
+
+.realestate__social-link {
+  @apply flex items-center gap-x-4;
+}
+
+.realestate__social-icon {
+  @apply w-6 h-6;
+}
+
+/* 📌 Floating Logo Circle */
+.realestate__logo-circle {
+  @apply absolute w-24 h-24 sm:w-40 sm:h-40 md:w-52 md:h-52  lg:w-[310px] lg:h-[310px] flex items-center justify-center bg-gray-2 rounded-full 
+  right-4 md:right-[108px] bottom-[-20%] md:bottom-[-10%] lg:bottom-[-127px];
+}
+
+.realestate__logo {
+  @apply lg:min-w-[163px] w-[53%] h-auto object-contain;
+}
+
 
 }

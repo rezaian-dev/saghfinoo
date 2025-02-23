@@ -8,6 +8,7 @@ const RentPage = lazy(() => import("../pages/Rent/RentPage/RentPage"));
 const HomeDetails = lazy(() => import("../pages/Rent/HomeDetails/HomeDetails"));
 const Realestates = lazy(() => import("../pages/Realestates/Realestates"));
 const Realators = lazy(() => import("../pages/Realators/Realators"));
+const Realestate = lazy(() => import("../pages/Realestate/Realestate"));
 
 
 const routes = [
@@ -17,6 +18,7 @@ const routes = [
   { path: "/home-details", element: <HomeDetails /> },
   { path: "/realestates", element: <Realestates /> },
   { path: "/realators", element: <Realators /> },
+  { path: "/realestate", element: <Realestate /> },
 ];
 
 export default routes;
