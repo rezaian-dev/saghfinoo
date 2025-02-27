@@ -5,38 +5,65 @@ import clsx from "classnames";
 import useFilterManager from "../../hooks/useFilterManager";
 import useToggleMenu from "../../hooks/useToggleMenu";
 
-export default function PropertyFilterDesktop({ label, options, systemState, setSystemState, context }) {
-  // Manage filter state and update filter status
-  const { resetFillter, isFilterAreaApplied, isFilterPropertyTypeApplied } = useFilterManager();
+export default function PropertyFilterDesktop({
+  label,
+  listSystemState,
+  setListSystemState,
+  systemState,
+  setSystemState,
+  options,
+  context,
+}) {
 
-  // Manage menu toggle behavior
+  // 🔄 Manage filter state and update filter status
+  const { resetFillter, isFilterAreaApplied, isFilterPropertyTypeApplied, isFillterselectedCityApplied } = useFilterManager();
+
+  // 🍔 Manage menu toggle behavior
   const { isDropdownOpen, btnRef, menuRef, fillterInteractiveRef, handleClick } = useToggleMenu();
 
   const isInitialMount = useRef(true);
 
-  const isFilterApplied = context === "area" ? isFilterAreaApplied : isFilterPropertyTypeApplied;
+  // 🔎 Determine if any filter is applied based on the context
+  const isFilterApplied = context === "area"
+    ? isFilterAreaApplied
+    : context === "propertyType"
+    ? isFilterPropertyTypeApplied
+    : isFillterselectedCityApplied;
 
-  // Handle checkbox selection
+  // ✨ Handle checkbox selection
   const handleChangeBox = (id) => {
-    setSystemState(
-      systemState.map((option) =>
+    setListSystemState(
+      listSystemState.map((option) =>
         option.id === id ? { ...option, selected: !option.selected } : option
       )
     );
   };
 
+  // 📝 Handle system state update when filters are selected
+  const handleSystemState = () => {
+    const selectedOptions = listSystemState.filter((option) => {
+      if (option.selected) {
+        return { id: option.id, name: option.name };
+      }
+    });
+    setSystemState(selectedOptions);
+  };
+
+  // 🌍 UseEffect to initialize the filter and handle click outside dropdown
   useEffect(() => {
     document.addEventListener("click", handleClick);
+    handleSystemState();
 
+    // Initialize state only on the first mount
     if (isInitialMount.current) {
-      setSystemState(options);
+      setListSystemState(options);
       isInitialMount.current = false;
     }
 
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, [systemState]);
+  }, [listSystemState]);
 
   return (
     <div
@@ -46,10 +73,16 @@ export default function PropertyFilterDesktop({ label, options, systemState, set
         isDropdownOpen && "property-filter-desktop__btn--open"
       )}
     >
-      {/* Filter button label */}
-      <span className="property-filter-desktop__label">{label}</span>
+      {/* 📜 Filter button label */}
+      <span className="property-filter-desktop__label">
+        {systemState.length
+          ? systemState.length === 1
+            ? systemState[0].name
+            : `+${systemState.length.toLocaleString("fa-IR")} ${label}`
+          : label}
+      </span>
 
-      {/* Dropdown arrow */}
+      {/* 🔽 Dropdown arrow */}
       <ArrowDown2
         className={clsx(
           "property-filter-desktop__arrow",
@@ -58,7 +91,7 @@ export default function PropertyFilterDesktop({ label, options, systemState, set
         color="#505050"
       />
 
-      {/* Filter dropdown menu */}
+      {/* 🍔 Filter dropdown menu */}
       <div
         ref={menuRef}
         className={clsx(
@@ -67,7 +100,7 @@ export default function PropertyFilterDesktop({ label, options, systemState, set
         )}
       >
         <div className="property-filter-desktop__menu-content">
-          {systemState.map((category) => (
+          {listSystemState.map((category) => (
             <PropertyFilterBox
               key={category.id}
               {...category}
@@ -77,14 +110,14 @@ export default function PropertyFilterDesktop({ label, options, systemState, set
           ))}
         </div>
 
-        {/* Action buttons */}
+        {/* 🎯 Action buttons */}
         <div className="property-filter-desktop__actions">
           <span
             className={clsx(
               "property-filter-desktop__btn-reset",
               isFilterApplied && "property-filter-desktop__btn-reset--active"
             )}
-            onClick={() => resetFillter(setSystemState, options)}
+            onClick={() => resetFillter(setListSystemState, options)}
           >
             حذف
           </span>

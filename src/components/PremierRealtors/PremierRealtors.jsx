@@ -51,19 +51,33 @@ export default function PremierRealtors({text}) {
           ))}
         </Swiper>
 
-        {/* Prev button - only show when not at the beginning */}
-        {!isBeginning && (
-          <div onClick={handlePrev} className="premier-realtors__button premier-realtors__button--prev">
-            <ArrowRight2 className="premier-realtors__icon" color="#353535" variant="Outline" />
-          </div>
-        )}
-
-        {/* Next button - only show when not at the end */}
-        {!isEnd && (
-          <div onClick={handleNext} className="premier-realtors__button premier-realtors__button--next">
-            <ArrowLeft2 className="premier-realtors__icon" color="#353535" variant="Outline" />
-          </div>
-        )}
+         {/* 🔙Prev button - only show when not at the beginning */}
+                {!isBeginning && (
+                  <div
+                    onClick={handlePrev}
+                    className="navigation-button navigation-button--prev"
+                  >
+                    <ArrowRight2
+                      className="navigation-button__icon"
+                      color="#353535"
+                      variant="Outline"
+                    />
+                  </div>
+                )}
+        
+                {/* 🔜 Next Button - only show when not at the end */}
+                {!isEnd && (
+                  <div
+                    onClick={handleNext}
+                    className="navigation-button navigation-button--next"
+                  >
+                    <ArrowLeft2
+                      className="navigation-button__icon"
+                      color="#353535"
+                      variant="Outline"
+                    />
+                  </div>
+                )}
       </div>
     </>
   );

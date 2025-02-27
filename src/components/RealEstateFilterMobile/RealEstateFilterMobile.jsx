@@ -10,15 +10,11 @@ import BathroomTypeMobile from "../BathroomTypeMobile/BathroomTypeMobile";
 import FloorMobile from "../FloorMobile/FloorMobile";
 import HVACSystemMobile from "../HVACSystemMobile/HVACSystemMobile";
 import { FilterContext } from "../../context/FilterContext";
-import UseFilterData, {
-  categoriesBathroom,
-  categoriesFloor,
-  categoriesBathroomType,
-} from "../../hooks/UseFilterData";
+import UseFilterData, { categoriesBathroom, categoriesFloor, categoriesBathroomType } from "../../hooks/UseFilterData";
 import UseFilterManager from "../../hooks/useFilterManager";
 import useToggleMenu from "../../hooks/useToggleMenu";
 
-export default function RealEstateFilterMobile() {
+export default function RealEstateFilterMobile({rent= true}) {
   // Contexts and Hooks
   const { isFiltersApplied } = useContext(FilterContext);
   const [showMore, setShowMore] = useState(1);
@@ -76,9 +72,11 @@ export default function RealEstateFilterMobile() {
       {isSectionVisible(1) && (
         <>
           <div className="real-estate-filter-mobile__grid">
-            {propertyFilterData.map((category) => (
+            {rent ? propertyFilterData.slice(1).map((category) => (
               <PropertyFilterMobile key={category.id} {...category} />
-            ))}
+            )) :propertyFilterData.map((category) => (
+              <PropertyFilterMobile key={category.id} {...category} />
+            )) }
           </div>
           <div className="real-estate-filter-mobile__section">
             <PriceFillterMobile />

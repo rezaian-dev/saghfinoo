@@ -11,12 +11,12 @@ export default function RealEstateFilterDesktop() {
   return (
     <div className="real-estate-filter-desktop">
       {/* Render property filter categories */}
-      {propertyFilterData.map((category) => (
+      {propertyFilterData.slice(1).map((category) => (
         <PropertyFilterDesktop
           key={category.id}
           {...category}
-          systemState={category.systemState}
-          setSystemState={category.setSystemState}
+          listSystemState={category.listSystemState}
+          setListSystemState={category.setListSystemState}
         />
       ))}
 
@@ -26,10 +26,7 @@ export default function RealEstateFilterDesktop() {
 
       {/* More filters button */}
       <div className="real-estate-filter-desktop__more-filters">
-        <FilterSearch
-          className="real-estate-filter-desktop__icon"
-          color="#505050"
-          variant="Outline"
+        <FilterSearch className="real-estate-filter-desktop__icon" color="#505050" variant="Outline"
         />
         <span className="real-estate-filter-desktop__text">فیلترهای بیشتر</span>
       </div>

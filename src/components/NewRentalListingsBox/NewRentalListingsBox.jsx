@@ -1,9 +1,27 @@
 import React from "react";
+
 export default function NewRentalListingsBox({ locationAddress, rent, posted_at, image, alt,mortgage }) {
 
-    let convertRent = rent.replaceAll(",","");
-    let convertMortage = mortgage.replaceAll(",","");
-  
+  // 🔢 Convert numbers to Persian digits
+  function toPersianDigits(number) {
+    return number.toLocaleString("fa-IR");
+ }
+
+ // 💰 Format price based on amount (Million, Billion, etc.)
+ function formatPrice(amount) {
+    amount = parseInt(amount, 10);
+
+    if (amount % 1000000 !== 0) {
+       return `${toPersianDigits(amount)} تومان`; // Normal price
+    } else if (amount >= 1000000000) {
+       return `${toPersianDigits(amount / 1000000000)} میلیارد تومان`; // Convert to Billion
+    } else if (amount >= 1000000) {
+       return `${toPersianDigits(amount / 1000000)} میلیون تومان`; // Convert to Million
+    } else {
+       return `${toPersianDigits(amount)} تومان`; // Small values
+    }
+ }
+   
   return (
     <>
       {/* Main container for rental listing, including hover effects */}
@@ -33,8 +51,8 @@ export default function NewRentalListingsBox({ locationAddress, rent, posted_at,
           </span>
           {/* Pricing section (deposit and rent) */}
           <div className="rental-listing__pricing">
-            <h6>{convertMortage.length >= 10 ? `${mortgage} میلیارد تومان رهن`:`${mortgage} میلیون رهن`}</h6>
-            <h6>{convertRent.length <= 10 ? `${rent} میلیون تومان اجاره`:`${rent} میلیارد اجاره`}</h6>
+            <h6>{mortgage.length >= 10 ? `${formatPrice(mortgage)}   رهن` : `${formatPrice(mortgage)}   رهن`}</h6>
+            <h6>{rent.length >= 10 ? `${formatPrice(rent)}    اجاره` : `${formatPrice(rent)}   اجاره`}</h6>
           </div>
         </div>
       </div>

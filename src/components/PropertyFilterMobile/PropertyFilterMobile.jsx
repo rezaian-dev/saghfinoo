@@ -8,6 +8,8 @@ import useFilterManager from "../../hooks/useFilterManager";
 export default function PropertyFilterMobile({
   label,
   name,
+  listSystemState,
+  setListSystemState,
   systemState,
   setSystemState,
   options,
@@ -15,7 +17,7 @@ export default function PropertyFilterMobile({
 }) {
   const isInitialMount = useRef(true);
 
-  // Manage dropdown state and refs
+  // 🔽 Manage dropdown state and refs
   const {
     isDropdownOpen,
     btnRef,
@@ -24,44 +26,72 @@ export default function PropertyFilterMobile({
     handleClick,
   } = useToggleMenu();
 
-  // Toggle selection for filter options
+
+
+  // ✨ Toggle selection for filter options
   const handleChangeBox = (id) => {
-    setSystemState(
-      systemState.map((option) =>
+    setListSystemState(
+      listSystemState.map((option) =>
         option.id === id ? { ...option, selected: !option.selected } : option
       )
     );
   };
 
-  // Manage filter reset and state tracking
-  const { resetFillter, isFilterAreaApplied, isFilterPropertyTypeApplied } =
-    useFilterManager();
+  // 🔄 Manage filter reset and state tracking
+  const {
+    resetFillter,
+    isFilterAreaApplied,
+    isFilterPropertyTypeApplied,
+    isFillterselectedCityApplied,
+  } = useFilterManager();
 
+  // 🔎 Determine if any filter is applied based on the context
   const isFilterApplied =
-    context === "area" ? isFilterAreaApplied : isFilterPropertyTypeApplied;
+    context === "area"
+      ? isFilterAreaApplied
+      : context === "propertyType"
+      ? isFilterPropertyTypeApplied
+      : isFillterselectedCityApplied;
 
+  // 📝 Handle system state update when filters are selected
+  const handleSystemState = () => {
+    const selectedOptions = listSystemState.filter((option) => {
+      return option.selected === true && option.name;
+    });
+    setSystemState(selectedOptions);
+  };
+
+  // 🌍 UseEffect to initialize the filter and handle click outside dropdown
   useEffect(() => {
-    // Initialize state only on first mount
+    handleSystemState();
+
+    // Initialize state only on the first mount
     if (isInitialMount.current) {
-      setSystemState(options);
+      setListSystemState(options);
       isInitialMount.current = false;
     }
 
-    // Handle click events outside the dropdown
+    // Handle click events outside the dropdown to close it
     document.addEventListener("click", handleClick);
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, [systemState]);
+  }, [listSystemState]);
 
   return (
     <div>
-      {/* Filter label */}
-      <span className="property-filter-mobile__label">{label}</span>
+      {/* 📜 Filter label */}
+      <span className="property-filter-desktop__label">{label}</span>
 
-      {/* Dropdown trigger button */}
+      {/* 🛑 Dropdown trigger button */}
       <div ref={btnRef} className="property-filter-mobile__button">
-        <span className="property-filter-mobile__button-text">{name}</span>
+        <span className="property-filter-mobile__button-text">
+          {systemState.length
+            ? systemState.length === 1
+              ? systemState[0].name
+              : `+${systemState.length.toLocaleString("fa-IR")} ${label}`
+            : name}
+        </span>
         <ArrowDown2
           className={clsx(
             "property-filter-mobile__icon",
@@ -72,19 +102,17 @@ export default function PropertyFilterMobile({
         />
       </div>
 
-      {/* Dropdown menu */}
+      {/* 🍔 Dropdown menu */}
       <div
         ref={menuRef}
         className={clsx(
           "property-filter-mobile__menu",
-          isDropdownOpen
-            && "property-filter-mobile__menu--open"
-          
+          isDropdownOpen && "property-filter-mobile__menu--open"
         )}
       >
-        {/* Filter options */}
+        {/* 📝 Filter options */}
         <div className="property-filter-mobile__options">
-          {systemState.map((option) => (
+          {listSystemState.map((option) => (
             <PropertyFilterBox
               key={option.id}
               {...option}
@@ -94,14 +122,14 @@ export default function PropertyFilterMobile({
           ))}
         </div>
 
-        {/* Action buttons */}
+        {/* 🎯 Action buttons */}
         <div className="property-filter-mobile__actions">
           <span
             className={clsx(
               "property-filter-mobile__reset-button",
               isFilterApplied && "property-filter-mobile__reset-button--active"
             )}
-            onClick={() => resetFillter(setSystemState, options)}
+            onClick={() => resetFillter(setListSystemState, options)}
           >
             حذف
           </span>

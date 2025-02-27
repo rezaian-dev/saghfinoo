@@ -51,19 +51,33 @@ export default function HousingNews() {
           ))}
         </Swiper>
 
-        {/* Prev button - only show when not at the beginning */}
-        {!isBeginning && (
-          <div onClick={handlePrev} className="housing-news__slider-button housing-news__slider-button--prev">
-            <ArrowRight2 className="housing-news__icon" color="#353535" variant="Outline" />
-          </div>
-        )}
-
-        {/* Next button - only show when not at the end */}
-        {!isEnd && (
-          <div onClick={handleNext} className="housing-news__slider-button housing-news__slider-button--next">
-            <ArrowLeft2 className="housing-news__icon" color="#353535" variant="Outline" />
-          </div>
-        )}
+          {/* 🔙 Previous Button */}
+                {!isBeginning && (
+                  <div
+                    onClick={handlePrev}
+                    className="navigation-button navigation-button--prev"
+                  >
+                    <ArrowRight2
+                      className="navigation-button__icon"
+                      color="#353535"
+                      variant="Outline"
+                    />
+                  </div>
+                )}
+        
+                {/* 🔜 Next Button */}
+                {!isEnd && (
+                  <div
+                    onClick={handleNext}
+                    className="navigation-button navigation-button--next"
+                  >
+                    <ArrowLeft2
+                      className="navigation-button__icon"
+                      color="#353535"
+                      variant="Outline"
+                    />
+                  </div>
+                )}
       </div>
     </>
   );
