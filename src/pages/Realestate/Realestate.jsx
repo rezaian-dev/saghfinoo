@@ -10,11 +10,7 @@ import Footer from "../../layouts/Footer/Footer";
 export default function Realestate() {
   // 🔹 Social media links data
   const dataSocialMedia = [
-    {
-      id: 1,
-      link: "t.me/amlaktoosi",
-      image: "images/socialMedia/telegram.png",
-    },
+    { id: 1, link: "t.me/amlaktoosi", image: "images/socialMedia/telegram.png"},
     { id: 2, link: "Toosi_Amlak", image: "images/socialMedia/linkdin.png" },
     { id: 3, link: "Toosi_Amlak", image: "images/socialMedia/instagram.png" },
     { id: 4, link: "Toosi_Amlak.com", image: "images/socialMedia/site.png" },
@@ -55,11 +51,11 @@ export default function Realestate() {
           />
         </div>
       </header>
-      {/* Main content area - contains profile, realtors, property listings, and user comments */}
+      {/* 📑 Main content area - contains profile, realtors, property listings, and user comments */}
       <main>
         <section className="realestate__profile">
           <div className="container">
-            <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="realestate__grid grid">
               <RealtyIntro />
               <PropertyRatingCard />
             </div>
@@ -81,11 +77,11 @@ export default function Realestate() {
           </div>
         </section>
       </main>
+      {/* 🏢 Footer with site information and copyright */}
       <footer className="realestate__footer">
         <div className="container">
       <Footer/>
         </div>
-       {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
        <p className="realestate__footer-copyright">
           حقوق این سایت متعلق به سقفینو است
         </p>

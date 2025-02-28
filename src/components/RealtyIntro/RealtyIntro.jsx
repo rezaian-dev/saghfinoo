@@ -1,11 +1,14 @@
-import { HomeTrendUp, Location, More } from "iconsax-react";
+import { HomeTrendUp, Location, More, UserSquare } from "iconsax-react";
 import React from "react";
 
-export default function RealtyIntro() {
+export default function RealtyIntro({realestate=true}) {
   // Data for the details section (location and active listings)
   const dataList = [
-    { id: 1, caption: "تهران، نیاوران، سه راه یاسر", icon: (<Location className="realty-intro__icon" color="#505050" />) },
-    { id: 2, caption: "بیش از ۴۰۰۰ آگهی‌های فعال", icon: (<HomeTrendUp className="realty-intro__icon" color="#505050" />) },
+    { id: 1, caption: "مشاور املاک توسی", icon: (<UserSquare className="realty-intro__icon" color="#505050" />) },
+    { id: 2, caption: "۵۰۰ آگهی‌های فعال", icon: (<HomeTrendUp className="realty-intro__icon" color="#505050" />) },
+    { id: 3, caption: "تهران، نیاوران، سه راه یاسر", icon: (<Location className="realty-intro__icon" color="#505050" />) },
+    { id: 4, caption: "بیش از ۴۰۰۰ آگهی‌های فعال", icon: (<HomeTrendUp className="realty-intro__icon" color="#505050" />) },
+
   ];
 
   return (
@@ -16,9 +19,9 @@ export default function RealtyIntro() {
           {/* 🏡 Title and logo */}
           <div className="realty-intro__title">
             <h2 className="realty-intro__main-title">
-              املاک توسی
+              {realestate ? "املاک توسی":"علی پرتو"}
+               
             </h2>
-            <img className="realty-intro__icon-img" src="images/realestate/tik-blue.png" loading="lazy" alt="tikBlue"/>
           </div>
           {/* 🔽 More icon (visible on mobile only) */}
           <div className="realty-intro__more-icon">
@@ -39,21 +42,30 @@ export default function RealtyIntro() {
 
       {/* 📍 Data details section (location and listings count) */}
       <div className="realty-intro__details">
-        {dataList.map(({ id, caption, icon }) => {
-          return (
-            <div key={id} className="realty-intro__detail">
-              {icon} {/* 📍 Icon for each detail */}
-              <h4 className="realty-intro__detail-caption">
-                {caption} {/* 🏡 Caption for each detail */}
-              </h4>
-            </div>
-          );
-        })}
-      </div>
+    {realestate 
+    ? dataList.slice(2).map(({ id, caption, icon }) => (
+        <div key={id} className="realty-intro__detail">
+          {icon} {/* 📍 Icon for each detail */}
+          <h4 className="realty-intro__detail-caption">
+            {caption} {/* 🏡 Caption for each detail */}
+          </h4>
+        </div>
+      ))
+    : dataList.slice(0,2).map(({ id, caption, icon }) => (
+        <div key={id} className="realty-intro__detail">
+          {icon} {/* 📍 Icon for each detail */}
+          <h4 className="realty-intro__detail-caption">
+            {caption} {/* 🏡 Caption for each detail */}
+          </h4>
+        </div>
+      ))
+      }
+</div>
+
 
       {/* 📞 Contact button */}
       <span className="realty-intro__contact-btn">
-        تماس با ما
+        {realestate ? "تماس با ما":"تماس با مشاور"}
       </span>
     </div>
   );

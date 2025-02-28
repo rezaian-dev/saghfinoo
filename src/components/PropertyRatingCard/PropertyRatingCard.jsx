@@ -1,7 +1,15 @@
-import { ExportCurve, More, Warning2 } from "iconsax-react";
+import { ExportCurve, Warning2 } from "iconsax-react";
 import React from "react";
-
-export default function PropertyRatingCard() {
+import clsx from "classnames";
+export default function PropertyRatingCard({realestate=true}) {
+  const numberRating = [
+    { id: 1, value: "۵" },
+    { id: 2, value: "۴" },
+    { id: 3, value: "۳" },
+    { id: 4, value: "۲" },
+    { id: 5, value: "۱" },
+  ];
+  
   return (
     <>
       <div className="property-rating">
@@ -19,7 +27,24 @@ export default function PropertyRatingCard() {
         </div>
 
         {/* 📊 Rating Card */}
-        <div className="property-rating__content">
+        <div className={clsx("property-rating__content", !realestate && "property-rating__content--expanded")}>
+          {!realestate && <div className="property-rating__question">
+            <span className="property-rating__question-text">
+              چه امتیازی به علی پرتو میدی؟
+            </span>
+            <div className="property-rating__stars">
+              {numberRating.reverse().map(({ id, value }) => {
+                return (
+                  <span
+                    key={id}
+                    className="property-rating__star"
+                  >
+                    {value}
+                  </span>
+                );
+              })}
+            </div>
+          </div>}
           {/* ⭐ User Satisfaction Score */}
           <span className="property-rating__score">
             میزان رضایتمندی کاربران: ۴/۹ از ۵

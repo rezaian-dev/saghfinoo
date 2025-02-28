@@ -10,7 +10,7 @@ import NewRentalListingsBox from "../NewRentalListingsBox/NewRentalListingsBox";
 import useShowItem from "../../hooks/useShowItem";
 import clsx from "classnames";
 
-export default function RealestateListing() {
+export default function RealestateListing({realestate=true}) {
   const { propertyFilterData } = UseFilterData();
   const selectedCity = dataCard.filter(item => item.label ==="Tehran");
   const {isCountShowItem, handlerShowItem} = useShowItem(12,selectedCity)
@@ -18,8 +18,8 @@ export default function RealestateListing() {
   return (
     <>
       <div>
-        <h3 className="realestate-listing__title">
-          آگهی های املاک توسی
+        <h3 className="realestate-listing__title">{realestate ? "آگهی های املاک توسی":"لیست آگهی ها "}
+            
         </h3>
         <div className="realestate-listing__filters">
           <div className="realestate-listing__filters-desktop">

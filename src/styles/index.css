@@ -763,7 +763,7 @@ body {
     @apply flex-center rounded h-[32px] gap-x-1 px-4 sm:gap-x-2 border border-gray-7;
   }
   .hvac-system-mobile__arrow {
-    @apply transition-all duration-300;
+    @apply transition-all duration-300 flex shrink-0;
   }
   .hvac-system-mobile__filter-menu {
     @apply overflow-hidden transition-all duration-300 pr-4 space-y-1 min-w-full w-full bg-white rounded !max-h-0;
@@ -779,7 +779,7 @@ body {
     @apply max-h-[140px] space-y-1 mb-2 pl-2 overflow-y-auto;
   }
   .hvac-system-mobile__actions {
-    @apply flex-center gap-x-4 ml-4 mt-2;
+    @apply flex-center gap-x-2 md:gap-x-4 ml-4 mt-2;
   }
   .hvac-system-mobile__reset-btn {
     @apply flex-center rounded text-xs w-full max-w-[77px] h-8 sm:text-[14px] border bg-white text-primary border-primary;
@@ -995,9 +995,6 @@ body {
     @apply max-h-[140px] space-y-1 mb-2 pl-2 overflow-y-auto;
   }
 
-  .property-filter-mobile__actions {
-    @apply flex-center gap-x-4 ml-4 mt-2;
-  }
 
   .property-filter-mobile__reset-button {
     @apply flex-center rounded text-xs w-full max-w-[77px] h-8 sm:text-[14px] border border-primary bg-white text-primary;
@@ -1822,7 +1819,7 @@ bg-gray-3;
   }
 
   .consultants-box__image-container {
-    @apply max-w-[81px] md:max-w-max;
+    @apply max-w-[81px] md:max-w-[140px];
   }
   .consultants-box__image {
     @apply w-full;
@@ -1983,9 +1980,6 @@ bg-gray-3;
 
   .hvac-system-mobile__options {
     @apply max-h-[140px] space-y-1 mb-2 pl-2 overflow-y-auto;
-  }
-  .hvac-system-mobile__actions {
-    @apply flex-center gap-x-4 ml-4 mt-2;
   }
   .hvac-system-mobile__reset-btn {
     @apply flex-center rounded text-xs w-full max-w-[77px] h-8 sm:text-[14px] border bg-white text-primary border-primary;
@@ -2152,7 +2146,7 @@ bg-gray-3;
   }
 
   .property-filter-mobile__actions {
-    @apply flex-center gap-x-4 ml-4 mt-2;
+    @apply flex-center gap-x-2 md:gap-x-4 ml-4 mt-2;
   }
 
   .property-filter-mobile__select-button {
@@ -2899,6 +2893,9 @@ bg-gray-3;
     @apply absolute w-24 h-24 sm:w-40 sm:h-40 md:w-52 md:h-52  lg:w-[310px] lg:h-[310px] flex items-center justify-center bg-gray-2 rounded-full 
   right-4 md:right-[108px] bottom-[-20%] md:bottom-[-10%] lg:bottom-[-127px];
   }
+  .realator__logo-circle{
+    @apply border border-black;
+  }
 
   .realestate__logo {
     @apply lg:min-w-[163px] w-[53%] h-auto object-contain;
@@ -2906,8 +2903,29 @@ bg-gray-3;
   .realestate__profile {
     @apply mt-[65px] sm:mt-24 md:mt-[187px];
   }
+  .realestate__grid{
+    @apply grid grid-cols-1 md:grid-cols-2;
+  }
   .property-rating {
     @apply hidden md:flex flex-col items-end;
+  }
+  .property-rating__star{
+    @apply flex-center cursor-pointer text-gray-8 border rounded-lg border-gray-8 w-[31px] h-[22px];
+  }
+  .property-rating__content--expanded{
+    @apply !h-auto;
+  }
+  .property-rating__question{
+    @apply space-y-4 mb-6;
+  }
+  .realestate__image{
+    @apply w-full h-full object-cover;
+  }
+  .property-rating__question-text{
+    @apply text-gray-10 text-base;
+  }
+  .property-rating__stars{
+    @apply flex-center gap-x-1;
   }
 
   .property-rating__actions {

@@ -2,13 +2,18 @@ import React from "react";
 import CategoryBoxes from "../../components/CategoryBoxes/CategoryBoxes";
 import ContactInfoBox from "../../components/ContactInfoBox/ContactInfoBox";
 import ServicesSection from "../../components/ServicesSection/ServicesSection";
-// FooterDesktop component to display the desktop version of the footer
+
+/**
+ * 🖥️ FooterDesktop Component
+ * 
+ * Displays the desktop version of the footer, including categories, contact info, and services.
+ */
 export default function FooterDesktop() {
-  // Data for categories to display in the footer
+  // 📌 Data for categories displayed in the footer
   const dataCategory = [
     {
       id: 1,
-      title: "بازارهای املاک و مستغلات", // Real estate markets category
+      title: "بازارهای املاک و مستغلات", // 🏠 Real estate markets category
       items: [
         { id: 1, content: "بازار املاک و مستغلات تهران" },
         { id: 2, content: "بازار املاک و مستغلات اصفهان" },
@@ -17,7 +22,7 @@ export default function FooterDesktop() {
     },
     {
       id: 2,
-      title: "بیشترین جست‌وجوها", // Most searched category
+      title: "بیشترین جست‌وجوها", // 🔍 Most searched category
       items: [
         { id: 1, content: "آپارتمان نزدیک مترو" },
         { id: 2, content: "خانه نزدیک بر اصلی خیابان" },
@@ -26,7 +31,7 @@ export default function FooterDesktop() {
     },
     {
       id: 3,
-      title: "پرامتیازترین مشاوران املاک", // Most rated real estate agents category
+      title: "پرامتیازترین مشاوران املاک", // ⭐ Most rated real estate agents category
       items: [
         { id: 1, content: "میترا جباری" },
         { id: 2, content: "حسام‌الدین عزیزی" },
@@ -37,29 +42,29 @@ export default function FooterDesktop() {
 
   return (
     <>
-      {/* Footer container for desktop version */}
+      {/* 📦 Footer container for desktop version */}
       <div className="footer-desktop">
-        {/* Main title of the footer */}
+        {/* 🏡 Main title of the footer */}
         <h3 className="footer-desktop__title">
           سقفینو؛ سقفی ایده‌آل برای زندگی
         </h3>
 
-        {/* Categories and contact info section */}
+        {/* 📂 Categories and contact info section */}
         <div className="footer-desktop__categories-section">
-          {/* Render each category box */}
+          {/* 📌 Render each category box */}
           {dataCategory.map((item) => (
             <CategoryBoxes key={item.id} {...item} />
           ))}
-          {/* Contact info box */}
+          {/* 📞 Contact info box */}
           <ContactInfoBox />
         </div>
 
-        {/* Services section */}
+        {/* 🛠️ Services section */}
         <div className="footer-desktop__services-section">
           <ServicesSection />
         </div>
 
-        {/* Footer graphic image */}
+        {/* 🌆 Footer graphic image */}
         <div className="footer-desktop__graphic">
           <img className="mx-auto" src="images/footer_graphic_city.png" loading="lazy" alt="grapphicCity"
           />
@@ -68,4 +73,3 @@ export default function FooterDesktop() {
     </>
   );
 }
-
