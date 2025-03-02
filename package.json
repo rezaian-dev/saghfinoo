@@ -13,6 +13,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@hookform/resolvers": "^4.1.2",
     "@mui/material": "^6.4.4",
     "autoprefixer": "10.4.20",
     "classnames": "^2.5.1",
@@ -25,7 +26,8 @@
     "react-router-dom": "^7.1.1",
     "react-spinners": "^0.15.0",
     "swiper": "^11.2.1",
-    "tailwindcss": "3.4.17"
+    "tailwindcss": "3.4.17",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

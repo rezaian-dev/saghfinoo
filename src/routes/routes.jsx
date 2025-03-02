@@ -10,6 +10,7 @@ const Realestates = lazy(() => import("../pages/Realestates/Realestates"));
 const Realators = lazy(() => import("../pages/Realators/Realators"));
 const Realestate = lazy(() => import("../pages/Realestate/Realestate"));
 const Realator = lazy(()=> import ("../pages/Realator/Realator"))
+const UserProfilePage = lazy(()=> import ("../pages/UserProfile/UserProfilePage/UserProfilePage"))
 
 const routes = [
   { path: "/", element: <HomeNewUser /> },
@@ -20,6 +21,7 @@ const routes = [
   { path: "/realators", element: <Realators /> },
   { path: "/realestate", element: <Realestate /> },
   { path: "/realator", element: <Realator /> },
+  { path: "/user-profile", element: <UserProfilePage /> },
 ];
 
 export default routes;

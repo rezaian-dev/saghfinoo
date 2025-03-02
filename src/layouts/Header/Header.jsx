@@ -1,4 +1,16 @@
-import { AddCircle, ArrowLeft2, CloseCircle, HambergerMenu, House, House2, Key, People, ProfileCircle, Receipt21 } from "iconsax-react";
+import {
+  AddCircle,
+  ArrowLeft2,
+  CloseCircle,
+  HambergerMenu,
+  House,
+  House2,
+  Key,
+  People,
+  ProfileCircle,
+  Receipt21,
+  ReceiptText,
+} from "iconsax-react";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import useToggleMenu from "../../hooks/useToggleMenu";
@@ -7,28 +19,64 @@ import clsx from "classnames";
 export default function Header() {
   // Desktop menu items
   const menuItemsDesktop = [
-    { id: 1, name: "اجاره",path:"/rent" },
-    { id: 2, name: "خرید",path:"/buy" },
-    { id: 3, name: "املاک و مستغلات",path:"/realestates" },
-    { id: 4, name: "مشاورین املاک",path:"/realators" },
-    { id: 5, name: "اخبار روز",path:"/news" },
+    { id: 1, name: "اجاره", path: "/rent" },
+    { id: 2, name: "خرید", path: "/buy" },
+    { id: 3, name: "املاک و مستغلات", path: "/realestates" },
+    { id: 4, name: "مشاورین املاک", path: "/realators" },
+    { id: 5, name: "اخبار روز", path: "/news" },
   ];
 
   // Mobile menu items with icons
   const menuItemsMobile = [
-    { id: 1, label: "ثبت آگهی",path:"" , icon: <AddCircle size="20" /> },
-    { id: 2, label: "اجاره خانه",path:"/rent" , icon: <House size="20" /> },
-    { id: 3, label: "خرید خانه",path:"/buy" , icon: <Key size="20" /> },
-    { id: 4, label: "املاک و مستغلات",path:"/realestates" , icon: <House2 size="20" /> },
-    { id: 5, label: "مشاورین املاک",path:"/realators" , icon: <People size="20" /> },
-    { id: 6, label: "اخبار روز",path:"/news" , icon: <Receipt21 size="20" /> },
+    { id: 1, label: "ثبت آگهی", path: "", icon: <AddCircle size="20" /> },
+    {
+      id: 2,
+      label: "آگهی های من",
+      path: "/rent",
+      icon: <ReceiptText size="20" />,
+    },
+    {
+      id: 3,
+      label: "آگهی های ذخیره شده",
+      path: "/rent",
+      icon: <img src="svgs\icons\archive-minus(bg-gray-11).svg" width={20} />,
+    },
+    { id: 4, label: "اجاره خانه", path: "/rent", icon: <House size="20" /> },
+    { id: 5, label: "خرید خانه", path: "/buy", icon: <Key size="20" /> },
+    {
+      id: 6,
+      label: "املاک و مستغلات",
+      path: "/realestates",
+      icon: <House2 size="20" />,
+    },
+    {
+      id: 7,
+      label: "مشاورین املاک",
+      path: "/realators",
+      icon: <People size="20" />,
+    },
+    { id: 8, label: "اخبار روز", path: "/news", icon: <Receipt21 size="20" /> },
   ];
 
   // Get current path from react-router
   const { pathname } = useLocation();
 
   // Get menu state and refs from custom hook
-  const { isMenuOpen, navToggleRef, menuRef, btnCloseRef, isActiveOverrlay, handleClick } = useToggleMenu();
+  const {
+    isMenuOpen,
+    navToggleRef,
+    menuRef,
+    btnCloseRef,
+    isActiveOverrlay,
+    handleClick,
+  } = useToggleMenu();
+
+  const isUserProfilePage = pathname === "/user-profile";
+
+  // Filter menu items based on the page type
+  const filteredMenuItems = isUserProfilePage
+    ? menuItemsMobile // Show only items 2 and 3 on the profile page
+    : menuItemsMobile.filter((item) => item.id !== 2 && item.id !== 3); // Remove items 2 and 3 on other pages
 
   // Handle click events for opening and closing the menu
   useEffect(() => {
@@ -41,20 +89,34 @@ export default function Header() {
       {/* Desktop menu */}
       <div
         className={clsx("menu-desktop", {
-          "md:bg-gray-2": (pathname !== "/" || pathname !== "/home-pro-user"), // Apply background color if on rent page
-        "bg-gray-2": pathname ==="/realestates" || pathname ==="/realators" })}
+          "md:bg-gray-2": pathname !== "/" || pathname !== "/home-pro-user", // Apply background color if on rent page
+          "bg-gray-2": pathname === "/realestates" || pathname === "/realators",
+        })}
       >
         {/* Navigation container with desktop layout */}
         <div className="child:md:flex child:hidden">
           <nav className="menu-desktop__nav">
             {/* Logo */}
-            <img className="menu-desktop__logo" src="/images/logos/Logo.png" loading="lazy" alt="Logo" />
+            <img
+              className="menu-desktop__logo"
+              src="/images/logos/Logo.png"
+              loading="lazy"
+              alt="Logo"
+            />
 
             {/* Desktop Menu Items */}
             <ul className="menu-desktop__items">
-              {menuItemsDesktop.map(({ name, id,path }) => (
-                <li key={id} className={clsx("group relative", pathname === path && "menu-desktop__link-desktop--active")}>
-                  <a href="#" className="menu-desktop__link">{name}</a>
+              {menuItemsDesktop.map(({ name, id, path }) => (
+                <li
+                  key={id}
+                  className={clsx(
+                    "group relative",
+                    pathname === path && "menu-desktop__link-desktop--active"
+                  )}
+                >
+                  <a href="#" className="menu-desktop__link">
+                    {name}
+                  </a>
                   {/* Underline effect on hover */}
                   <span className="menu-desktop__underline"></span>
                 </li>
@@ -71,16 +133,28 @@ export default function Header() {
           </span>
 
           {/* Logo for mobile */}
-          <img src="/images/logos/Logo.png" loading="lazy" alt="Logo" width={72} height={35} />
+          <img
+            src="/images/logos/Logo.png"
+            loading="lazy"
+            alt="Logo"
+            width={72}
+            height={35}
+          />
 
           {/* Register ad link for mobile */}
-          <a href="#" className="menu-desktop__register-link">ثبت آگهی</a>
+          <a href="#" className="menu-desktop__register-link">
+            ثبت آگهی
+          </a>
         </div>
 
         {/* User actions section (login and register links) */}
         <div className="menu-desktop__user-actions">
-          <a href="#" className="menu-desktop__login-link">ورود</a>
-          <a href="#" className="Register-ad-desktop">ثبت آگهی</a>
+          <a href="#" className="menu-desktop__login-link">
+            ورود
+          </a>
+          <a href="#" className="Register-ad-desktop">
+            ثبت آگهی
+          </a>
         </div>
       </div>
 
@@ -108,9 +182,15 @@ export default function Header() {
 
         {/* Mobile Menu Items */}
         <ul className="menu-mobile__list">
-          {menuItemsMobile.map(({ label, icon, id,path }) => (
+          {filteredMenuItems.map(({ label, icon, id, path }) => (
             <li key={id} className="menu-mobile__list-item">
-              <a href="#" className={clsx("menu-mobile__link",pathname === path && "menu-mobile__link-mobile--active")}>
+              <a
+                href="#"
+                className={clsx(
+                  "menu-mobile__link",
+                  pathname === path && "menu-mobile__link-mobile--active"
+                )}
+              >
                 <div className="menu-mobile__link-content">
                   {icon} {/* Icon for mobile menu item */}
                   <span>{label}</span>

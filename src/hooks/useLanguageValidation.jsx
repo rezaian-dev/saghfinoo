@@ -22,14 +22,14 @@ const useLanguageValidation = (value, onChange, language) => {
     // Persian validation
     if (language === 'fa' && regexPersian.test(value)) {
       setErrorMessage('* لطفاً فارسی تایپ کنید');
-      timeoutRef.current = setTimeout(() => setErrorMessage(''), 500);
+      timeoutRef.current = setTimeout(() => setErrorMessage(''), 1000);
       return false;
     }
 
     // English validation
     if (language === 'en' && regexEnglish.test(value)) {
       setErrorMessage('* Please type in English');
-      timeoutRef.current = setTimeout(() => setErrorMessage(''), 500);
+      timeoutRef.current = setTimeout(() => setErrorMessage(''), 1000);
       return false;
     }
 
