@@ -10,6 +10,9 @@ module.exports = {
           lg: "1.75rem",
         },
       },
+      screens:{
+        "custom":"430px"
+      },
       colors: {
         gray: {
           1: "#FAFAFA",
@@ -42,6 +45,7 @@ module.exports = {
           5: "#FCA197",
           6: "#F66262",
           7: "#E43434",
+          8: "#E91717"
         },
         elight: {
           1: "#ED2E2E",
@@ -55,6 +59,7 @@ module.exports = {
           1: "#F4B740",
           2: "#FFF8E1",
         },
+
         black: "#0C0C0C",
         primary: "#CB1B1B",
         error: "#C30000",

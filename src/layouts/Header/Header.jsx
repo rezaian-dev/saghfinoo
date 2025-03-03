@@ -32,7 +32,7 @@ export default function Header() {
     {
       id: 2,
       label: "آگهی های من",
-      path: "/rent",
+      path: "/my-ad",
       icon: <ReceiptText size="20" />,
     },
     {
@@ -71,7 +71,7 @@ export default function Header() {
     handleClick,
   } = useToggleMenu();
 
-  const isUserProfilePage = pathname === "/user-profile";
+  const isUserProfilePage = pathname === "/user-profile" || "/my-ad";
 
   // Filter menu items based on the page type
   const filteredMenuItems = isUserProfilePage

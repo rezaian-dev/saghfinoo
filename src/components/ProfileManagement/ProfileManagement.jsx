@@ -1,10 +1,4 @@
-import {
-  AddCircle,
-  Edit,
-  Logout,
-  ProfileCircle,
-  ReceiptText,
-} from "iconsax-react";
+import { AddCircle, Edit, Logout, ProfileCircle, ReceiptText } from "iconsax-react";
 import React from "react";
 import clsx from "classnames";
 
@@ -12,7 +6,7 @@ import clsx from "classnames";
  * 🧑‍💼 Profile Management Component
  * Displays user profile with navigation menu
  */
-export default function ProfileManagement() {
+export default function ProfileManagement({activeLabel}) {
   // 📋 Menu items configuration array
   const menuItems = [
     { id: 1, title: "ویرایش اطلاعات", label: "editInfo", icon: <Edit size="24" color="#717171" variant="Outline"/>, href: "#" },
@@ -43,8 +37,8 @@ export default function ProfileManagement() {
                 {icon}
                 <span className="profile__menu-text  group-hover:text-primary">{title}</span>
               </a>
-              {/* 🟢 Active indicator - only active for editInfo */}
-              <span className={clsx("profile__menu-indicator", label === "editInfo" && "profile__menu-indicator--active")}></span>
+              {/* 🟢 Active indicator - only active for the selected item */}
+              <span className={clsx("profile__menu-indicator", label === activeLabel && "profile__menu-indicator--active")}></span>
             </li>
           ))}
         </ul>

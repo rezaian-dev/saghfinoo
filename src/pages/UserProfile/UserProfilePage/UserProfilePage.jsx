@@ -19,7 +19,7 @@ export default function UserProfilePage() {
         <div className="container">
           <div className="user-profile__grid">
             <div className="user-profile__sidebar">
-              <ProfileManagement />
+              <ProfileManagement activeLabel={"editInfo"} />
             </div>
             <div className="user-profile__content">
               <UserProfileEdit />

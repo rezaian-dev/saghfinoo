@@ -3590,9 +3590,6 @@ bg-gray-3;
   .rental-listing__size-location {
     @apply inline-block text-[10px] sm:text-xs md:text-base text-gray-10 mb-1 !line-clamp-1;
   }
-  .rental-listing__pricing {
-    @apply text-gray-11 gap-y-1 flex-col text-[10px] sm:text-xs md:text-base  font-bold ;
-  }
   .new-rental__header {
     @apply flex justify-between items-center mb-8;
   }
@@ -6266,6 +6263,65 @@ bg-gray-3;
     @apply text-gray-11
     bg-gray-3;
   }
+.rental-listing__status{
+  @apply flex items-center justify-between grow px-3 absolute left-0 right-0 top-3;
+}
+.rental-listing__status-badge{
+  @apply text-white w-[65px] h-8 md:w-[97px] md:h-[38px]  flex-center rounded text-[10px] sm:text-xs md:text-base bg-tint-8/40;
+}
+.rental-listing__status-badge--confirmed{
+  @apply bg-black/40  ;
+}
+  .rental-listing__icon{
+    @apply !w-5 !h-5 md:!w-6 md:!h-6;
+  }
+  .rental-listing__type{
+    @apply text-gray-8 text-xs/7 sm:text-base/7;
+  }
+  .no-ad{
+    @apply  flex flex-col mt-[36px] md:mt-[10px] items-center justify-center w-full;
+  }
+.no-ad__image-container{
+  @apply max-w-[212px] md:max-w-full flex justify-center;
+}
+.no-ad__image{
+  @apply max-w-full h-auto;
+}
+.no-ad__content{
+  @apply mt-[31px] text-center space-y-1;
+}
+.no-ad__title{
+  @apply text-gray-10 mb-3  font-bold text-[clamp(12px,4vw,24px)];
+}
+.no-ad__description{
+  @apply text-gray-9 px-0.5 text-[clamp(14px,4vw,20px)];
+}
+.no-ad__button-container{
+  @apply mt-8;
+}
+.no-ad__button{
+  @apply flex-center mb-[72px] font-medium  text-xs  sm:text-[14px] w-[156px] md:w-[278px] h-8 md:h-10 bg-primary text-white rounded-lg transition-colors duration-300;
+}
+.no-ad__button:hover{
+  @apply  bg-shade-2;
+}
 
-  
+.user-ad-list__header{
+  @apply flex items-center mt-3 md:mt-4 gap-x-1;
+}
+.user-ad-list__icon{
+  @apply  w-5 h-5 md:w-6 md:h-6;
+}
+.user-ad-list__text{
+  @apply  text-gray-10 text-[clamp(12px,4vw,16px)];
+}
+.user-ad-list__grid{
+  @apply  grid grid-cols-1 custom:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:px-[97px] mt-8 md:mt-[37px] gap-x-4 gap-y-2;
+}
+.user-ads__container{
+  @apply border border-gray-5 rounded-2xl py-6 px-4 md:px-6 md:pb-[39px] md:pt-8;
+}
+.user-ads__title{
+  @apply text-gray-11 font-bold text-[clamp(12px,4vw,24px)];
+}
 }
