@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import { agents } from "../../data/realEstateData";
 import useShowItem from "../../hooks/useShowItem";
 
-export default function RealEstateAgents() {
+const RealEstateAgents = memo(() => {
   const { isCountShowItem, handlerShowItem } = useShowItem(11, agents);
 
   return (
@@ -50,4 +50,6 @@ export default function RealEstateAgents() {
       </div>
     </div>
   );
-}
+});
+
+export default RealEstateAgents;

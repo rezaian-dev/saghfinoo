@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import PremierRealtorsBox from "../PremierRealtorsBox/PremierRealtorsBox";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -7,7 +7,7 @@ import { Navigation } from "swiper/modules";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import useSwiperSlider from "../../hooks/useSwiperSlider";
 
-export default function PremierRealtors({text}) {
+ const PremierRealtors = memo((({text}) => {
 
   
   const dataCard = [
@@ -81,5 +81,6 @@ export default function PremierRealtors({text}) {
       </div>
     </>
   );
-}
+}))
 
+export default PremierRealtors

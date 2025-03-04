@@ -1,15 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import React, { memo, useContext, useEffect } from "react";
 import clsx from "classnames";
 import { ArrowDown2 } from "iconsax-react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import useToggleMenu from "../../hooks/useToggleMenu";
 import { FilterContext } from "../../context/FilterContext";
 import useNumberValidation from "../../hooks/useNumberValidation";
+import InputField from "../InputField/InputField";
 
-const PriceFilterDesktop = () => {
+const PriceFilterDesktop = memo(() => {
   const { selectedPrice, setSelectedPrice } = useContext(FilterContext);
 
-  // Form state management
+  // 🎯 Form state management - Handling the form values
   const { control, watch, setValue, reset } = useForm({
     defaultValues: {
       minPrice: selectedPrice.min || "",
@@ -17,76 +18,64 @@ const PriceFilterDesktop = () => {
     },
   });
 
-  // Dropdown state management
-  const { isDropdownOpen, btnRef, menuRef, fillterInteractiveRef, handleClick } = useToggleMenu();
+  // 🛠️ Dropdown state management for the price filter
+  const {
+    isDropdownOpen,
+    btnRef,
+    menuRef,
+    fillterInteractiveRef,
+    handleClick,
+  } = useToggleMenu();
 
-  // Watch input values
+  // 👀 Watch input values for minPrice and maxPrice
   const minPrice = watch("minPrice");
   const maxPrice = watch("maxPrice");
 
-  // Validation hooks
-  const { errorMessage: minPriceErrorMessage, isError: isMinPriceError, formatNumber: minPriceFormat, handleInputChange: handleMinPriceChange } = useNumberValidation("minPrice", setValue);
-  const { errorMessage: maxPriceErrorMessage, isError: isMaxPriceError, formatNumber: maxPriceFormat, handleInputChange: handleMaxPriceChange } = useNumberValidation("maxPrice", setValue);
+  // 🔍 Validation hooks for prices
+  const {
+    errorMessage: minPriceErrorMessage,
+    isError: isMinPriceError,
+    formatNumber: minPriceFormat,
+    handleInputChange: handleMinPriceChange,
+  } = useNumberValidation("minPrice", setValue);
+  const {
+    errorMessage: maxPriceErrorMessage,
+    isError: isMaxPriceError,
+    formatNumber: maxPriceFormat,
+    handleInputChange: handleMaxPriceChange,
+  } = useNumberValidation("maxPrice", setValue);
 
-  // Reset inputs and state
+  // 🧹 Reset inputs and state when reset is clicked
   const handleReset = () => {
     reset({ minPrice: "", maxPrice: "" });
     setSelectedPrice({ min: "", max: "" });
   };
 
-  // Update selected price on input change
+  // 🔄 Update selected price on input change for minPrice
   useEffect(() => {
     if (minPrice !== selectedPrice.min) {
       setSelectedPrice((prev) => ({ ...prev, min: minPriceFormat(minPrice) }));
     }
   }, [minPrice]);
 
+  // 🔄 Update selected price on input change for maxPrice
   useEffect(() => {
     if (maxPrice !== selectedPrice.max) {
       setSelectedPrice((prev) => ({ ...prev, max: maxPriceFormat(maxPrice) }));
     }
   }, [maxPrice]);
 
-  // Sync input values when dropdown opens
+  // 🔄 Sync input values when dropdown opens
   useEffect(() => {
     if (minPrice !== "") setValue("minPrice", selectedPrice.min);
     if (maxPrice !== "") setValue("maxPrice", selectedPrice.max);
   }, [isDropdownOpen]);
 
-  // Close dropdown on outside click
+  // 🚪 Close dropdown on outside click
   useEffect(() => {
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
   }, []);
-
-  // Render input field
-  const renderInputField = (name, placeholder, handleInputChange, errorMessage, isError) => (
-    <div className="price-filter-desktop__input-field">
-      <span>{placeholder === "حداقل ۵‌,۰۰۰‌,۰۰۰" ? "از" : "تا"}</span>
-      <div className="input-field__wrapper group">
-        <Controller
-          name={name}
-          control={control}
-          render={({ field }) => (
-            <input
-              {...field}
-              autoComplete="off"
-              className={clsx(
-                "input-field__input group-hover:bg-gray-3",
-                isError && "input-field__input--error"
-              )}
-              type="text"
-              placeholder={placeholder}
-              value={name === "minPrice" ? selectedPrice.min : selectedPrice.max}
-              onChange={handleInputChange}
-            />
-          )}
-        />
-        <span>تومان</span>
-        {isError && <span className="error-message">{errorMessage}</span>}
-      </div>
-    </div>
-  );
 
   return (
     <div
@@ -96,6 +85,7 @@ const PriceFilterDesktop = () => {
         isDropdownOpen && "price-filter-desktop--active"
       )}
     >
+      {/* 🏷️ Price filter label */}
       <span className="price-filter-desktop__label">قیمت</span>
       <ArrowDown2
         className={clsx(
@@ -104,6 +94,7 @@ const PriceFilterDesktop = () => {
         )}
         color="#505050"
       />
+      {/* 📥 Dropdown menu containing input fields */}
       <div
         ref={menuRef}
         className={clsx(
@@ -111,24 +102,32 @@ const PriceFilterDesktop = () => {
           isDropdownOpen && "price-filter-desktop__menu--open"
         )}
       >
+        {/* 🔖 Title for the price filter */}
         <span className="price-filter-desktop__title">اجاره</span>
         <div className="form">
-          {renderInputField(
-            "minPrice",
-            "حداقل ۵‌,۰۰۰‌,۰۰۰",
-            handleMinPriceChange,
-            minPriceErrorMessage,
-            isMinPriceError
-          )}
-          {renderInputField(
-            "maxPrice",
-            "حداکثر ۱۰۰‌,۰۰۰‌,۰۰۰",
-            handleMaxPriceChange,
-            maxPriceErrorMessage,
-            isMaxPriceError
-          )}
+          {/* 🏷️ Min price input field */}
+          <InputField
+            rangeValue={selectedPrice.min}
+            placeholder="حداقل ۵‌,۰۰۰‌,۰۰۰"
+            handleInputChange={handleMinPriceChange}
+            error={minPriceErrorMessage}
+            hasError={isMinPriceError}
+            control={control}
+            unit={"minPrice"}
+          />
+          {/* 🏷️ Max price input field */}
+          <InputField
+            rangeValue={selectedPrice.max}
+            placeholder="حداکثر ۱۰۰‌,۰۰۰‌,۰۰۰"
+            handleInputChange={handleMaxPriceChange}
+            error={maxPriceErrorMessage}
+            hasError={isMaxPriceError}
+            control={control}
+            unit={"maxPrice"}
+          />
 
           <div className="price-filter-desktop__actions">
+            {/* 🚮 Reset button */}
             <span
               className={clsx(
                 "price-filter-desktop__reset",
@@ -139,6 +138,7 @@ const PriceFilterDesktop = () => {
             >
               حذف
             </span>
+            {/* 🔍 Search button */}
             <span
               ref={fillterInteractiveRef}
               className="price-filter-desktop__search"
@@ -150,6 +150,6 @@ const PriceFilterDesktop = () => {
       </div>
     </div>
   );
-};
+});
 
 export default PriceFilterDesktop;

@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{memo} from "react";
 import CategoryBoxes from "../../components/CategoryBoxes/CategoryBoxes";
 import ContactInfoBox from "../../components/ContactInfoBox/ContactInfoBox";
 import ServicesSection from "../../components/ServicesSection/ServicesSection";
@@ -8,7 +8,7 @@ import ServicesSection from "../../components/ServicesSection/ServicesSection";
  * 
  * Displays the desktop version of the footer, including categories, contact info, and services.
  */
-export default function FooterDesktop() {
+const FooterDesktop = memo(() => {
   // 📌 Data for categories displayed in the footer
   const dataCategory = [
     {
@@ -66,10 +66,11 @@ export default function FooterDesktop() {
 
         {/* 🌆 Footer graphic image */}
         <div className="footer-desktop__graphic">
-          <img className="mx-auto" src="images/footer_graphic_city.png" loading="lazy" alt="grapphicCity"
-          />
+          <img className="mx-auto" src="images/footer_graphic_city.png" loading="lazy" alt="grapphicCity" />
         </div>
       </div>
     </>
   );
-}
+});
+
+export default FooterDesktop;

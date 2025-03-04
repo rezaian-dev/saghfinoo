@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import HousingInfoBox from "../HousingInfoBox/HousingInfoBox";
 
-export default function HousingPlanner() {
+const HousingPlanner = memo(() => {
   const dataCards = [
     {
       id: 1,
@@ -31,18 +31,23 @@ export default function HousingPlanner() {
       alt: "propertyOwner",
     },
   ];
+
   return (
     <>
-      {/* Section Title */}
+      {/* 🏡 Section Title - Helping you find a home */}
       <h3 className="housing-planner__title">
         سقفینو چطور به خانه‌دار شدن شما کمک می‌کند
       </h3>
-      {/* Grid for Housing Info Boxes */}
+
+      {/* 📦 Grid container for displaying housing information cards */}
       <div className="housing-planner__grid">
         {dataCards.map((item) => (
+          // 🔹 Rendering each HousingInfoBox component with data
           <HousingInfoBox key={item.id} {...item} />
         ))}
       </div>
     </>
   );
-}
+});
+
+export default HousingPlanner;

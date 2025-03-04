@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -8,12 +8,12 @@ import useSwiperSlider from "../../hooks/useSwiperSlider";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import clsx from "classnames";
 
-export default function PropertyImageSliderDesktop() {
+const PropertyImageSliderDesktop = memo(() => {
 
-  // Destructure hook values for handling slider state
+  // 🧑‍💻 Destructure hook values for handling slider state
   const { isBeginning, setIsBeginning, isEnd, handleNext, handlePrev, setSwiper, setIsEnd } = useSwiperSlider();
 
-  // List of property images
+  // 🖼️ List of property images
   const listImage = [
     { id: 1, img: "images/rent/home-details/house_1.webp", alt: "house_1" },
     { id: 2, img: "images/rent/home-details/house_2.webp", alt: "house_2" },
@@ -22,7 +22,7 @@ export default function PropertyImageSliderDesktop() {
     { id: 5, img: "images/rent/home-details/house_5.webp", alt: "house_5" },
   ];
 
-  // Fill remaining space in listImage with default images if there are less than 10 images
+  // ⛔ Fill remaining space with default images if there are less than 10 images
   for (let i = 0; i < 10; i++) {
     if (listImage.length < 10) {
       listImage.push({ id: listImage.length + 1, img: "images/landing/home-prouser/no-image.webp", alt: "noImage" });
@@ -33,28 +33,28 @@ export default function PropertyImageSliderDesktop() {
 
   return (
     <div className="property-image-slider__container">
-      {/* Swiper component */}
+      {/* 🎡 Swiper component to display images */}
       <Swiper
-        spaceBetween={24}
-        slidesPerView={1}
-        loop={false}
-        modules={[Navigation]}
+        spaceBetween={24} // 🧑‍🔬 Space between slides
+        slidesPerView={1} // 👀 Number of slides to show at once
+        loop={false} // 🔄 Disable looping
+        modules={[Navigation]} // 🧩 Enable navigation controls
         onSwiper={(swiper) => {
-          setSwiper(swiper);
-          setIsBeginning(swiper.isBeginning);
-          setIsEnd(swiper.isEnd);
+          setSwiper(swiper); // 📝 Initialize swiper state
+          setIsBeginning(swiper.isBeginning); // 🏁 Check if at the beginning
+          setIsEnd(swiper.isEnd); // 🏁 Check if at the end
         }}
         onSlideChange={(swiper) => {
-          setIsBeginning(swiper.isBeginning);
-          setIsEnd(swiper.isEnd);
+          setIsBeginning(swiper.isBeginning); // 🏁 Update beginning state
+          setIsEnd(swiper.isEnd); // 🏁 Update end state
         }}
         breakpoints={{
-          320: { slidesPerView: 1, spaceBetween: 16 },
-          768: { slidesPerView: 1, spaceBetween: 20 },
-          1024: { slidesPerView: 1, spaceBetween: 24 },
+          320: { slidesPerView: 1, spaceBetween: 16 }, // 📱 Mobile breakpoint
+          768: { slidesPerView: 1, spaceBetween: 20 }, // 💻 Tablet breakpoint
+          1024: { slidesPerView: 1, spaceBetween: 24 }, // 🖥️ Desktop breakpoint
         }}
       >
-        {/* First SwiperSlide */}
+        {/* 🖼️ First SwiperSlide displaying first set of images */}
         <SwiperSlide>
           <div className="property-image-slider__grid">
             {listImage.slice(0, 5).map(({ id, img, alt }) => (
@@ -65,7 +65,7 @@ export default function PropertyImageSliderDesktop() {
           </div>
         </SwiperSlide>
 
-        {/* Second SwiperSlide */}
+        {/* 🖼️ Second SwiperSlide displaying second set of images */}
         <SwiperSlide>
           <div className="property-image-slider__grid">
             {listImage.slice(5, 10).map(({ id, img, alt }) => (
@@ -77,14 +77,14 @@ export default function PropertyImageSliderDesktop() {
         </SwiperSlide>
       </Swiper>
 
-      {/* Prev button (visible when not at the beginning) */}
+      {/* ⬅️ Prev button, visible when not at the beginning */}
       {!isBeginning && (
         <div onClick={handlePrev} className="property-image-slider__button property-image-slider__button--prev">
           <ArrowRight2 color="#353535" size={24} />
         </div>
       )}
 
-      {/* Next button (visible when not at the end) */}
+      {/* ➡️ Next button, visible when not at the end */}
       {!isEnd && (
         <div onClick={handleNext} className="property-image-slider__button property-image-slider__button--next">
           <ArrowLeft2 color="#353535" size={24} />
@@ -92,4 +92,6 @@ export default function PropertyImageSliderDesktop() {
       )}
     </div>
   );
-}
+});
+
+export default PropertyImageSliderDesktop;

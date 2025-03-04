@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, memo } from "react";
 import { ArrowDown2, FilterSearch, Sort } from "iconsax-react";
 import clsx from "classnames";
 import { FilterContext } from "../../context/FilterContext";
@@ -13,66 +13,62 @@ import Stack from "@mui/material/Stack";
 import PaginationItem from "@mui/material/PaginationItem";
 import { useSearchParams } from "react-router-dom";
 
-export default function RentalPropertyListing() {
-  // Context and states for sorting and filtering
-  const { sortBy, setSortBy } = useContext(FilterContext);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const category = [
+const RentalPropertyListing = memo(() => {
+  // 🏷️ Context and states for sorting and filtering properties
+  const { sortBy, setSortBy } = useContext(FilterContext); // Sorting context
+  const [searchParams, setSearchParams] = useSearchParams(); // For handling URL search params
+  const category = [ // Sorting categories
     { id: 1, name: "جدیدترین", value: "newest" },
     { id: 2, name: "قرارداد فوری", value: "urgent" },
   ];
-  
-  
-  // City and pagination states
-  const [selectCity, setSelectCity] = useState("Tehran");
-  const [isLoading, setIsLoading] = useState(true);
-  const { isDropdownOpen, btnRef, menuRef, handleClick } = useToggleMenu();
-  
-  // Utility function to convert numbers to Persian digits
-  const toPersianDigits = (number) => {
-    return number.toString().replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
-  };
-  
-  // Pagination setup
+
+  // 🏙️ State to handle selected city and loading status
+  const [selectCity, setSelectCity] = useState("Tehran"); // Selected city for filtering
+  const [isLoading, setIsLoading] = useState(true); // Loading state for async data fetching
+  const { isDropdownOpen, btnRef, menuRef, handleClick } = useToggleMenu(); // Dropdown menu state
+
+
+  // 📅 Pagination setup: defining items per page and current page state
   const itemsPerPage = 28;
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Handle page change in the pagination
+  // 🔄 Function to handle page change and update URL
   const handlePageChange = (event, page) => {
     const url = new URL(location);
     url.searchParams.set("Page", page);
-    window.history.pushState({}, "", url.toString());
+    window.history.pushState({}, "", url.toString()); // Update browser history with new page
     setCurrentPage(page);
   };
 
-  // Filter data by selected city
-  const dataBaseCity = dataCard.filter((item) => item.label === selectCity);
-  let startIndex = (currentPage - 1) * itemsPerPage;
-  let selectedData = dataBaseCity.slice(startIndex, startIndex + itemsPerPage);
+  // 🏙️ Filter data by the selected city
+  const dataBaseCity = dataCard.filter((item) => item.label === selectCity); // Filtered data by city
+  let startIndex = (currentPage - 1) * itemsPerPage; // Calculate start index for pagination
+  let selectedData = dataBaseCity.slice(startIndex, startIndex + itemsPerPage); // Paginated data
 
-  // Effect to initialize page on component mount
+  // 📝 Effect hook to handle page setup and loading state on component mount
   useEffect(() => {
-    setCurrentPage(+searchParams.get("Page") || 1);
+    document.addEventListener("click", handleClick); // Event listener for click handling
+
+    setCurrentPage(+searchParams.get("Page") || 1); // Initialize current page from URL params
     setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-    document.addEventListener("click", handleClick);
+      setIsLoading(false); // Set loading state to false after 2 seconds
+    }, 2000);
 
     return () => {
-      document.removeEventListener("click", handleClick);
+      document.removeEventListener("click", handleClick); // Clean up event listener on unmount
     };
   }, []);
 
   return (
     <>
       <div className="rental-property-listing">
-        {/* Header Section */}
+        {/* 🏠 Header Section */}
         <div className="container">
           <div className="rental-property-listing__header">
             <h3 className="rental-property-listing__title">املاک اجاره ای</h3>
-            {/* Controls for sorting and filtering */}
+            {/* 🛠️ Controls for sorting and filtering */}
             <div className="rental-property-listing__controls">
-              {/* Sorting Options */}
+              {/* 🧹 Sorting Options */}
               <div
                 ref={btnRef}
                 className={clsx(
@@ -91,11 +87,12 @@ export default function RentalPropertyListing() {
                 <ArrowDown2
                   className={clsx(
                     "rental-property-listing__sort-arrow",
-                    isDropdownOpen && "rental-property-listing__sort-arrow--rotated"
+                    isDropdownOpen &&
+                      "rental-property-listing__sort-arrow--rotated"
                   )}
                   color="#505050"
                 />
-                {/* Dropdown menu for sorting */}
+                {/* ⬇️ Dropdown menu for sorting */}
                 <div
                   ref={menuRef}
                   className={clsx(
@@ -109,9 +106,10 @@ export default function RentalPropertyListing() {
                       value={value}
                       className={clsx(
                         "rental-property-listing__sort-option",
-                        sortBy === value && "rental-property-listing__sort-option--selected"
+                        sortBy === value &&
+                          "rental-property-listing__sort-option--selected"
                       )}
-                      onClick={() => setSortBy(value)}
+                      onClick={() => setSortBy(value)} // Set the sorting criteria
                     >
                       {name}
                     </span>
@@ -119,7 +117,7 @@ export default function RentalPropertyListing() {
                 </div>
               </div>
 
-              {/* Filter Options */}
+              {/* 🔄 Filter Options */}
               <div className="rental-property-listing__filters">
                 <FilterSearch
                   className="rental-property-listing__filter-icon"
@@ -134,63 +132,78 @@ export default function RentalPropertyListing() {
             </div>
           </div>
           <span className="rental-property-listing__results-count">
-            {toPersianDigits(dataBaseCity.length)} مورد یافت شد
+            {(dataBaseCity.length).toLocaleString("fa-IR")} مورد یافت شد
           </span>
         </div>
       </div>
 
-      {/* Display Listings */}
+      {/* 🏡 Display Listings */}
       <div className="container">
         <div className="rental-property-listing__grid">
-          {!isLoading && selectedData.slice(0, 8).map((item) => (
-            <NewRentalListingsBox key={item.id} {...item} />
-          ))}
+          {!isLoading &&
+            selectedData
+              .slice(0, 8) // Display the first 8 listings
+              .map((item) => <NewRentalListingsBox key={item.id} {...item} />)}
         </div>
-        {isLoading && <div className="rental-property-listing__loader"><SyncLoader color="#CB1B1B" /></div>}
+        {isLoading && (
+          <div className="rental-property-listing__loader">
+            <SyncLoader color="#CB1B1B" />
+          </div>
+        )}
       </div>
 
-      {/* Related Listings */}
+      {/* 🔗 Related Listings */}
       <div className="rental-property-listing__related-listings">
         <div className="container">
           <PremierRealtors text={"دفاتر املاک مرتبط"} />
         </div>
       </div>
 
-      {/* Display More Listings */}
+      {/* 🏡 Display More Listings */}
       <div className="container">
         <div className="rental-property-listing__grid">
-          {!isLoading && selectedData.slice(8, 16).map((item) => (
-            <NewRentalListingsBox key={item.id} {...item} />
-          ))}
+          {!isLoading &&
+            selectedData
+              .slice(8, 16) // Display listings from 9th to 16th
+              .map((item) => <NewRentalListingsBox key={item.id} {...item} />)}
         </div>
-        {isLoading && <div className="rental-property-listing__loader"><SyncLoader color="#CB1B1B" /></div>}
+        {isLoading && (
+          <div className="rental-property-listing__loader">
+            <SyncLoader color="#CB1B1B" />
+          </div>
+        )}
       </div>
 
-      {/* Related Links Section */}
+      {/* 🔗 Related Links Section */}
       <div className="rental-property-listing__related-links">
         <RelatedLinks />
       </div>
 
-      {/* Display Remaining Listings */}
+      {/* 📄 Display Remaining Listings */}
       <div className="container">
         <div className="rental-property-listing__grid">
-          {!isLoading && selectedData.slice(16, 28).map((item) => (
-            <NewRentalListingsBox key={item.id} {...item} />
-          ))}
+          {!isLoading &&
+            selectedData
+              .slice(16, 28) // Display listings from 17th to 28th
+              .map((item) => <NewRentalListingsBox key={item.id} {...item} />)}
         </div>
-        {isLoading && <div className="rental-property-listing__loader"><SyncLoader color="#CB1B1B" /></div>}
+        {isLoading && (
+          <div className="rental-property-listing__loader">
+            <SyncLoader color="#CB1B1B" />
+          </div>
+        )}
       </div>
 
-      {/* Pagination */}
+      {/* 📚 Pagination */}
       <div className="rental-property-listing__pagination">
         <Stack spacing={20}>
           <Pagination
-            count={Math.ceil(dataBaseCity.length / itemsPerPage)} // Number of pages
+            count={Math.ceil(dataBaseCity.length / itemsPerPage)} // Calculate the number of pages
             page={currentPage} // Current page
-            onChange={handlePageChange} // Page change handler
+            onChange={handlePageChange} // Handle page change
             variant="outlined"
             color="white"
-            size={window.screen.width < 640 ? "small" : "medium"}
+            size={window.screen.width < 640 ? "small" : "medium"} // Adjust size based on screen width
             renderItem={(item) => {
               return (
                 <PaginationItem
@@ -198,9 +211,10 @@ export default function RentalPropertyListing() {
                   className={clsx(
                     "rental-property-listing__pagination-item",
                     item.selected && "selected-page",
-                    (item.type === "previous" || item.type === "next") && "rotate-arrow"
+                    (item.type === "previous" || item.type === "next") &&
+                      "rotate-arrow" // Rotate arrows for next/previous buttons
                   )}
-                  page={toPersianDigits(item.page)} // Convert page number to Persian digits
+                  page={(item.page).toLocaleString("fa-IR")} // Convert page number to Persian digits
                 />
               );
             }}
@@ -209,4 +223,6 @@ export default function RentalPropertyListing() {
       </div>
     </>
   );
-}
+});
+
+export default RentalPropertyListing;

@@ -1,10 +1,10 @@
-import React from 'react'
-import CategoryBoxes from '../CategoryBoxes/CategoryBoxes'
+import React, {memo} from 'react';
+import CategoryBoxes from '../CategoryBoxes/CategoryBoxes';
 import ServicesSectionItems from '../ServicesSectionItems/ServicesSectionItems';
 import { Call, Instagram } from 'iconsax-react';
 
 // 📌 Footer component for mobile version
-export default function FooterMobile() {
+const FooterMobile = memo(() => {
   // 🔹 Categories for quick access in the footer
   const dataCategory = [
     {
@@ -25,7 +25,7 @@ export default function FooterMobile() {
         { id: 3, content: "بازار املاک و مستغلات شمال" },
       ],
     }
-  ]
+  ];
 
   // 🔹 Footer sections including services and contact info
   const sections = [
@@ -111,4 +111,6 @@ export default function FooterMobile() {
       </div>
     </>
   )
-}
+});
+
+export default FooterMobile;

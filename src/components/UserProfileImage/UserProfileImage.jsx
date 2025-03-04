@@ -1,11 +1,11 @@
-import React from "react";
+import React, { memo } from "react";
 import { ProfileCircle, GalleryAdd } from "iconsax-react";
 
 /**
  * 🖼️ UserProfileImage Component
  * Displays user profile image with upload functionality
- **/
-const UserProfileImage = ({ userImage, handleFileChange }) => {
+ */
+const UserProfileImage = memo(({ userImage, handleFileChange }) => {
   return (
     <div className="user-profile-edit__image-container">
       {/* 📸 Image upload control */}
@@ -39,6 +39,6 @@ const UserProfileImage = ({ userImage, handleFileChange }) => {
       </label>
     </div>
   );
-};
+});
 
 export default UserProfileImage;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { userAdlist } from "../../data/realEstateData";
 import NewRentalListingsBox from "../NewRentalListingsBox/NewRentalListingsBox";
 import { Trash } from "iconsax-react";
@@ -6,10 +6,10 @@ import { Trash } from "iconsax-react";
 /**
  * 📋 UserAdList Component
  * Displays a list of user's real estate advertisements
- * with ability to delete all listings
+ * with ability to delete all listings 🗑️
  */
 
-export default function UserAdList() {
+const UserAdList = memo(({ myad, savead }) => {
   return (
     <div>
       {/* 🗑️ Header with delete all option */}
@@ -21,10 +21,11 @@ export default function UserAdList() {
       <div className="user-ad-list__grid">
         {/* 🔄 Map through user's advertisements data */}
         {userAdlist.map((item) => (
-          <NewRentalListingsBox key={item.id} {...item} myad={true} />
+          <NewRentalListingsBox key={item.id} {...item} myad={myad} savead={savead} />
         ))}
       </div>
     </div>
   );
-}
+});
 
+export default UserAdList;

@@ -1,36 +1,37 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useCallback, memo } from "react";
 import HVACSystemBoxMobile from "../HVACSystemBoxMobile/HVACSystemBoxMobile";
 import { ArrowDown2 } from "iconsax-react";
 import clsx from "classnames";
 import useToggleMenu from "../../hooks/useToggleMenu";
 import useFilterManager from "../../hooks/useFilterManager";
 
-export default function HVACSystemMobile({  label,
+// 📝 HVACSystemMobile component for managing HVAC options in a mobile layout
+const HVACSystemMobile = memo((({
+  label,
   name,
   listSystemState,
   setListSystemState,
   systemState,
   setSystemState,
   options,
-  context, }) {
-
-  // Refs for managing menu toggle and filter states
+  context,
+}) => {
+  // 🔄 Refs for managing menu toggle and filter states
   const { isDropdownOpen, btnRef, menuRef, fillterInteractiveRef, handleClick } = useToggleMenu();
-;
 
-  // Ref for tracking initial mount and managing filter states
+  // 🔰 Ref for tracking initial mount and managing filter states
   const isInitialMount = useRef(true);
-  const { resetFillter, isFillterCoolSystemApplied, isFillterHotSystemApplied, isFillterfloorMaterialApplied } = useFilterManager();
+  const { resetFillter, isFillterCoolSystemApplied, isFillterHotSystemApplied, isFillterfloorMaterialApplied,handleSystemState } = useFilterManager();
 
-  // Determine if a filter is applied based on the context
+  // 🛠️ Check if a filter is applied based on the context
   const isFilterApplied = context === "coolSystem" ? isFillterCoolSystemApplied
     : context === "hotSystem" ? isFillterHotSystemApplied
     : context === "floorMaterial" && isFillterfloorMaterialApplied;
 
-  // Handle the change of the selected HVAC option
-  const handleChangeBox = (id) => {
-    setListSystemState(() => {
-      const updatedState = listSystemState.map((option) => {
+  // ✅ Handle the change of the selected HVAC option
+  const handleChangeBox = useCallback((id) => {
+    setListSystemState((prevState) => {
+      const updatedState = prevState.map((option) => {
         if (id === 1) {
           return { ...option, selected: option.id === 1 }; // Always select the first option if it's ID 1
         }
@@ -40,52 +41,48 @@ export default function HVACSystemMobile({  label,
         };
       });
 
-      // Ensure at least one option is selected
+      // ⚖️ Ensure at least one option is selected
       if (!updatedState.some((option) => option.selected)) {
         updatedState[0].selected = true;
       }
 
       return updatedState;
     });
-  };
+  }, [setListSystemState]);
 
-   // 📝 Handle system state update when filters are selected
-  const handleSystemState = () => {
-    const selectedOptions = listSystemState.filter((option) => {
-      return (option.selected === true && option.id !== 1);
-    });
-    setSystemState(selectedOptions);
-    
-  };
-
-  // Effect to manage state initialization and filter updates
+  // ⏳ Effect to manage state initialization and filter updates
   useEffect(() => {
-    handleSystemState()
-    document.addEventListener("click", handleClick);
+    handleSystemState(listSystemState,setSystemState,"HVAC");
 
-    // On initial mount, set the systemState with options
+    // 🟢 On initial mount, set the systemState with options
     if (isInitialMount.current) {
       setListSystemState(options);
       isInitialMount.current = false;
     }
+  }, [listSystemState]);
 
-    // Clean up event listener when component unmounts
+  // 📱 Add event listener for dropdown toggle
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, [listSystemState]);
+  }, [handleClick]);
 
   return (
     <div className="hvac-system-mobile">
-      {/* Display the name of the HVAC system */}
+      {/* 🏷️ Display the name of the HVAC system */}
       <span className="hvac-system-mobile__name">{label}</span>
-      
+
+      {/* 🖱️ Button to toggle dropdown menu */}
       <div ref={btnRef} className={clsx("hvac-system-mobile__menu-btn")}>
-        <span className="hvac-system-mobile__menu-label">{systemState.length
+        <span className="hvac-system-mobile__menu-label">
+          {systemState.length
             ? systemState.length === 1
               ? systemState[0].name
               : `+${systemState.length.toLocaleString("fa-IR")} ${label}`
-            : name}</span>
+            : name}
+        </span>
         <ArrowDown2
           className={clsx("hvac-system-mobile__arrow", isDropdownOpen && "hvac-system-mobile__menu-arrow--open")}
           size="16"
@@ -93,12 +90,13 @@ export default function HVACSystemMobile({  label,
         />
       </div>
 
+      {/* 📜 Dropdown menu for filter options */}
       <div
         ref={menuRef}
         className={clsx("hvac-system-mobile__filter-menu", isDropdownOpen && "hvac-system-mobile__filter-menu--open")}
       >
         <div className="hvac-system-mobile__options">
-          {/* Render each HVAC system box option */}
+          {/* 🎴 Render each HVAC system box option */}
           {listSystemState.map((option) => (
             <HVACSystemBoxMobile
               key={option.id}
@@ -107,17 +105,17 @@ export default function HVACSystemMobile({  label,
             />
           ))}
         </div>
-        
+
         <div className="hvac-system-mobile__actions">
-          {/* Reset button that triggers filter reset */}
+          {/* 🔄 Reset button that triggers filter reset */}
           <span
             className={clsx("hvac-system-mobile__reset-btn", isFilterApplied && "hvac-system-mobile__reset-btn--active")}
             onClick={() => resetFillter(setListSystemState, options)}
           >
             حذف
           </span>
-          
-          {/* Select button for confirming selection */}
+
+          {/* ✅ Select button for confirming selection */}
           <span ref={fillterInteractiveRef} className="hvac-system-mobile__select-btn">
             انتخاب
           </span>
@@ -125,4 +123,7 @@ export default function HVACSystemMobile({  label,
       </div>
     </div>
   );
-}
+}));
+
+// 🎯 Wrap the component with React.memo for optimization
+export default HVACSystemMobile;

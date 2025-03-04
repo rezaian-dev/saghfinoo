@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, memo } from "react";
-import { useForm, Controller } from "react-hook-form";
-import clsx from "classnames";
+import { useForm } from "react-hook-form";
 import { FilterContext } from "../../context/FilterContext";
 import useToggleMenu from "../../hooks/useToggleMenu";
 import useNumberValidation from "../../hooks/useNumberValidation";
+import InputFieldMobile from "../InputFieldMobile/InputFieldMobile";
 
-const SizeFillterMobile = memo(() => {
-  // Get state and functions from context
+const SizeFilterMobile = memo(() => {
+  // 🌍 Retrieve size filter context values
   const {
     propertySize,
     setPropertySize,
@@ -14,27 +14,22 @@ const SizeFillterMobile = memo(() => {
     setResetInputsTrigger,
   } = useContext(FilterContext);
 
-  // Dropdown state management
-  const { isDropdownOpen, isMenuOpen } = useToggleMenu();
+  // 🔄 Manage dropdown state
+  const { isMenuOpen } = useToggleMenu();
 
-  // useForm for managing form state and validation
-  const {
-    control,
-    watch,
-    setValue,
-    reset,
-  } = useForm({
+  // 📝 Form control setup
+  const { control, watch, setValue, reset } = useForm({
     defaultValues: {
       minSize: propertySize.min || "",
       maxSize: propertySize.max || "",
     },
   });
 
-  // Watch input values
+  // 👀 Watch input values dynamically
   const minSize = watch("minSize");
   const maxSize = watch("maxSize");
 
-  // Custom hook for validation and formatting
+  // 🔢 Input validation & formatting hooks
   const {
     errorMessage: minSizeErrorMessage,
     isError: isMinSizeError,
@@ -49,101 +44,64 @@ const SizeFillterMobile = memo(() => {
     handleInputChange: handleMaxSizeChange,
   } = useNumberValidation("maxSize", setValue);
 
-  // Handle changes in minSize
+  // 📏 Update minSize in context when input changes
   useEffect(() => {
-    if (resetInputsTrigger) {
-      handleReset();
-      setResetInputsTrigger(false);
-    } else {
-      const newMinValue = minSize === "" ? "" : minSizeFormat(minSize);
-      setPropertySize(prev => ({ ...prev, min: newMinValue }));
-    }
-  }, [minSize, resetInputsTrigger]);
+    setPropertySize((prev) => ({ ...prev, min: minSizeFormat(minSize) }));
+  }, [minSize]);
 
-  // Handle changes in maxSize
+  // 📏 Update maxSize in context when input changes
   useEffect(() => {
-    if (resetInputsTrigger) {
-      handleReset();
-      setResetInputsTrigger(false);
-    } else {
-      const newMaxValue = maxSize === "" ? "" : maxSizeFormat(maxSize);
-      setPropertySize(prev => ({ ...prev, max: newMaxValue }));
-    }
-  }, [maxSize, resetInputsTrigger]);
+    setPropertySize((prev) => ({ ...prev, max: maxSizeFormat(maxSize) }));
+  }, [maxSize]);
 
-  // Sync input values when dropdown state changes
+  // 🎯 Ensure input values stay updated when UI state changes
   useEffect(() => {
     if (minSize !== "") setValue("minSize", propertySize.min);
     if (maxSize !== "") setValue("maxSize", propertySize.max);
-  }, [isDropdownOpen, isMenuOpen, propertySize]);
+  }, [isMenuOpen, propertySize]);
 
-  // Reset form and context state
+  // 🔄 Reset input fields on external trigger
+  useEffect(() => {
+    if (resetInputsTrigger) {
+      handleReset();
+      setResetInputsTrigger(false);
+    }
+  }, [resetInputsTrigger]);
+
+  // 🧹 Reset all inputs and clear selected size
   const handleReset = () => {
     reset({ minSize: "", maxSize: "" });
     setPropertySize({ min: "", max: "" });
   };
 
-  // Render input field with validation and error handling
-  const renderInputField = (
-    name,
-    label,
-    handleInputChange,
-    errorMessage,
-    isError
-  ) => (
-    <div className="input-field-mobile">
-      <div className="input-field-mobile__wrapper">
-        <span className="input-field-mobile__label">{label}</span>
-        <Controller
-          name={name}
-          control={control}
-          render={({ field }) => (
-            <input
-              {...field}
-              autoComplete="off"
-              className={clsx(
-                "input-field-mobile__input",
-                isError && "input-field-mobile__input--error"
-              )}
-              type="text"
-              placeholder={label === "از" ? "حداقل ۵۰ " : "حداکثر ۱۰۰ "}
-              value={name === "minSize" ? propertySize.min : propertySize.max}
-              onChange={handleInputChange}
-            />
-          )}
-        />
-      </div>
-      <span className="input-field-mobile__unit">متراژ</span>
-      {isError && (
-        <span className="input-field-mobile__error">{errorMessage}</span>
-      )}
-    </div>
-  );
-
   return (
     <>
-      {/* Title */}
+      {/* 📏 Title for size filter */}
       <span className="real-estate-size-mobile__title">متراژ</span>
 
-      {/* Input Fields */}
+      {/* 🔢 Input fields for min & max size */}
       <div className="real-estate-size-mobile__inputs">
-        {renderInputField(
-          "minSize",
-          "از",
-          handleMinSizeChange,
-          minSizeErrorMessage,
-          isMinSizeError
-        )}
-        {renderInputField(
-          "maxSize",
-          "تا",
-          handleMaxSizeChange,
-          maxSizeErrorMessage,
-          isMaxSizeError
-        )}
+        <InputFieldMobile
+          rangeValue={propertySize.min}
+          placeholder="حداقل ۵۰"
+          handleInputChange={handleMinSizeChange}
+          error={minSizeErrorMessage}
+          hasError={isMinSizeError}
+          control={control}
+          unit={"minSize"}
+        />
+        <InputFieldMobile
+          rangeValue={propertySize.max}
+          placeholder="حداکثر ۱۰۰"
+          handleInputChange={handleMaxSizeChange}
+          error={maxSizeErrorMessage}
+          hasError={isMaxSizeError}
+          control={control}
+          unit={"maxSize"}
+        />
       </div>
     </>
   );
 });
 
-export default SizeFillterMobile;
+export default SizeFilterMobile;

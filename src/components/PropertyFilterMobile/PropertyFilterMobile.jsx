@@ -1,11 +1,11 @@
 import { ArrowDown2 } from "iconsax-react";
-import React, { useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import PropertyFilterBox from "../PropertyFilterBox/PropertyFilterBox";
 import clsx from "classnames";
 import useToggleMenu from "../../hooks/useToggleMenu";
 import useFilterManager from "../../hooks/useFilterManager";
 
-export default function PropertyFilterMobile({
+ const PropertyFilterMobile = memo((({
   label,
   name,
   listSystemState,
@@ -14,10 +14,10 @@ export default function PropertyFilterMobile({
   setSystemState,
   options,
   context,
-}) {
+}) => {
   const isInitialMount = useRef(true);
 
-  // 🔽 Manage dropdown state and refs
+  // 🔽 Manage dropdown state and refs for toggle behavior
   const {
     isDropdownOpen,
     btnRef,
@@ -25,8 +25,6 @@ export default function PropertyFilterMobile({
     fillterInteractiveRef,
     handleClick,
   } = useToggleMenu();
-
-
 
   // ✨ Toggle selection for filter options
   const handleChangeBox = (id) => {
@@ -37,12 +35,13 @@ export default function PropertyFilterMobile({
     );
   };
 
-  // 🔄 Manage filter reset and state tracking
+  // 🔄 Manage filter reset and system state updates
   const {
     resetFillter,
     isFilterAreaApplied,
     isFilterPropertyTypeApplied,
     isFillterselectedCityApplied,
+    handleSystemState,
   } = useFilterManager();
 
   // 🔎 Determine if any filter is applied based on the context
@@ -53,37 +52,30 @@ export default function PropertyFilterMobile({
       ? isFilterPropertyTypeApplied
       : isFillterselectedCityApplied;
 
-  // 📝 Handle system state update when filters are selected
-  const handleSystemState = () => {
-    const selectedOptions = listSystemState.filter((option) => {
-      return option.selected === true && option.name;
-    });
-    setSystemState(selectedOptions);
-  };
-
-  // 🌍 UseEffect to initialize the filter and handle click outside dropdown
+  // 🌍 Handle component mount and filter state update
   useEffect(() => {
-    handleSystemState();
+    // 📝 Update system state when listSystemState changes
+    handleSystemState(listSystemState, setSystemState);
 
-    // Initialize state only on the first mount
+    // Initialize list state only on first mount
     if (isInitialMount.current) {
       setListSystemState(options);
       isInitialMount.current = false;
     }
 
-    // Handle click events outside the dropdown to close it
+    // 🧹 Handle click events outside the dropdown to close it
     document.addEventListener("click", handleClick);
     return () => {
-      document.removeEventListener("click", handleClick);
+      document.removeEventListener("click", handleClick); // 🧹 Cleanup click event listener on unmount
     };
   }, [listSystemState]);
 
   return (
     <div>
-      {/* 📜 Filter label */}
+      {/* 📜 Display the filter label */}
       <span className="property-filter-desktop__label">{label}</span>
 
-      {/* 🛑 Dropdown trigger button */}
+      {/* 🛑 Trigger button for the dropdown */}
       <div ref={btnRef} className="property-filter-mobile__button">
         <span className="property-filter-mobile__button-text">
           {systemState.length
@@ -92,6 +84,7 @@ export default function PropertyFilterMobile({
               : `+${systemState.length.toLocaleString("fa-IR")} ${label}`
             : name}
         </span>
+        {/* 🔽 Arrow icon to indicate dropdown */}
         <ArrowDown2
           className={clsx(
             "property-filter-mobile__icon",
@@ -102,7 +95,7 @@ export default function PropertyFilterMobile({
         />
       </div>
 
-      {/* 🍔 Dropdown menu */}
+      {/* 🍔 Dropdown menu with filter options */}
       <div
         ref={menuRef}
         className={clsx(
@@ -110,7 +103,7 @@ export default function PropertyFilterMobile({
           isDropdownOpen && "property-filter-mobile__menu--open"
         )}
       >
-        {/* 📝 Filter options */}
+        {/* 📝 List filter options */}
         <div className="property-filter-mobile__options">
           {listSystemState.map((option) => (
             <PropertyFilterBox
@@ -122,7 +115,7 @@ export default function PropertyFilterMobile({
           ))}
         </div>
 
-        {/* 🎯 Action buttons */}
+        {/* 🎯 Action buttons for filter reset and selection */}
         <div className="property-filter-mobile__actions">
           <span
             className={clsx(
@@ -143,4 +136,5 @@ export default function PropertyFilterMobile({
       </div>
     </div>
   );
-}
+}))
+export default PropertyFilterMobile;

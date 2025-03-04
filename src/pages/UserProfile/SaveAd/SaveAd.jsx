@@ -4,7 +4,7 @@ import ProfileManagement from '../../../components/ProfileManagement/ProfileMana
 import Footer from '../../../layouts/Footer/Footer'
 import UserAds from '../../../components/UserAds/UserAds'
 
-export default function MyAd() {
+export default function SaveAd() {
   return (
     <>
           {/* 🏠 Page Header */}
@@ -19,10 +19,10 @@ export default function MyAd() {
             <div className="container">
               <div className="user-profile__grid">
                 <div className="user-profile__sidebar">
-                  <ProfileManagement activeLabel={"myAds"} />
+                  <ProfileManagement activeLabel={"savedAds"} />
                 </div>
                 <div className="user-profile__content">
-                <UserAds text={"آگهی های من"} title={"هنوز آگهی‌ای ثبت نکردید!"} image={"images/myAd/pana.png"} description={"با ثبت رایگان آگهی هر جا که هستید به‌سرعت ملک‌تان را معامله کنید"} myad={true}/>
+                <UserAds text={"آگهی های ذخیره شده"} savead={true} searchAd={true} image={"images/saveAd/no-save-ad.png"} title={"هنوز آگهی‌ای ذخیره نکردید!"} description={"صفحه املاک اجاره‌ای سقفینو را ببینید و از میان آن‌ها آگهی‌های دلخواه را ذخیره کنید"}/>
                 </div>
               </div>
             </div>

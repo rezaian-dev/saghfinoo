@@ -1,8 +1,8 @@
 import { Car, Fatrows, Grid2, House2, Receipt1, Slider, Sun, Sun1 } from "iconsax-react";
-import React from "react";
+import React, { memo } from "react";
 
-export default function PropertyAmenities() {
-  // Data list containing property amenities
+ const PropertyAmenities =memo((() => {
+  // 📌 List of property amenities with icons and values
   const dataList = [
     { id: 1, title: "پارکینگ", icon: <Car className="!w-4 !h-4 md:!w-6 md:!h-6" color="#353535" variant="Outline" />, value: "۱" },
     { id: 2, title: "انباری", icon: <House2 className="!w-4 !h-4 md:!w-6 md:!h-6" color="#353535" variant="Outline" />, value: "۱" },
@@ -17,55 +17,52 @@ export default function PropertyAmenities() {
   return (
     <>
       <div>
-        {/* Section Title */}
+        {/* 🏡 Section Title */}
         <h4 className="property-amenities__title">امکانات</h4>
 
-        {/* Grid for the amenities sections */}
+        {/* 🔳 Grid Layout for Amenities */}
         <div className="property-amenities__grid">
-          {/* First section with the first 4 items */}
+          {/* 📌 First section (first 4 amenities) */}
           <div className="property-amenities__section">
-            {dataList.slice(0, 4).map(({ id, title, icon, value }) => {
-              return (
-                <div key={id} className="property-amenities__item">
-                  {/* Icon and title for the amenity */}
-                  <div className="property-amenities__item-icon-title">
-                    {icon}
-                    <span className="property-amenities__item-title">
-                      {title}:
-                    </span>
-                  </div>
-                  {/* Value of the amenity */}
-                  <span className="property-amenities__item-value">
-                    {value}
+            {dataList.slice(0, 4).map(({ id, title, icon, value }) => (
+              <div key={id} className="property-amenities__item">
+                {/* 🏷️ Icon and Title */}
+                <div className="property-amenities__item-icon-title">
+                  {icon}
+                  <span className="property-amenities__item-title">
+                    {title}:
                   </span>
                 </div>
-              );
-            })}
+                {/* 🔢 Value */}
+                <span className="property-amenities__item-value">
+                  {value}
+                </span>
+              </div>
+            ))}
           </div>
 
-          {/* Second section with the remaining items */}
+          {/* 📌 Second section (remaining amenities) */}
           <div className="property-amenities__section">
-            {dataList.slice(4).map(({ id, title, icon, value }) => {
-              return (
-                <div key={id} className="property-amenities__item">
-                  {/* Icon and title for the amenity */}
-                  <div className="property-amenities__item-icon-title">
-                    {icon}
-                    <span className="property-amenities__item-title">
-                      {title}:
-                    </span>
-                  </div>
-                  {/* Value of the amenity */}
-                  <span className="property-amenities__item-value">
-                    {value}
+            {dataList.slice(4).map(({ id, title, icon, value }) => (
+              <div key={id} className="property-amenities__item">
+                {/* 🏷️ Icon and Title */}
+                <div className="property-amenities__item-icon-title">
+                  {icon}
+                  <span className="property-amenities__item-title">
+                    {title}:
                   </span>
                 </div>
-              );
-            })}
+                {/* 🔢 Value */}
+                <span className="property-amenities__item-value">
+                  {value}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </>
   );
-}
+}));
 
+export default PropertyAmenities

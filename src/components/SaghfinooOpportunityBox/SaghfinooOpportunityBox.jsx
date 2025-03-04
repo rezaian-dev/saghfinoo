@@ -1,20 +1,19 @@
-import React from 'react'
+import React, { memo } from 'react';
 
-export default function SaghfinooOpportunityBox({ image, caption,alt }) {
+const SaghfinooOpportunityBox = memo(({ image, caption, alt }) => {
   return (
-    <>
-      <div className="saghfinoo-opportunity-box">
-        {/* Image Wrapper */}
-        <div className="saghfinoo-opportunity-box__image-wrapper">
-          <img className="saghfinoo-opportunity-box__image" src={image} loading="lazy" alt={alt}/>
-        </div>
-
-        {/* Caption */}
-        <p className="saghfinoo-opportunity-box__caption">
-          {caption}
-        </p>
+    <div className="saghfinoo-opportunity-box">
+      {/* 🖼️ Image Wrapper */}
+      <div className="saghfinoo-opportunity-box__image-wrapper">
+        <img className="saghfinoo-opportunity-box__image" src={image} loading="lazy" alt={alt} />
       </div>
-    </>
-  );
-}
 
+      {/* 📝 Caption */}
+      <p className="saghfinoo-opportunity-box__caption">
+        {caption}
+      </p>
+    </div>
+  );
+});
+
+export default SaghfinooOpportunityBox;

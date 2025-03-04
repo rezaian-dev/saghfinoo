@@ -1,8 +1,8 @@
 import { Edit, Trash } from "iconsax-react";
-import React from "react";
+import React, { memo } from "react";
 import clsx from "classnames";
 
-export default function NewRentalListingsBox({
+ const NewRentalListingsBox = memo((({
   locationAddress,
   rent,
   posted_at,
@@ -10,8 +10,8 @@ export default function NewRentalListingsBox({
   alt,
   mortgage,
   myad = false,
-  isAdConfirmed,
-}) {
+  savead = false,
+  isAdConfirmed,}) => {
   // 🔢 Convert numbers to Persian digits
   function toPersianDigits(number) {
     return number.toLocaleString("fa-IR");
@@ -19,9 +19,7 @@ export default function NewRentalListingsBox({
 
   // 💰 Format price based on amount (Million, Billion, etc.)
   function formatPrice(amount) {
-    amount = parseInt(amount, 10);
-
-    if (amount % 1000000 !== 0) {
+    if (+amount % 1000000 !== 0) {
       return `${toPersianDigits(amount)} تومان`; // Normal price
     } else if (amount >= 1000000000) {
       return `${toPersianDigits(amount / 1000000000)} میلیارد تومان`; // Convert to Billion
@@ -72,7 +70,7 @@ export default function NewRentalListingsBox({
                 {/* 🗂️ Archive icon */}
                 <img
                   className="rental-listing__archive-icon"
-                  src="svgs\icons\archive-minus.svg"
+                  src={savead ? "svgs/icons/archive-minus-red.svg" : "svgs/icons/archive-minus.svg"}
                   loading="lazy"
                   alt="archiveMinus"
                 />
@@ -100,19 +98,13 @@ export default function NewRentalListingsBox({
           
           {/* 💵 Pricing section (deposit and rent) */}
           <div className="rental-listing__pricing">
-            <h6>
-              {mortgage.length >= 10
-                ? `${formatPrice(mortgage)}   رهن`
-                : `${formatPrice(mortgage)}   رهن`}
-            </h6>
-            <h6>
-              {rent.length >= 10
-                ? `${formatPrice(rent)}    اجاره`
-                : `${formatPrice(rent)}   اجاره`}
-            </h6>
+            <h6>{`${formatPrice(mortgage)} رهن`}</h6>
+            <h6>{`${formatPrice(rent)} اجاره`}</h6>
           </div>
         </div>
       </div>
     </>
   );
-}
+}))
+
+export default NewRentalListingsBox

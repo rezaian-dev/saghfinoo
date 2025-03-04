@@ -1,24 +1,34 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default function PropertyDescription() {
+ const PropertyDescription =memo((() => {
+  // List of property details with descriptions
+  const propertyDetails = [
+    { id: 1, label: "سن بنا", value: "نوساز" },
+    { id: 2, label: "موقعیت جغرافیایی بنا", value: "شمالی" },
+    { id: 3, label: "نوع سند", value: "شخصی" },
+    { id: 4, label: "امکانات امنیتی", value: "آیفون تصویری، درب ضدسرقت" },
+    { id: 5, label: "سایر امکانات", value: "کمد دیواری، پنجره‌ها UPVC" },
+    { id: 6, label: "زمان بازدید", value: "۷ صبح تا ۱۱ شب" }
+  ];
+
   return (
-    // Main container for the property description
-      <div>
-        {/* Section title */}
-        <h4 className="property-description__title">
-          توضیحات
-        </h4>
-        {/* List of property details */}
-        <div className="property-description__details">
-          {/* Each property detail item */}
-          <span className="property-description__item">سن بنا: نوساز</span>
-          <span className="property-description__item">موقعیت جغرافیایی بنا: شمالی</span>
-          <span className="property-description__item">نوع سند: شخصی</span>
-          <span className="property-description__item">امکانات امنیتی: آیفون تصویری، درب ضدسرقت</span>
-          <span className="property-description__item">سایر امکانات: کمد دیواری، پنجره‌ها UPVC</span>
-          <span className="property-description__item">زمان بازدید: ۷ صبح تا ۱۱ شب</span>
-        </div>
+    // 🏡 Main container for the property description
+    <div>
+      {/* 📌 Section title */}
+      <h4 className="property-description__title">توضیحات</h4>
+
+      {/* 📋 List of property details */}
+      <div className="property-description__details">
+        {propertyDetails.map(({ id, label, value }) => (
+          <span key={id} className="property-description__item">
+            {/* 🏷️ Displaying label and value */}
+            {label}: {value}
+          </span>
+        ))}
       </div>
-    
+    </div>
   );
-}
+}));
+
+export default PropertyDescription
+

@@ -11,12 +11,12 @@ import {
   Receipt21,
   ReceiptText,
 } from "iconsax-react";
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import useToggleMenu from "../../hooks/useToggleMenu";
 import clsx from "classnames";
 
-export default function Header() {
+ const Header =memo((() => {
   // Desktop menu items
   const menuItemsDesktop = [
     { id: 1, name: "اجاره", path: "/rent" },
@@ -71,7 +71,8 @@ export default function Header() {
     handleClick,
   } = useToggleMenu();
 
-  const isUserProfilePage = pathname === "/user-profile" || "/my-ad";
+  const userProfilePages = ["/user-profile", "/my-ad", "/save-ad"];
+  const isUserProfilePage = userProfilePages.includes(pathname);
 
   // Filter menu items based on the page type
   const filteredMenuItems = isUserProfilePage
@@ -210,4 +211,6 @@ export default function Header() {
       />
     </>
   );
-}
+}));
+
+export default Header

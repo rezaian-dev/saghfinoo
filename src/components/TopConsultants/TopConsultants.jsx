@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import TopConsultantsBox from "../TopConsultantsBox/TopConsultantsBox";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -8,17 +8,17 @@ import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import useSwiperSlider from "../../hooks/useSwiperSlider";
 import { agents } from "../../data/realEstateData";
 
-export default function TopConsultants() {
+const TopConsultants = memo(() => {
   
-  // Swiper slider hooks and handlers
+  // 🔧 Swiper slider hooks and handlers
   const { isBeginning, setIsBeginning, isEnd, handleNext, handlePrev, setSwiper, setIsEnd } = useSwiperSlider();
 
   return (
     <>
-      {/* Section title */}
+      {/* 🏆 Section title */}
       <h3 className="top-consultants__title">مشاورین برتر تهران</h3>
 
-      {/* Slider container */}
+      {/* 🎡 Slider container */}
       <div className="top-consultants__slider">
         <Swiper
           spaceBetween={24}
@@ -37,8 +37,8 @@ export default function TopConsultants() {
             1280: { slidesPerView: 4, spaceBetween: 24 },
           }}
         >
-          {/* Map through the agents list to render each consultant */}
-          {agents.slice(0,5).map((item) => (
+          {/* 🔑 Map through the agents list to render each consultant */}
+          {agents.slice(0, 5).map((item) => (
             <SwiperSlide key={item.id}>
               <TopConsultantsBox {...item} /> {/* Render consultant details */}
             </SwiperSlide>
@@ -75,4 +75,6 @@ export default function TopConsultants() {
       </div>
     </>
   );
-}
+});
+
+export default TopConsultants;

@@ -55,25 +55,24 @@ export default function useFilterManager() {
     // 🚪 Room filters
     selectedRooms,
     setSelectedRooms,
-    
+
     // 🅿️ Parking filters
     selectedParking,
     setSelectedParking,
-    
+
     // 📦 Storage filters
     selectedStorage,
     setSelectedStorage,
-    
+
     // 🛗 Elevator filters
     selectedElevator,
     setSelectedElevator,
-    
+
     // 🚿 Bathroom filters
     selectedBathroomCount,
     setSelectedBathroomCount,
     selectedBathroomType,
     setSelectedBathroomType,
-    
     // 🏢 Floor filters
     selectedFloor,
     setSelectedFloor,
@@ -108,11 +107,10 @@ export default function useFilterManager() {
 
   // 🔍 Helper functions for checking filter status
 
-  
-   /* Check if an array has at least one selected item */
-   
+  /* Check if an array has at least one selected item */
+
   const hasArraySelection = (array) => {
-      return !array.every((option) => !option.selected); // At least one item is selected
+    return !array.every((option) => !option.selected); // At least one item is selected
   };
 
   /* Check if a range filter (min/max) has been applied */
@@ -122,7 +120,6 @@ export default function useFilterManager() {
   };
 
   /* Check if a single select value is different from default*/
-  
   const isSingleSelectApplied = (value) => {
     return value !== "any";
   };
@@ -131,21 +128,21 @@ export default function useFilterManager() {
   const updateFilterStatus = () => {
     // Create an array of conditions to check all filter types
     const filterConditions = [
-      hasArraySelection(selectedPropertyType),  // Property type selected?
-      isRangeFilterApplied(selectedPrice),      // Price range applied?
-      hasArraySelection(selectedCity),          // City selected?
-      hasArraySelection(selectedArea),          // Area selected?
-      isSingleSelectApplied(selectedRooms),     // Room count selected?
-      isSingleSelectApplied(selectedParking),   // Parking selected?
-      isSingleSelectApplied(selectedStorage),   // Storage selected?
-      isSingleSelectApplied(selectedElevator),  // Elevator selected?
+      hasArraySelection(selectedPropertyType), // Property type selected?
+      isRangeFilterApplied(selectedPrice), // Price range applied?
+      hasArraySelection(selectedCity), // City selected?
+      hasArraySelection(selectedArea), // Area selected?
+      isSingleSelectApplied(selectedRooms), // Room count selected?
+      isSingleSelectApplied(selectedParking), // Parking selected?
+      isSingleSelectApplied(selectedStorage), // Storage selected?
+      isSingleSelectApplied(selectedElevator), // Elevator selected?
       isSingleSelectApplied(selectedBathroomCount), // Bathroom count selected?
-      isSingleSelectApplied(selectedBathroomType),  // Bathroom type selected?
-      isSingleSelectApplied(selectedFloor),     // Floor selected?
-      hasArraySelection(coolSystem),            // Cooling system selected?
-      hasArraySelection(hotSystem),             // Heating system selected?
-      hasArraySelection(floorMaterial),         // Floor material selected?
-      isRangeFilterApplied(propertySize),       // Size range applied?
+      isSingleSelectApplied(selectedBathroomType), // Bathroom type selected?
+      isSingleSelectApplied(selectedFloor), // Floor selected?
+      hasArraySelection(coolSystem), // Cooling system selected?
+      hasArraySelection(hotSystem), // Heating system selected?
+      hasArraySelection(floorMaterial), // Floor material selected?
+      isRangeFilterApplied(propertySize), // Size range applied?
     ];
 
     // Check if any filter is applied (at least one condition is true)
@@ -160,16 +157,27 @@ export default function useFilterManager() {
     setIsFillterCoolSystemApplied(hasArraySelection(coolSystem));
     setIsFillterHotSystemApplied(hasArraySelection(hotSystem));
     setIsFillterfloorMaterialApplied(hasArraySelection(floorMaterial));
-    setIsFillterselectedCityApplied(hasArraySelection(selectedCity)) 
+    setIsFillterselectedCityApplied(hasArraySelection(selectedCity));
+  };
+
+  // 📝 Update system state when filters are selected
+  const handleSystemState = (listSystemState,setSystemState,mode = "property") => {
+    let selectedOptions = null;
+    if (mode === "property") {
+      selectedOptions = listSystemState.filter((option) => option.selected);
+    } else {
+      selectedOptions = listSystemState.filter((option) => option.selected === true && option.id !== 1);
+    }
+    setSystemState(selectedOptions);
   };
 
   // 🧹 Reset all filters to their initial state
   const resetAllFilters = useCallback(() => {
     // Reset property filters
     setSelectedPropertyType([]);
-    setListPropertyType(propertyFilterData[2].options)
+    setListPropertyType(propertyFilterData[2].options);
     setSelectedArea([]);
-    setListArea(propertyFilterData[1].options)
+    setListArea(propertyFilterData[1].options);
     setSelectedRooms("any");
     setSelectedParking("any");
     setSelectedStorage("any");
@@ -182,11 +190,11 @@ export default function useFilterManager() {
     setCoolSystem([]);
     setHotSystem([]);
     setFloorMaterial([]);
-    setListCities(propertyFilterData[0].options)
-    setListCoolSystem(hvacSystemMobileData[0].options)
-    setListHotSystem(hvacSystemMobileData[1].options)
-    setListFloorMaterial(hvacSystemMobileData[2].options)
-    
+    setListCities(propertyFilterData[0].options);
+    setListCoolSystem(hvacSystemMobileData[0].options);
+    setListHotSystem(hvacSystemMobileData[1].options);
+    setListFloorMaterial(hvacSystemMobileData[2].options);
+
     // Reset price and size filters
     setSelectedPrice({ min: "", max: "" });
     setPropertySize({ min: "", max: "" });
@@ -197,8 +205,8 @@ export default function useFilterManager() {
     setIsFilterPriceApplied(false);
     setIsFilterSizeApplied(false);
   }, [
-    hvacSystemMobileData, 
-    propertyFilterData, 
+    hvacSystemMobileData,
+    propertyFilterData,
     setResetInputsTrigger,
     setSelectedPropertyType,
     setListPropertyType,
@@ -222,14 +230,13 @@ export default function useFilterManager() {
     setPropertySize,
     setIsFiltersApplied,
     setIsFilterPriceApplied,
-    setIsFilterSizeApplied
+    setIsFilterSizeApplied,
   ]);
 
   // 🔄 Reset individual filter option
   const resetFillter = useCallback((setListSystemState, options) => {
     setListSystemState(options);
   }, []);
-  
   // 👁️ Watch for changes in filter values and update status accordingly
   useEffect(() => {
     updateFilterStatus();
@@ -263,6 +270,7 @@ export default function useFilterManager() {
   // 📤 Return functions and states from the hook
   return {
     updateFilterStatus,
+    handleSystemState,
     resetAllFilters,
     resetFillter,
     isFilterPriceApplied,
@@ -273,6 +281,6 @@ export default function useFilterManager() {
     isFillterCoolSystemApplied,
     isFillterHotSystemApplied,
     isFillterfloorMaterialApplied,
-    isFillterselectedCityApplied
+    isFillterselectedCityApplied,
   };
 }

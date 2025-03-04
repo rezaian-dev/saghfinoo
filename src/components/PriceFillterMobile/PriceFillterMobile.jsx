@@ -1,18 +1,23 @@
 import React, { memo, useContext, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
-import clsx from "classnames";
+import { useForm } from "react-hook-form";
 import { FilterContext } from "../../context/FilterContext";
 import useToggleMenu from "../../hooks/useToggleMenu";
 import useNumberValidation from "../../hooks/useNumberValidation";
+import InputFieldMobile from "../InputFieldMobile/InputFieldMobile";
 
 const PriceFilterMobile = memo(() => {
-  // Get context values
-  const { selectedPrice, setSelectedPrice, resetInputsTrigger, setResetInputsTrigger } = useContext(FilterContext);
+  // 🌍 Retrieve filter context values
+  const {
+    selectedPrice,
+    setSelectedPrice,
+    resetInputsTrigger,
+    setResetInputsTrigger,
+  } = useContext(FilterContext);
 
-  // Toggle state for dropdown and menu
-  const { isDropdownOpen, isMenuOpen } = useToggleMenu();
+  // 🔄 Manage dropdown state
+  const { isMenuOpen } = useToggleMenu();
 
-  // Form control
+  // 📝 Form control setup
   const { control, watch, setValue, reset } = useForm({
     defaultValues: {
       minPrice: selectedPrice.min || "",
@@ -20,96 +25,83 @@ const PriceFilterMobile = memo(() => {
     },
   });
 
-  // Watch form values
+  // 👀 Watch input values dynamically
   const minPrice = watch("minPrice");
   const maxPrice = watch("maxPrice");
 
-  // Input validation hooks
-  const { errorMessage: minPriceErrorMessage, isError: isMinPriceError, formatNumber: minPriceFormat, handleInputChange: handleMinPriceChange } = useNumberValidation("minPrice", setValue);
-  const { errorMessage: maxPriceErrorMessage, isError: isMaxPriceError, formatNumber: maxPriceFormat, handleInputChange: handleMaxPriceChange } = useNumberValidation("maxPrice", setValue);
+  // 🔢 Input validation & formatting hooks
+  const {
+    errorMessage: minPriceErrorMessage,
+    isError: isMinPriceError,
+    formatNumber: minPriceFormat,
+    handleInputChange: handleMinPriceChange,
+  } = useNumberValidation("minPrice", setValue);
 
-  // Update selected price when input changes
+  const {
+    errorMessage: maxPriceErrorMessage,
+    isError: isMaxPriceError,
+    formatNumber: maxPriceFormat,
+    handleInputChange: handleMaxPriceChange,
+  } = useNumberValidation("maxPrice", setValue);
+
+  // 🔄 Sync selected price with input changes
   useEffect(() => {
-    if (resetInputsTrigger) {
-      handleReset();
-      setResetInputsTrigger(false);
-      return;
-    }
     if (minPrice !== selectedPrice.min) {
       setSelectedPrice((prev) => ({ ...prev, min: minPriceFormat(minPrice) }));
     }
-  }, [minPrice, resetInputsTrigger]);
+  }, [minPrice]);
 
+  useEffect(() => {
+    if (maxPrice !== selectedPrice.max) {
+      setSelectedPrice((prev) => ({ ...prev, max: maxPriceFormat(maxPrice) }));
+    }
+  }, [maxPrice]);
+
+  // 🎯 Ensure input values stay updated when UI state changes
+  useEffect(() => {
+    if (minPrice !== "") setValue("minPrice", selectedPrice.min);
+    if (maxPrice !== "") setValue("maxPrice", selectedPrice.max);
+  }, [isMenuOpen, selectedPrice]);
+
+  // 🔄 Reset input fields on external trigger
   useEffect(() => {
     if (resetInputsTrigger) {
       handleReset();
       setResetInputsTrigger(false);
-      return;
     }
-    if (maxPrice !== selectedPrice.max) {
-      setSelectedPrice((prev) => ({ ...prev, max: maxPriceFormat(maxPrice) }));
-    }
-  }, [maxPrice, resetInputsTrigger]);
+  }, [resetInputsTrigger]);
 
-  // Update input fields when dropdown or menu state changes
-  useEffect(() => {
-    if (minPrice !== "") setValue("minPrice", selectedPrice.min);
-    if (maxPrice !== "") setValue("maxPrice", selectedPrice.max);
-  }, [isDropdownOpen, isMenuOpen, selectedPrice]);
-
-  // Reset input fields and selected price
+  // 🧹 Reset all inputs and clear selected price
   const handleReset = () => {
     reset({ minPrice: "", maxPrice: "" });
     setSelectedPrice({ min: "", max: "" });
   };
 
-  // Render input field component
-  const renderInputField = (name, label, handleInputChange, errorMessage, isError) => (
-    <div className="input-field-mobile">
-      <div className="input-field-mobile__wrapper">
-        <span className="input-field-mobile__label">{label}</span>
-        <Controller
-          name={name}
-          control={control}
-          render={({ field }) => (
-            <input
-              {...field}
-              autoComplete="off"
-              className={clsx(
-                "input-field-mobile__input",
-                isError && "input-field-mobile__input--error"
-              )}
-              type="text"
-              placeholder={label === "از" ? "حداقل ۵۰۰" : "حداکثر ۱۰۰۰"}
-              value={name === "minPrice" ? selectedPrice.min : selectedPrice.max}
-              onChange={handleInputChange}
-            />
-          )}
-        />
-      </div>
-      <span className="input-field-mobile__unit">تومان</span>
-      {isError && <span className="input-field-mobile__error">{errorMessage}</span>}
-    </div>
-  );
-
   return (
     <>
+      {/* 💰 Price filter label */}
       <span className="price-filter-mobile__label">قیمت</span>
+
+      {/* 🔢 Input fields for min & max price */}
       <div className="price-filter-mobile__inputs">
-        {renderInputField(
-          "minPrice",
-          "از",
-          handleMinPriceChange,
-          minPriceErrorMessage,
-          isMinPriceError
-        )}
-        {renderInputField(
-          "maxPrice",
-          "تا",
-          handleMaxPriceChange,
-          maxPriceErrorMessage,
-          isMaxPriceError
-        )}
+        <InputFieldMobile
+          rangeValue={selectedPrice.min}
+          placeholder="حداقل ۵۰"
+          handleInputChange={handleMinPriceChange}
+          error={minPriceErrorMessage}
+          hasError={isMinPriceError}
+          control={control}
+          unit={"minPrice"}
+        />
+        <InputFieldMobile
+          rangeValue={selectedPrice.max}
+          placeholder="حداقل ۱۰۰۰"
+          handleInputChange={handleMaxPriceChange}
+          error={maxPriceErrorMessage}
+          hasError={isMaxPriceError}
+          control={control}
+          unit={"maxPrice"}
+        />
       </div>
     </>
   );

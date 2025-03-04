@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import useUserProfileForm from "../../hooks/useUserProfileForm";
 import useFormValidation from "../../hooks/useFormValidation";
 import UserProfileFormFields from "../UserProfileFormFields/UserProfileFormFields";
@@ -11,10 +11,11 @@ import clsx from "classnames";
  * 🔍 This component handles the user profile editing functionality,
  * including form validation, image uploads, and saving to localStorage.
  */
-export default function UserProfileEdit() {
+
+const UserProfileEdit = memo(() => {
   // 🖼️ State for user profile image
   const [userImage, setUserImage] = useState(null);
-  
+
   // 🎛️ Custom hook for form field management
   const {
     focusState,
@@ -149,4 +150,6 @@ export default function UserProfileEdit() {
       </form>
     </div>
   );
-}
+});
+
+export default UserProfileEdit;

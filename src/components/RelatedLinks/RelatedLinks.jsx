@@ -1,6 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default function RelatedLinks() {
+// Memoize the component to optimize re-renders
+const RelatedLinks = memo(() => {
   // Search suggestions to be displayed as links
   const searchSuggestions = [
     { id: 1, title: "املاک در نارمک" },
@@ -13,20 +14,22 @@ export default function RelatedLinks() {
 
   return (
     <div className="container">
-      {/* Title for the related links section */}
+      {/* 📌 Title for the related links section */}
       <h3 className="related-links__title">
         لینک های مرتبط
       </h3>
       
-      {/* Grid to display the related links */}
+      {/* 🔗 Grid to display the related links */}
       <div className="related-links__grid">
-        {/* Map over search suggestions to display each link */}
+        {/* 💬 Map over search suggestions to display each link */}
         {searchSuggestions.map(({ id, title }) => (
           <a href="#" key={id} className="related-links__item">
-            {title}
+            {title} {/* 🏠 Each related link title */}
           </a>
         ))}
       </div>
     </div>
   );
-}
+});
+
+export default RelatedLinks;

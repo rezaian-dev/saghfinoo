@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { userAdlist } from "../../data/realEstateData";
 import NoAdPlaceholder from "../NoAdPlaceholder/NoAdPlaceholder";
 import UserAdList from "../UserAdList/UserAdList";
@@ -6,24 +6,28 @@ import UserAdList from "../UserAdList/UserAdList";
 /**
  * 📢 UserAds Component
  * Main container for displaying user's advertisements
- * Shows either a list of ads or a placeholder when no ads exist
+ * Shows either a list of ads or a placeholder when no ads exist 🏘️
  */
 
-export default function UserAds() {
+const UserAds = memo(({ text, myad, savead, title, description, image, searchAd = false }) => {
   return (
     <>
       <div className="user-ads__container">
         {/* 📝 Section title */}
-        <h4 className="user-ads__title">آگهی های من</h4>
+        <h4 className="user-ads__title">{text}</h4>
+        
         {/* 📋 Conditionally render user's ad list when ads exist */}
         <div className={userAdlist.length ? "block" : "hidden"}>
-          <UserAdList />
+          <UserAdList myad={myad} savead={savead} />
         </div>
-        {/* �empty Conditionally render placeholder when no ads exist */}
+        
+        {/* ❌ Conditionally render placeholder when no ads exist */}
         <div className={!userAdlist.length ? "block" : "hidden"}>
-          <NoAdPlaceholder />
+          <NoAdPlaceholder title={title} description={description} image={image} searchAd={searchAd} />
         </div>
       </div>
     </>
   );
-}
+});
+
+export default UserAds;

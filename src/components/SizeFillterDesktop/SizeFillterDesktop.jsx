@@ -1,16 +1,17 @@
-import React, { useContext, useEffect } from "react";
+import React, { memo, useContext, useEffect } from "react";
 import clsx from "classnames";
 import { ArrowDown2 } from "iconsax-react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import useToggleMenu from "../../hooks/useToggleMenu";
 import { FilterContext } from "../../context/FilterContext";
 import useNumberValidation from "../../hooks/useNumberValidation";
+import InputField from "../InputField/InputField";
 
-const SizeFilterDesktop = () => {
-  // Get state and setter from context
+const SizeFilterDesktop = memo(() => {
+  // 🧑‍🤝‍🧑 Get property size state from context and setter function
   const { propertySize, setPropertySize } = useContext(FilterContext);
 
-  // Initialize form controls with default values
+  // 📋 Initialize form control with default values from context
   const { control, watch, setValue, reset } = useForm({
     defaultValues: {
       minSize: propertySize.min || "",
@@ -18,7 +19,7 @@ const SizeFilterDesktop = () => {
     },
   });
 
-  // Manage dropdown state and references
+  // 🔽 Manage dropdown open/close state and related references
   const {
     isDropdownOpen,
     btnRef,
@@ -27,11 +28,11 @@ const SizeFilterDesktop = () => {
     handleClick,
   } = useToggleMenu();
 
-  // Watch input values
+  // 👀 Watch for changes in minSize and maxSize inputs
   const minSize = watch("minSize");
   const maxSize = watch("maxSize");
 
-  // Custom hook for validation and formatting
+  // 🧮 Custom hook for validating and formatting input values for minSize
   const {
     errorMessage: minSizeErrorMessage,
     isError: isMinSizeError,
@@ -39,6 +40,7 @@ const SizeFilterDesktop = () => {
     handleInputChange: handleMinSizeChange,
   } = useNumberValidation("minSize", setValue);
 
+  // 🧮 Custom hook for validating and formatting input values for maxSize
   const {
     errorMessage: maxSizeErrorMessage,
     isError: isMaxSizeError,
@@ -46,75 +48,37 @@ const SizeFilterDesktop = () => {
     handleInputChange: handleMaxSizeChange,
   } = useNumberValidation("maxSize", setValue);
 
-  // Reset form values and context state
+  // 🔄 Handle reset of the form and context values
   const handleReset = () => {
     reset({ minSize: "", maxSize: "" });
     setPropertySize({ min: "", max: "" });
   };
 
-  // Sync minSize with context and handle outside clicks
+  // 🔄 Sync minSize with context and handle clicks outside the menu
   useEffect(() => {
     if (propertySize.min !== minSize) {
-      setPropertySize((prev) => ({
-        ...prev,
-        min: minSize === "" ? "" : minSizeFormat(minSize),
-      }));
+      setPropertySize((prev) => ({ ...prev, min: minSizeFormat(minSize) }));
     }
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
   }, [minSize]);
 
-  // Sync maxSize with context
+  // 🔄 Sync maxSize with context when it changes
   useEffect(() => {
     if (propertySize.max !== maxSize) {
-      setPropertySize((prev) => ({
-        ...prev,
-        max: maxSize === "" ? "" : maxSizeFormat(maxSize),
-      }));
+      setPropertySize((prev) => ({ ...prev, max: maxSizeFormat(maxSize) }));
     }
   }, [maxSize]);
 
-  // Set input values when dropdown opens
+  // 🔄 Set input values when the dropdown is opened
   useEffect(() => {
     if (minSize !== "") setValue("minSize", propertySize.min);
     if (maxSize !== "") setValue("maxSize", propertySize.max);
   }, [isDropdownOpen]);
 
-  // Render input field with custom validation and error messages
-  const renderInputField = (
-    name,
-    placeholder,
-    formatNumber,
-    handleInputChange,
-    errorMessage,
-    isError
-  ) => (
-    <div className="size-filter-desktop__input-field">
-      <span>{placeholder === "حداقل ۵۰ متر" ? "از" : "تا"}</span>
-      <div className="input-field__wrapper group relative">
-        <Controller
-          name={name}
-          control={control}
-          render={({ field }) => (
-            <input
-              {...field}
-              autoComplete="off"
-              className={clsx(
-                "input-field__input group-hover:bg-gray-3",
-                isError && "input-field__input--error"
-              )}
-              type="text"
-              placeholder={placeholder}
-              value={name === "minSize" ? propertySize.min : propertySize.max}
-              onChange={handleInputChange}
-            />
-          )}
-        />
-        <span>متراژ</span>
-        {isError && <span className="error-message">{errorMessage}</span>}
-      </div>
-    </div>
-  );
+  // 🚪 Close dropdown on outside click
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
 
   return (
     <div
@@ -124,7 +88,7 @@ const SizeFilterDesktop = () => {
         isDropdownOpen && "size-filter-desktop--active"
       )}
     >
-      {/* Label and Arrow Icon */}
+      {/* 🏷️ Label and dropdown arrow */}
       <span className="size-filter-desktop__label">متراژ</span>
       <ArrowDown2
         className={clsx(
@@ -134,7 +98,7 @@ const SizeFilterDesktop = () => {
         color="#505050"
       />
 
-      {/* Dropdown Menu */}
+      {/* 📥 Dropdown menu containing input fields */}
       <div
         ref={menuRef}
         className={clsx(
@@ -144,24 +108,27 @@ const SizeFilterDesktop = () => {
       >
         <span className="size-filter-desktop__title">متراژ</span>
         <div className="form">
-          {renderInputField(
-            "minSize",
-            "حداقل ۵۰ متر",
-            minSizeFormat,
-            handleMinSizeChange,
-            minSizeErrorMessage,
-            isMinSizeError
-          )}
-          {renderInputField(
-            "maxSize",
-            "حداکثر ۱۰۰ متر",
-            maxSizeFormat,
-            handleMaxSizeChange,
-            maxSizeErrorMessage,
-            isMaxSizeError
-          )}
+          {/* 🏠 Input fields for minSize and maxSize */}
+          <InputField
+            rangeValue={propertySize.min}
+            placeholder="حداقل ۵۰"
+            handleInputChange={handleMinSizeChange}
+            error={minSizeErrorMessage}
+            hasError={isMinSizeError}
+            control={control}
+            unit={"minSize"}
+          />
+          <InputField
+            rangeValue={propertySize.max}
+            placeholder="حداکثر ۱۰۰"
+            handleInputChange={handleMaxSizeChange}
+            error={maxSizeErrorMessage}
+            hasError={isMaxSizeError}
+            control={control}
+            unit={"maxSize"}
+          />
 
-          {/* Action Buttons */}
+          {/* 🔁 Reset and 🔍 Search buttons */}
           <div className="size-filter-desktop__actions">
             <span
               className={clsx(
@@ -184,6 +151,6 @@ const SizeFilterDesktop = () => {
       </div>
     </div>
   );
-};
+});
 
 export default SizeFilterDesktop;

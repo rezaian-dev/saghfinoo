@@ -1,55 +1,66 @@
-import React, { useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import clsx from "classnames";
 
-export default function LeafletMap({width,height}) {
-  
-  const position = [35.6895, 51.3890]; // Tehran coordinates
-  const zoomLevel = 12;
-  const minZoomLevel = 8;
-  const maxZoomLevel = 18;
-  const mapRef = useRef(null); // Reference for MapContainer
-  const mapInstanceRef = useRef(null); // Reference to store the map instance
+const LeafletMap = memo(({ width, height }) => {
+  // Positions with multiple areas in Tehran
+  const positions = [
+    { name: "Downtown Tehran", coordinates: [35.6895, 51.389] }, // مرکز تهران
+    { name: "Keshavarz Blvd", coordinates: [35.6998, 51.3755] }, // خیابان کشاورز
+    { name: "Vali Asr Square", coordinates: [35.7022, 51.3961] }, // میدان ولیعصر
+    { name: "Tajrish", coordinates: [35.847, 51.4236] }, // تجریش
+    { name: "Niavaran", coordinates: [35.7869, 51.4064] }, // نیاوران
+  ];
 
-  // Define custom map marker icon
+  const zoomLevel = 12; // 🔍 Default zoom level
+  const minZoomLevel = 8; // 🔒 Minimum zoom level
+  const maxZoomLevel = 18; // 🔓 Maximum zoom level
+
+  const mapRef = useRef(null); // 🗺️ Reference for MapContainer
+  const mapInstanceRef = useRef(null); // 🗺️ Reference to store the map instance
+
+  // Define custom map marker icon 🔘
   const customIcon = new L.Icon({
-    iconUrl: "/images/location-tick.png", // Ensure the path is correct
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-    popupAnchor: [0, -40],
+    iconUrl: "/images/location-tick.png", // 🖼️ Ensure the path is correct
+    iconSize: [40, 40], // 📏 Icon size
+    iconAnchor: [20, 40], // 📍 Icon anchor point
+    popupAnchor: [0, -40], // 📍 Popup position relative to the icon
   });
 
-  // Prevent unintended scrolling on touch screens
+  // Prevent unintended scrolling on touch screens 📱
   const handleTouchMove = (e) => {
-    // Prevent scrolling if touch is inside the map
     if (mapRef.current && mapRef.current.contains(e.target)) {
-      e.preventDefault();
+      e.preventDefault(); // ✋ Prevent scrolling inside the map
     }
   };
 
   useEffect(() => {
-    // Add touchmove prevention only when necessary
-    document.body.addEventListener("touchmove", handleTouchMove, { passive: false });
+    // 🖱️ Add touchmove prevention
+    document.body.addEventListener("touchmove", handleTouchMove, {
+      passive: false,
+    });
 
     return () => {
-      document.body.removeEventListener("touchmove", handleTouchMove);
+      document.body.removeEventListener("touchmove", handleTouchMove); // 🧹 Clean up event listener
     };
   }, []);
 
   useEffect(() => {
-    // Initialize map instance and prevent scrolling when zooming
-    mapInstanceRef.current = mapRef.current && mapRef.current.querySelector('.leaflet-container');
+    // 🗺️ Initialize map instance and prevent scrolling when zooming
+    mapInstanceRef.current =
+      mapRef.current && mapRef.current.querySelector(".leaflet-container");
 
     if (mapInstanceRef.current) {
       const mapElement = mapInstanceRef.current;
 
+      // 🖱️ Prevent scroll when zooming with mouse wheel
       mapElement.addEventListener("wheel", (e) => {
-        e.preventDefault(); // Prevent scroll while zooming
+        e.preventDefault();
       });
 
-      // Prevent scrolling if zooming in or out
+      // 🖱️ Prevent scroll when mouse button is pressed
       mapElement.addEventListener("mousedown", (e) => {
         e.preventDefault();
       });
@@ -67,7 +78,7 @@ export default function LeafletMap({width,height}) {
   return (
     <div ref={mapRef} className={clsx("leaflet-map", width, height)}>
       <MapContainer
-        center={position}
+        center={positions[0].coordinates} // Initial center
         zoom={zoomLevel}
         minZoom={minZoomLevel}
         maxZoom={maxZoomLevel}
@@ -75,17 +86,25 @@ export default function LeafletMap({width,height}) {
         touchZoom={true}
         className="w-full h-full"
       >
-        {/* OpenStreetMap tile layer */}
+        {/* 🌍 OpenStreetMap tile layer */}
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
 
-        {/* Marker with custom icon */}
-        <Marker position={position} icon={customIcon}>
-          <Popup>Tehran! <br /> Capital of Iran.</Popup>
-        </Marker>
+        {/* 📍 Markers for each location */}
+        {positions.map((position) => (
+          <Marker
+            key={position.name}
+            position={position.coordinates}
+            icon={customIcon}
+          >
+            <Popup>{position.name}</Popup>
+          </Marker>
+        ))}
       </MapContainer>
     </div>
   );
-}
+});
+
+export default LeafletMap;

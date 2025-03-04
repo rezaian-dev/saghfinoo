@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { dataCardRealestates } from "../../data/realEstateData";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -7,16 +7,21 @@ import { Navigation } from "swiper/modules";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import useSwiperSlider from "../../hooks/useSwiperSlider";
 
-export default function UserReviews() {
+/**
+ * 📝 UserReviews Component
+ * Displays user reviews for a selected consultant with swiper slider functionality
+ */
+const UserReviews = memo(() => {
 
+  // 🔍 Filter selected consultant's reviews
   const selectedConsultant = dataCardRealestates.filter((item) => item.label === "Toosi");
-  const { isBeginning, setIsBeginning, isEnd, handleNext, handlePrev, setSwiper, setIsEnd} = useSwiperSlider();
+
+  // 🔄 Swiper slider state and handlers
+  const { isBeginning, setIsBeginning, isEnd, handleNext, handlePrev, setSwiper, setIsEnd } = useSwiperSlider();
 
   return (
     <div>
-      <h3 className="user-reviews__title">
-        نظرات کاربران
-      </h3>
+      <h3 className="user-reviews__title">نظرات کاربران</h3>
 
       <div className="user-reviews__slider">
         <Swiper
@@ -24,10 +29,10 @@ export default function UserReviews() {
           slidesPerView={4}
           loop={false}
           modules={[Navigation]}
-          onSwiper={setSwiper}
+          onSwiper={setSwiper} // 🖱️ Capture swiper instance
           onSlideChange={(swiperInstance) => {
-            setIsBeginning(swiperInstance.isBeginning);
-            setIsEnd(swiperInstance.isEnd);
+            setIsBeginning(swiperInstance.isBeginning); // 🏁 Set swiper start state
+            setIsEnd(swiperInstance.isEnd); // 🏁 Set swiper end state
           }}
           breakpoints={{
             320: { slidesPerView: 1, spaceBetween: 16 },
@@ -36,6 +41,7 @@ export default function UserReviews() {
             1280: { slidesPerView: 4, spaceBetween: 32 },
           }}
         >
+          {/* 🔄 Render reviews from selected consultant */}
           {selectedConsultant[0].reviews.map(({ id, userName, rating, comment, image }) => (
             <SwiperSlide className="user-reviews__slide" key={id}>
               <div className="user-reviews__card">
@@ -56,34 +62,22 @@ export default function UserReviews() {
           ))}
         </Swiper>
 
-        {/* 🔙Prev button - only show when not at the beginning */}
+        {/* 🔙 Prev button - only show when not at the beginning */}
         {!isBeginning && (
-          <div
-            onClick={handlePrev}
-            className="navigation-button navigation-button--prev"
-          >
-            <ArrowRight2
-              className="navigation-button__icon"
-              color="#353535"
-              variant="Outline"
-            />
+          <div onClick={handlePrev} className="navigation-button navigation-button--prev">
+            <ArrowRight2 className="navigation-button__icon" color="#353535" variant="Outline" />
           </div>
         )}
 
-        {/* 🔜 Next Button - only show when not at the end */}
+        {/* 🔜 Next button - only show when not at the end */}
         {!isEnd && (
-          <div
-            onClick={handleNext}
-            className="navigation-button navigation-button--next"
-          >
-            <ArrowLeft2
-              className="navigation-button__icon"
-              color="#353535"
-              variant="Outline"
-            />
+          <div onClick={handleNext} className="navigation-button navigation-button--next">
+            <ArrowLeft2 className="navigation-button__icon" color="#353535" variant="Outline" />
           </div>
         )}
       </div>
     </div>
   );
-}
+});
+
+export default UserReviews;

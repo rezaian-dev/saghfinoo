@@ -1,10 +1,9 @@
-import React from 'react'
-import ServicesSectionItems from '../ServicesSectionItems/ServicesSectionItems'
+import React, { memo } from "react";
+import ServicesSectionItems from "../ServicesSectionItems/ServicesSectionItems";
 
-
-// ServicesSection component that renders a list of services and related information
-export default function ServicesSection() {
-  // Data for sections to display in the services section
+// Wrapping ServicesSection in React.memo for performance optimization
+const ServicesSection = memo(() => {
+  // 📝 Data for sections to display in the services section
   const sections = [
     {
       id: 1,
@@ -44,31 +43,37 @@ export default function ServicesSection() {
   ];
 
   return (
-    <>
-      {/* Main container for the services section */}
-      <div className="services-section">
-        {/* Left side container with logo and description */}
-        <div className="services-section__left">
-          <div>
-            <img src="images/logos/Logo-footer.png" loading="lazy" alt="logoFooter" />
-          </div>
-          <div className="services-section__description">
-            <span className="services-section__subtitle">تجربه لذت خانه‌دار شدن سریع و آسان</span>
-            <p className="services-section__text">
-              سقفینو پلی است تا به سرعت در بین هزاران آگهی ثبت‌شده جست‌وجو کنید. ملک مورد نظر را پیدا کنید و برای انجام معامله‌ای مطمئن، با مشاورین املاک معتمد و متخصص شهرتان در ارتباط باشید.
-            </p>
-          </div>
+    <div className="services-section">
+      {/* 🖥️ Left side container with logo and description */}
+      <div className="services-section__left">
+        <div>
+          <img
+            src="images/logos/Logo-footer.png"
+            loading="lazy"
+            alt="logoFooter"
+          />
         </div>
-
-        {/* Right side container with the services sections */}
-        <div className="services-section__right">
-          {/* Rendering each section with its items */}
-          {sections.map((item) => (
-            <ServicesSectionItems key={item.id} {...item} />
-          ))}
+        <div className="services-section__description">
+          <span className="services-section__subtitle">
+            تجربه لذت خانه‌دار شدن سریع و آسان
+          </span>
+          <p className="services-section__text">
+            سقفینو پلی است تا به سرعت در بین هزاران آگهی ثبت‌شده جست‌وجو کنید.
+            ملک مورد نظر را پیدا کنید و برای انجام معامله‌ای مطمئن، با مشاورین
+            املاک معتمد و متخصص شهرتان در ارتباط باشید.
+          </p>
         </div>
       </div>
-    </>
-  );
-}
 
+      {/* 🧭 Right side container with the services sections */}
+      <div className="services-section__right">
+        {/* Rendering each section with its items */}
+        {sections.map((item) => (
+          <ServicesSectionItems key={item.id} {...item} />
+        ))}
+      </div>
+    </div>
+  );
+});
+
+export default ServicesSection;

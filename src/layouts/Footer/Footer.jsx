@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import FooterDesktop from "../../components/FooterDesktop/FooterDesktop";
 import FooterMobile from "../../components/FooterMobile/FooterMobile";
 
-export default function Footer() {
+ const Footer = memo((() => {
   return (
     <>
       {/* Render the desktop version of the footer */}
@@ -12,4 +12,5 @@ export default function Footer() {
       <FooterMobile />
     </>
   );
-}
+}));
+export default Footer

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default function SuggestedSearches() {
+const SuggestedSearches = memo(() => {
   const searchSuggestions = [
     { id: 1, title: "املاک در نارمک" },
     { id: 2, title: "املاک در پونک" },
@@ -18,15 +18,23 @@ export default function SuggestedSearches() {
 
   return (
     <>
-      {/* Title for the suggested searches section */}
+      {/* 🔍 Title for the suggested searches section */}
       <h3 className="suggested-searches__title">جستجوهای پیشنهادی</h3>
 
-      {/* Grid displaying each search suggestion */}
+      {/* 🧭 Grid displaying each search suggestion */}
       <div className="suggested-searches__grid">
-        {searchSuggestions.map(({ title,id }) => (
-          <a key={id} href="#" className="suggested-searches__item suggested-searches__item--link">{title}</a>
+        {searchSuggestions.map(({ title, id }) => (
+          <a
+            key={id}
+            href="#"
+            className="suggested-searches__item suggested-searches__item--link"
+          >
+            {title}
+          </a>
         ))}
       </div>
     </>
   );
-}
+});
+
+export default SuggestedSearches;

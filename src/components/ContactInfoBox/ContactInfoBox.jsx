@@ -1,5 +1,6 @@
 import { Call, Instagram } from "iconsax-react";
-import React from "react";
+import React, {memo} from "react";
+import clsx from "classnames";
 
 /**
  * 📞 ContactInfoBox Component
@@ -10,7 +11,7 @@ import React from "react";
  * - 📌 Displays contact methods (Phone, Instagram, Telegram)
  * - 🎨 Uses BEM for styling
  */
-export default function ContactInfoBox() {
+const ContactInfoBox = memo(() => {
   const dataItem = [
     { id: 1, text: "تلفن", icon: <Call size="24" color="#CB1B1B" variant="Bold" /> },
     { id: 2, text: "اینستاگرام", icon: <Instagram size="24" color="#CB1B1B" variant="Bold" /> },
@@ -29,7 +30,7 @@ export default function ContactInfoBox() {
           {dataItem.map(({ id, icon, text }) => (
             <li key={id} className="contact-info-box__list-item">
               {/* 🔗 Each contact method with its icon */}
-              <a href="#" className="contact-info-box__link">
+              <a href="#" className={clsx("contact-info-box__link", id === 1 && "contact-info-box__link--phone")}>
                 {icon}
                 {text}
               </a>
@@ -39,4 +40,6 @@ export default function ContactInfoBox() {
       </div>
     </>
   );
-}
+});
+
+export default ContactInfoBox;

@@ -1,12 +1,12 @@
 import { AddCircle, Edit, Logout, ProfileCircle, ReceiptText } from "iconsax-react";
-import React from "react";
+import React, { memo } from "react";
 import clsx from "classnames";
 
 /**
  * 🧑‍💼 Profile Management Component
  * Displays user profile with navigation menu
  */
-export default function ProfileManagement({activeLabel}) {
+const ProfileManagement = memo((({activeLabel}) => {
   // 📋 Menu items configuration array
   const menuItems = [
     { id: 1, title: "ویرایش اطلاعات", label: "editInfo", icon: <Edit size="24" color="#717171" variant="Outline"/>, href: "#" },
@@ -45,4 +45,6 @@ export default function ProfileManagement({activeLabel}) {
       </div>
     </div>
   );
-}
+}));
+
+export default ProfileManagement

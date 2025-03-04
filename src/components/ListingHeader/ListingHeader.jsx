@@ -1,11 +1,16 @@
-import React from "react";
+import React, { memo } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 
-export default function ListingHeader({title}) {
+ const ListingHeader =memo((({ title }) => {
   return (
     <div>
+      {/* 📑 Displaying the title of the listing */}
       <h3 className="listing-header__title">{title}</h3>
+
+      {/* 🔍 Search bar for filtering or searching listings */}
       <SearchBar />
     </div>
   );
-}
+}))
+
+export default ListingHeader

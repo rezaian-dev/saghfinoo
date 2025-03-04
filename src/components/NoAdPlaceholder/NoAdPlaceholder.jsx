@@ -1,28 +1,30 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-export default function NoAdPlaceholder() {
+ const NoAdPlaceholder = memo((({title,description,image,searchAd}) => {
   return (
     // 🏠 Main block container
     <div className="no-ad">
       
       {/* 🖼️ Image element */}
       <div className="no-ad__image-container">
-        <img src="images/myAd/pana.png" loading="lazy" alt="panda" className="no-ad__image"/>
+        <img src={image} loading="lazy" alt="panda" className="no-ad__image"/>
       </div>
       
       {/* 📝 Text content section */}
       <div className="no-ad__content">
-        <h4 className="no-ad__title">هنوز آگهی‌ای ثبت نکردید!</h4>
-        <span className="no-ad__description">با ثبت رایگان آگهی هر جا که هستید به‌سرعت ملک‌تان را معامله کنید</span>
+        <h4 className="no-ad__title">{title}</h4>
+        <span className="no-ad__description">{description}</span>
       </div>
       
       {/* 🔘 Call to action button */}
       <div className="no-ad__button-container">
         <a href="#" className="no-ad__button">
-          ثبت آگهی
+          {searchAd ? "املاک اجاره ای" :"ثبت آگهی"}
         </a>
       </div>
       
     </div>
   );
-}
+}))
+
+export default NoAdPlaceholder

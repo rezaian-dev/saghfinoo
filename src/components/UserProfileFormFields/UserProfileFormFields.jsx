@@ -1,11 +1,11 @@
-import React from "react";
+import React, { memo } from "react";
 import clsx from "classnames";
 
 /**
  * 📝 UserProfileFormFields Component
  * Renders a single form field with validation and styling
  */
-const UserProfileFormFields = ({
+const UserProfileFormFields = memo(({
   register,
   focusState,
   errors,
@@ -83,6 +83,6 @@ const UserProfileFormFields = ({
       )}
     </div>
   );
-};
+});
 
 export default UserProfileFormFields;
