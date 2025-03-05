@@ -6295,10 +6295,10 @@ bg-gray-3;
 .saghfino-story__title{
   @apply text-gray-11 font-bold text-[clamp(12px,4vw,24px)];
 }
-.saghfino-story__header{
+.saghfino-story__header,.contact-info__header{
   @apply text-center mt-8 md:mt-[54px];
 }
-.saghfino-story__header-title{
+.saghfino-story__header-title,.contact-info__header-title{
   @apply font-bold md:font-medium text-[clamp(16px,4vw,40px)] text-shade-3;
 }
 .saghfino-story__header-subtitle{
@@ -6314,7 +6314,7 @@ bg-gray-3;
   @apply max-w-[282px];
 }
 .about-us__footer-copyright{
-  @apply hidden md:block text-center py-4 text-xs bg-gray-3 text-gray-8
+  @apply hidden md:block text-center py-4 text-xs bg-gray-3 text-gray-8;
 }
 .about-us__header{
   @apply md:pt-10;
@@ -6322,4 +6322,102 @@ bg-gray-3;
 .about-us__main{
   @apply mt-[74px] md:mt-16;
 }
+.contact-us__header{
+  @apply md:pt-10;
+}
+.contact-us__contact-section{
+  @apply mt-[74px] md:mt-16;
+}
+.contact-us__location-section{
+  @apply bg-city-map bg-cover bg-no-repeat mt-8 md:mt-16 py-10 md:py-[62px]
+}
+.map-focus-area {
+  @apply flex justify-center items-center;
+}
+
+.map-focus-area__container {
+  @apply w-[270px] h-[135px] md:w-[440px] md:h-[220px] grid grid-cols-2;
+}
+
+.map-focus-area__info {
+  @apply flex flex-col justify-center items-center text-center bg-white md:border border-tint-4 gap-y-[2px] md:gap-y-2;
+}
+
+.map-focus-area__title {
+  @apply text-gray-11 text-xs md:text-base;
+}
+
+.map-focus-area__address {
+  @apply text-gray-9 text-[10px] md:text-[14px];
+}
+
+.map-focus-area__action {
+  @apply flex justify-center items-center bg-shade-1;
+}
+
+.map-focus-area__link {
+  @apply flex flex-col justify-center items-center gap-y-1 md:gap-y-6;
+}
+
+.map-focus-area__icon {
+  @apply w-8 h-8 md:w-10 md:h-10;
+}
+
+.map-focus-area__text {
+  @apply text-white text-xs md:text-base text-center;
+}
+.contact-info {
+  @apply border border-gray-5 rounded-2xl px-6 pt-8 pb-6;
+}
+
+.contact-info__title {
+  @apply text-gray-11 font-bold text-[clamp(12px,4vw,24px)];
+}
+
+.contact-info__header {
+  @apply text-center;
+}
+
+.contact-info__header-title {
+  @apply text-lg font-bold md:font-medium text-[clamp(16px,4vw,40px)] text-shade-3;
+}
+
+.contact-info__header-subtitle {
+  @apply text-gray-9 text-[clamp(16px,4vw,28px)] font-medium md:font-normal;
+}
+
+.contact-info__content {
+  @apply mt-12 flex flex-col items-center gap-y-1;
+}
+
+.contact-info__social {
+  @apply flex items-center gap-x-2;
+}
+
+.contact-info__icon {
+  @apply w-4 h-4 md:w-6 md:h-6;
+}
+
+.contact-info__support {
+  @apply text-gray-9 font-medium md:font-normal text-xs sm:text-base;
+}
+
+.contact-info__call-button {
+  @apply flex items-center justify-center gap-x-2 mt-[21px] md:mt-1 text-white bg-primary w-[192px] h-8 md:w-[382px] md:h-12 rounded-lg;
+}
+
+.contact-info__phone {
+  @apply font-medium text-xs md:text-[14px];
+}
+
+.contact-info__call-icon {
+  @apply w-4 h-4 md:w-6 md:h-6;
+}
+.contact-us__footer{
+  @apply mt-14 md:mt-[104px] bg-gray-2;
+}
+.contact-us__footer-copyright{
+  @apply hidden md:block text-center py-4 text-xs bg-gray-3 text-gray-8;
+}
+
 }

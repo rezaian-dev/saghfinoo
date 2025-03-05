@@ -13,6 +13,7 @@ const UserProfilePage = lazy(() => import("../pages/UserProfile/UserProfilePage/
 const MyAd = lazy(() => import("../pages/UserProfile/MyAd/MyAd"));
 const SaveAd = lazy(() => import("../pages/UserProfile/SaveAd/SaveAd"));
 const AboutUs = lazy (() => import("../pages/AboutUs/AboutUs"));
+const ContactUs = lazy (() => import("../pages/ContactUs/ContactUs"))
 
 const routes = [
   { path: "/", element: <HomeNewUser /> },
@@ -27,6 +28,7 @@ const routes = [
   { path: "/my-ad", element: <MyAd /> },
   { path: "/save-ad", element: <SaveAd /> },
   { path: "/about", element: <AboutUs /> },
+  { path: "/contact", element: <ContactUs /> },
 ];
 
 export default routes;
