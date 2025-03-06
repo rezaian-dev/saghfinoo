@@ -6419,5 +6419,8 @@ bg-gray-3;
 .contact-us__footer-copyright{
   @apply hidden md:block text-center py-4 text-xs bg-gray-3 text-gray-8;
 }
+.news-page__header{
+  @apply md:pt-10;
+}
 
 }
