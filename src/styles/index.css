@@ -6497,11 +6497,11 @@ bg-gray-3;
 }
 
 .property-comparison__grid {
-  @apply grid lg:grid-cols-[1fr_377px] pb-10 custom:auto-rows-[325px] sm:auto-rows-auto gap-4;
+  @apply grid lg:grid-cols-[1fr_377px]  sm:auto-rows-auto gap-4;
 }
 
 .property-comparison__small-news {
-  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 custom:auto-rows-[325px] sm:auto-rows-auto gap-4;
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1  sm:auto-rows-auto gap-4;
 }
 .small-news-card {
   @apply rounded-2xl border border-gray-5;
@@ -6575,6 +6575,53 @@ bg-gray-3;
 .main-news-card__description {
   @apply text-gray-10 text-[clamp(12px,2vw,18px)] mt-2 line-clamp-1;
 }
-
+.news-page__construction{
+  @apply mt-10 md:mt-14;
+}
+.construction-news__heading{
+  @apply font-bold text-[clamp(16px,4vw,32px)] text-gray-11 mb-4 md:mb-8;
+}
+.construction-news__grid{
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 auto-rows-[254px] md:auto-rows-[235px];
+}
+.construction-news__item{
+  @apply grid grid-cols-1 md:grid-cols-2 rounded-2xl bg-white border border-gray-5 overflow-hidden;
+}
+.construction-news__text{
+  @apply flex order-2 md:order-1 items-start md:justify-center md:items-start flex-col p-2 md:px-4 md:py-2 gap-y-2;
+}
+.construction-news__reading-time{
+  @apply bg-gray-2 rounded-lg p-1 text-xs;
+}
+.construction-news__title{
+  @apply text-gray-11 text-[clamp(12px,1.5vw,20px)] font-bold line-clamp-2;
+}
+.construction-news__image-container{
+  @apply order-1 md:order-2 max-h-[160px] md:max-h-full ;
+}
+.construction-news__image{
+  @apply w-full h-full object-cover ;
+}
+.news-page__home-support{
+  @apply mt-14 md:mt-[88px]
+}
+.home-finder{
+  @apply bg-gray-2 rounded-2xl p-2  md:px-8 md:py-4 grid grid-cols-1 md:grid-cols-[1fr_290px] justify-items-center items-center gap-x-8 gap-y-4;
+}
+.home-finder__content{
+  @apply md:py-16 md:pl-8 px-2  pb-3 order-2 md:order-1;
+}
+.home-finder__title{
+  @apply font-bold text-[clamp(14px,3vw,32px)] text-gray-11 mb-4 md:mb-6;
+}
+.home-finder__subtitle{
+  @apply text-gray-11  md:font-medium text-[clamp(12px,2.5vw,24px)];
+}
+.home-finder__image-wrapper{
+  @apply order-1 md:order-2 w-[177px] md:w-full;
+}
+.home-finder__image{
+  @apply w-full h-full;
+}
 
 }
