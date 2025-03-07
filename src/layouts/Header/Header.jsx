@@ -91,7 +91,7 @@ import clsx from "classnames";
       <div
         className={clsx("menu-desktop", {
           "md:bg-gray-2": pathname !== "/" || pathname !== "/home-pro-user", // Apply background color if on rent page
-          "bg-gray-2": pathname === "/realestates" || pathname === "/realators",
+          "bg-gray-2": pathname === "/realestates" || pathname === "/realators" || pathname ==="/news" || pathname ==="/rent",
         })}
       >
         {/* Navigation container with desktop layout */}
