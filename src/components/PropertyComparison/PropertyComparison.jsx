@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import MainNewsCard from "../MainNewsCard/MainNewsCard";
 import SmallNewsCard from "../SmallNewsCard/SmallNewsCard";
 
-export default function PropertyComparison() {
+ const PropertyComparison = memo((() => {
   // 📰 Main news data
   const mainNewsItems = [
     {
@@ -14,7 +14,7 @@ export default function PropertyComparison() {
       subtitle:
         "بازار کساد کسب و کار معماران داخلی در پی بالا رفتن قیمت مواد و متریال اولیه و مصالح خارجی",
       description:
-        "زلزله یکی از حوادث طبیعی است که نمی‌توان زمان و مکان وقوع آن را بصورت دقیق پیش‌بینی کرد...",
+        "زلزله یکی از حوادث طبیعی است که نمی‌توان زمان و مکان وقوع آن را بصورت دقیق پیش‌بینی کرد",
     },
   ];
 
@@ -62,4 +62,5 @@ export default function PropertyComparison() {
       </div>
     </div>
   );
-}
+}))
+export default PropertyComparison

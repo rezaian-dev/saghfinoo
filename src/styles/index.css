@@ -6497,11 +6497,11 @@ bg-gray-3;
 }
 
 .property-comparison__grid {
-  @apply grid lg:grid-cols-[1fr_377px]  sm:auto-rows-auto gap-4;
+  @apply grid lg:grid-cols-[1fr_377px] auto-rows-auto    gap-4;
 }
 
 .property-comparison__small-news {
-  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1  sm:auto-rows-auto gap-4;
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 auto-rows-fr    gap-4;
 }
 .small-news-card {
   @apply rounded-2xl border border-gray-5;
@@ -6509,7 +6509,7 @@ bg-gray-3;
 
 /* 🖼️ Image Container */
 .small-news-card__image-container {
-  @apply relative h-[160px] custom:h-[180px] sm:h-[143px];
+  @apply relative h-[160px] custom:h-[180px] sm:h-[170px];
 }
 
 /* 🏞️ Image */
@@ -6524,7 +6524,7 @@ bg-gray-3;
 
 /* 📄 Content Wrapper */
 .small-news-card__content {
-  @apply px-2 md:px-4 pt-4 min-h-[142px] sm:min-h-max pb-5;
+  @apply px-2 md:px-4 pt-4 min-h-[160px] sm:min-h-max pb-5;
 }
 
 /* 📰 Title */
@@ -6534,7 +6534,7 @@ bg-gray-3;
 
 /* 📝 Description */
 .small-news-card__description {
-  @apply text-gray-10 text-[clamp(12px,2vw,18px)] mt-2 line-clamp-3 md:line-clamp-1;
+  @apply text-gray-10 text-[clamp(12px,2vw,18px)] mt-2 line-clamp-2 md:line-clamp-1;
 }
 /* 📰 Main News Card */
 .main-news-card {
@@ -6543,7 +6543,7 @@ bg-gray-3;
 
 /* 🖼️ Image Container */
 .main-news-card__image-container {
-  @apply relative h-[160px] custom:h-[180px] sm:h-[200px] md:h-[300px] lg:h-[375px];
+  @apply relative h-[160px] custom:h-[180px] sm:h-[200px] md:h-[300px] lg:h-[563px];
 }
 
 /* 🏞️ Image */
@@ -6558,7 +6558,7 @@ bg-gray-3;
 
 /* 📄 Content Wrapper */
 .main-news-card__content {
-  @apply px-2 md:px-4 pt-4 lg:pt-[41px] pb-5 min-h-[142px] sm:min-h-max;
+  @apply px-2 md:px-4 pt-4 lg:pt-[41px] pb-5 min-h-[160px] sm:min-h-max;
 }
 
 /* 📰 Title */
@@ -6573,7 +6573,7 @@ bg-gray-3;
 
 /* 📝 Description */
 .main-news-card__description {
-  @apply text-gray-10 text-[clamp(12px,2vw,18px)] mt-2 line-clamp-1;
+  @apply text-gray-10 text-[clamp(12px,2vw,18px)] mt-2 line-clamp-2 md:line-clamp-3;
 }
 .news-page__construction{
   @apply mt-10 md:mt-14;
@@ -6623,5 +6623,13 @@ bg-gray-3;
 .home-finder__image{
   @apply w-full h-full;
 }
-
+.news-page__rent{
+  @apply mt-14 md:mt-[88px]
+}
+.rental-news__title{
+  @apply font-bold text-[clamp(16px,4vw,32px)] text-gray-11 mb-4 md:mb-8;
+}
+.news-page__footer {
+  @apply  mt-14 md:mt-[104px] bg-gray-2;
+}
 }

@@ -4,15 +4,20 @@ import RealEstateNews from "../../../components/RealEstateNews/RealEstateNews";
 import PropertyComparison from "../../../components/PropertyComparison/PropertyComparison";
 import ConstructionNews from "../../../components/ConstructionNews/ConstructionNews";
 import HomeFinder from "../../../components/HomeFinder/HomeFinder";
+import RentalNews from "../../../components/RentalNews/RentalNews";
+import Footer from "../../../layouts/Footer/Footer";
 
 export default function NewsPage() {
   return (
     <>
+      {/* 📰 Header Section */}
       <header className="news-page__header">
         <div className="container">
           <Header />
         </div>
       </header>
+
+        {/* 🏠 Main Content: News and Sections */}
       <main>
         <section className="news-page__real-estate-news">
           <div className="lg:container">
@@ -34,7 +39,22 @@ export default function NewsPage() {
             <HomeFinder />
           </div>
         </section>
+        <section className="news-page__rent">
+          <div className="container">
+            <RentalNews />
+          </div>
+        </section>
       </main>
+
+      <footer className="news-page__footer">
+        <div className="container">
+          <Footer />
+        </div>
+        {/* 📜 Copyright Notice */}
+        <p className="rent-page__footer-copyright">
+          حقوق این سایت متعلق به سقفینو است
+        </p>
+      </footer>
     </>
   );
 }
