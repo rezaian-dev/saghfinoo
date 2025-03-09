@@ -13,8 +13,9 @@ const UserProfilePage = lazy(() => import("../pages/UserProfile/UserProfilePage/
 const MyAd = lazy(() => import("../pages/UserProfile/MyAd/MyAd"));
 const SaveAd = lazy(() => import("../pages/UserProfile/SaveAd/SaveAd"));
 const AboutUs = lazy (() => import("../pages/AboutUs/AboutUs"));
-const ContactUs = lazy (() => import("../pages/ContactUs/ContactUs"))
-const NewsPage = lazy (() => import("../pages/News/NewsPage/NewsPage"))
+const ContactUs = lazy (() => import("../pages/ContactUs/ContactUs"));
+const NewsPage = lazy (() => import("../pages/News/NewsPage/NewsPage"));
+const NewsDetails = lazy (() => import("../pages/News/NewsDetails/NewsDetails"));
 
 const routes = [
   { path: "/", element: <HomeNewUser /> },
@@ -31,6 +32,7 @@ const routes = [
   { path: "/about", element: <AboutUs /> },
   { path: "/contact", element: <ContactUs /> },
   { path: "/news", element: <NewsPage /> },
+  { path: "/news/news-details", element: <NewsDetails /> },
 ];
 
 export default routes;

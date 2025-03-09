@@ -6632,4 +6632,7 @@ bg-gray-3;
 .news-page__footer {
   @apply  mt-14 md:mt-[104px] bg-gray-2;
 }
+.news-details__header{
+  @apply md:pt-10;
+}
 }

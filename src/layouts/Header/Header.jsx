@@ -23,7 +23,7 @@ import clsx from "classnames";
     { id: 2, name: "خرید", path: "/buy" },
     { id: 3, name: "املاک و مستغلات", path: "/realestates" },
     { id: 4, name: "مشاورین املاک", path: "/realators" },
-    { id: 5, name: "اخبار روز", path: "/news" },
+    { id: 5, name: "اخبار روز",path: "/news"},
   ];
 
   // Mobile menu items with icons
@@ -91,7 +91,7 @@ import clsx from "classnames";
       <div
         className={clsx("menu-desktop", {
           "md:bg-gray-2": pathname !== "/" || pathname !== "/home-pro-user", // Apply background color if on rent page
-          "bg-gray-2": pathname === "/realestates" || pathname === "/realators" || pathname ==="/news" || pathname ==="/rent",
+          "bg-gray-2": pathname === "/realestates" || pathname === "/realators" || pathname ==="/news" || "/news-details" || pathname ==="/rent",
         })}
       >
         {/* Navigation container with desktop layout */}
@@ -112,7 +112,7 @@ import clsx from "classnames";
                   key={id}
                   className={clsx(
                     "group relative",
-                    pathname === path && "menu-desktop__link-desktop--active"
+                    pathname.includes(path) && "menu-desktop__link-desktop--active"
                   )}
                 >
                   <a href="#" className="menu-desktop__link">
