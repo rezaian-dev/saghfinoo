@@ -28,7 +28,7 @@ import clsx from "classnames";
 
   // Mobile menu items with icons
   const menuItemsMobile = [
-    { id: 1, label: "ثبت آگهی", path: "", icon: <AddCircle size="20" /> },
+    { id: 1, label: "ثبت آگهی", path: "/register", icon: <AddCircle size="20" /> },
     {
       id: 2,
       label: "آگهی های من",
@@ -189,7 +189,7 @@ import clsx from "classnames";
                 href="#"
                 className={clsx(
                   "menu-mobile__link",
-                  pathname === path && "menu-mobile__link-mobile--active"
+                  pathname.includes(path) && "menu-mobile__link-mobile--active"
                 )}
               >
                 <div className="menu-mobile__link-content">

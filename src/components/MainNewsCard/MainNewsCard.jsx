@@ -1,12 +1,12 @@
 import React, { memo } from "react";
-
+import clsx from "classnames";
 const MainNewsCard = memo(
-  ({ image, readTime, title, subtitle, description }) => {
+  ({ image, readTime, title, subtitle, description,height }) => {
     return (
       <div className="main-news-card">
         <a href="#">
           {/* 🖼️ News Image */}
-          <div className="main-news-card__image-container">
+          <div className={clsx("main-news-card__image-container", height)}>
             <img
               className="main-news-card__image"
               src={image}

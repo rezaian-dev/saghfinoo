@@ -51,7 +51,7 @@ export default function NewsPage() {
           <Footer />
         </div>
         {/* 📜 Copyright Notice */}
-        <p className="rent-page__footer-copyright">
+        <p className="news-page__footer-copyright">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>

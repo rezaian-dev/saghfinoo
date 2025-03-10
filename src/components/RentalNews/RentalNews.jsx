@@ -75,14 +75,14 @@ import { useSearchParams } from "react-router-dom";
     <div>
       <h3 className="rental-news__title">اجاره</h3>
 
-      <div className="property-comparison__grid">
+      <div className="property-comparison__grid grid-rows-[284px] custom:grid-rows-[304px] sm:grid-rows-1 lg:grid-rows-[814px]">
         {/* 📌 Render main news card */}
         {mainNewsItems.map((news) => (
-          <MainNewsCard key={news.id} {...news} />
+          <MainNewsCard key={news.id} {...news} height={"h-[160px] custom:h-[180px] lg:h-[563px]"} />
         ))}
 
         {/* 📰 Render small news cards */}
-        <div className="property-comparison__small-news">
+        <div className="property-comparison__small-news auto-rows-[284px] custom:auto-rows-[304px] sm:auto-rows-fr">
           {smallNewsItems.map((news) => (
             <SmallNewsCard key={news.id} {...news} />
           ))}

@@ -50,7 +50,7 @@ import SmallNewsCard from "../SmallNewsCard/SmallNewsCard";
       <div className="property-comparison__grid">
         {/* 📌 Render main news card */}
         {mainNewsItems.map((news) => (
-          <MainNewsCard key={news.id} {...news} />
+          <MainNewsCard key={news.id} {...news} height={"h-[160px] sm:h-[180px] lg:h-[375px]"} />
         ))}
 
         {/* 📰 Render small news cards */}

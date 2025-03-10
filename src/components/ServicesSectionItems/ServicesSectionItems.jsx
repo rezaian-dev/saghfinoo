@@ -33,7 +33,7 @@ const ServicesSectionItems = memo(({ title, items, mobile }) => {
         {title === "حساب کاربری" && (
           <li className="services-section__trust-logo">
             <img
-              src="images/logos/Logo-trust.webp"
+              src="../images/logos/Logo-trust.webp"
               loading="lazy"
               alt="trust-logo"
             />

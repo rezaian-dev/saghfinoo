@@ -48,7 +48,7 @@ const ServicesSection = memo(() => {
       <div className="services-section__left">
         <div>
           <img
-            src="images/logos/Logo-footer.png"
+            src="../images/logos/Logo-footer.png"
             loading="lazy"
             alt="logoFooter"
           />

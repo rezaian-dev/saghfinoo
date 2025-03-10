@@ -15,7 +15,7 @@ const ContactInfoBox = memo(() => {
   const dataItem = [
     { id: 1, text: "تلفن", icon: <Call size="24" color="#CB1B1B" variant="Bold" /> },
     { id: 2, text: "اینستاگرام", icon: <Instagram size="24" color="#CB1B1B" variant="Bold" /> },
-    { id: 3, text: "تلگرام", icon: <img src="svgs/icons/telegram.svg" loading="lazy" alt="telegram" /> },
+    { id: 3, text: "تلگرام", icon: <img src="../svgs/icons/telegram.svg" loading="lazy" alt="telegram" /> },
   ];
 
   return (
