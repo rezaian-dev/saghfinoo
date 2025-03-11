@@ -17,13 +17,16 @@ const RealEstateFilterDesktop = memo(() => {
 
       {/* 💰 Price filter */}
       <PriceFillterDesktop />
-      
       {/* 📏 Size filter */}
       <SizeFillterDesktop />
 
       {/* 🔍 More filters button */}
       <div className="real-estate-filter-desktop__more-filters">
-        <FilterSearch className="real-estate-filter-desktop__icon" color="#505050" variant="Outline" />
+        <FilterSearch
+          className="real-estate-filter-desktop__icon"
+          color="#505050"
+          variant="Outline"
+        />
         <span className="real-estate-filter-desktop__text">فیلترهای بیشتر</span>
       </div>
     </div>

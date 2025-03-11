@@ -16,6 +16,7 @@ const AboutUs = lazy (() => import("../pages/AboutUs/AboutUs"));
 const ContactUs = lazy (() => import("../pages/ContactUs/ContactUs"));
 const NewsPage = lazy (() => import("../pages/News/NewsPage/NewsPage"));
 const NewsDetails = lazy (() => import("../pages/News/NewsDetails/NewsDetails"));
+const NotFoundPage = lazy (() => import("../pages/NotFoundPage/NotFoundPage"));
 
 const routes = [
   { path: "/", element: <HomeNewUser /> },
@@ -33,6 +34,7 @@ const routes = [
   { path: "/contact", element: <ContactUs /> },
   { path: "/news", element: <NewsPage /> },
   { path: "/news/news-details", element: <NewsDetails /> },
+  { path: "/*", element: <NotFoundPage /> },
 ];
 
 export default routes;
