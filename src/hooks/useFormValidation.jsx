@@ -43,7 +43,7 @@ const schema = yup
 /**
  * 🔍 useFormValidation Custom Hook
  **/
-export default function useFormValidation(defaultValues, userImage) {
+export default function useFormValidation(defaultValues) {
   // ⚙️ Initialize react-hook-form with yup validation schema
   const {
     register,
@@ -56,13 +56,13 @@ export default function useFormValidation(defaultValues, userImage) {
     mode: "all",
     defaultValues,
   });
-  
+
   // 👁️ Watch all form values for changes
   const formValues = watch();
-  
+
   // ✅ Check if the form has any filled fields or an image
-  const formIsComplete = 
-    Object.values(formValues).some((value) => value.length > 0) || userImage;
+  const formIsComplete =
+    Object.values(formValues).some((value) => value.length > 0);
 
   // 📦 Return all necessary form utilities and state
   return {

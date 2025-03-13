@@ -13,6 +13,7 @@ module.exports = {
       screens:{
         "custom":"430px"
       },
+      
       colors: {
         gray: {
           1: "#FAFAFA",
@@ -75,6 +76,7 @@ module.exports = {
         "realestate-banner" : "url('../images/backgrounds/banner.webp')",
         "city-map" : "url('../images/backgrounds/map.png')",
         "news-banner" : "url('../images/backgrounds/housing-news-1.webp')",
+        "register" : "url('../images/register/register-banner.webp')"
       },
       boxShadow: {
         info: "0 0 4px 0 rgba(47, 128, 23, .19)",
@@ -93,6 +95,8 @@ module.exports = {
   ],
   safelist: [
     "swiper-pagination-bullet",
-    "swiper-pagination-bullet-active"
+    "swiper-pagination-bullet-active",
+    "MuiStepLabel-label",
+    "MuiSvgIcon-root"
   ]
 };
