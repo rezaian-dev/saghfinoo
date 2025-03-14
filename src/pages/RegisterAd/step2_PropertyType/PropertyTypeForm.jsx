@@ -137,7 +137,7 @@ export default function PropertyTypeForm() {
             </div>
 
             {/* 🔘 Navigation buttons */}
-            <div className="form-buttons">
+            <div className="form-buttons mt-6">
               <button type="button" className="btn-previous">
                 قبلی
               </button>

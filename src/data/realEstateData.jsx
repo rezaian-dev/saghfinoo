@@ -70720,19 +70720,52 @@ export const transactionTypes = [
   { id: 1, name: "فروش" },
   { id: 2, name: "خرید" },
   { id: 3, name: "اجاره" },
-  { id: 4, name: "رهن کامل"  },
+  { id: 4, name: "رهن کامل" },
   { id: 5, name: "مشارکت در ساخت" },
   { id: 6, name: "معاوضه" },
-  { id: 7, name: "پیش‌فروش" }
+  { id: 7, name: "پیش‌فروش" },
 ];
 export const propertyType = [
-  { id: 1, name: "آپارتمان"},
-  { id: 2, name: "خانه ویلایی"},
-  { id: 3, name: "خانه تک واحدی"},
-  { id: 4, name: "پنت‌هاوس"},
-  { id: 5, name: "مغازه/واحد تجاری"},
-  { id: 6, name: "دفتر اداری"},
-  { id: 7, name: "زمین"},
-  { id: 8, name: "ویلای باغ"},
-  { id: 9, name: "مزرعه/اراضی کشاورزی"},
+  { id: 1, name: "آپارتمان" },
+  { id: 2, name: "خانه ویلایی" },
+  { id: 3, name: "خانه تک واحدی" },
+  { id: 4, name: "پنت‌هاوس" },
+  { id: 5, name: "مغازه/واحد تجاری" },
+  { id: 6, name: "دفتر اداری" },
+  { id: 7, name: "زمین" },
+  { id: 8, name: "ویلای باغ" },
+  { id: 9, name: "مزرعه/اراضی کشاورزی" },
+];
+
+export const toiletTypes = [
+  { id: 1, name: "مهم نیست" },
+  { id: 2, name: "ایرانی" },
+  { id: 3, name: "فرنگی" },
+  { id: 4, name: "هر دو" },
+];
+
+export const coolingSystems = [
+  { id: 1, name: "مهم نیست" },
+  { id: 2, name: "کولر آبی" },
+  { id: 3, name: "اسپلیت" },
+  { id: 4, name: "فن کوئل" },
+  { id: 5, name: "چیلر" },
+];
+
+export const heatingSystems = [
+  { id: 1, name: "مهم نیست" },
+  { id: 2, name: "مرکزی" },
+  { id: 3, name: "اسپلیت" },
+  { id: 4, name: "شومینه" },
+  { id: 5, name: "از کف" },
+  { id: 6, name: "رادیاتور" },
+];
+
+export const floorMaterials = [
+  { id: 1, name: "مهم نیست" },
+  { id: 2, name: "سنگ" },
+  { id: 3, name: "سرامیک" },
+  { id: 4, name: "پارکت" },
+  { id: 5, name: "لمینت" },
+  { id: 6, name: "موزائیک" },
 ];

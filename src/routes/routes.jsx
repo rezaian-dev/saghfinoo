@@ -19,6 +19,8 @@ const NewsDetails = lazy (() => import("../pages/News/NewsDetails/NewsDetails"))
 const NotFoundPage = lazy (() => import("../pages/NotFoundPage/NotFoundPage"));
 const LocationForm = lazy (() => import("../pages/RegisterAd/step1_Location/LocationForm"));
 const PropertyTypeForm = lazy (() => import("../pages/RegisterAd/step2_PropertyType/PropertyTypeForm"));
+const DimensionsForm = lazy (() => import("../pages/RegisterAd/step3_Dimensions/DimensionsForm"));
+const FacilitiesForm = lazy (() => import("../pages/RegisterAd/step4_Facilities/FacilitiesForm"));
 
 const routes = [
   { path: "/", element: <HomeNewUser /> },
@@ -39,6 +41,8 @@ const routes = [
   { path: "/*", element: <NotFoundPage /> },
   { path: "/register/1", element: <LocationForm /> },
   { path: "/register/2", element: <PropertyTypeForm /> },
+  { path: "/register/3", element: <DimensionsForm /> },
+  { path: "/register/4", element: <FacilitiesForm /> },
 ];
 
 export default routes;

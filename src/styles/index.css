@@ -6097,13 +6097,16 @@ body {
     @apply  border border-info overflow-hidden absolute left-0 right-0 top-[35px] md:top-[55px] rounded md:rounded-lg z-10 transition-all duration-300 opacity-0 bg-white shadow-info pointer-events-none;
   }
   .ad-input-field__dropdown-list {
-    @apply overflow-y-auto max-h-[265px] py-4;
+    @apply overflow-y-auto max-h-[188px] ;
   }
   .ad-input-field__dropdown-item {
-    @apply cursor-pointer pr-4 text-xs sm:text-sm text-gray-10 py-2 transition-all;
+    @apply cursor-pointer pr-2 border-b border-gray-7  text-xs sm:text-sm text-gray-10 py-1 md:py-[13px] transition-all;
   }
   .ad-input-field__dropdown-item:hover {
-    @apply bg-gray-2;
+    @apply bg-gray-3;
+  }
+  .ad-input-field__dropdown--custom{
+    @apply top-[-157px] sm:top-[-180px] md:top-[-195px];
   }
   .ad-input-field__dropdown--visible{
     @apply opacity-100 pointer-events-auto;
@@ -6138,12 +6141,12 @@ body {
   }
   /* Main container styles */
 .ad-form {
-  @apply bg-gray-3 flex items-center justify-center min-h-[100vh] w-full bg-realestate-banner bg-cover bg-center bg-no-repeat md:bg-none;
+  @apply bg-gray-3  flex items-center overflow-hidden justify-center min-h-[100vh] w-full bg-realestate-banner bg-cover bg-center bg-no-repeat md:bg-none ;
 }
 
 /* Grid container styles */
 .ad-form__grid {
-  @apply grid grid-cols-1 md:grid-cols-[1fr_1.5fr] lg:grid-cols-[421px_1fr] rounded-3xl md:rounded-2xl  overflow-hidden w-[85%];
+  @apply grid grid-cols-1 mt-[84px] mb-[136px] md:my-0  md:min-h-[815px] max-h-[815px]     overflow-x-hidden  md:grid-cols-[1fr_1.5fr] lg:grid-cols-[421px_1fr] rounded-3xl md:rounded-2xl  w-[85%];
 }
 
 /* Image container */
@@ -6157,7 +6160,7 @@ body {
 
 /* Form container */
 .form-container {
-  @apply bg-white flex overflow-hidden flex-col px-4 md:px-0 pt-14 pb-[67px] md:py-32 relative;
+  @apply bg-white flex  overflow-x-hidden overflow-y-auto flex-col px-4 md:px-0 pt-14 pb-[67px] md:py-32 relative;
 }
 
 /* Form content container */
@@ -6177,7 +6180,7 @@ body {
 
 /* Button container */
 .form-buttons {
-  @apply mt-10 xl:mt-[104px] flex items-center justify-center gap-x-4;
+  @apply mt-10  xl:!mt-[104px] flex items-center justify-center gap-x-4;
 }
 
 /* Previous button */
@@ -6232,7 +6235,7 @@ body {
   @apply text-gray-12 font-bold;
 }
 .ad-form__convertible {
-  @apply flex items-center mt-5 gap-2 cursor-pointer;
+  @apply flex items-center mt-5 md:mt-2 gap-2 cursor-pointer;
 }
 
 .ad-form__convertible-icon,

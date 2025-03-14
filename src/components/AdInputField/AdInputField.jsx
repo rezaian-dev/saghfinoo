@@ -3,7 +3,7 @@ import useToggleMenu from "../../hooks/useToggleMenu";
 import { ArrowDown2, CloseCircle } from "iconsax-react";
 import clsx from "classnames";
 
-const AdInputField = memo(({ systemState, setSystemState, placeholder, label, dataList, error, errorMessage }) => {
+const AdInputField = memo(({ systemState, setSystemState, placeholder, label, dataList, error, errorMessage,customStyle=false }) => {
 
     const { isDropdownOpen, btnRef, fillterInteractiveRef, handleClick } = useToggleMenu();
 
@@ -65,7 +65,8 @@ const AdInputField = memo(({ systemState, setSystemState, placeholder, label, da
           <div
             className={clsx(
               "ad-input-field__dropdown",
-              isDropdownOpen && "ad-input-field__dropdown--visible"
+              isDropdownOpen && "ad-input-field__dropdown--visible",
+              customStyle && "ad-input-field__dropdown--custom"
             )}
           >
             <ul className="ad-input-field__dropdown-list">
