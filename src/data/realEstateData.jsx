@@ -70715,3 +70715,24 @@ export const cities = [
   { id: 63, name: "همدان" },
   { id: 64, name: "یزد" },
 ];
+
+export const transactionTypes = [
+  { id: 1, name: "فروش" },
+  { id: 2, name: "خرید" },
+  { id: 3, name: "اجاره" },
+  { id: 4, name: "رهن کامل"  },
+  { id: 5, name: "مشارکت در ساخت" },
+  { id: 6, name: "معاوضه" },
+  { id: 7, name: "پیش‌فروش" }
+];
+export const propertyType = [
+  { id: 1, name: "آپارتمان"},
+  { id: 2, name: "خانه ویلایی"},
+  { id: 3, name: "خانه تک واحدی"},
+  { id: 4, name: "پنت‌هاوس"},
+  { id: 5, name: "مغازه/واحد تجاری"},
+  { id: 6, name: "دفتر اداری"},
+  { id: 7, name: "زمین"},
+  { id: 8, name: "ویلای باغ"},
+  { id: 9, name: "مزرعه/اراضی کشاورزی"},
+];

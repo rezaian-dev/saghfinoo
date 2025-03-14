@@ -29,16 +29,16 @@ export default function LocationForm() {
   // ✅ Handle form submission and navigate to the next step
   const onSubmit = (data) => {
     console.log(data); // 📌 Debugging: Log form data
-    navigate("/rent");
+    navigate("/register/2");
   };
 
   return (
-    <div className="location-form-container">
-      <div className="form-grid-container">
+    <div className="ad-form">
+      <div className="ad-form__grid">
         {/* 🖼️ Left section: Image display */}
-        <div className="form-image-container">
+        <div className="ad-form__image-container">
           <img
-            className="form-image"
+            className="ad-form__image"
             src="../images/register/register-banner.webp"
             loading="lazy"
             alt="Register Banner"

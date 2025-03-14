@@ -6137,21 +6137,21 @@ body {
     @apply absolute bottom-[-20px] right-3 text-primary  text-xs block;
   }
   /* Main container styles */
-.location-form-container {
+.ad-form {
   @apply bg-gray-3 flex items-center justify-center min-h-[100vh] w-full bg-realestate-banner bg-cover bg-center bg-no-repeat md:bg-none;
 }
 
 /* Grid container styles */
-.form-grid-container {
+.ad-form__grid {
   @apply grid grid-cols-1 md:grid-cols-[1fr_1.5fr] lg:grid-cols-[421px_1fr] rounded-3xl md:rounded-2xl  overflow-hidden w-[85%];
 }
 
 /* Image container */
-.form-image-container {
+.form-image-container,.ad-form__image-container {
   @apply w-full h-full hidden md:block;
 }
 
-.form-image {
+.form-image,.ad-form__image {
   @apply w-full h-full object-cover;
 }
 
@@ -6230,5 +6230,17 @@ body {
 }
 .stepper__label--active{
   @apply text-gray-12 font-bold;
+}
+.ad-form__convertible {
+  @apply flex items-center mt-5 gap-2 cursor-pointer;
+}
+
+.ad-form__convertible-icon,
+.ad-form__convertible-arrow {
+  @apply w-3 h-3 md:w-4 md:h-4;
+}
+
+.ad-form__convertible-text {
+  @apply text-xs md:text-sm text-gray-11 font-medium;
 }
 }

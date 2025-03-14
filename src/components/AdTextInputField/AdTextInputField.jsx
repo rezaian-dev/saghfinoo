@@ -5,7 +5,6 @@ export default function AdTextInputField({label, placeholder, name, register, fo
   
   // Regex for validating address (Persian characters and spaces) 📜
   const addressRegex = /^[\u0600-\u06FF\s،-]+(\d*[\u0600-\u06FF\s،-]*)+$/;
-console.log(errors[name]);
 
   return (
     <div className="ad-text-input-field">
