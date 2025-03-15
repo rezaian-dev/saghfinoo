@@ -38,7 +38,7 @@ export default function FacilitiesForm() {
 
   return (
     <div className="ad-form">
-      <div className="ad-form__grid min-h-[1000px] md:min-h-[815px]">
+      <div className="ad-form__grid">
         {/* 🖼️ Left section: Image display */}
         <div className="ad-form__image-container">
           <img
@@ -52,10 +52,10 @@ export default function FacilitiesForm() {
         {/* 📝 Form Section */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="form-container pt-24 pb-0"
+          className="form-container"
         >
           <Stepper currentStep={4} /> {/* 🔄 Step indicator */}
-          <div className="form-content pb-7">
+          <div className="form-content">
             <span className="form-heading">لطفا موارد زیر را تکمیل کنید</span>
             <div className="form-fields__grid">
               {/* 🅿️ Parking input field */}
@@ -175,10 +175,10 @@ export default function FacilitiesForm() {
 
             {/* 🔘 Navigation buttons */}
             <div className="form-buttons md:!mt-10">
-              <button type="button" className="btn-previous">
+              <button type="button" className="form-buttons__prev">
                 قبلی
               </button>
-              <button type="submit" className="btn-next">
+              <button type="submit" className="form-buttons__next">
                 ادامه
               </button>
             </div>

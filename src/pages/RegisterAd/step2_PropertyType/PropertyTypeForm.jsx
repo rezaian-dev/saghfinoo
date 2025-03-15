@@ -138,10 +138,10 @@ export default function PropertyTypeForm() {
 
             {/* 🔘 Navigation buttons */}
             <div className="form-buttons mt-6">
-              <button type="button" className="btn-previous">
+              <button type="button" className="form-buttons__prev">
                 قبلی
               </button>
-              <button type="submit" className="btn-next">
+              <button type="submit" className="form-buttons__next">
                 ادامه
               </button>
             </div>

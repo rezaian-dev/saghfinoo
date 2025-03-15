@@ -21,6 +21,7 @@ const LocationForm = lazy (() => import("../pages/RegisterAd/step1_Location/Loca
 const PropertyTypeForm = lazy (() => import("../pages/RegisterAd/step2_PropertyType/PropertyTypeForm"));
 const DimensionsForm = lazy (() => import("../pages/RegisterAd/step3_Dimensions/DimensionsForm"));
 const FacilitiesForm = lazy (() => import("../pages/RegisterAd/step4_Facilities/FacilitiesForm"));
+const DescriptionForm = lazy (() => import("../pages/RegisterAd/step5_Description/DescriptionForm"));
 
 const routes = [
   { path: "/", element: <HomeNewUser /> },
@@ -43,6 +44,7 @@ const routes = [
   { path: "/register/2", element: <PropertyTypeForm /> },
   { path: "/register/3", element: <DimensionsForm /> },
   { path: "/register/4", element: <FacilitiesForm /> },
+  { path: "/register/5", element: <DescriptionForm /> },
 ];
 
 export default routes;

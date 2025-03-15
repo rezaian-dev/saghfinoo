@@ -111,8 +111,8 @@ export default function LocationForm() {
 
             {/* 🔘 Navigation buttons */}
             <div className="form-buttons">
-              <button type="button" className="btn-previous">قبلی</button>
-              <button type="submit" className="btn-next">ادامه</button>
+              <button type="button" className="form-buttons__prev">قبلی</button>
+              <button type="submit" className="form-buttons__next">ادامه</button>
             </div>
           </div>
         </form>
