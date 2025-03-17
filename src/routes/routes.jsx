@@ -23,6 +23,7 @@ const DimensionsForm = lazy (() => import("../pages/RegisterAd/step3_Dimensions/
 const FacilitiesForm = lazy (() => import("../pages/RegisterAd/step4_Facilities/FacilitiesForm"));
 const DescriptionForm = lazy (() => import("../pages/RegisterAd/step5_Description/DescriptionForm"));
 const MediaUploader = lazy (() => import("../pages/RegisterAd/step6_Media/MediaUploader"));
+const AdSuccess = lazy (() => import("../pages/RegisterAd/step7_Success/AdSuccess"));
 
 const routes = [
   { path: "/", element: <HomeNewUser /> },
@@ -47,6 +48,7 @@ const routes = [
   { path: "/register/4", element: <FacilitiesForm /> },
   { path: "/register/5", element: <DescriptionForm /> },
   { path: "/register/6", element: <MediaUploader /> },
+  { path: "/register/7", element: <AdSuccess /> },
 ];
 
 export default routes;
