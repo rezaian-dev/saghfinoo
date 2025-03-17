@@ -32,6 +32,7 @@ export default function DimensionsForm() {
 
   return (
     <div className="ad-form">
+      <div className="container">
       <div className="ad-form__grid">
         {/* 🖼️ Left section: Image display */}
         <div className="ad-form__image-container">
@@ -101,6 +102,7 @@ export default function DimensionsForm() {
             </div>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );

@@ -6141,32 +6141,28 @@ body {
   }
   /* Main container styles */
 .ad-form {
-  @apply bg-gray-3  flex items-center  xl:py-0  justify-center min-h-[100vh] w-full bg-realestate-banner bg-cover bg-center bg-no-repeat md:bg-none ;
+  @apply bg-gray-3 flex-center  min-h-screen w-full bg-realestate-banner bg-cover bg-center bg-no-repeat md:bg-none ;
 }
 
 /* Grid container styles */
 .ad-form__grid {
-  @apply grid grid-cols-1 mt-[84px] mb-[138px] lg:my-0  xl:my-0 max-h-max md:min-h-[815px] overflow-hidden   md:grid-cols-[1fr_1.5fr] lg:grid-cols-[421px_1fr] rounded-3xl md:rounded-2xl  w-[85%];
+  @apply grid grid-cols-1 max-h-max mx-auto md:min-h-[815px] xl:max-h-[815px] overflow-hidden  md:grid-cols-[1fr_1.5fr] lg:grid-cols-[421px_1fr] rounded-3xl md:rounded-2xl w-full  max-w-[1224px];
 }
 
 /* Image container */
 .form-image-container,.ad-form__image-container {
-  @apply w-full h-full hidden md:block;
+  @apply w-full h-full   hidden md:block;
 }
 
 .form-image,.ad-form__image {
-  @apply w-full h-full object-cover;
+  @apply w-full h-full object-cover ;
 }
 
 /* Form container */
 .form-container {
-  @apply bg-white flex !h-max md:min-h-full    flex-col px-4 md:px-0 pt-14 pb-[59px] xl:pb-0     relative;
+  @apply bg-white flex  overflow-x-hidden overflow-y-auto   md:items-center h-max md:min-h-full  flex-col px-4  pt-14 pb-[59px]  relative;
 }
 
-/* Form content container */
-.form-content {
-  @apply  md:mx-auto;
-}
 
 /* Form heading */
 .form-heading {
@@ -6180,7 +6176,7 @@ body {
 
 /* Button container */
 .form-buttons {
-  @apply mt-12  xl:!mt-[104px] flex items-center justify-center gap-x-4;
+  @apply mt-12  xl:mt-[104px] flex items-center justify-center gap-x-4;
 }
 
 /* Previous button */
@@ -6211,7 +6207,7 @@ body {
   @apply h-[3px] bg-primary;
 }
 .stepper__steps{
-  @apply grid grid-cols-6 items-center justify-items-center justify-center auto-rows-fr absolute m-auto right-[-9%] left-[-12%] custom:left-[-10%] top-[-11px] sm:top-[-13px] xl:top-[-25px];
+  @apply grid grid-cols-6 items-center justify-items-center justify-center auto-rows-fr absolute m-auto right-[-9%] left-[-12%] custom:left-[-10%]  top-[-11px] sm:top-[-13px] xl:top-[-25px];
 }
 .stepper__step{
   @apply grid grid-cols-1 justify-items-center gap-y-2;
@@ -6235,7 +6231,7 @@ body {
   @apply text-gray-12 font-bold;
 }
 .ad-form__convertible {
-  @apply flex items-center mt-5 md:mt-2 gap-2 cursor-pointer;
+  @apply flex items-center mt-5 md:mt-5 gap-2 cursor-pointer;
 }
 
 .ad-form__convertible-icon,
@@ -6264,4 +6260,56 @@ body {
 .form-content__line-underline{
   @apply w-full border border-dashed absolute right-3 z-10 h-0 bottom-1 m-auto;
 }
+.ad-form__form-container--extended{
+  @apply xl:h-[815px];
+}
+.ad-form__description{
+  @apply space-y-2 mt-[76px] md:mt-[90px];
+}
+.ad-form__text.ad-form__text--primary{
+  @apply text-[clamp(14px,1vw,18px)] block leading-6 text-gray-11 mb-2;
+}
+.ad-form__text.ad-form__text--secondary{
+  @apply block text-gray-8 text-xs sm:text-sm leading-6;
+}
+.ad-form__image-grid{
+  @apply grid grid-cols-2 xl:grid-cols-[repeat(3,182px)] gap-x-4 auto-rows-[100px] md:auto-rows-[150px] gap-y-2 mt-4;
+}
+.ad-form__image-wrapper{
+  @apply relative h-full w-full rounded-lg overflow-hidden;
+}
+.ad-form__image-preview{
+  @apply w-full h-full object-cover;
+}
+.ad-form__file-input{
+  @apply absolute top-0 bottom-0 left-0 m-auto opacity-0 cursor-pointer;
+}
+.ad-form__delete-icon{
+  @apply absolute top-2 left-2 flex-center w-5 h-5 md:w-[25px] md:h-[25px] rounded bg-gray-13 cursor-pointer;
+}
+.ad-form__delete-icon__trash{
+  @apply !w-4 !h-4 md:!w-5 md:!h-5;
+}
+.ad-form__upload-box{
+  @apply relative h-full w-full border-dashed border-2 hover:bg-gray-3 hover:border-info  transition-all  rounded-lg border-gray-7 flex-center overflow-hidden;
+}
+.ad-form__upload-icon{
+  @apply !w-[38px] !h-[38px] md:!w-12 md:!h-12;
+}
+.ad-form__video-section{
+  @apply mt-10 space-y-2;
+}
+.ad-form__video-upload{
+  @apply flex flex-col space-y-3;
+}
+.ad-form__video-success{
+  @apply flex items-center px-2 text-sm md:text-base text-gray-11 rounded w-max md:max-w-[282px] h-[45px] bg-gray-3;
+}
+.ad-form__video-delete{
+  @apply text-primary w-full border max-w-[141px] md:w-[182px] font-medium text-xs sm:text-sm h-8 md:h-10 border-primary mt-6 rounded-md hover:bg-primary hover:text-white transition-all;
+}
+.ad-form__video-select{
+  @apply flex-center relative overflow-hidden w-full max-w-[141px] cursor-pointer transition-all duration-300 hover:bg-gray-3 h-8 md:w-[104px] md:h-10 rounded-lg border border-gray-9 font-medium text-xs sm:text-sm text-gray-9 leading-6;
+}
+
 }
