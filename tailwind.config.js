@@ -10,10 +10,9 @@ module.exports = {
           lg: "1.75rem",
         },
       },
-      screens:{
-        "custom":"430px"
+      screens: {
+        custom: "430px",
       },
-      
       colors: {
         gray: {
           1: "#FAFAFA",
@@ -46,7 +45,7 @@ module.exports = {
           5: "#FCA197",
           6: "#F66262",
           7: "#E43434",
-          8: "#E91717"
+          8: "#E91717",
         },
         elight: {
           1: "#ED2E2E",
@@ -69,34 +68,34 @@ module.exports = {
         info: "#2F80ED",
       },
       fontFamily: {
-        Shabnam: "shabnam",
+        Shabnam: ["shabnam", "sans-serif"],
       },
       backgroundImage: {
         "home-desktop": "url('../images/backgrounds/background.webp')",
-        "realestate-banner" : "url('../images/backgrounds/banner.webp')",
-        "city-map" : "url('../images/backgrounds/map.png')",
-        "news-banner" : "url('../images/backgrounds/housing-news-1.webp')",
-        "register" : "url('../images/register/register-banner.webp')"
+        "realestate-banner": "url('../images/backgrounds/banner.webp')",
+        "city-map": "url('../images/backgrounds/map.png')",
+        "news-banner": "url('../images/backgrounds/housing-news-1.webp')",
+        "register": "url('../images/register/register-banner.webp')",
       },
       boxShadow: {
         info: "0 0 4px 0 rgba(47, 128, 23, .19)",
-        border:"0 0 5px 0 rgba(0,0,0,.25)",
+        border: "0 0 5px 0 rgba(0,0,0,.25)",
         1: "0 2px 8px 0 rgba(0, 0, 0, .3)",
         slider: "0 3px 10px 0 rgba(0, 0, 0, .20)",
-        inner:"0 -4px 14px 0 (0,0,0,.25)",
+        inner: "0 -4px 14px 0 rgba(0,0,0,.25)",
       },
     },
   },
   plugins: [
     function ({ addVariant }) {
-      addVariant("child", "&>*");
-      addVariant("child-hover", "&*:hover");
+      addVariant("child", "& > *");
+      addVariant("child-hover", "& *:hover");
     },
   ],
   safelist: [
     "swiper-pagination-bullet",
     "swiper-pagination-bullet-active",
     "MuiStepLabel-label",
-    "MuiSvgIcon-root"
-  ]
+    "MuiSvgIcon-root",
+  ],
 };
