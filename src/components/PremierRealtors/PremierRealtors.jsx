@@ -7,9 +7,8 @@ import { Navigation } from "swiper/modules";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import useSwiperSlider from "../../hooks/useSwiperSlider";
 
- const PremierRealtors = memo((({text}) => {
+ const PremierRealtors = memo(({text,btnModal}) => {
 
-  
   const dataCard = [
     {id: 1, title: "مشاور املاک توسی", image: "images/landing/home-prouser/logo-tusi.png", location: "تهران، نیاوران", popularity: "۴/۹ از ۵", activeAd: "بیش از ۴۰۰۰", comment: " (۱۲ نظر)", tikBlue: true, alt: "logoTusi"},
     {id: 2, title: "مشاوراملاک ولیعصر", image: "images/landing/home-prouser/logo-valiasr.png", location: "تهران، خیابان ولیعصر", popularity: "۴ از ۵", activeAd: "بیش از ۳۵۰۰", comment: " (۱۲ نظر)", tikBlue: true, alt: "logoValiasr"},
@@ -19,7 +18,7 @@ import useSwiperSlider from "../../hooks/useSwiperSlider";
   ];
 
   const { isBeginning, setIsBeginning, isEnd, handleNext, handlePrev, setSwiper, setIsEnd } = useSwiperSlider();
-
+         
   return (
     <>
       <h3 className="premier-realtors__title">
@@ -44,11 +43,13 @@ import useSwiperSlider from "../../hooks/useSwiperSlider";
             1280: { slidesPerView: 4, spaceBetween: 24 },
           }}
         >
+          <div ref={btnModal}>
           {dataCard.map((item) => (
             <SwiperSlide className="premier-realtors__slide" key={item.id}>
               <PremierRealtorsBox {...item} /> {/* Render each news item */}
             </SwiperSlide>
           ))}
+          </div>
         </Swiper>
 
          {/* 🔙Prev button - only show when not at the beginning */}
@@ -81,6 +82,6 @@ import useSwiperSlider from "../../hooks/useSwiperSlider";
       </div>
     </>
   );
-}))
+})
 
 export default PremierRealtors

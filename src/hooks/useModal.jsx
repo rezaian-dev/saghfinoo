@@ -1,45 +1,48 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useCallback } from "react";
 
-// 🛠️ Custom hook to manage modal open/close
-const useModal = (closeMenu) => { // Receiving closeMenu function as a parameter
-  const [isOpenModal, setIsOpenModal] = useState(false); 
+// 🎯 Custom hook for managing modals
+const useModal = (closeMenu) => {
+  // 🔄 State for different modals
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [isOpenModalMobile, setIsOpenModalMobile] = useState(false);
-  const btnModal = useRef(null);
-  const btnMobileModal = useRef(null);
-  const menuModal = useRef(null);
-  const menuModalMobile = useRef(null);
-  const submitModal = useRef(null);
-  const submitModalMobile = useRef(null);
+  const [isOpenModalPremier, setIsOpenModalPremier] = useState(false);
 
-  // 🖱️ Handle modal toggle on click
+  // 🖱️ Handle modal open/close based on user click
   const handleModal = useCallback(({ target }) => {
-    // Desktop modal open/close
-    if (btnModal.current && btnModal.current.contains(target)) {
-      setIsOpenModal(true); // Open desktop modal
-    } else if (menuModal.current && !menuModal.current.contains(target)) {
-      setIsOpenModal(false); // Close desktop modal
+    // 🖥️ Desktop modal
+    if (target.closest(".menu-desktop__login-link")) {
+      setIsOpenModal(true);
+    } 
+    else if (!target.closest(".modal__content")) {
+      setIsOpenModal(false);
     }
 
-    // Mobile modal open/close
-    if (btnMobileModal.current && btnMobileModal.current.contains(target)) {
-      setIsOpenModalMobile(true); // Open mobile modal
-      closeMenu(); // Close the mobile menu when modal opens
-    } else if (menuModalMobile.current && !menuModalMobile.current.contains(target)) {
-      setIsOpenModalMobile(false); // Close mobile modal
+    // 📱 Mobile modal
+    if (target.closest(".menu-mobile__profile-link")) {
+      setIsOpenModalMobile(true);
+      // ✅ Close menu if function exists
+      if (closeMenu && typeof closeMenu === 'function') {
+        closeMenu();
+      }
+    } else if (!target.closest(".modal-login__content")) {
+      setIsOpenModalMobile(false);
     }
-  }, []); // Added closeMenu as a dependency
+
+    // 🌟 Premier realtors modal
+    if (target.closest(".premier-realtors-box")) {
+      setIsOpenModalPremier(true);
+    }
+    else if(!target.closest(".premier-realtors-modal__content") || target.closest(".premier-realtors-modal__close-button")){
+      setIsOpenModalPremier(false)
+    }
+  }, []);
 
   return {
     isOpenModal,
     isOpenModalMobile,
+    isOpenModalPremier,
     setIsOpenModal,
     setIsOpenModalMobile,
-    btnModal,
-    btnMobileModal,
-    menuModal,
-    menuModalMobile,
-    submitModal,
-    submitModalMobile,
     handleModal,
   };
 };

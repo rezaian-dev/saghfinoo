@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import clsx from "classnames";
 
- const PremierRealtorsBox = memo((({ 
+ const PremierRealtorsBox = memo(({ 
   title, 
   image, 
   location, 
@@ -10,9 +10,12 @@ import clsx from "classnames";
   comment, 
   tikBlue, 
   alt, 
-  hover 
+  hover,
 }) => {
+
+
   return (
+    
     <div className={clsx("premier-realtors-box", hover && "hover:translate-y-[-10px] hover:shadow-2xl")}>
       
       {/* 🖼️ Image container for realtor */}
@@ -48,6 +51,6 @@ import clsx from "classnames";
       </div>
     </div>
   );
-}))
+})
 
-export default PremierRealtorsBox
+export default PremierRealtorsBox;

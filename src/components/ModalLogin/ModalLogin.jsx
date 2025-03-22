@@ -7,7 +7,7 @@ import clsx from "classnames";
 import { FilterContext } from "../../context/FilterContext";
 import useToast from "../../hooks/useToast";
 
-const ModalLogin = memo(({ isOpenModal, menuModal, setIsOpenModal }) => {
+const ModalLogin = memo(({ isOpenModal,setIsOpenModal }) => {
   const { showVerificationStep, setShowVerificationStep, userPhoneNumber, setUserPhoneNumber } = useContext(FilterContext);
   const{ handleToastSuccess, handleToastError } = useToast()
 
@@ -16,7 +16,7 @@ const ModalLogin = memo(({ isOpenModal, menuModal, setIsOpenModal }) => {
       {/* 🔔 Toast notifications container */}
       <ToastContainer/>
       
-      <div ref={menuModal} className="modal__content">
+      <div  className="modal__content">
         {/* 📞 Show Phone Number Step if showVerificationStep is false */}
         {!showVerificationStep ? (
           <PhoneNumberStep

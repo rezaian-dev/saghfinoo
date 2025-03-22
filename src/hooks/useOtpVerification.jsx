@@ -89,16 +89,21 @@ export const useOtpVerification = (
       e.preventDefault();
       e.stopPropagation();
     }
-    
     if (+state.otp === +state.correctOtp) {
       dispatch({ type: "SET_OTP_ERROR", payload: false });
       dispatch({ type: "SET_IS_OTP_CORRECT", payload: true });
-      onToastSuccess("ورود موفقیت‌آمیز بود"); // 🎉 Success message using callback
-      setTimeout(() => setIsOpenModal(false), 3000); // ⏳ Close modal after 3 seconds
+    
+      onToastSuccess("ورود موفقیت‌آمیز بود")
+        // ⏳ Wait for 3 seconds after the toast before closing the modal
+        setTimeout(() => {
+          setIsOpenModal(false); // Close modal after 3 seconds
+        }, 3300);
+      
     } else {
       dispatch({ type: "SET_OTP_ERROR", payload: true });
-      onToastError("کد وارد شده اشتباه است"); // ❌ Error message using callback
+      onToastError("کد وارد شده اشتباه است");
     }
+     
   };
 
   // ========================

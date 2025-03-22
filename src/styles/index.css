@@ -12581,7 +12581,7 @@ body {
     @apply bg-primary cursor-pointer hover:bg-shade-2;
   }
 .modal-login{
-  @apply fixed inset-0 bg-black/40 z-50 transition-all duration-300  opacity-0 pointer-events-none;
+  @apply fixed inset-0 bg-black/60 z-50 transition-all duration-300  opacity-0 pointer-events-none;
 }
 .modal-login--open{
   @apply opacity-100 pointer-events-auto;
@@ -12691,6 +12691,39 @@ body {
 }
 .verification-timer__time{
   @apply text-shade-5 text-sm inline-block mr-2;
+}
+.premier-realtors-modal{
+  @apply  fixed inset-0 flex items-center justify-center opacity-0 pointer-events-none bg-black/60 transition-opacity duration-300 z-50;
+}
+.premier-realtors-modal--open{
+  @apply opacity-100 pointer-events-auto;
+}
+.premier-realtors-modal__content{
+  @apply flex-center flex-col relative bg-white md:rounded-2xl w-full h-full md:max-w-[628px] md:w-full md:h-[408px] shadow-lg;
+}
+.premier-realtors-modal__close-button{
+  @apply absolute left-6 top-6;
+}
+.premier-realtors-modal__logo{
+  @apply w-[121px] h-[76px] md:w-[136px] md:h-[82px];
+}
+.premier-realtors-modal__title{
+  @apply text-gray-11 text-base md:text-2xl font-bold mt-5 md:mt-8;
+}
+.premier-realtors-modal__contacts{
+  @apply mt-28 md:mt-8 space-y-4 md:space-y-3 flex flex-col;
+}
+.premier-realtors-modal__contact-item{
+  @apply inline-flex items-center gap-x-1;
+}
+.premier-realtors-modal__contact-number{
+  @apply text-gray-11 text-base md:text-xl;
+}
+.premier-realtors-modal__logo-image{
+  @apply w-full h-full;
+}
+.premier-realtors-modal__contact-icon{
+  @apply !w-5 !h-5 md:!w-7 md:!h-7;
 }
 
 }

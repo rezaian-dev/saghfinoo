@@ -37,10 +37,6 @@ const Header = memo(() => {
     isOpenModalMobile,
     setIsOpenModal,
     setIsOpenModalMobile,
-    btnModal,
-    btnMobileModal,
-    menuModal,
-    menuModalMobile,
     handleModal
   } = useModal(closeMenu);
 
@@ -176,7 +172,7 @@ const Header = memo(() => {
 
         {/* User actions section 👤 */}
         <div className="menu-desktop__user-actions">
-          <a ref={btnModal} href="#" className="menu-desktop__login-link">
+          <a  href="#" className="menu-desktop__login-link">
             ورود
           </a>
           <a href="#" className="Register-ad-desktop">
@@ -202,7 +198,7 @@ const Header = memo(() => {
         {/* Profile section - Login or Sign-up for mobile 📝 */}
         <div className="menu-mobile__profile-section">
           <a
-            ref={btnMobileModal}
+            
             className="menu-mobile__profile-link"
             href="#"
           >
@@ -242,14 +238,14 @@ const Header = memo(() => {
       <div className="hidden md:block">
         <ModalLogin
           isOpenModal={isOpenModal}
-          menuModal={menuModal}
+          
           setIsOpenModal={setIsOpenModal}
         />
       </div>
       <div className="block md:hidden">
         <ModalLoginMobile 
           isOpenModal={isOpenModalMobile} 
-          menuModal={menuModalMobile} 
+           
           setIsOpenModal={setIsOpenModalMobile}
         />
       </div>
