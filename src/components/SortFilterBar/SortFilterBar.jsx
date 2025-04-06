@@ -4,20 +4,21 @@ import { FilterContext } from "../../context/FilterContext";
 import useToggleMenu from "../../hooks/useToggleMenu";
 import clsx from "classnames";
 
-const SortFilterBar = memo((() => {
+const SortFilterBar = memo(() => {
   const { isDropdownOpen, btnRef, menuRef, handleClick } = useToggleMenu(); // Dropdown menu state
   const { sortBy, setSortBy } = useContext(FilterContext); // Sorting context
-  
+
   const category = [
     // Sorting categories
     { id: 1, name: "جدیدترین", value: "newest" },
     { id: 2, name: "قرارداد فوری", value: "urgent" },
   ];
 
+  const { filterCount } = useContext(FilterContext);
+
   // 📝 Effect hook to handle page setup and loading state on component mount
   useEffect(() => {
     document.addEventListener("click", handleClick); // Event listener for click handling
-
     return () => {
       document.removeEventListener("click", handleClick); // Clean up event listener on unmount
     };
@@ -77,16 +78,18 @@ const SortFilterBar = memo((() => {
         {/* 🔄 Filter Options */}
         <div className="rental-property-listing__filters">
           <FilterSearch
-            className="rental-property-listing__filter-icon"
-            size="16"
+            className="realestate-listing__filter-icon"
             color="#505050"
-            variant="Outline"
           />
-          <span className="rental-property-listing__filter-text">فیلترها</span>
+          <span className="real-estate-filter-desktop__text">
+            {filterCount
+              ? `+${filterCount.toLocaleString("fa-IR")} فیلتر`
+              : "فیلترها"}
+          </span>
         </div>
       </div>
     </>
   );
-}));
+});
 
 export default SortFilterBar;

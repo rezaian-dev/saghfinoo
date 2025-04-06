@@ -1,46 +1,44 @@
-import { ArrowDown2, CloseCircle } from "iconsax-react";
-import React, { useEffect, useContext, useState, memo } from "react";
+import React, { useEffect, useState, memo } from "react";
 import clsx from "classnames";
-import PropertyFilterMobile from "../PropertyFilterMobile/PropertyFilterMobile";
-import PriceFillterMobile from "../PriceFillterMobile/PriceFillterMobile";
-import SizeFillterMobile from "../SizeFillterMobile/SizeFillterMobile";
-import AmenitiesSelectorMobile from "../AmenitiesSelectorMobile/AmenitiesSelectorMobile";
-import BathroomMobile from "../BathroomMobile/BathroomMobile";
-import BathroomTypeMobile from "../BathroomTypeMobile/BathroomTypeMobile";
-import FloorMobile from "../FloorMobile/FloorMobile";
-import HVACSystemMobile from "../HVACSystemMobile/HVACSystemMobile";
-import { FilterContext } from "../../context/FilterContext";
-import UseFilterData, {categoriesBathroom,categoriesFloor,categoriesBathroomType} from "../../hooks/UseFilterData";
-import UseFilterManager from "../../hooks/useFilterManager";
+import { CloseCircle } from "iconsax-react";
+import { ArrowDown2 } from "iconsax-react";
+import FilterGroupMobile from "../FilterGroupMobile/FilterGroupMobile";
 import useToggleMenu from "../../hooks/useToggleMenu";
+import RangeFilterMobile from "../RangeFilterMobile/RangeFilterMobile";
+import FilterDropdownMobile from "../FilterDropdownMobile/FilterDropdownMobile";
+import useRealEstateFilter from "../../hooks/useRealEstateFilter";
 
-const RealEstateFilterMobile = memo(({ rent = true }) => {
-  // 👨‍👩‍👧‍👦 Context and Hooks
-  const { isFiltersApplied } = useContext(FilterContext); // Filters state
-  const [showMore, setShowMore] = useState(1); // Show more filters state
-  const { resetAllFilters } = UseFilterManager(); // Reset filters hook
-  const { hvacSystemMobileData, amenitiesData, propertyFilterData } =
-    UseFilterData(); // Data for filters
+const RealEstateFilterMobile = memo(() => {
+  const [isShowMore, setIsShowMore] = useState(0); // 👀 Track status for "show more" button
+  const { isMenuOpen, menuRef, btnCloseRef, handleClick } = useToggleMenu(); // 🍔 Menu toggle state
+
   const {
-    isMenuOpen,
-    menuRef,
-    fillterInteractiveRef,
-    btnCloseRef,
-    handleClick,
-  } = useToggleMenu(); // Toggle menu hook
+    setValue,
+    onSubmit,
+    handleSubmit,
+    propertyFilterMobileConfig,
+    rangeFilterMobileConfig,
+    FILTER_VISIBILITY_RANGES,
+    AMENITIES_FILTER_CONFIG,
+    systemsFilterConfig,
+    isChanged,
+    watch,
+    handleResetAll,
+  } = useRealEstateFilter(); // 🔑 Hook for real estate filters
 
-  // 🚶‍♂️ Handle outside clicks when menu is open
+  // Handle show more toggle 👇
+  const handleShowMore = () => {
+    setIsShowMore(isShowMore === 3 ? 0 : isShowMore + 1); // 🔄 Toggle between show more/less
+  };
+
+  const sendData = (data) => {
+    onSubmit(data, "Global"); // 🌐 Send filter data globally
+  };
+
   useEffect(() => {
-    document.addEventListener("click", handleClick);
-
-    return () => document.removeEventListener("click", handleClick); // Cleanup
+    document.addEventListener("click", handleClick); // 🖱️ Close menu when clicking outside
+    return () => document.removeEventListener("click", handleClick); // 🧹 Cleanup on unmount
   }, []);
-
-  // 🔄 Toggle additional filters visibility
-  const toggleShowMore = () => setShowMore((prev) => (prev % 4) + 1);
-
-  // 👀 Check if section is visible based on showMore value
-  const isSectionVisible = (sectionNumber) => showMore >= sectionNumber;
 
   return (
     <div
@@ -48,11 +46,11 @@ const RealEstateFilterMobile = memo(({ rent = true }) => {
       className={clsx(
         "real-estate-filter-mobile",
         isMenuOpen
-          ? "real-estate-filter-mobile--open" // Menu open class
-          : "real-estate-filter-mobile--close" // Menu close class
+          ? "real-estate-filter-mobile--open"
+          : "real-estate-filter-mobile--close"
       )}
     >
-      {/* ❌ Close Button */}
+      {/* 🔒 Close icon for filter menu */}
       <div className="real-estate-filter-mobile__close">
         <CloseCircle
           ref={btnCloseRef}
@@ -62,7 +60,7 @@ const RealEstateFilterMobile = memo(({ rent = true }) => {
         />
       </div>
 
-      {/* 🏠 Logo */}
+      {/* 🏡 Logo section */}
       <div className="real-estate-filter-mobile__logo">
         <img
           className="mx-auto"
@@ -74,95 +72,93 @@ const RealEstateFilterMobile = memo(({ rent = true }) => {
         />
       </div>
 
-      {/* 📦 Primary Filters */}
-      {isSectionVisible(1) && (
-        <>
-          <div className="real-estate-filter-mobile__grid">
-            {rent
-              ? propertyFilterData
-                  .slice(1) // Exclude rent filter when rent is true
-                  .map((category) => (
-                    <PropertyFilterMobile key={category.id} {...category} />
-                  ))
-              : propertyFilterData.map((category) => (
-                  <PropertyFilterMobile key={category.id} {...category} />
-                ))}
-          </div>
-          <div className="real-estate-filter-mobile__section">
-            <PriceFillterMobile />
-          </div>
-          <div className="real-estate-filter-mobile__section">
-            <SizeFillterMobile />
-          </div>
-        </>
-      )}
+      {/* 🧩 Property filter dropdowns */}
+      <div className="real-estate-filter-mobile__grid">
+        {propertyFilterMobileConfig.map((filter) => (
+          <FilterDropdownMobile
+            key={filter.id}
+            {...filter}
+            setValue={setValue}
+            filterType="property"
+          />
+        ))}
+      </div>
 
-      {/* 🏡 Amenities Filter */}
-      {isSectionVisible(2) && (
-        <div className="real-estate-filter-mobile__section mt-[68px]">
-          {amenitiesData.map((category) => (
-            <AmenitiesSelectorMobile key={category.key} {...category} />
+      {/* 🔥 Range filters for mobile */}
+      <div className="real-estate-filter-mobile__section">
+        {rangeFilterMobileConfig.map((filter) => (
+          <RangeFilterMobile key={filter.id} setValue={setValue} {...filter} />
+        ))}
+      </div>
+
+      {/* 🏠 Amenities filter sections with show more logic */}
+      {FILTER_VISIBILITY_RANGES.map(({ id, min, max, showLevel }) => (
+        <div
+          key={id}
+          className={clsx(
+            "mt-[68px]",
+            isShowMore >= showLevel ? "grid" : "hidden"
+          )}
+        >
+          {AMENITIES_FILTER_CONFIG.slice(min, max).map((filter) => (
+            <FilterGroupMobile
+              key={filter.id}
+              {...filter}
+              setValue={setValue}
+              watch={watch}
+            />
           ))}
         </div>
-      )}
+      ))}
 
-      {/* 🚽 Bathroom Filters */}
-      {isSectionVisible(3) && (
-        <div className="real-estate-filter-mobile__section mt-[68px]">
-          {categoriesBathroom.map((category) => (
-            <BathroomMobile key={category.id} {...category} />
-          ))}
-          {categoriesBathroomType.map((category) => (
-            <BathroomTypeMobile key={category.id} {...category} />
-          ))}
-        </div>
-      )}
+      {/* ⚙️ HVAC systems filters */}
+      <div
+        className={clsx(
+          "real-estate-filter-mobile__grid",
+          isShowMore >= 3 ? "grid" : "hidden"
+        )}
+      >
+        {systemsFilterConfig.map((filter) => (
+          <FilterDropdownMobile
+            key={filter.id}
+            {...filter}
+            setValue={setValue}
+            filterType="hvac"
+          />
+        ))}
+      </div>
 
-      {/* 🏢 Floor & HVAC Filters */}
-      {isSectionVisible(4) && (
-        <div className="real-estate-filter-mobile__section mt-[68px]">
-          {categoriesFloor.map((category) => (
-            <FloorMobile key={category.id} {...category} />
-          ))}
-          <div className="real-estate-filter-mobile__grid">
-            {hvacSystemMobileData.map((category) => (
-              <HVACSystemMobile key={category.key} {...category} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* ⬇️ Toggle "More Filters" Button */}
-      <div className="real-estate-filter-mobile__toggle">
-        <span onClick={toggleShowMore}>
-          {showMore >= 4 ? "مشاهده کمتر" : "مشاهده بیشتر"} {/* Toggle text */}
+      {/* 👇 Show more/less button */}
+      <div className="mt-10 flex-center gap-x-[6px]">
+        <span className="text-shade-3 text-xs" onClick={handleShowMore}>
+          {isShowMore <= 2 ? "مشاهده بیشتر" : "مشاهده کمتر"} {/* 🔽 Toggle text */}
         </span>
         <ArrowDown2
-          className={clsx("real-estate-filter-mobile__toggle-icon", {
-            "real-estate-filter-mobile__toggle-icon--rotated": showMore === 4, // Rotation on toggle
-          })}
+          className={clsx("transform ", isShowMore >= 3 && "rotate-180")}
           size="12"
           color="#871212"
         />
       </div>
 
-      {/* 📲 Action Buttons */}
+      {/* 🎯 Actions: Reset filters & submit */}
       <div className="real-estate-filter-mobile__actions">
         <button
+          type="button"
           className={clsx(
             "real-estate-filter-mobile__reset",
-            isFiltersApplied && "real-estate-filter-mobile__reset--active" // Active reset button
+            isChanged && "real-estate-filter-mobile__reset--active"
           )}
-          onClick={resetAllFilters}
-          disabled={!isFiltersApplied} // Disable if no filters applied
+          onClick={handleResetAll}
+          disabled={!isChanged}
         >
-          حذف فیلترها {/* Clear filters */}
+          حذف فیلترها
         </button>
         <button
-          ref={fillterInteractiveRef}
+          type="submit"
           className="real-estate-filter-mobile__submit"
+          onClick={handleSubmit(sendData)}
         >
-          جستجو {/* Search */}
+          جستجو
         </button>
       </div>
     </div>

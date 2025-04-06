@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 // 🌐 Create FilterContext for global state management
 export const FilterContext = createContext();
@@ -62,6 +62,17 @@ const FilterProvider = ({ children }) => {
   const [isFillterselectedCityApplied, setIsFillterselectedCityApplied] =
     useState(false); // City filters
 
+    
+    const [filtersCountDesktop, setFiltersCountDesktop] = useState(0);
+    const [filtersCountMobile, setFiltersCountMobile] = useState(0);
+    
+    const[filterCount,setFilterCount] = useState(0);
+
+    useEffect(()=>{
+      setFiltersCountDesktop(+localStorage.getItem("filtersDesktopCount"))
+      setFiltersCountMobile(+localStorage.getItem("filtersMobileCount"))
+      setFilterCount(+localStorage.getItem("filterCount"))
+    },[filtersCountDesktop,filtersCountMobile,filterCount])
   // 🔗 Context Provider with all state values and setters
   return (
     <FilterContext.Provider
@@ -69,7 +80,8 @@ const FilterProvider = ({ children }) => {
         // 🔄 General triggers
         resetInputsTrigger,
         setResetInputsTrigger,
-
+        filterCount,
+        setFilterCount,
         // 📋 Single selection filters
         selectedRooms,
         selectedParking,
@@ -125,6 +137,10 @@ const FilterProvider = ({ children }) => {
         setListHotSystem,
         setListFloorMaterial,
         setSelectedCity,
+        filtersCountDesktop,
+setFiltersCountDesktop,
+filtersCountMobile,
+setFiltersCountMobile,
 
         // 🚥 Applied filters states
         isFiltersApplied,

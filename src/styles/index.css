@@ -922,12 +922,6 @@ body {
   .property-filter-desktop__menu--open .property-filter-desktop__actions {
     @apply pointer-events-auto;
   }
-  .property-filter-desktop__btn-reset {
-    @apply flex-center mt-2 w-20 h-10 rounded-lg border text-xs md:text-[14px] font-medium border-primary text-primary cursor-not-allowed bg-white;
-  }
-  .property-filter-desktop__btn-reset--active {
-    @apply bg-primary text-white cursor-pointer;
-  }
   .property-filter-desktop__btn-select {
     @apply flex-center mt-2 w-20 h-10 rounded-lg border text-xs md:text-[14px] font-medium border-gray-6 bg-primary text-white cursor-default pointer-events-none;
   }
@@ -945,9 +939,6 @@ body {
   }
   .property-filter-mobile__button-text {
     @apply text-gray-7 text-[11px] sm:text-xs;
-  }
-  .property-filter-mobile__icon {
-    @apply transition-all duration-300 rotate-0;
   }
   .property-filter-mobile__icon--open {
     @apply transform rotate-180;
@@ -1006,12 +997,8 @@ body {
   .real-estate-filter-mobile__logo {
     @apply mb-6;
   }
-  .real-estate-filter-mobile__grid {
-    @apply grid grid-cols-2 gap-4 mt-5;
-  }
-  .real-estate-filter-mobile__section {
-    @apply mt-5;
-  }
+
+ 
   .real-estate-filter-mobile__toggle {
     @apply flex-center text-shade-3 text-xs mt-10 gap-x-[6px];
   }
@@ -1986,9 +1973,6 @@ body {
   .property-filter-mobile__button-text {
     @apply text-gray-7 text-[11px] sm:text-xs;
   }
-  .property-filter-mobile__icon {
-    @apply transition-all duration-300 rotate-0;
-  }
   .property-filter-mobile__icon--open {
     @apply transform rotate-180;
   }
@@ -2042,9 +2026,6 @@ body {
   }
   .real-estate-filter-mobile__logo {
     @apply mb-6;
-  }
-  .real-estate-filter-mobile__section {
-    @apply mt-5;
   }
   .real-estate-filter-mobile__toggle {
     @apply flex-center text-shade-3 text-xs mt-10 gap-x-[6px];
@@ -3681,12 +3662,6 @@ body {
   .property-filter-desktop__menu--open .property-filter-desktop__actions {
     @apply pointer-events-auto;
   }
-  .property-filter-desktop__btn-reset {
-    @apply flex-center mt-2 w-20 h-10 rounded-lg border text-xs md:text-[14px] font-medium border-primary text-primary cursor-not-allowed bg-white;
-  }
-  .property-filter-desktop__btn-reset--active {
-    @apply bg-primary text-white cursor-pointer;
-  }
   .property-filter-desktop__btn-select {
     @apply flex-center mt-2 w-20 h-10 rounded-lg border text-xs md:text-[14px] font-medium border-gray-6 bg-primary text-white cursor-default pointer-events-none;
   }
@@ -3704,9 +3679,6 @@ body {
   }
   .property-filter-mobile__button-text {
     @apply text-gray-7 text-[11px] sm:text-xs;
-  }
-  .property-filter-mobile__icon {
-    @apply transition-all duration-300 rotate-0;
   }
   .property-filter-mobile__icon--open {
     @apply transform rotate-180;
@@ -3765,11 +3737,10 @@ body {
   .real-estate-filter-mobile__logo {
     @apply mb-6;
   }
-  .real-estate-filter-mobile__grid {
-    @apply grid grid-cols-2 gap-4 mt-5;
-  }
-  .real-estate-filter-mobile__section {
-    @apply mt-5;
+
+
+  .range-filter-mobile__inputs{
+    @apply grid grid-cols-2 gap-x-4 gap-y-12;
   }
   .real-estate-filter-mobile__toggle {
     @apply flex-center text-shade-3 text-xs mt-10 gap-x-[6px];
@@ -3883,31 +3854,31 @@ body {
   .search-bar__error-message--visible {
     @apply block;
   }
-  .size-filter-desktop {
+  .size-filter-desktop, .range-filter-desktop {
     @apply flex-center gap-x-1 xl:gap-x-2 text-gray-10 px-2 xl:px-4 h-12 rounded-lg border border-gray-7 transition-all duration-300 relative cursor-pointer;
   }
-  .size-filter-desktop:hover {
+  .size-filter-desktop:hover , .range-filter-desktop:hover {
     @apply bg-gray-3 text-gray-11;
   }
-  .size-filter-desktop--active {
+  .size-filter-desktop--active, .range-filter-desktop--active {
     @apply border-info shadow-info;
   }
-  .size-filter-desktop__label {
+  .size-filter-desktop__label, .range-filter-desktop__label {
     @apply pointer-events-none text-gray-10 text-xs xl:text-base;
   }
-  .size-filter-desktop__icon {
+  .size-filter-desktop__icon, .range-filter-desktop__icon {
     @apply flex-shrink-0 h-full max-w-4 max-h-4 xl:max-w-5 xl:max-h-5 transition-all duration-300 transform;
   }
-  .size-filter-desktop__icon--rotated {
+  .size-filter-desktop__icon--rotated, .range-filter-desktop__icon--rotated {
     @apply rotate-180;
   }
-  .size-filter-desktop__menu {
+  .size-filter-desktop__menu, .range-filter-desktop__menu {
     @apply absolute z-30 top-14 right-0 border cursor-auto opacity-0 pointer-events-none border-info shadow-info min-w-[236px] p-4 bg-white rounded-lg transition-all duration-300;
   }
-  .size-filter-desktop__menu--open {
+  .size-filter-desktop__menu--open, .range-filter-desktop__menu--open {
     @apply opacity-100 pointer-events-auto;
   }
-  .size-filter-desktop__title {
+  .size-filter-desktop__title, .range-filter-desktop__title {
     @apply font-medium text-[14px] text-gray-11;
   }
   .size-filter-desktop__inputs {
@@ -3916,16 +3887,16 @@ body {
   .form {
     @apply space-y-5 mt-5;
   }
-  .size-filter-desktop__actions {
+  .size-filter-desktop__actions, .range-filter-desktop__actions {
     @apply flex-center gap-x-2 mt-5;
   }
-  .size-filter-desktop__reset {
+  .size-filter-desktop__reset, .range-filter-desktop__reset {
     @apply flex-center font-medium text-[14px] w-[98px] h-10 rounded-lg border border-primary bg-white text-primary cursor-not-allowed;
   }
-  .size-filter-desktop__reset--active {
+  .size-filter-desktop__reset--active,.range-filter-desktop__reset--active {
     @apply bg-primary text-white cursor-pointer;
   }
-  .size-filter-desktop__search {
+  .size-filter-desktop__search, .range-filter-desktop__search {
     @apply flex-center font-medium text-[14px] w-[98px] h-10 text-white cursor-pointer bg-primary rounded-lg border border-primary;
   }
   .error-message {
@@ -4699,9 +4670,6 @@ body {
   .price-filter-desktop__icon--rotated {
     @apply rotate-180;
   }
-  .price-filter-mobile__label {
-    @apply inline-block text-gray-10 text-[14px] mb-1;
-  }
   .price-filter-mobile__inputs {
     @apply grid grid-cols-2 gap-x-4;
   }
@@ -4734,9 +4702,6 @@ body {
   }
   .property-filter-mobile__button-text {
     @apply text-gray-7 text-[11px] sm:text-xs;
-  }
-  .property-filter-mobile__icon {
-    @apply transition-all duration-300 rotate-0;
   }
   .property-filter-mobile__icon--open {
     @apply transform rotate-180;
@@ -4792,9 +4757,7 @@ body {
   .real-estate-filter-mobile__logo {
     @apply mb-6;
   }
-  .real-estate-filter-mobile__section {
-    @apply mt-5;
-  }
+ 
   .real-estate-filter-mobile__toggle {
     @apply flex-center text-shade-3 text-xs mt-10 gap-x-[6px];
   }
@@ -6987,7 +6950,7 @@ body {
   .price-filter-desktop__icon--rotated {
     @apply rotate-180;
   }
-  .price-filter-mobile__label {
+   .range-filter-mobile__label {
     @apply inline-block text-gray-10 text-[14px] mb-1;
   }
   .price-filter-mobile__inputs {
@@ -7044,12 +7007,6 @@ body {
   .property-filter-desktop__menu--open .property-filter-desktop__actions {
     @apply pointer-events-auto;
   }
-  .property-filter-desktop__btn-reset {
-    @apply flex-center mt-2 w-20 h-10 rounded-lg border text-xs md:text-[14px] font-medium border-primary text-primary cursor-not-allowed bg-white;
-  }
-  .property-filter-desktop__btn-reset--active {
-    @apply bg-primary text-white cursor-pointer;
-  }
   .property-filter-desktop__btn-select {
     @apply flex-center mt-2 w-20 h-10 rounded-lg border text-xs md:text-[14px] font-medium border-gray-6 bg-primary text-white cursor-default pointer-events-none;
   }
@@ -7067,9 +7024,6 @@ body {
   }
   .property-filter-mobile__button-text {
     @apply text-gray-7 text-[11px] sm:text-xs;
-  }
-  .property-filter-mobile__icon {
-    @apply transition-all duration-300 rotate-0;
   }
   .property-filter-mobile__icon--open {
     @apply transform rotate-180;
@@ -7128,12 +7082,8 @@ body {
   .real-estate-filter-mobile__logo {
     @apply mb-6;
   }
-  .real-estate-filter-mobile__grid {
-    @apply grid grid-cols-2 gap-4 mt-5;
-  }
-  .real-estate-filter-mobile__section {
-    @apply mt-5;
-  }
+
+ 
   .real-estate-filter-mobile__toggle {
     @apply flex-center text-shade-3 text-xs mt-10 gap-x-[6px];
   }
@@ -8109,7 +8059,7 @@ body {
     @apply text-gray-7 text-[11px] sm:text-xs;
   }
   .property-filter-mobile__icon {
-    @apply transition-all duration-300 rotate-0;
+    @apply transition-all duration-300 rotate-0 shrink-0;
   }
   .property-filter-mobile__icon--open {
     @apply transform rotate-180;
@@ -8164,9 +8114,6 @@ body {
   }
   .real-estate-filter-mobile__logo {
     @apply mb-6;
-  }
-  .real-estate-filter-mobile__section {
-    @apply mt-5;
   }
   .real-estate-filter-mobile__toggle {
     @apply flex-center text-shade-3 text-xs mt-10 gap-x-[6px];
@@ -9804,13 +9751,13 @@ body {
     @apply pointer-events-auto;
   }
   .property-filter-desktop__btn-reset {
-    @apply flex-center mt-2 w-20 h-10 rounded-lg border text-xs md:text-[14px] font-medium border-primary text-primary cursor-not-allowed bg-white;
+    @apply flex-center mt-2 w-20 h-10 rounded-lg border text-xs md:text-[14px] font-medium border-primary text-primary cursor-not-allowed  bg-white;
   }
   .property-filter-desktop__btn-reset--active {
-    @apply bg-primary text-white cursor-pointer;
+    @apply bg-primary text-white cursor-pointer ;
   }
   .property-filter-desktop__btn-select {
-    @apply flex-center mt-2 w-20 h-10 rounded-lg border text-xs md:text-[14px] font-medium border-gray-6 bg-primary text-white cursor-default pointer-events-none;
+    @apply flex-center mt-2 w-20 h-10 rounded-lg border text-xs md:text-[14px] font-medium border-gray-6 bg-primary text-white cursor-default ;
   }
   .property-filter-desktop__menu--open .property-filter-desktop__btn-select {
     @apply cursor-pointer pointer-events-auto;
@@ -9827,9 +9774,6 @@ body {
   .property-filter-mobile__button-text {
     @apply text-gray-7 text-[11px] sm:text-xs;
   }
-  .property-filter-mobile__icon {
-    @apply transition-all duration-300 rotate-0;
-  }
   .property-filter-mobile__icon--open {
     @apply transform rotate-180;
   }
@@ -9843,10 +9787,10 @@ body {
     @apply max-h-[140px] space-y-1 mb-2 pl-2 overflow-y-auto;
   }
   .property-filter-mobile__reset-button {
-    @apply flex-center rounded text-xs w-full max-w-[77px] h-8 sm:text-[14px] border border-primary bg-white text-primary;
+    @apply flex-center rounded text-xs w-full pointer-events-none max-w-[77px]  h-8 sm:text-[14px]  border border-primary bg-white text-primary;
   }
   .property-filter-mobile__reset-button--active {
-    @apply bg-primary text-white;
+    @apply bg-primary text-white pointer-events-auto ;
   }
   .property-filter-mobile__select-button {
     @apply flex-center rounded text-xs w-full max-w-[77px] h-8 p-2 sm:text-[14px] bg-primary text-white;
@@ -9889,9 +9833,6 @@ body {
   }
   .real-estate-filter-mobile__grid {
     @apply grid grid-cols-2 gap-4 mt-5;
-  }
-  .real-estate-filter-mobile__section {
-    @apply mt-5;
   }
   .real-estate-filter-mobile__toggle {
     @apply flex-center text-shade-3 text-xs mt-10 gap-x-[6px];
@@ -10857,9 +10798,6 @@ body {
   .property-filter-mobile__button-text {
     @apply text-gray-7 text-[11px] sm:text-xs;
   }
-  .property-filter-mobile__icon {
-    @apply transition-all duration-300 rotate-0;
-  }
   .property-filter-mobile__icon--open {
     @apply transform rotate-180;
   }
@@ -10913,9 +10851,6 @@ body {
   }
   .real-estate-filter-mobile__logo {
     @apply mb-6;
-  }
-  .real-estate-filter-mobile__section {
-    @apply mt-5;
   }
   .real-estate-filter-mobile__toggle {
     @apply flex-center text-shade-3 text-xs mt-10 gap-x-[6px];
@@ -12724,6 +12659,75 @@ body {
 }
 .premier-realtors-modal__contact-icon{
   @apply !w-5 !h-5 md:!w-7 md:!h-7;
+}
+.filter-group__label{
+  @apply text-gray-10 text-sm;
+}
+.filter-group__buttons{
+  @apply mt-1 flex h-8 whitespace-nowrap;
+}
+.filter-group__title{
+  @apply text-gray-11 font-bold text-base mb-3;
+}
+.select-button{
+  @apply text-xs px-2.5 custom:px-3 h-full border border-gray-5;
+}
+.select-button--active{
+  @apply bg-primary text-white;
+}
+.select-button--inactive{
+  @apply text-gray-10 bg-white;
+}
+/* 🎨 Base button styles */
+.filter-button {
+  @apply h-10 px-6 text-sm border border-gray-5 transition-all duration-300;
+}
+
+
+/* ✅ Active (selected) button */
+.filter-button--active {
+  @apply bg-primary text-white hover:bg-shade-2;
+}
+
+/* ⚪ Inactive (default) button */
+.filter-button--inactive {
+  @apply bg-white text-gray-11 hover:bg-gray-3;
+}
+.filter-modal{
+  @apply fixed z-40 bg-black/60 inset-0 m-auto flex-center transition-all duration-300 opacity-0 pointer-events-none ;
+}
+.filter-modal__content{
+  @apply absolute bg-white rounded-2xl w-full max-w-[720px];
+}
+.filter-modal--close{
+  @apply opacity-100 pointer-events-auto;
+}
+.filter-modal__header{
+  @apply relative py-8;
+}
+.filter-modal__close-button{
+  @apply absolute right-20 top-0 bottom-0 m-auto;
+}
+.filter-modal__title{
+  @apply text-gray-11 font-bold text-center text-2xl;
+}
+.filter-modal__body{
+  @apply bg-gray-1 pr-14 pt-4 pb-[26px] max-h-[660px] overflow-y-auto overflow-x-hidden;
+}
+.filter-modal__footer{
+  @apply py-[26px] flex justify-center items-center gap-x-4;
+}
+.filter-modal__reset-button{
+  @apply h-12 w-full max-w-[152px] rounded-lg border whitespace-nowrap transition-all duration-300 font-medium;
+}
+.filter-modal__submit-button{
+  @apply h-12 w-full max-w-[152px] rounded-lg bg-primary text-white font-medium whitespace-nowrap hover:bg-shade-2;
+}
+.filter-modal__reset-button--disabled{
+  @apply bg-gray-3 text-gray-6 border-gray-6 cursor-not-allowed;
+}
+.filter-modal__reset-button--active{
+  @apply bg-primary text-white border-primary cursor-pointer;
 }
 
 }

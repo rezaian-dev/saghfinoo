@@ -17,9 +17,7 @@ export default function useToggleMenu() {
   // 🔹 Handle clicks
   const handleClick = ({ target }) => {
     const isFilterInteractive = fillterInteractiveRef.current?.contains(target);
-    const isFilterButton = target.classList.contains(
-      "rental-property-listing__filters"
-    );
+    const isFilterButton = target.closest(".rental-property-listing__filters");
     const isCloseButton = btnCloseRef.current?.contains(target);
     const isFilterMenu = menuRef.current?.contains(target);
     const isFilterButtonRef = btnRef.current?.contains(target);

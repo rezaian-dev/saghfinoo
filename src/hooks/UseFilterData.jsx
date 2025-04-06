@@ -1,301 +1,329 @@
-import React, { useContext } from "react";
-import { FilterContext } from "../context/FilterContext";
+// 🏙️ Location and property constants
+export const LOCATION_OPTIONS = {
+  cities: [
+    { id: 1, label: "آبادان", value: "abadan", selected: false },
+    { id: 2, label: "بابل", value: "babol", selected: false },
+    { id: 3, label: "بوشهر", value: "bushehr", selected: false },
+    { id: 4, label: "تبریز", value: "tabriz", selected: false },
+    { id: 5, label: "اراک", value: "arak", selected: false },
+    { id: 6, label: "اصفهان", value: "isfahan", selected: false },
+    { id: 7, label: "خراسان رضوی", value: "razavi_khorasan", selected: false },
+    { id: 8, label: "خراسان شمالی", value: "north_khorasan", selected: false },
+    { id: 9, label: "خراسان جنوبی", value: "south_khorasan", selected: false },
+    { id: 10, label: "هرمزگان", value: "hormozgan", selected: false },
+    { id: 11, label: "قم", value: "qom", selected: false },
+    { id: 12, label: "ساری", value: "sari", selected: false },
+    { id: 13, label: "سنندج", value: "sanandaj", selected: false },
+    { id: 14, label: "گیلان", value: "guilan", selected: false },
+    { id: 15, label: "گلستان", value: "golestan", selected: false },
+    { id: 16, label: "مشهد", value: "mashhad", selected: false },
+    { id: 17, label: "رشت", value: "rasht", selected: false },
+    { id: 18, label: "قزوین", value: "qazvin", selected: false },
+    { id: 19, label: "کرج", value: "karaj", selected: false },
+    { id: 20, label: "کرمانشاه", value: "kermanshah", selected: false },
+    { id: 21, label: "کرمان", value: "kerman", selected: false },
+    { id: 22, label: "شیراز", value: "shiraz", selected: false },
+    { id: 23, label: "اردبیل", value: "ardabil", selected: false },
+    { id: 24, label: "ایلام", value: "ilam", selected: false },
+    { id: 25, label: "یزد", value: "yazd", selected: false },
+    { id: 26, label: "همدان", value: "hamedan", selected: false },
+    { id: 27, label: "زنجان", value: "zanjan", selected: false },
+    { id: 28, label: "زاهدان", value: "zahedan", selected: false },
+    { id: 29, label: "لرستان", value: "lorestan", selected: false },
+    { id: 30, label: "چهارمحال و بختیاری", value: "chaharmahal", selected: false },
+    { id: 31, label: "تهران", value: "tehran", selected: false },
+    { id: 32, label: "اهواز", value: "ahvaz", selected: false },
+    { id: 33, label: "ارومیه", value: "urmia", selected: false },
+    { id: 34, label: "بندرعباس", value: "bandar_abbas", selected: false },
+    { id: 35, label: "خرم‌آباد", value: "khorramabad", selected: false },
+    { id: 36, label: "گرگان", value: "gorgan", selected: false },
+    { id: 37, label: "سمنان", value: "semnan", selected: false },
+    { id: 38, label: "بیرجند", value: "birjand", selected: false },
+    { id: 39, label: "بجنورد", value: "bojnurd", selected: false },
+    { id: 40, label: "یاسوج", value: "yasuj", selected: false },
+    { id: 41, label: "شهرکرد", value: "shahrekord", selected: false },
+    { id: 42, label: "قائم‌شهر", value: "qaemshahr", selected: false },
+    { id: 43, label: "آمل", value: "amol", selected: false },
+    { id: 44, label: "کاشان", value: "kashan", selected: false },
+    { id: 45, label: "نیشابور", value: "neyshabur", selected: false },
+    { id: 46, label: "دزفول", value: "dezful", selected: false },
+    { id: 47, label: "سبزوار", value: "sabzevar", selected: false },
+    { id: 48, label: "گنبدکاووس", value: "gonbad", selected: false },
+    { id: 49, label: "اسلامشهر", value: "eslamshahr", selected: false },
+    { id: 50, label: "مرودشت", value: "marvdasht", selected: false },
+    { id: 51, label: "بروجرد", value: "borujerd", selected: false },
+    { id: 52, label: "سیرجان", value: "sirjan", selected: false },
+    { id: 53, label: "اردکان", value: "ardakan", selected: false },
+    { id: 54, label: "نجف‌آباد", value: "najafabad", selected: false },
+    { id: 55, label: "لاهیجان", value: "lahijan", selected: false },
+    { id: 56, label: "انزلی", value: "anzali", selected: false },
+    { id: 57, label: "ملایر", value: "malayer", selected: false },
+    { id: 58, label: "شاهرود", value: "shahroud", selected: false },
+    { id: 59, label: "محمودآباد", value: "mahmudabad", selected: false },
+    { id: 60, label: "مراغه", value: "maragheh", selected: false },
+  ],
+  districts: [
+    { id: 1, label: "منطقه ۱", value: "district_1", selected: false },
+    { id: 2, label: "منطقه ۲", value: "district_2", selected: false },
+    { id: 3, label: "منطقه ۳", value: "district_3", selected: false },
+    { id: 4, label: "منطقه ۴", value: "district_4", selected: false },
+    { id: 5, label: "منطقه ۵", value: "district_5", selected: false },
+    { id: 6, label: "منطقه ۶", value: "district_6", selected: false },
+    { id: 7, label: "منطقه ۷", value: "district_7", selected: false },
+    { id: 8, label: "منطقه ۸", value: "district_8", selected: false },
+    { id: 9, label: "منطقه ۹", value: "district_9", selected: false },
+    { id: 10, label: "منطقه ۱۰", value: "district_10", selected: false },
+    { id: 11, label: "منطقه ۱۱", value: "district_11", selected: false },
+    { id: 12, label: "منطقه ۱۲", value: "district_12", selected: false },
+    { id: 13, label: "منطقه ۱۳", value: "district_13", selected: false },
+    { id: 14, label: "منطقه ۱۴", value: "district_14", selected: false },
+    { id: 15, label: "منطقه ۱۵", value: "district_15", selected: false },
+    { id: 16, label: "منطقه ۱۶", value: "district_16", selected: false },
+    { id: 17, label: "منطقه ۱۷", value: "district_17", selected: false },
+    { id: 18, label: "منطقه ۱۸", value: "district_18", selected: false },
+    { id: 19, label: "منطقه ۱۹", value: "district_19", selected: false },
+    { id: 20, label: "منطقه ۲۰", value: "district_20", selected: false },
+    { id: 21, label: "منطقه ۲۱", value: "district_21", selected: false },
+    { id: 22, label: "منطقه ۲۲", value: "district_22", selected: false },
+  ],
+  propertyTypes: [
+    { id: 1, label: "آپارتمان", value: "apartment", selected: false },
+    { id: 2, label: "خانه ویلایی", value: "villa", selected: false },
+    { id: 3, label: "خانه تک واحدی", value: "single_unit", selected: false },
+    { id: 4, label: "پنت‌هاوس", value: "penthouse", selected: false },
+    { id: 5, label: "مغازه/واحد تجاری", value: "commercial", selected: false },
+    { id: 6, label: "دفتر اداری", value: "office", selected: false },
+    { id: 7, label: "زمین", value: "land", selected: false },
+    { id: 8, label: "ویلای باغ", value: "garden_villa", selected: false },
+    { id: 9, label: "مزرعه/اراضی کشاورزی", value: "farm", selected: false },
+  ],
+};
 
-// 🏠 Categories for bathroom filters
-export const categoriesBathroom = [
+// 🏠 Building systems and materials options
+export const BUILDING_SYSTEMS_OPTIONS = {
+  coolingSystem: [
+    { id: 1, value: "any", label: "مهم نیست", selected: true },
+    { id: 2, value: "water", label: "کولر آبی", selected: false },
+    { id: 3, value: "split", label: "اسپلیت", selected: false },
+    { id: 4, value: "fan", label: "فن کوئل", selected: false },
+    { id: 5, value: "chiller", label: "چیلر", selected: false },
+  ],
+  heatingSystem: [
+    { id: 1, value: "any", label: "مهم نیست", selected: true },
+    { id: 2, value: "central", label: "مرکزی", selected: false },
+    { id: 3, value: "split", label: "اسپلیت", selected: false },
+    { id: 4, value: "fireplace", label: "شومینه", selected: false },
+    { id: 5, value: "package", label: "پکیج", selected: false },
+    { id: 6, value: "radiator", label: "رادیاتور", selected: false },
+  ],
+  floorMaterial: [
+    { id: 1, value: "any", label: "مهم نیست", selected: true },
+    { id: 2, value: "stone", label: "سنگ", selected: false },
+    { id: 3, value: "ceramic", label: "سرامیک", selected: false },
+    { id: 4, value: "parquet", label: "پارکت", selected: false },
+    { id: 5, value: "laminate", label: "لمینت", selected: false },
+    { id: 6, value: "mosaic", label: "موزاییک", selected: false },
+  ],
+};
+
+// 🏷️ Labels for filter sections (displayed to user)
+export const FILTER_LABELS = {
+  district: "منطقه",
+  propertyType: "نوع ملک",
+  city: "شهر",
+  coolingType: "سیستم سرمایشی",
+  heatingType: "سیستم گرمایشی",
+  floorType: "جنس کف",
+};
+
+// 🔢 Quantity-based filters configuration
+export const AMENITIES_FILTER_CONFIG = [
+  { id: 1, value: "bedrooms", label: "اتاق خواب" },
+  { id: 2, value: "parking", label: "پارکینگ" },
+  { id: 3, value: "storage", label: "انباری" },
+  { id: 4, value: "elevator", label: "آسانسور" },
+  { id: 5, value: "bathroom", label: "سرویس بهداشتی" },
+  { id: 6, value: "bathroomType", label: "نوع سرویس بهداشتی" },
+  { id: 7, value: "floor", label: "طبقه" },
+];
+
+// 📊 Visibility thresholds for filter groups
+export const FILTER_VISIBILITY_RANGES = [
+  {id:1, min: 0, max: 4, showLevel: 1 },
+  {id:2, min: 4, max: 6, showLevel: 2 },
+  {id:3, min: 6, max: AMENITIES_FILTER_CONFIG.length, showLevel: 3 },
+];
+
+// Define available filters for property features 🏠
+export const PROPERTY_FILTERS = {
+  bedrooms: [
+    { id: 1, value: "any", label: "هر تعداد" },
+    { id: 2, value: "0", label: "ندارد" },
+    { id: 3, value: "1", label: "۱" },
+    { id: 4, value: "2", label: "۲" },
+    { id: 5, value: "3", label: "۳" },
+    { id: 6, value: "4", label: "۴" },
+    { id: 7, value: "5+", label: "+۵" },
+  ],
+  parking: [
+    { id: 1, value: "any", label: "هر تعداد" },
+    { id: 2, value: "0", label: "ندارد" },
+    { id: 3, value: "1", label: "۱" },
+    { id: 4, value: "2", label: "۲" },
+    { id: 5, value: "3", label: "۳" },
+    { id: 6, value: "4", label: "۴" },
+    { id: 7, value: "5+", label: "+۵" },
+  ],
+  storage: [
+    { id: 1, value: "any", label: "هر تعداد" },
+    { id: 2, value: "0", label: "ندارد" },
+    { id: 3, value: "1", label: "۱" },
+    { id: 4, value: "2", label: "۲" },
+    { id: 5, value: "3", label: "۳" },
+    { id: 6, value: "4", label: "۴" },
+    { id: 7, value: "5+", label: "+۵" },
+  ],
+  bathroom: [
+    { id: 1, value: "any", label: "هر تعداد" },
+    { id: 2, value: "1", label: "۱" },
+    { id: 3, value: "2", label: "۲" },
+    { id: 4, value: "3", label: "۳" },
+    { id: 5, value: "4", label: "۴" },
+    { id: 6, value: "5+", label: "+۵" },
+  ],
+  bathroomType: [
+    { id: 1, value: "any", label: "مهم نیست" },
+    { id: 2, value: "iranian", label: "ایرانی" },
+    { id: 3, value: "foreign", label: "فرنگی" },
+    { id: 4, value: "both", label: "هر دو" },
+  ],
+  elevator: [
+    { id: 1, value: "any", label: "مهم نیست" },
+    { id: 2, value: "1", label: "۱" },
+    { id: 3, value: "2", label: "۲" },
+    { id: 4, value: "3", label: "۳" },
+    { id: 5, value: "4", label: "۴" },
+    { id: 6, value: "5+", label: "+۵" },
+  ],
+  floor: [
+    { id: 1, value: "any", label: "مهم نیست" },
+    { id: 2, value: "0", label: "همکف" },
+    { id: 3, value: "1", label: "۱" },
+    { id: 4, value: "2", label: "۲" },
+    { id: 5, value: "3", label: "۳" },
+    { id: 6, value: "4", label: "۴" },
+    { id: 7, value: "5+", label: "+۵" },
+  ],
+  coolingSystem: [
+    { id: 1, value: "any", label: "مهم نیست" },
+    { id: 2, value: "water", label: "کولر آبی" },
+    { id: 3, value: "split", label: "اسپلیت" },
+    { id: 4, value: "fan", label: "فن کوئل" },
+    { id: 5, value: "chiller", label: "چیلر" },
+  ],
+  heatingSystem: [
+    { id: 1, value: "any", label: "مهم نیست" },
+    { id: 2, value: "central", label: "مرکزی" },
+    { id: 3, value: "split", label: "اسپلیت" },
+    { id: 4, value: "fireplace", label: "شومینه" },
+    { id: 5, value: "package", label: "پکیج" },
+    { id: 6, value: "radiator", label: "رادیاتور" },
+  ],
+  floorMaterial: [
+    { id: 1, value: "any", label: "مهم نیست" },
+    { id: 2, value: "stone", label: "سنگ" },
+    { id: 3, value: "ceramic", label: "سرامیک" },
+    { id: 4, value: "parquet", label: "پارکت" },
+    { id: 5, value: "laminate", label: "لمینت" },
+    { id: 6, value: "mosaic", label: "موزاییک" },
+  ],
+};
+
+// Filter configuration for property features 🔧
+export const FILTER_CONFIG = [
   {
-    id: 1,
-    name: "سرویس بهداشتی", // Bathroom
-    labels: [
-      { id: 1, name: "هر تعداد", value: "any" }, // Any number
-      { id: 3, name: "۱", value: "1" },
-      { id: 4, name: "۲", value: "2" },
-      { id: 5, name: "۳", value: "3" },
-      { id: 6, name: "۴", value: "4" },
-      { id: 7, name: "۵+", value: "5+" },
-    ],
+    title: "اتاق خواب",
+    name: "bedrooms",
+    options: PROPERTY_FILTERS.bedrooms,
+  },
+  {
+    title: "پارکینگ",
+    name: "parking",
+    options: PROPERTY_FILTERS.parking,
+  },
+  {
+    title: "انباری",
+    name: "storage",
+    options: PROPERTY_FILTERS.storage,
+  },
+  {
+    title: "سرویس بهداشتی",
+    name: "bathroom",
+    options: PROPERTY_FILTERS.bathroom,
+  },
+  {
+    title: "نوع سرویس بهداشتی",
+    name: "bathroomType",
+    options: PROPERTY_FILTERS.bathroomType,
+  },
+  {
+    title: "آسانسور",
+    name: "elevator",
+    options: PROPERTY_FILTERS.elevator,
+  },
+  {
+    title: "طبقه",
+    name: "floor",
+    options: PROPERTY_FILTERS.floor,
+  },
+  {
+    title: "سیستم سرمایش",
+    name: "coolingSystem",
+    options: PROPERTY_FILTERS.coolingSystem,
+  },
+  {
+    title: "سیستم گرمایش",
+    name: "heatingSystem",
+    options: PROPERTY_FILTERS.heatingSystem,
+  },
+  {
+    title: "جنس کف",
+    name: "floorMaterial",
+    options: PROPERTY_FILTERS.floorMaterial,
   },
 ];
 
-// 🏢 Categories for floor selection
-export const categoriesFloor = [
-  {
-    id: 1,
-    name: "طبقه", // Floor
-    labels: [
-      { id: 1, name: "مهم نیست", value: "any" }, // Doesn't matter
-      { id: 2, name: "همکف", value: "groundFloor" }, // Ground floor
-      { id: 3, name: "۱", value: "1" },
-      { id: 4, name: "۲", value: "2" },
-      { id: 5, name: "۳", value: "3" },
-      { id: 6, name: "۴", value: "4" },
-      { id: 7, name: "۵+", value: "5+" },
-    ],
-  },
+// List of keys to remove from the filter 🗑️
+export const keysToRemove = [
+  "coolingSystem",
+  "heatingSystem",
+  "floorMaterial",
+  "bedrooms",
+  "parking",
+  "storage",
+  "elevator",
+  "bathroom",
+  "bathroomType",
+  "floor",
+  "minPrice",
+  "maxPrice",
+  "areas",
+  "minSize",
+  "maxSize",
+  "propertyType",
 ];
 
-// 🚽 Categories for bathroom type
-export const categoriesBathroomType = [
-  {
-    id: 1,
-    name: "نوع سرویس بهداشتی", // Bathroom type
-    labels: [
-      { id: 1, name: "مهم نیست", value: "any" }, // Doesn't matter
-      { id: 2, name: "ایرانی", value: "irani" }, // Iranian style
-      { id: 3, name: "فرنگی", value: "foreign" }, // Western style
-      { id: 4, name: "هر دو", value: "both" }, // Both types
-    ],
-  },
+// Allowed keys for filtering ✅
+export const allowedKeys = [
+  "bedrooms",
+  "parking",
+  "storage",
+  "bathroom",
+  "bathroomType",
+  "elevator",
+  "floor",
+  "coolingSystem",
+  "heatingSystem",
+  "floorMaterial",
 ];
 
-// 🔍 Main hook to access and manage filter data from context
-export default function UseFilterData() {
-  // Extract all filter-related state and setter functions from context
-  const {
-    // 🛏️ Amenities filters
-    selectedRooms,
-    setSelectedRooms,
-    selectedParking,
-    setSelectedParking,
-    selectedStorage,
-    setSelectedStorage,
-    selectedElevator,
-    setSelectedElevator,
-    
-    // 🧊 Systems and materials filters
-    listCoolSystem,
-    listHotSystem,
-    listFloorMaterial,
-    listPropertyType,
-    listArea,
-    setListCoolSystem,
-    setListHotSystem,
-    setListFloorMaterial,
-    setListPropertyType,
-    setListArea,
-   
-    // 🏙️ Location filters
-    selectedCity,
-    setSelectedCity,
-    selectedPropertyType,
-    setSelectedPropertyType,
-    selectedArea,
-    setSelectedArea,
-    listCities,
-    setListCities,
-    
-    // 🌡️ System selection states
-    coolSystem,
-    setCoolSystem,
-    hotSystem,
-    setHotSystem,
-    floorMaterial,
-    setFloorMaterial,
-  } = useContext(FilterContext);
-
-  // 🌡️ HVAC and floor material configuration data
-  const hvacSystemMobileData = [
-    {
-      key: "coolSystem",
-      label: "سیستم سرمایش", // Cooling system
-      name: "انتخاب سیستم", // Select system
-      context: "coolSystem",
-      listSystemState: listCoolSystem, // Current system options state
-      setListSystemState: setListCoolSystem, // Function to update options
-      systemState: coolSystem, // Current selection
-      setSystemState: setCoolSystem, // Function to update selection
-      
-      options: [
-        { id: 1, name: "مهم نیست", selected: true }, // Doesn't matter
-        { id: 2, name: "کولر آبی", selected: false }, // Evaporative cooler
-        { id: 3, name: "اسپلیت", selected: false }, // Split AC
-        { id: 4, name: "فن کوئل", selected: false }, // Fan coil
-        { id: 5, name: "چیلر", selected: false }, // Chiller
-      ],
-    },
-    {
-      key: "hotSystem",
-      label: "سیستم گرمایش", // Heating system
-      name: "انتخاب سیستم", // Select system
-      context: "hotSystem",
-      listSystemState: listHotSystem,
-      setListSystemState: setListHotSystem,
-      systemState: hotSystem,
-      setSystemState: setHotSystem,
-      options: [
-        { id: 1, name: "مهم نیست", selected: true }, // Doesn't matter
-        { id: 2, name: "مرکزی", selected: false }, // Central heating
-        { id: 3, name: "اسپلیت", selected: false }, // Split unit
-        { id: 4, name: "شومینه", selected: false }, // Fireplace
-        { id: 5, name: "از کف", selected: false }, // Floor heating
-        { id: 6, name: "رادیاتور", selected: false }, // Radiator
-      ],
-    },
-    {
-      key: "floorMaterial",
-      label: "جنس کف", // Floor material
-      name: "انتخاب جنس کف", // Select floor material
-      context: "floorMaterial",
-      listSystemState: listFloorMaterial,
-      setListSystemState: setListFloorMaterial,
-      systemState: floorMaterial,
-      setSystemState: setFloorMaterial,
-      options: [
-        { id: 1, name: "مهم نیست", selected: true }, // Doesn't matter
-        { id: 2, name: "سنگ", selected: false }, // Stone
-        { id: 3, name: "سرامیک", selected: false }, // Ceramic
-        { id: 4, name: "پارکت", selected: false }, // Parquet
-        { id: 5, name: "لمینت", selected: false }, // Laminate
-        { id: 6, name: "موزائیک", selected: false }, // Mosaic
-      ],
-    },
-  ];
-
-  // 🔢 Common numeric labels used across multiple filters
-  const commonLabels = [
-    { id: 1, name: "هر تعداد", value: "any" }, // Any number
-    { id: 7, name: "ندارد", value: "none" }, // None
-    { id: 2, name: "۱", value: "1" },
-    { id: 3, name: "۲", value: "2" },
-    { id: 4, name: "۳", value: "3" },
-    { id: 5, name: "۴", value: "4" },
-    { id: 6, name: "۵+", value: "5+" },
-  ];
-
-  // 🏠 Filter data for property amenities
-  const amenitiesData = [
-    {
-      key: "selectedRooms",
-      name: "اتاق خواب", // Bedrooms
-      systemState: selectedRooms,
-      setSystemState: setSelectedRooms,
-      labels: commonLabels,
-    },
-    {
-      key: "selectedParking",
-      name: "پارکینگ", // Parking
-      systemState: selectedParking,
-      setSystemState: setSelectedParking,
-      labels: commonLabels,
-    },
-    {
-      key: "selectedStorage",
-      name: "انباری", // Storage
-      systemState: selectedStorage,
-      setSystemState: setSelectedStorage,
-      labels: commonLabels,
-    },
-    {
-      key: "selectedElevator",
-      name: "آسانسور", // Elevator
-      systemState: selectedElevator,
-      setSystemState: setSelectedElevator,
-      labels: commonLabels,
-    },
-  ];
-
-  // 🏙️ Property location and type filter configurations
-  const propertyFilterData = [
-    {
-      id: 1,
-      listSystemState: listCities,
-      setListSystemState: setListCities,
-      systemState: selectedCity,
-      setSystemState: setSelectedCity,
-      name: "انتخاب شهر", // Select city
-      label: "شهر", // City
-      context: "city",
-      options: [
-        { id: 1, name: "آبادان", selected: false },
-        { id: 2, name: "بابل", selected: false },
-        { id: 3, name: "بوشهر", selected: false },
-        { id: 4, name: "تبریز", selected: false },
-        { id: 5, name: "اراک", selected: false },
-        { id: 6, name: "اصفهان", selected: false },
-        { id: 7, name: "خراسان رضوی", selected: false },
-        { id: 8, name: "خراسان شمالی", selected: false },
-        { id: 9, name: "خراسان جنوبی", selected: false },
-        { id: 10, name: "هرمزگان", selected: false },
-        { id: 11, name: "قم", selected: false },
-        { id: 12, name: "ساری", selected: false },
-        { id: 13, name: "سنندج", selected: false },
-        { id: 14, name: "گیلان", selected: false },
-        { id: 15, name: "گلستان", selected: false }, 
-        { id: 16, name: "مشهد", selected: false },
-        { id: 17, name: "رشت", selected: false },
-        { id: 18, name: "قزوین", selected: false },
-        { id: 19, name: "کرج", selected: false },
-        { id: 20, name: "کرمانشاه", selected: false },
-        { id: 21, name: "کرمان", selected: false },
-        { id: 22, name: "شیراز", selected: false },
-        { id: 23, name: "اردبیل", selected: false },
-        { id: 24, name: "ایلام", selected: false },
-        { id: 25, name: "یزد", selected: false },
-        { id: 26, name: "همدان", selected: false },
-        { id: 27, name: "زنجان", selected: false },
-        { id: 28, name: "زاهدان", selected: false },
-        { id: 29, name: "لرستان", selected: false },
-        { id: 30, name: "چهارمحال و بختیاری", selected: false },
-        { id: 31, name: "تهران", selected: false }
-      ],
-    },
-    {
-      id: 2,
-      listSystemState: listArea,
-      setListSystemState: setListArea,
-      systemState: selectedArea,
-      setSystemState: setSelectedArea,
-      name: "انتخاب منطقه", // Select area
-      label: "منطقه‌", // Area/district
-      context: "area",
-      options: [
-        { id: 1, name: "منطقه ۱", selected: false },
-        { id: 2, name: "منطقه ۲", selected: false },
-        { id: 3, name: "منطقه ۳", selected: false },
-        { id: 4, name: "منطقه ۴", selected: false },
-        { id: 5, name: "منطقه ۵", selected: false },
-        { id: 6, name: "منطقه ۶", selected: false },
-        { id: 7, name: "منطقه ۷", selected: false },
-        { id: 8, name: "منطقه ۸", selected: false },
-        { id: 9, name: "منطقه ۹", selected: false },
-        { id: 10, name: "منطقه ۱۰", selected: false },
-        { id: 11, name: "منطقه ۱۱", selected: false },
-        { id: 12, name: "منطقه ۱۲", selected: false },
-        { id: 13, name: "منطقه ۱۳", selected: false },
-        { id: 14, name: "منطقه ۱۴", selected: false },
-        { id: 15, name: "منطقه ۱۵", selected: false },
-        { id: 16, name: "منطقه ۱۶", selected: false },
-        { id: 17, name: "منطقه ۱۷", selected: false },
-        { id: 18, name: "منطقه ۱۸", selected: false },
-        { id: 19, name: "منطقه ۱۹", selected: false },
-        { id: 20, name: "منطقه ۲۰", selected: false },
-        { id: 21, name: "منطقه ۲۱", selected: false },
-        { id: 22, name: "منطقه ۲۲", selected: false },
-      ],
-    },
-    {
-      id: 3,
-      listSystemState: listPropertyType,
-      setListSystemState: setListPropertyType,
-      systemState: selectedPropertyType,
-      setSystemState: setSelectedPropertyType,
-      name: "انتخاب نوع ملک", // Select property type
-      label: "نوع ملک", // Property type
-      context: "propertyType",
-      options: [
-        { id: 1, name: "آپارتمان", selected: false }, // Apartment
-        { id: 2, name: "خانه ویلایی", selected: false }, // Villa
-        { id: 3, name: "خانه تک واحدی", selected: false }, // Single unit house
-        { id: 4, name: "پنت‌هاوس", selected: false }, // Penthouse
-        { id: 5, name: "مغازه/واحد تجاری", selected: false }, // Shop/Commercial unit
-        { id: 6, name: "دفتر اداری", selected: false }, // Office
-        { id: 7, name: "زمین", selected: false }, // Land
-        { id: 8, name: "ویلای باغ", selected: false }, // Garden villa
-        { id: 9, name: "مزرعه/اراضی کشاورزی", selected: false }, // Farm/Agricultural land
-      ],
-    },
-  ];
-
-  // Return all filter data for component use
-  return { hvacSystemMobileData, amenitiesData, propertyFilterData };
-}

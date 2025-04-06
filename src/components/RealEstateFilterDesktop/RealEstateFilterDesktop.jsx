@@ -1,35 +1,54 @@
-import React, { memo } from "react";
+import React, { memo, useContext } from "react";
 import { FilterSearch } from "iconsax-react";
-import UseFilterData from "../../hooks/UseFilterData";
 import PropertyFilterDesktop from "../PropertyFilterDesktop/PropertyFilterDesktop";
-import PriceFillterDesktop from "../PriceFillterDesktop/PriceFillterDesktop";
-import SizeFillterDesktop from "../SizeFillterDesktop/SizeFillterDesktop";
+import RangeFilterDesktop from "../RangeFilterDesktop/RangeFilterDesktop";
+import useRealEstateFilter from "../../hooks/useRealEstateFilter";
+import { FilterContext } from "../../context/FilterContext";
 
 const RealEstateFilterDesktop = memo(() => {
-  const { propertyFilterData } = UseFilterData();
+  const { handleSubmit, onSubmit, setValue, rangeFilterDesktopConfig, propertyFilterDesktopConfig } = useRealEstateFilter();
+
+  const { filtersCountDesktop } = useContext(FilterContext); // 🔢 Get the count of filters applied
 
   return (
-    <div className="real-estate-filter-desktop">
-      {/* 🏡 Render property filter categories */}
-      {propertyFilterData.slice(1).map((category) => (
-        <PropertyFilterDesktop key={category.id} {...category} />
+    <form className="real-estate-filter-desktop">
+      {/* 🏠 Render property filters if condition is met */}
+      {propertyFilterDesktopConfig.map(
+        (option) =>
+          option.condition && (
+            <PropertyFilterDesktop
+              key={option.id}
+              {...option}
+              setValue={setValue}
+              onSubmit={handleSubmit(onSubmit)}
+            />
+          )
+      )}
+
+      {/* 🔢 Render range filters */}
+      {rangeFilterDesktopConfig.map((option) => (
+        <RangeFilterDesktop
+          key={option.id}
+          {...option}
+          setValue={setValue}
+          onSubmit={handleSubmit(onSubmit)}
+        />
       ))}
 
-      {/* 💰 Price filter */}
-      <PriceFillterDesktop />
-      {/* 📏 Size filter */}
-      <SizeFillterDesktop />
-
-      {/* 🔍 More filters button */}
+      {/* ➕ More filters button with dynamic text */}
       <div className="real-estate-filter-desktop__more-filters">
         <FilterSearch
           className="real-estate-filter-desktop__icon"
           color="#505050"
           variant="Outline"
         />
-        <span className="real-estate-filter-desktop__text">فیلترهای بیشتر</span>
+        <span className="real-estate-filter-desktop__text">
+          {filtersCountDesktop
+            ? `+${filtersCountDesktop.toLocaleString("fa-IR")} فیلتر` // 💡 If filters applied, show count
+            : "فیلترهای بیشتر"} {/* 🔍 Show more filters button text */}
+        </span>
       </div>
-    </div>
+    </form>
   );
 });
 
