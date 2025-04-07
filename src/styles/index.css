@@ -2336,9 +2336,6 @@ body {
   .home-details__similar-ads {
     @apply mt-12 md:mt-16;
   }
-  .similar-listings__grid {
-    @apply grid grid-cols-2 md:grid-cols-3 gap-4;
-  }
   .home-details__footer {
     @apply mt-14 md:mt-[104px] bg-gray-2;
   }
@@ -2372,12 +2369,6 @@ body {
   .agent-card__rating,
   .agent-card__ads {
     @apply text-gray-11 block;
-  }
-  .agent-card__contact {
-    @apply flex items-center justify-center rounded-lg max-w-[232px] bg-primary h-10 hover:bg-shade-2 transition-all duration-300 font-medium text-[14px] text-white;
-  }
-  .agent-card__contact:hover {
-    @apply bg-shade-2;
   }
   .property-amenities__title {
     @apply text-[14px] sm:text-lg md:text-2xl text-gray-12 font-bold;
@@ -5067,9 +5058,6 @@ body {
   .home-details__similar-ads {
     @apply mt-12 md:mt-16;
   }
-  .similar-listings__grid {
-    @apply grid grid-cols-2 md:grid-cols-3 gap-4;
-  }
   .home-details__footer {
     @apply mt-14 md:mt-[104px] bg-gray-2;
   }
@@ -5103,12 +5091,6 @@ body {
   .agent-card__rating,
   .agent-card__ads {
     @apply text-gray-11 block;
-  }
-  .agent-card__contact {
-    @apply flex items-center justify-center rounded-lg max-w-[232px] bg-primary h-10 hover:bg-shade-2 transition-all duration-300 font-medium text-[14px] text-white;
-  }
-  .agent-card__contact:hover {
-    @apply bg-shade-2;
   }
   .property-amenities__title {
     @apply text-[14px] sm:text-lg md:text-2xl text-gray-12 font-bold;
@@ -8424,9 +8406,6 @@ body {
   .home-details__similar-ads {
     @apply mt-12 md:mt-16;
   }
-  .similar-listings__grid {
-    @apply grid grid-cols-2 md:grid-cols-3 gap-4;
-  }
   .home-details__footer {
     @apply mt-14 md:mt-[104px] bg-gray-2;
   }
@@ -8460,12 +8439,6 @@ body {
   .agent-card__rating,
   .agent-card__ads {
     @apply text-gray-11 block;
-  }
-  .agent-card__contact {
-    @apply flex items-center justify-center rounded-lg max-w-[232px] bg-primary h-10 hover:bg-shade-2 transition-all duration-300 font-medium text-[14px] text-white;
-  }
-  .agent-card__contact:hover {
-    @apply bg-shade-2;
   }
   .property-amenities__title {
     @apply text-[14px] sm:text-lg md:text-2xl text-gray-12 font-bold;
@@ -11162,7 +11135,7 @@ body {
     @apply mt-12 md:mt-16;
   }
   .similar-listings__grid {
-    @apply grid grid-cols-2 md:grid-cols-3 gap-4;
+    @apply grid grid-cols-1 custom:grid-cols-2 md:grid-cols-3 gap-4;
   }
   .home-details__footer {
     @apply mt-14 md:mt-[104px] bg-gray-2;
@@ -11199,7 +11172,7 @@ body {
     @apply text-gray-11 block;
   }
   .agent-card__contact {
-    @apply flex items-center justify-center rounded-lg max-w-[232px] bg-primary h-10 hover:bg-shade-2 transition-all duration-300 font-medium text-[14px] text-white;
+    @apply flex items-center justify-center w-full rounded-lg max-w-[232px] bg-primary h-10 hover:bg-shade-2 transition-all duration-300 font-medium text-[14px] text-white;
   }
   .agent-card__contact:hover {
     @apply bg-shade-2;
@@ -11356,7 +11329,7 @@ body {
     @apply text-xs sm:text-[14px] md:text-base text-gray-11;
   }
   .property-overview__report-actions {
-    @apply flex items-center gap-x-1 md:gap-x-2;
+    @apply flex items-center gap-x-1 md:gap-x-2 cursor-pointer;
   }
   .property-overview__report-icon {
     @apply w-4 h-4 md:w-6 md:h-6;
@@ -12697,7 +12670,7 @@ body {
   @apply fixed z-40 bg-black/60 inset-0 m-auto flex-center transition-all duration-300 opacity-0 pointer-events-none ;
 }
 .filter-modal__content{
-  @apply absolute bg-white rounded-2xl w-full max-w-[720px];
+  @apply absolute bg-white rounded-2xl w-full   max-w-[720px];
 }
 .filter-modal--close{
   @apply opacity-100 pointer-events-auto;
@@ -12712,7 +12685,7 @@ body {
   @apply text-gray-11 font-bold text-center text-2xl;
 }
 .filter-modal__body{
-  @apply bg-gray-1 pr-14 pt-4 pb-[26px] max-h-[660px] overflow-y-auto overflow-x-hidden;
+  @apply bg-gray-1 pr-14 pt-4 pb-[26px]  max-h-[67vh] overflow-y-auto overflow-x-hidden;
 }
 .filter-modal__footer{
   @apply py-[26px] flex justify-center items-center gap-x-4;
@@ -12728,6 +12701,163 @@ body {
 }
 .filter-modal__reset-button--active{
   @apply bg-primary text-white border-primary cursor-pointer;
+}
+/* Agent Card Modal - Base structure */
+.agent-card-modal {
+  @apply fixed flex-center z-50 inset-0 m-auto transition-all duration-300 bg-black/60;
+}
+
+.agent-card-modal--open {
+  @apply opacity-100 pointer-events-auto;
+}
+
+.agent-card-modal--closed {
+  @apply opacity-0 pointer-events-none;
+}
+
+.agent-card-modal__content {
+  @apply md:w-full max-w-[360px] md:max-w-[628px] relative flex-center flex-col min-h-[568px] md:max-h-[638px] p-6 bg-white rounded-2xl;
+}
+
+.agent-card-modal__close-btn {
+  @apply absolute left-6 top-6;
+}
+
+/* Logo and company section */
+.agent-card-modal__logo-container {
+  @apply flex-center flex-col gap-y-4;
+}
+
+.agent-card-modal__logo {
+  @apply max-w-16 max-h-[42px] md:max-w-max md:max-h-max;
+}
+
+.agent-card-modal__company-name {
+  @apply text-gray-11 text-sm md:text-base;
+}
+
+/* Agent name */
+.agent-card-modal__agent-name {
+  @apply text-gray-11 font-bold text-xl md:text-[32px] mt-6;
+}
+
+/* Phone numbers section */
+.agent-card-modal__phone-list {
+  @apply mt-8 space-y-4;
+}
+
+.agent-card-modal__phone-item {
+  @apply flex gap-x-1 items-center;
+}
+
+.agent-card-modal__phone-number {
+  @apply text-gray-11 text-base md:text-xl;
+}
+
+.agent-card-modal__phone-icon {
+  @apply !w-5 !h-5 md:!w-7 md:!h-7;
+}
+
+/* Information section */
+.agent-card-modal__info-container {
+  @apply mt-8 gap-y-2 flex-center flex-col;
+}
+
+.agent-card-modal__info-row {
+  @apply flex gap-x-1;
+}
+
+.agent-card-modal__info-icon {
+  @apply !w-4 !h-4 md:!w-6 md:!h-6;
+}
+
+.agent-card-modal__info-label {
+  @apply text-info text-sm md:text-base;
+}
+
+.agent-card-modal__info-value {
+  @apply text-info text-sm md:text-base border-b-2 border-info;
+}
+
+.agent-card-modal__info-hint {
+  @apply text-gray-8 text-sm text-center;
+}
+
+/* Rating section */
+.agent-card-modal__rating {
+  @apply flex-center flex-col gap-y-3 mt-8;
+}
+
+.agent-card-modal__rating-label {
+  @apply text-gray-11 text-sm;
+}
+
+.agent-card-modal__rating-numbers {
+  @apply flex-center gap-x-1;
+}
+
+.agent-card-modal__rating-number {
+  @apply flex-center w-[29px] h-[29px] md:h-[30px] md:w-[30px] transition-all duration-300 cursor-pointer rounded-lg border text-sm font-medium bg-white text-gray-8 border-gray-8;
+}
+
+.agent-card-modal__rating-number--selected {
+  @apply bg-gray-5 text-gray-8;
+}
+
+/* 📦 Modal wrapper */
+.report-ad-modal {
+  @apply fixed inset-0 z-40 bg-black/60 flex items-center justify-center transition-all duration-300;
+}
+
+/* 📄 Modal box */
+.report-ad-modal__content {
+  @apply relative w-full max-w-[360px] z-50 md:max-w-[528px] bg-white min-h-[568px]  md:max-h-[682px] rounded-2xl px-6 md:px-[25px];
+}
+
+/* ❌ Close icon */
+.report-ad-modal__close-btn {
+  @apply absolute left-6 top-6;
+}
+
+/* 📝 Title */
+.report-ad-modal__title {
+  @apply mt-16 text-center text-xl md:text-2xl font-bold text-gray-11;
+}
+
+/* ☑️ Checkbox list */
+.report-ad-modal__checkbox-group {
+  @apply mt-8 space-y-3;
+}
+
+/* 🔘 Single checkbox */
+.report-ad-modal__checkbox-item {
+  @apply flex items-center gap-x-3 cursor-pointer w-max;
+}
+
+/* 🏷️ Label */
+.report-ad-modal__checkbox-label {
+  @apply text-base md:text-xl text-gray-10;
+}
+
+/* ⚠️ Error */
+.report-ad-modal__error-message {
+  @apply text-primary text-sm mt-1 text-right h-5 transition-all duration-300 opacity-100 pointer-events-auto;
+}
+
+/* 💬 Comment box */
+.report-ad-modal__textarea {
+  @apply mt-4 md:mt-12 w-full h-[106px] resize-none py-2 pr-2 pl-8 outline-none bg-gray-2 text-sm text-gray-7 font-medium;
+}
+
+/* 🚀 Submit */
+.report-ad-modal__submit-btn {
+  @apply mt-10 md:mt-[42px] w-full max-w-[156px] md:max-w-[326px] h-10 md:h-12 rounded-lg text-white mb-6 outline-none;
+}
+.report-ad-modal__open{
+  @apply opacity-100 pointer-events-auto;
+}
+.report-ad-modal__closed{
+  @apply opacity-0 pointer-events-none;
 }
 
 }

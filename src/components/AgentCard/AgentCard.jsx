@@ -28,9 +28,9 @@ const AgentCard = memo(() => {
               </div>
 
               {/* 📞 Contact information button */}
-              <a className="agent-card__contact" href="#">
+              <button className="agent-card__contact">
                 اطلاعات تماس
-              </a>
+              </button>
             </div>
           </div>
         </div>

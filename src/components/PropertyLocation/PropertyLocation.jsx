@@ -51,9 +51,9 @@ const PropertyLocation = memo(() => {
       </div>
 
       {/* 📞 Contact information button (mobile only) */}
-      <a className="property-location__contact-button" href="#">
+      <button className="property-location__contact-button">
         اطلاعات تماس
-      </a>
+      </button>
     </div>
   );
 });

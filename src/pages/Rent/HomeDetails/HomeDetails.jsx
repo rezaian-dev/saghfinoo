@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../../layouts/Header/Header";
 import PropertyImageSlider from "../../../components/PropertyImageSliderDesktop/PropertyImageSliderDesktop";
 import PropertyImageSliderMobile from "../../../components/PropertyImageSliderMobile/PropertyImageSliderMobile";
@@ -9,8 +9,23 @@ import PropertyDescription from "../../../components/PropertyDescription/Propert
 import PropertyLocation from "../../../components/PropertyLocation/PropertyLocation";
 import SimilarListings from "../../../components/SimilarListings/SimilarListings";
 import Footer from "../../../layouts/Footer/Footer";
+import useModal from "../../../hooks/useModal";
+import AgentCardModal from "../../../components/AgentCardModal/AgentCardModal";
+import ReportAdModal from "../../../components/ReportAdModal/ReportAdModal";
 
 export default function HomeDetails() {
+  const {
+    handleModal,
+    isOpenModalAgentCard,
+    isOpenModalReportAd,
+    setIsOpenModalReportAd,
+    setIsOpenModalAgentCard,
+  } = useModal();
+
+  useEffect(() => {
+    document.addEventListener("click", handleModal);
+    return () => document.removeEventListener("click", handleModal);
+  }, []);
   return (
     <>
       {/* Header with image sliders (desktop and mobile) */}
@@ -22,7 +37,7 @@ export default function HomeDetails() {
         <PropertyImageSliderMobile />
       </header>
 
-        {/* Main content section containing property details, amenities, location, and similar listings */}
+      {/* Main content section containing property details, amenities, location, and similar listings */}
       <main>
         <section className="home-details__info">
           <div className="md:container">
@@ -68,12 +83,19 @@ export default function HomeDetails() {
         <div className="container">
           <Footer />
         </div>
-         {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
-         <p className="home-details__footer-copyright">
+        {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
+        <p className="home-details__footer-copyright">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>
+      <AgentCardModal
+        isOpenModal={isOpenModalAgentCard}
+        setIsOpenModal={setIsOpenModalAgentCard}
+      />
+      <ReportAdModal
+        isOpenModal={isOpenModalReportAd}
+        setIsOpenModal={setIsOpenModalReportAd}
+      />
     </>
   );
 }
-
