@@ -4,44 +4,61 @@ import * as yup from "yup";
 
 /**
  * 📋 Form Validation Schema
- * Defines validation rules for user profile form fields
+ * Defines validation rules for user forms including phone number validation
  */
-const schema = yup
+export const schema = yup
   .object({
-    userName: yup
+    // 🧑‍💼 First Name - required & must be Persian
+    firstName: yup
       .string()
-      .required("نام الزامی است")
-      .matches(/[\u0600-\u06FF\s]+/, "لطفاً فقط حروف فارسی وارد کنید")
+      .required("*نام الزامی است")
+      .matches(/^[\u0600-\u06FF\s]+$/, "*لطفاً فقط حروف فارسی وارد کنید")
       .test(
         "no-leading-space",
-        "نام نمی‌تواند با فاصله شروع شود",
+        "*نام نمی‌تواند با فاصله شروع شود",
         (value) => !value?.startsWith(" ")
       ),
-    userNumber: yup
+
+    // 👨‍👩‍👧 Last Name - required & must be Persian
+    lastName: yup
       .string()
-      .required("شماره موبایل الزامی است")
-      .length(11, "شماره موبایل باید ۱۱ رقم باشد")
-      .matches(/^\d+$/, "لطفاً فقط اعداد وارد کنید"),
-    userEmail: yup.string().email("فرمت ایمیل صحیح نیست").notRequired(),
-    userPassword: yup
+      .required("*نام خانوادگی الزامی است")
+      .matches(/^[\u0600-\u06FF\s]+$/, "*لطفاً فقط حروف فارسی وارد کنید")
+      .test(
+        "no-leading-space",
+        "*نام خانوادگی نمی‌تواند با فاصله شروع شود",
+        (value) => !value?.startsWith(" ")
+      ),
+
+    // 📱 Mobile Number - required & must be valid format
+    mobile: yup
       .string()
-      .required("رمز عبور الزامی است")
-      .min(8, "رمز عبور باید حداقل ۸ کاراکتر باشد")
+      .required("*شماره موبایل الزامی است")
+      .matches(/^(09|\+989|989)[0-9]{9}$/, "*شماره موبایل معتبر نیست"),
+
+    // 🔐 Password - required, min length, only letters & numbers
+    password: yup
+      .string()
+      .required("*رمز عبور الزامی است")
+      .min(6, "*رمز عبور باید حداقل ۶ کاراکتر باشد")
       .matches(
         /^[a-zA-Z0-9]+$/,
-        "رمز عبور فقط می‌تواند شامل حروف انگلیسی و اعداد باشد"
-      )
-      .test("hasLetter", "رمز عبور باید شامل حداقل یک حرف باشد", (value) =>
-        /[a-zA-Z]/.test(value)
-      )
-      .test("hasNumber", "رمز عبور باید شامل حداقل یک عدد باشد", (value) =>
-        /[0-9]/.test(value)
+        "*رمز عبور فقط می‌تواند شامل حروف انگلیسی و اعداد باشد"
       ),
   })
   .required();
 
+// Define validation schema directly in the component
+export const schemaPhoneNumber = yup.object({
+  mobileNumber: yup
+    .string()
+    .required("*لطفا شماره موبایل خود را وارد کنید")
+    .matches(/^(09|\+989|989)[0-9]{9}$/, "*.شماره موبایل معتبر نیست"),
+});
+
 /**
  * 🔍 useFormValidation Custom Hook
+ * Unified custom hook for form validation using Yup schema
  **/
 export default function useFormValidation(defaultValues) {
   // ⚙️ Initialize react-hook-form with yup validation schema
@@ -53,16 +70,16 @@ export default function useFormValidation(defaultValues) {
     watch,
   } = useForm({
     resolver: yupResolver(schema),
-    mode: "all",
+    mode: "onChange",
     defaultValues,
   });
 
   // 👁️ Watch all form values for changes
   const formValues = watch();
 
-  // ✅ Check if the form has any filled fields or an image
+  // ✅ Check if the form has any filled fields
   const formIsComplete =
-    Object.values(formValues).some((value) => value.length > 0);
+    Object.values(formValues).some((value) => value && value.length > 0);
 
   // 📦 Return all necessary form utilities and state
   return {
@@ -72,5 +89,6 @@ export default function useFormValidation(defaultValues) {
     errors,
     formIsComplete,
     formValues,
+    schema
   };
 }

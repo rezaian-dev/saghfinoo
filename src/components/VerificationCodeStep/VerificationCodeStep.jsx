@@ -8,10 +8,11 @@ import { useOtpVerification } from "../../hooks/useOtpVerification";
 const VerificationCodeStep = memo(({ 
   showVerificationStep, 
   setShowVerificationStep, 
-  setIsOpenModal, 
   userPhoneNumber,
   onToastSuccess,
-  onToastError 
+  onToastError,
+  usersDataBase,
+  setUser 
 }) => {
   const { handleSubmit } = useForm();
   const submitModal = useRef(null);
@@ -27,9 +28,12 @@ const VerificationCodeStep = memo(({
   } = useOtpVerification(
     showVerificationStep, 
     setShowVerificationStep, 
-    setIsOpenModal,
     onToastSuccess,
-    onToastError
+    onToastError,
+    userPhoneNumber,
+    usersDataBase,
+    setUser
+
   );
 
   // ⌨️ Handle Enter key submission
@@ -53,9 +57,9 @@ const VerificationCodeStep = memo(({
   }, [state.otp, state.otpError, state.isOtpCorrect]);
 
   return (
-    <>
-      {/* 🔤 Title */}
-      <h4 className="modal__verification-title">کد تایید</h4>
+    <div className="modal__content">
+ {/* 🔤 Title */}
+ <h4 className="modal__verification-title">کد تایید</h4>
       
       {/* 📱 Phone number info */}
       <div className="modal__verification-subtitle">
@@ -143,7 +147,9 @@ const VerificationCodeStep = memo(({
           تایید
         </button>
       </form>
-    </>
+    </div>
+     
+  
   );
 });
 

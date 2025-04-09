@@ -1,10 +1,11 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import clsx from "classnames";
 import {
   AddCircle,
   ArrowLeft2,
   CloseCircle,
+  Edit,
   HambergerMenu,
   House,
   House2,
@@ -18,6 +19,8 @@ import useToggleMenu from "../../hooks/useToggleMenu";
 import ModalLogin from "../../components/ModalLogin/ModalLogin";
 import useModal from "../../hooks/useModal";
 import ModalLoginMobile from "../../components/ModalLoginMobile/ModalLoginMobile";
+import { FilterContext } from "../../context/FilterContext";
+import { a } from "@react-spring/web";
 
 const Header = memo(() => {
   // Get menu state and refs from custom hook
@@ -28,7 +31,7 @@ const Header = memo(() => {
     btnCloseRef,
     isActiveOverlay,
     handleClick,
-    closeMenu // دریافت تابع closeMenu از هوک
+    closeMenu, // دریافت تابع closeMenu از هوک
   } = useToggleMenu();
 
   // پاس دادن تابع closeMenu به useModal
@@ -37,8 +40,10 @@ const Header = memo(() => {
     isOpenModalMobile,
     setIsOpenModal,
     setIsOpenModalMobile,
-    handleModal
+    handleModal,
   } = useModal(closeMenu);
+
+  const { user } = useContext(FilterContext);
 
   // Get current path from react-router
   const { pathname } = useLocation();
@@ -101,13 +106,12 @@ const Header = memo(() => {
   useEffect(() => {
     document.addEventListener("click", handleClick); // Listen for menu click
     document.addEventListener("click", handleModal); // Listen for modal click
-    
+
     return () => {
       document.removeEventListener("click", handleClick); // Clean up event listeners
-      document.removeEventListener("click", handleModal); // Clean up event listeners 
+      document.removeEventListener("click", handleModal); // Clean up event listeners
     };
   }, [handleClick, handleModal]);
-  
 
   return (
     <>
@@ -172,9 +176,20 @@ const Header = memo(() => {
 
         {/* User actions section 👤 */}
         <div className="menu-desktop__user-actions">
-          <a  href="#" className="menu-desktop__login-link">
-            ورود
-          </a>
+          {user ? (
+            <a
+              href="#"
+              className="text-lg text-gray-10 hidden items-center gap-x-2  md:flex"
+            >
+              <ProfileCircle size="24" color="#505050" />
+              <span>{user.firstName}</span>
+            </a>
+          ) : (
+            <a href="#" className="menu-desktop__login-link">
+              ورود
+            </a>
+          )}
+
           <a href="#" className="Register-ad-desktop">
             ثبت آگهی
           </a>
@@ -196,15 +211,38 @@ const Header = memo(() => {
         </div>
 
         {/* Profile section - Login or Sign-up for mobile 📝 */}
-        <div className="menu-mobile__profile-section">
-          <a
-            
-            className="menu-mobile__profile-link"
-            href="#"
-          >
-            <ProfileCircle size="20" color="#505050" variant="Outline" />
-            <span>ورود یا ثبت‌ نام</span>
-          </a>
+        <div
+          className={clsx(
+            "menu-mobile__profile-section",
+            (user && user.firstName) && "py-1"
+          )}
+        >
+          {user ? (
+            <div className={clsx("flex items-center gap-x-4")}>
+              {user.image ? (
+                <img
+                  width={70}
+                  height={70}
+                  src="../images/landing/home-prouser/ali-parto.png"
+                  loading="lazy"
+                  alt="userProfile"
+                />
+              ) : (
+                <ProfileCircle size="70" color="#505050" variant="Outline" />
+              )}
+           
+              <div className="flex items-center gap-x-2">
+                <Edit size="20" color="#505050" />
+                <span>{user.firstName}</span>
+                <ArrowLeft2 size="20" color="#505050" />
+              </div>
+            </div>
+          ) : (
+            <a className="menu-mobile__profile-link" href="#">
+              <ProfileCircle size="20" color="#505050" variant="Outline" />
+              <span>ورود یا ثبت‌ نام</span>
+            </a>
+          )}
         </div>
 
         {/* Mobile Menu Items 📱 */}
@@ -230,22 +268,15 @@ const Header = memo(() => {
       </div>
 
       {/* Overlay background for mobile menu 🌫️ */}
-      <div
-        className={clsx("overlay",isActiveOverlay && "overlay--active")}
-      />
+      <div className={clsx("overlay", isActiveOverlay && "overlay--active")} />
 
       {/* Login Modal using Headless UI 🛠️ */}
       <div className="hidden md:block">
-        <ModalLogin
-          isOpenModal={isOpenModal}
-          
-          setIsOpenModal={setIsOpenModal}
-        />
+        <ModalLogin isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
       </div>
       <div className="block md:hidden">
-        <ModalLoginMobile 
-          isOpenModal={isOpenModalMobile} 
-           
+        <ModalLoginMobile
+          isOpenModal={isOpenModalMobile}
           setIsOpenModal={setIsOpenModalMobile}
         />
       </div>

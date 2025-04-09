@@ -1,28 +1,50 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form"; // Import useForm for handling form state 📝
 import clsx from "classnames";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schemaPhoneNumber } from "../../hooks/useFormValidation";
 
-const PhoneNumberStep = ({ setShowVerificationStep, setUserPhoneNumber }) => {
-  // useForm hook to handle form validation and state 💡
+const PhoneNumberStep = ({
+  setShowVerificationStep,
+  setUserPhoneNumber,
+  setUserRegister,
+  usersDataBase,
+}) => {
+  // 📝 Setup form with validation schema (yup + react-hook-form)
   const {
-    register: registerPhone,
+    register,
     handleSubmit,
-    formState: { errors: phoneErrors }, // get errors from useForm ⚠️
-  } = useForm();
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schemaPhoneNumber),
+    mode: "onChange",
+    defaultValues: {
+      mobileNumber: "",
+    },
+  });
 
-  const [isAccept, setIsAccept] = useState(false); // State to handle terms acceptance ✅
+  // ✅ Checkbox state for terms agreement
+  const [isAccept, setIsAccept] = useState(false);
 
-  // handleSubmit function for form submission 📤
+  // 🚀 Form submission logic
   const onSubmit = (data) => {
-    // Only the mobile number is being validated here, no need to store in state 📱
-    setShowVerificationStep(true); // Show verification step 🔒
-    setUserPhoneNumber(data.mobileNumber);
+    const alreadyExists = usersDataBase
+      ? usersDataBase.some((user) => user.mobile === data.mobileNumber)
+      : false;
+
+    if (!alreadyExists) {
+      setUserRegister(true); // 🆕 New user, show register flow
+    } else {
+      setUserPhoneNumber(data.mobileNumber); // 🔁 Existing user, go to verification
+      setShowVerificationStep(true);
+    }
   };
 
   return (
-    /* Phone Number Step 📱 */
-    <>
+    <div className="modal__content">
       <h4 className="modal__title">ورود</h4>
+
+      {/* 👋 Welcome message */}
       <div className="modal__subtitle">
         <span className="modal__subtitle-text">به سقفینو خوش آمدید</span>
         <span className="modal__subtitle-instruction">
@@ -30,11 +52,13 @@ const PhoneNumberStep = ({ setShowVerificationStep, setUserPhoneNumber }) => {
         </span>
       </div>
 
+      {/* 📱 Form starts */}
       <form onSubmit={handleSubmit(onSubmit)} className="modal__form">
+        {/* 📤 Mobile number input */}
         <div
           className={clsx(
             "modal__form-input",
-            phoneErrors.mobileNumber
+            errors.mobileNumber
               ? "modal__form-input--error"
               : "modal__form-input--focus"
           )}
@@ -42,25 +66,21 @@ const PhoneNumberStep = ({ setShowVerificationStep, setUserPhoneNumber }) => {
           <input
             className="modal__form-input__field"
             type="tel"
-            {...registerPhone("mobileNumber", {
-              required: "*شماره موبایل الزامی است", // Required mobile number validation 📛
-              pattern: {
-                value: /^(09|\+989)[0-9]{9}$/, // Mobile number pattern validation 🔍
-                message: "*لطفا یک شماره موبایل معتبر وارد کنید", // Invalid mobile number error ❌
-              },
-            })}
+            {...register("mobileNumber")}
+            placeholder="09xxxxxxxxx"
           />
-          {phoneErrors.mobileNumber && (
+          {/* ⚠️ Validation error */}
+          {errors.mobileNumber && (
             <span className="modal__form-input__error">
-              {phoneErrors.mobileNumber.message} {/* Show error message ❌ */}
+              {errors.mobileNumber.message}
             </span>
           )}
         </div>
 
+        {/* 📄 Terms agreement */}
         <label className="modal__form-terms">
           <input
             type="checkbox"
-            
             checked={isAccept}
             onChange={() => setIsAccept((prev) => !prev)}
             className="hidden"
@@ -69,8 +89,8 @@ const PhoneNumberStep = ({ setShowVerificationStep, setUserPhoneNumber }) => {
             className="modal__form-terms__checkbox"
             src={
               isAccept
-                ? "../svgs/icons/checked.svg" // Checked ✔️
-                : "../svgs/icons/tick-square.svg" // Unchecked ⬜️
+                ? "../svgs/icons/checked.svg"
+                : "../svgs/icons/tick-square.svg"
             }
             loading="lazy"
             alt="tickSquare"
@@ -84,9 +104,10 @@ const PhoneNumberStep = ({ setShowVerificationStep, setUserPhoneNumber }) => {
           </span>
         </label>
 
+        {/* 🚪 Submit button */}
         <button
           type="submit"
-          disabled={!isAccept} // Disable submit if terms not accepted 🔒
+          disabled={!isAccept}
           className={clsx(
             "modal__form-submit",
             isAccept && "modal__form-submit--active"
@@ -95,7 +116,8 @@ const PhoneNumberStep = ({ setShowVerificationStep, setUserPhoneNumber }) => {
           ورود یا ثبت نام در سقفینو
         </button>
       </form>
-    </>
+    </div>
   );
 };
+
 export default PhoneNumberStep;

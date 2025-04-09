@@ -31,13 +31,14 @@ const otpReducer = (state, { type, payload }) => {
       return state;
   }
 };
-
 export const useOtpVerification = (
   showVerificationStep,  // 🖥️ Controls OTP verification step visibility
   setShowVerificationStep, // 🛑 Function to hide OTP verification step
-  setIsOpenModal, // 🔓 Function to close modal
   onToastSuccess, // 🎉 Callback for success toast
-  onToastError // ❌ Callback for error toast
+  onToastError, // ❌ Callback for error toast
+  userPhoneNumber,
+  usersDataBase,
+  setUser
 ) => {
   // ========================
   // Initial State Setup
@@ -84,27 +85,33 @@ export const useOtpVerification = (
   // ========================
   // ✅ Handle OTP submission
   const onSubmitVerification = (e) => {
-    
+    // 🛑 Prevent default form behavior
     if (e && typeof e === "object" && e.preventDefault) {
       e.preventDefault();
-      e.stopPropagation();
     }
+  
+    // ✅ OTP is correct
     if (+state.otp === +state.correctOtp) {
       dispatch({ type: "SET_OTP_ERROR", payload: false });
       dispatch({ type: "SET_IS_OTP_CORRECT", payload: true });
-    
-      onToastSuccess("ورود موفقیت‌آمیز بود")
-        // ⏳ Wait for 3 seconds after the toast before closing the modal
-        setTimeout(() => {
-          setIsOpenModal(false); // Close modal after 3 seconds
-        }, 3300);
-      
+  
+      onToastSuccess("ورود موفقیت‌آمیز بود"); // 🎉 Show success message
+  
+      // ⏳ Wait before setting user (sync with toast autoClose: 3.4s)
+      setTimeout(() => {
+        let userTarget = usersDataBase.find(user => user.mobile === userPhoneNumber);
+  
+        setUser(userTarget); // 👤 Set logged-in user
+        localStorage.setItem("user", JSON.stringify(userTarget)); // 💾 Save to localStorage
+      }, 3400);
+  
     } else {
+      // ❌ OTP is incorrect
       dispatch({ type: "SET_OTP_ERROR", payload: true });
-      onToastError("کد وارد شده اشتباه است");
+      onToastError("کد وارد شده اشتباه است"); // ⚠️ Show error message
     }
-     
   };
+  
 
   // ========================
   // Resend OTP Logic

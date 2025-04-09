@@ -12384,7 +12384,7 @@ body {
     @apply fixed z-20 transition-all duration-300 flex-center bg-black/60 inset-0 m-auto opacity-0 pointer-events-none;
   }
   .modal__content{
-    @apply bg-white rounded-2xl flex-center grow flex-col md:max-w-[614px] md:h-[412px] text-center p-8;
+    @apply bg-white rounded-2xl flex-center relative grow flex-col md:max-w-[614px] md:h-[412px] text-center p-8;
   }
   .modal__title{
     @apply text-gray-12 font-bold text-2xl mb-[17px];
@@ -12859,5 +12859,97 @@ body {
 .report-ad-modal__closed{
   @apply opacity-0 pointer-events-none;
 }
-
+.user-registration{
+  @apply bg-white relative w-full rounded-2xl h-[770px] max-w-[600px];
+}
+.user-registration__close-btn{
+  @apply absolute left-6 top-6;
+}
+.user-registration__title{
+  @apply text-gray-11 font-bold text-2xl text-center mt-16;
+}
+.user-registration__description{
+  @apply space-y-3 mt-8 text-center;
+}
+.user-registration__description-text{
+  @apply block text-gray-10 text-base;
+}
+.user-registration__fields{
+  @apply space-y-3 flex items-center flex-col mt-8;
+}
+.form-field__field-group{
+  @apply w-full max-w-[324px];
+}
+.form-field__input-wrapper{
+  @apply flex items-center px-3 gap-x-3 h-16 transition-all duration-300 grow w-full rounded-xl border;
+}
+.form-field__input{
+  @apply outline-none text-sm w-full text-gray-10;
+}
+.form-field__error-text{
+  @apply text-primary text-xs mr-3 mt-1 transition-opacity duration-300;
+}
+.user-registration__password-input{
+  @apply flex items-center grow gap-x-3;
+}
+.form-field__password-toggle{
+  @apply cursor-pointer pointer-events-auto;
+}
+.user-registration__submit-btn{
+  @apply w-full flex-center mx-auto max-w-[324px] rounded-lg h-14 text-white transition-all;
+}
+.form-field__input-wrapper--focus{
+  @apply border-gray-7 focus-within:border-info focus-within:shadow-info;
+}
+.form-field__input-content{
+  @apply flex items-center gap-x-3 w-full;
+}
+.form-field-mobile__input-wrapper{
+  @apply flex items-center px-3 gap-x-2 h-12 transition-all duration-300 grow w-full rounded border;
+}
+.form-field-mobile__input-wrapper--focus{
+  @apply border-gray-7 focus-within:border-info focus-within:shadow-info;
+}
+.form-field-mobile__input-content{
+  @apply flex items-center grow gap-x-2;
+}
+.form-field-mobile__input{
+  @apply outline-none text-xs w-full text-gray-10;
+}
+.form-field-mobile__error-text{
+  @apply text-primary text-xs mr-2 transition-opacity duration-300;
+}
+.user-registration__submit-btn--disabled{
+  @apply  bg-tint-4 cursor-not-allowed;
+}
+.user-registration__submit-btn--active{
+  @apply bg-primary hover:bg-shade-2;
+}
+.user-registration-mobile{
+  @apply bg-white relative w-full rounded p-4 max-w-full md:max-w-sm mx-auto;
+}
+.user-registration-mobile__logo{
+  @apply mb-5 pt-1 w-full;
+}
+.user-registration-mobile__title{
+  @apply text-gray-11 font-bold text-xl text-center mb-3;
+}
+.user-registration-mobile__subtitle{
+  @apply space-y-1 mb-4 text-center text-gray-10 text-sm;
+}
+.user-registration-mobile__fields{
+  @apply space-y-3 flex items-center flex-col;
+}
+.user-registration-mobile__submit-wrapper{
+  @apply mt-4 mb-2;
+}
+.user-registration-mobile__submit-btn{
+  @apply w-full flex-center rounded-lg h-12 text-white text-sm font-medium transition-all;
+}
+.user-registration-mobile__submit-btn--disabled{
+  @apply bg-tint-4 cursor-not-allowed;
+}
+.user-registration-mobile__submit-btn--active{
+  @apply bg-primary hover:bg-shade-2 active:bg-shade-1;
+}
 }

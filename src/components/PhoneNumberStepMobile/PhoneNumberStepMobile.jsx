@@ -1,22 +1,34 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import clsx from "classnames";
+import { schemaPhoneNumber } from "../../hooks/useFormValidation";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 const PhoneNumberStepMobile = React.memo(
-  ({ setShowVerificationStep, setUserPhoneNumber }) => {
-    // 📌 React Hook Form setup
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm();
+  ({ setShowVerificationStep, setUserPhoneNumber, usersDataBase, setUserRegister }) => {
 
+      const {register,handleSubmit,formState: { errors } } = useForm({
+        resolver: yupResolver(schemaPhoneNumber),
+        mode:"onChange",
+        defaultValues: {
+          mobileNumber: "",
+        },
+      });
     const [isAccept, setIsAccept] = useState(false); // State to handle terms acceptance ✅
 
     // 📌 Handle form submission
     const onSubmit = (data) => {
-      setUserPhoneNumber(data.phoneNumber);
-      setShowVerificationStep(true);
+      const alreadyExists = usersDataBase
+        ? usersDataBase.some((user) => user.mobile === data.mobileNumber)
+        : false;
+
+      if (!alreadyExists) {
+        setUserRegister(true);
+      } else {
+        setUserRegister(false);
+        setUserPhoneNumber(data.mobileNumber);
+        setShowVerificationStep(true);
+      }
     };
 
     return (
@@ -37,7 +49,7 @@ const PhoneNumberStepMobile = React.memo(
           <div
             className={clsx(
               "phone-step__input-wrapper",
-              errors.phoneNumber
+              errors.mobileNumber
                 ? "phone-step__input-wrapper--error"
                 : "phone-step__input-wrapper--focus"
             )}
@@ -45,17 +57,11 @@ const PhoneNumberStepMobile = React.memo(
             <input
               className="phone-step__input"
               type="tel"
-              {...register("phoneNumber", {
-                required: "*لطفاً شماره موبایل خود را وارد کنید",
-                pattern: {
-                  value: /^(09\d{9}|98\d{10})$/,
-                  message: "*لطفاً یک شماره معتبر وارد کنید",
-                },
-              })}
+              {...register("mobileNumber")}
             />
-            {errors.phoneNumber && (
+            {errors.mobileNumber && (
               <span className="phone-step__error-message">
-                {errors.phoneNumber.message}
+                {errors.mobileNumber.message}
               </span>
             )}
           </div>
