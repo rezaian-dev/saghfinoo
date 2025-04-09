@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../layouts/Header/Header";
 import RealtyIntro from "../../components/RealtyIntro/RealtyIntro";
 import PropertyRatingCard from "../../components/PropertyRatingCard/PropertyRatingCard";
@@ -6,6 +6,9 @@ import RealEstateAgents from "../../components/RealEstateAgents/RealEstateAgents
 import RealestateListing from "../../components/RealestateListing/RealestateListing";
 import UserReviews from "../../components/UserReviews/UserReviews";
 import Footer from "../../layouts/Footer/Footer";
+import useModal from "../../hooks/useModal";
+import PremierRealtorsModal from "../../components/PremierRealtorsModal/PremierRealtorsModal";
+import ShareModal from "../../components/ShareModal/ShareModal";
 
 export default function Realestate() {
   // 🔹 Social media links data
@@ -15,6 +18,13 @@ export default function Realestate() {
     { id: 3, link: "Toosi_Amlak", image: "images/socialMedia/instagram.png" },
     { id: 4, link: "Toosi_Amlak.com", image: "images/socialMedia/site.png" },
   ];
+
+  const {handleModal,isOpenModalPremier,isOpenModalShare} = useModal();
+
+  useEffect(()=>{
+     document.addEventListener("click",handleModal);
+     return ()=> document.removeEventListener("click",handleModal)
+  },[])
 
   return (
     <>
@@ -86,6 +96,8 @@ export default function Realestate() {
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>
+      <PremierRealtorsModal isOpenModal={isOpenModalPremier}/>
+      <ShareModal isOpenModal={isOpenModalShare}/>
     </>
   );
 }

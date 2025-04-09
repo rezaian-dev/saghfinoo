@@ -1,104 +1,96 @@
 import { useState, useCallback } from "react";
 
-/**
- * 🎭 Minimal modal management hook
- */
+// 🎯 Custom hook for managing modals
 const useModal = (closeMenu) => {
-  // 📊 All modal states
-  const [modals, setModals] = useState({
-    main: false,
-    mobile: false,
-    premier: false,
-    filter: false,
-    agent: false,
-    report: false,
-  });
+  // 🔄 State for different modals
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenModalMobile, setIsOpenModalMobile] = useState(false);
+  const [isOpenModalPremier, setIsOpenModalPremier] = useState(false);
+  const [isOpenModalFillter, setIsOpenModalFillter] = useState(false);
+  const [isOpenModalAgentCard, setIsOpenModalAgentCard] = useState(false);
+  const [isOpenModalReportAd, setIsOpenModalReportAd] = useState(false);
+  const [isOpenModalShare, setIsOpenModalShare] = useState(false);
 
-  // 🎯 Handle all modal interactions
-  const handleModal = useCallback(
-    ({ target }) => {
-      // 📱 Open modals - check clicks on trigger elements
-      const openTriggers = {
-        main: target.closest(".menu-desktop__login-link"),
-        mobile: target.closest(".menu-mobile__profile-link"),
-        agent: target.closest(
-          ".agent-card__contact, .property-location__contact-button"
-        ),
-        report: target.closest(".property-overview__report-actions"),
-        premier: target.closest(".premier-realtors-box"),
-        filter: target.closest(".real-estate-filter-desktop__more-filters"),
-      };
+  // 🖱️ Handle modal open/close based on user click
+  const handleModal = useCallback(({ target }) => {
+    // 🖥️ Desktop modal
+    if (target.closest(".menu-desktoplogin-link")) {
+      setIsOpenModal(true);
+    } else if (!target.closest(".modalcontent") && !target.closest(".user-registration") || target.closest(".user-registration__close-btn") || target.closest(".user-registration-mobile")) {
 
-      // 🚪 Close modals - check clicks outside or on close buttons
-      const closeTriggers = {
-        main:
-          modals.main &&
-          ((!target.closest(".modal__content") &&
-            !target.closest(".user-registration")) ||
-            target.closest(".user-registration__close-btn") ||
-            target.closest(".user-registration-mobile")),
-        mobile: modals.mobile && !target.closest(".modal-login__content"),
-        agent:
-          modals.agent &&
-          (target.closest(".agent-card-modal__close-btn") ||
-            !target.closest(".agent-card-modal__content")),
-        report:
-          modals.report &&
-          (!target.closest(".report-ad-modal__content") ||
-            target.closest(".report-ad-modal__close-btn")),
-        premier:
-          modals.premier &&
-          (!target.closest(".premier-realtors-modal__content") ||
-            target.closest(".premier-realtors-modal__close-button")),
-        filter:
-          modals.filter &&
-          (!target.closest(".filter-modal__content") ||
-            target.closest(".filter-modal__close-button") ||
-            target.closest(".filter-modal__submit-button")),
-      };
+      setIsOpenModal(false);
+    }
 
-      // 🔄 Update states
-      const newModals = { ...modals };
-
-      // Handle opens
-      Object.entries(openTriggers).forEach(([key, condition]) => {
-        if (condition) newModals[key] = true;
-      });
-
-      // Handle closes
-      Object.entries(closeTriggers).forEach(([key, condition]) => {
-        if (condition) newModals[key] = false;
-      });
-
-      // Call closeMenu on mobile open
-      if (openTriggers.mobile && typeof closeMenu === "function") closeMenu();
-
-      // Update state if anything changed
-      if (JSON.stringify(modals) !== JSON.stringify(newModals)) {
-        setModals(newModals);
+    // 📱 Mobile modal
+    if (target.closest(".menu-mobile__profile-link")) {
+      setIsOpenModalMobile(true);
+      // ✅ Close menu if function exists
+      if (closeMenu && typeof closeMenu === "function") {
+        closeMenu();
       }
-    },
-    [modals, closeMenu]
-  );
+    } else if (!target.closest(".modal-login__content")) {
+      setIsOpenModalMobile(false);
+    }
 
-  // 🔙 Return compatible interface
+    if (
+      target.closest(".agent-cardcontact") ||
+      target.closest(".property-location__contact-button")
+    ) {
+      setIsOpenModalAgentCard(true);
+    } else if (
+      target.closest(".agent-card-modal__close-btn") ||
+      !target.closest(".agent-card-modal__content")
+    ) {
+      setIsOpenModalAgentCard(false);
+    }
+
+    if(target.closest(".property-rating__icon") || target.closest(".realty-intro__more-icon-img")){
+      setIsOpenModalShare(true)
+    }else if (!target.closest(".share-modal__content") || target.closest(".share-modal__close-btn")){
+      setIsOpenModalShare(false)
+    }
+
+    if(target.closest(".property-overview__report-actions")){
+      setIsOpenModalReportAd(true)
+    }else if(!target.closest(".report-ad-modal__content") || target.closest(".report-ad-modal__close-btn")){
+      setIsOpenModalReportAd(false)
+    }
+
+    // 🌟 Premier realtors modal
+    if (target.closest(".premier-realtors-box") || target.closest(".realestate__logo-circle")) {
+      setIsOpenModalPremier(true);
+    } else if (
+      !target.closest(".premier-realtors-modal__content") ||
+      target.closest(".premier-realtors-modal__close-button")
+    ) {
+      setIsOpenModalPremier(false);
+    }
+    if (target.closest(".real-estate-filter-desktopmore-filters")) {
+      setIsOpenModalFillter(true);
+    } else if (
+      !target.closest(".filter-modalcontent") ||
+      target.closest(".filter-modalclose-button") ||
+      target.closest(".filter-modalsubmit-button")
+    ) {
+      setIsOpenModalFillter(false);
+    }
+  }, []);
+
   return {
-    isOpenModal: modals.main,
-    isOpenModalMobile: modals.mobile,
-    isOpenModalPremier: modals.premier,
-    isOpenModalFillter: modals.filter,
-    isOpenModalAgentCard: modals.agent,
-    isOpenModalReportAd: modals.report,
-    setIsOpenModal: (value) => setModals((prev) => ({ ...prev, main: value })),
-    setIsOpenModalMobile: (value) =>
-      setModals((prev) => ({ ...prev, mobile: value })),
-    setIsOpenModalFillter: (value) =>
-      setModals((prev) => ({ ...prev, filter: value })),
-    setIsOpenModalAgentCard: (value) =>
-      setModals((prev) => ({ ...prev, agent: value })),
-    setIsOpenModalReportAd: (value) =>
-      setModals((prev) => ({ ...prev, report: value })),
+    isOpenModal,
+    isOpenModalMobile,
+    isOpenModalPremier,
+    setIsOpenModal,
+    setIsOpenModalMobile,
     handleModal,
+    isOpenModalFillter,
+    setIsOpenModalFillter,
+    isOpenModalAgentCard,
+    isOpenModalReportAd,
+    setIsOpenModalReportAd,
+    setIsOpenModalAgentCard,
+    isOpenModalShare,
+    setIsOpenModalShare
   };
 };
 

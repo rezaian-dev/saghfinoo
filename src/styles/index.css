@@ -12952,4 +12952,38 @@ body {
 .user-registration-mobile__submit-btn--active{
   @apply bg-primary hover:bg-shade-2 active:bg-shade-1;
 }
+
+.share-modal{
+  @apply fixed inset-0 transition-all duration-300 bg-black/60 z-40 flex items-center justify-center;
+}
+.share-modal__content{
+  @apply bg-white px-[25px] md:px-[107px] relative rounded-2xl w-full max-w-[360px] md:max-w-[528px] h-[460px] md:h-[617px];
+}
+.share-modal__close-btn{
+  @apply absolute left-6 top-6;
+}
+.share-modal__title{
+  @apply text-gray-11 font-bold text-base md:text-2xl mt-16 text-center;
+}
+.share-modal__description{
+  @apply text-gray-10 text-sm block md:text-lg mt-6;
+}
+.share-modal__social-media-list{
+  @apply space-y-[28px] md:space-y-8 mt-[28px] md:mt-8;
+}
+.share-modal__social-media-link{
+  @apply flex items-center gap-x-2;
+}
+.share-modal__social-media-name{
+  @apply text-gray-10 text-base md:text-xl;
+}
+.share-modal__social-media-icon{
+  @apply w-6 h-6 md:w-10 md:h-10
+}
+.share-modal__open{
+  @apply opacity-100 pointer-events-auto;
+}
+.share-modal__close{
+  @apply opacity-0 pointer-events-none;
+}
 }
