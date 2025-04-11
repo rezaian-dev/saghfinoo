@@ -10,14 +10,19 @@ const useModal = (closeMenu) => {
   const [isOpenModalAgentCard, setIsOpenModalAgentCard] = useState(false);
   const [isOpenModalReportAd, setIsOpenModalReportAd] = useState(false);
   const [isOpenModalShare, setIsOpenModalShare] = useState(false);
+  const [isOpenModalRating, setIsOpenModalRating] = useState(false);
 
   // 🖱️ Handle modal open/close based on user click
   const handleModal = useCallback(({ target }) => {
     // 🖥️ Desktop modal
-    if (target.closest(".menu-desktoplogin-link")) {
+    if (target.closest(".menu-desktop__login-link")) {
       setIsOpenModal(true);
-    } else if (!target.closest(".modalcontent") && !target.closest(".user-registration") || target.closest(".user-registration__close-btn") || target.closest(".user-registration-mobile")) {
-
+    } else if (
+      (!target.closest(".modal__content") &&
+        !target.closest(".user-registration")) ||
+      target.closest(".user-registration__close-btn") ||
+      target.closest(".user-registration-mobile")
+    ) {
       setIsOpenModal(false);
     }
 
@@ -31,9 +36,14 @@ const useModal = (closeMenu) => {
     } else if (!target.closest(".modal-login__content")) {
       setIsOpenModalMobile(false);
     }
+    if(target.closest(".property-rating__question") || target.closest(".realty-intro__more-icon-img")){
+      setIsOpenModalRating(true)
+    }
 
+   else if(!target.closest(".rating-modal__content") || target.closest(".rating-modal__btn-close"))
+      setIsOpenModalRating(false)
     if (
-      target.closest(".agent-cardcontact") ||
+      target.closest(".agent-card__contact") ||
       target.closest(".property-location__contact-button")
     ) {
       setIsOpenModalAgentCard(true);
@@ -44,20 +54,36 @@ const useModal = (closeMenu) => {
       setIsOpenModalAgentCard(false);
     }
 
-    if(target.closest(".property-rating__icon") || target.closest(".realty-intro__more-icon-img")){
-      setIsOpenModalShare(true)
-    }else if (!target.closest(".share-modal__content") || target.closest(".share-modal__close-btn")){
-      setIsOpenModalShare(false)
+    if (
+      target.closest(".property-rating__icon") 
+      
+    ) {
+      setIsOpenModalShare(true);
+    } else if (
+      !target.closest(".share-modal__content") ||
+      target.closest(".share-modal__close-btn")
+    ) {
+      setIsOpenModalShare(false);
     }
 
-    if(target.closest(".property-overview__report-actions")){
-      setIsOpenModalReportAd(true)
-    }else if(!target.closest(".report-ad-modal__content") || target.closest(".report-ad-modal__close-btn")){
-      setIsOpenModalReportAd(false)
+    if (
+      target.closest(".property-overview__report-actions") ||
+      target.closest(".property-rating__report")
+    ) {
+      setIsOpenModalReportAd(true);
+    } else if (
+      !target.closest(".report-ad-modal__content") ||
+      target.closest(".report-ad-modal__close-btn")
+    ) {
+      setIsOpenModalReportAd(false);
     }
 
     // 🌟 Premier realtors modal
-    if (target.closest(".premier-realtors-box") || target.closest(".realestate__logo-circle")) {
+    if (
+      target.closest(".premier-realtors-box") ||
+      target.closest(".realestate__logo-circle") ||
+      target.closest(".realty-intro__contact-btn")
+    ) {
       setIsOpenModalPremier(true);
     } else if (
       !target.closest(".premier-realtors-modal__content") ||
@@ -65,12 +91,12 @@ const useModal = (closeMenu) => {
     ) {
       setIsOpenModalPremier(false);
     }
-    if (target.closest(".real-estate-filter-desktopmore-filters")) {
+    if (target.closest(".realestate-filter-desktop__more-filters")) {
       setIsOpenModalFillter(true);
     } else if (
-      !target.closest(".filter-modalcontent") ||
-      target.closest(".filter-modalclose-button") ||
-      target.closest(".filter-modalsubmit-button")
+      !target.closest(".filter-modal__content") ||
+      target.closest(".filter-modal__close-button") ||
+      target.closest(".filter-modal__submit-button")
     ) {
       setIsOpenModalFillter(false);
     }
@@ -90,7 +116,9 @@ const useModal = (closeMenu) => {
     setIsOpenModalReportAd,
     setIsOpenModalAgentCard,
     isOpenModalShare,
-    setIsOpenModalShare
+    setIsOpenModalShare,
+    isOpenModalRating,
+    setIsOpenModalRating,
   };
 };
 

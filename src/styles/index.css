@@ -964,10 +964,10 @@ body {
   .real-estate-filter-desktop {
     @apply hidden md:flex gap-x-2;
   }
-  .real-estate-filter-desktop__more-filters {
+  .realestate-filter-desktop__more-filters {
     @apply hidden md:flex-center cursor-pointer gap-x-1 xl:gap-x-2 text-gray-10 px-3 xl:px-4 h-12 border border-gray-7 rounded-lg transition-all duration-300;
   }
-  .real-estate-filter-desktop__more-filters:hover {
+  .realestate-filter-desktop__more-filters:hover {
     @apply text-gray-11 bg-gray-3;
   }
   .real-estate-filter-desktop__icon {
@@ -2650,7 +2650,7 @@ body {
     @apply text-base text-gray-10 whitespace-nowrap;
   }
   .property-rating__report {
-    @apply flex-center gap-x-2;
+    @apply flex-center gap-x-2 cursor-pointer;
   }
   .property-rating__warning-icon {
     @apply !w-4 !h-4 md:!w-6 md:!h-6;
@@ -5393,7 +5393,7 @@ body {
     @apply !w-4 !h-4 md:!w-6 md:!h-6;
   }
   .realty-intro__more-icon {
-    @apply flex md:hidden;
+    @apply flex items-center gap-x-2 md:hidden;
   }
   .realty-intro__more-icon-img {
     @apply !w-4 !h-4 md:!w-6 md:!h-6 cursor-pointer pointer-events-auto;
@@ -11409,7 +11409,7 @@ body {
     @apply absolute w-24 h-24 sm:w-40 sm:h-40 md:w-52 md:h-52 lg:w-[310px] lg:h-[310px] flex items-center justify-center bg-gray-2 rounded-full right-4 md:right-[108px] bottom-[-20%] md:bottom-[-10%] lg:bottom-[-127px];
   }
   .realator__logo-circle {
-    @apply border border-black;
+    @apply border border-black pointer-events-none;
   }
   .realestate__logo {
     @apply lg:min-w-[163px] w-[53%] h-auto object-contain;
@@ -12957,7 +12957,7 @@ body {
   @apply fixed inset-0 transition-all duration-300 bg-black/60 z-40 flex items-center justify-center;
 }
 .share-modal__content{
-  @apply bg-white px-[25px] md:px-[107px] relative rounded-2xl w-full max-w-[360px] md:max-w-[528px] h-[460px] md:h-[617px];
+  @apply bg-white px-[25px] md:px-[107px] relative rounded-2xl w-full max-w-[360px] md:max-w-[528px] h-[460px] md:h-[597px];
 }
 .share-modal__close-btn{
   @apply absolute left-6 top-6;
@@ -12966,7 +12966,7 @@ body {
   @apply text-gray-11 font-bold text-base md:text-2xl mt-16 text-center;
 }
 .share-modal__description{
-  @apply text-gray-10 text-sm block md:text-lg mt-6;
+  @apply text-gray-10 text-sm md:text-lg mt-8;
 }
 .share-modal__social-media-list{
   @apply space-y-[28px] md:space-y-8 mt-[28px] md:mt-8;
@@ -12986,4 +12986,116 @@ body {
 .share-modal__close{
   @apply opacity-0 pointer-events-none;
 }
+.user-profile-edit{
+  @apply rounded-2xl p-6 pb-0 bg-white border border-gray-5;
+}
+.user-profile-edit__title{
+  @apply text-xl font-bold mb-6;
+}
+.user-profile-edit__form{
+  @apply mt-4 xl:px-[97px];
+}
+.user-profile-edit__fields{
+  @apply grid grid-cols-1 xl:grid-cols-2 gap-x-4 gap-y-6 auto-rows-[40px] md:auto-rows-[64px];
+}
+.user-profile-edit__buttons{
+  @apply grid mb-10 md:mb-8 grid-cols-1 gap-y-[10px] md:grid-cols-[131px_131px] auto-rows-[40px] gap-x-4 justify-end mt-[66px] md:mt-12;
+}
+.user-profile-edit__cancel-btn{
+  @apply rounded-lg border border-primary outline-none transition-all duration-300;
+}
+.user-profile-edit__submit-btn{
+  @apply rounded-lg border outline-none border-primary bg-primary text-white hover:bg-shade-2 transition-all duration-300;
+}
+.user-profile-field__input-wrapper{
+  @apply flex items-center gap-x-2 md:gap-x-3 h-full w-full transition-all duration-300 rounded md:rounded-xl border bg-white px-3;
+}
+.user-profile-field__input{
+  @apply flex-1 outline-none font-medium text-sm text-gray-10 bg-transparent;
+}
+.user-profile-field__label{
+  @apply absolute right-9 md:right-[44px] top-1/2 z-10 text-xs md:text-sm transition-all duration-300 pointer-events-none -translate-y-1/2 text-gray-10 font-medium;
+}
+.user-profile-field__error{
+  @apply text-primary mr-9 text-[10px] md:text-xs block mt-1 transition-opacity duration-300;
+}
+.user-profile-field__input-wrapper--focus{
+  @apply border-gray-7 focus-within:border-info focus-within:shadow-info hover:border-gray-11 focus-within:hover:border-info;
+}
+.user-profile-field__icon{
+  @apply !w-4 !h-4 md:!w-5 md:!h-5;
+}
+.user-profile-field__label--active{
+  @apply -translate-y-7 text-info bg-white lg:bg-transparent px-1;
+}
+.rating-modal {
+  @apply fixed inset-0 z-40 bg-black/60 flex items-center justify-center transition-all duration-300;
+}
+.rating-modal--open {
+  @apply opacity-100 pointer-events-auto;
+}
+.rating-modal--closed {
+  @apply opacity-0 pointer-events-none;
+}
+.rating-modal__content {
+  @apply relative bg-white w-full overflow-y-auto h-full md:w-[600px] md:h-[860px] px-4 md:px-6 md:rounded-2xl;
+}
+.rating-modal__btn-close {
+  @apply absolute left-6 top-6;
+}
+.rating-modal__profile {
+  @apply flex flex-col items-center gap-y-2 mt-16;
+}
+.rating-modal__avatar {
+  @apply rounded-full;
+}
+.rating-modal__image {
+  @apply w-[87px] h-[87px] md:w-[98px] md:h-[98px];
+}
+.rating-modal__name {
+  @apply text-gray-11 font-medium text-sm;
+}
+.rating-modal__form {
+  @apply mt-6;
+}
+.rating-modal__section {
+  @apply flex flex-col items-center gap-y-4;
+}
+.rating-modal__hint {
+  @apply text-gray-11 text-center text-xs md:text-sm;
+}
+.rating-modal__stars {
+  @apply flex items-center gap-x-1 mb-2;
+}
+.rating-modal__star {
+  @apply w-8 h-8 border border-gray-8 rounded-lg text-center leading-8 text-gray-8 cursor-pointer text-sm;
+}
+.rating-modal__star--selected {
+  @apply bg-gray-5 text-gray-8 border-gray-8;
+}
+.rating-modal__error {
+  @apply text-primary text-xs mt-1 transition-all duration-300;
+}
+.rating-modal__label {
+  @apply text-gray-11 text-base;
+}
+.rating-modal__reasons-grid {
+  @apply grid grid-cols-2 auto-rows-[41px] gap-x-4 md:gap-x-6 gap-y-2 md:gap-y-3 min-h-[200px];
+}
+.rating-modal__reason {
+  @apply text-gray-10 p-1 sm:p-2 text-xs sm:text-sm border rounded-lg transition-colors duration-200;
+}
+.rating-modal__reason--selected {
+  @apply border-blue-500 bg-blue-50 text-blue-700;
+}
+.rating-modal__textarea {
+  @apply w-full h-[95px] md:h-[106px] mt-6 font-medium text-sm outline-none text-gray-7 resize-none ring-0 border border-gray-3 px-2 pt-2 rounded-lg;
+}
+.rating-modal__submit-wrapper {
+  @apply mt-10 md:mt-10 flex justify-center;
+}
+.rating-modal__submit {
+  @apply flex items-center justify-center mb-6 bg-primary text-white rounded-lg hover:bg-shade-2 transition-all w-full font-medium h-8 text-sm max-w-[184px];
+}
+
 }

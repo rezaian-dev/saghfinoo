@@ -1,4 +1,4 @@
-import { HomeTrendUp, Location, More, UserSquare } from "iconsax-react";
+import { ExportCurve, HomeTrendUp, Location, More, UserSquare, Warning2 } from "iconsax-react";
 import React, { memo } from "react";
 
 // Memoize the component to optimize re-renders
@@ -45,6 +45,19 @@ const RealtyIntro = memo(({ realestate = true }) => {
               color="#505050"
               variant="Outline"
             />
+                  {/* 🔹 Action buttons (Export & Archive) */}
+                  <div className="property-rating__actions">
+                    {/* 📤 Export button */}
+                    <ExportCurve className="property-rating__icon !w-6 !h-6"  color="#505050" />
+            
+                    {/* 📂 Archive button */}
+                    <img
+                      className="property-rating__archive"
+                      src="svgs/icons/archive-minus(bg-gray-11).svg"
+                      loading="lazy"
+                      alt="archiveMenu"
+                    />
+                  </div>
           </div>
         </div>
       </div>
@@ -84,6 +97,14 @@ const RealtyIntro = memo(({ realestate = true }) => {
       <span className="realty-intro__contact-btn">
         {realestate ? "تماس با ما" : "تماس با مشاور"}
       </span>
+      {/* 🚨 Report Section */}
+              <div className="property-rating__report md:hidden justify-start mt-4">
+                {/* ⚠️ Warning Icon */}
+                <Warning2 className="property-rating__warning-icon" size="32" color="#ED2E2E" />
+      
+                {/* 📢 Report Text */}
+                <span className="property-rating__report-text text-sm custom:text-base">گزارش تخلف</span>
+              </div>
     </div>
   );
 });

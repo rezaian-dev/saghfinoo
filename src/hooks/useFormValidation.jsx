@@ -4,11 +4,10 @@ import * as yup from "yup";
 
 /**
  * 📋 Form Validation Schema
- * Defines validation rules for user forms including phone number validation
+ * General user form schema including name, mobile, and password validation
  */
-export const schema = yup
-  .object({
-    // 🧑‍💼 First Name - required & must be Persian
+export const schema = yup.object({
+    // 🧑‍💼 First Name - Required & must be Persian letters
     firstName: yup
       .string()
       .required("*نام الزامی است")
@@ -19,7 +18,7 @@ export const schema = yup
         (value) => !value?.startsWith(" ")
       ),
 
-    // 👨‍👩‍👧 Last Name - required & must be Persian
+    // 👨‍👩‍👧 Last Name - Required & must be Persian letters
     lastName: yup
       .string()
       .required("*نام خانوادگی الزامی است")
@@ -30,13 +29,13 @@ export const schema = yup
         (value) => !value?.startsWith(" ")
       ),
 
-    // 📱 Mobile Number - required & must be valid format
+    // 📱 Mobile Number - Required & must follow Iran's format
     mobile: yup
       .string()
       .required("*شماره موبایل الزامی است")
       .matches(/^(09|\+989|989)[0-9]{9}$/, "*شماره موبایل معتبر نیست"),
 
-    // 🔐 Password - required, min length, only letters & numbers
+    // 🔐 Password - Required, min 6 chars, only letters & numbers
     password: yup
       .string()
       .required("*رمز عبور الزامی است")
@@ -48,7 +47,10 @@ export const schema = yup
   })
   .required();
 
-// Define validation schema directly in the component
+/**
+ * ☎️ Phone Number Only Schema
+ * Used when only mobile number is needed
+ */
 export const schemaPhoneNumber = yup.object({
   mobileNumber: yup
     .string()
@@ -57,11 +59,59 @@ export const schemaPhoneNumber = yup.object({
 });
 
 /**
- * 🔍 useFormValidation Custom Hook
- * Unified custom hook for form validation using Yup schema
- **/
+ * 👤 Profile Fields Schema
+ * For validating user profile form: name, mobile, password, email
+ */
+export const schemaّFieldProfile = yup.object({
+  fullName: yup
+    .string()
+    .required("*نام و نام خانوادگی الزامی است")
+    .matches(/^[\u0600-\u06FF\s]+$/, "*لطفا فقط حروف فارسی وارد کنید"),
+
+  mobile: yup
+    .string()
+    .required("*شماره موبایل الزامی است")
+    .matches(/^09\d{9}$/, "*لطفا یک شماره موبایل معتبر وارد کنید"),
+
+  password: yup
+    .string()
+    .required("*رمز عبور الزامی است")
+    .min(8, "*رمز عبور باید حداقل ۸ کاراکتر باشد")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+      "*رمز عبور باید شامل حروف و اعداد باشد"
+    ),
+
+  email: yup
+    .string()
+    .email("*لطفا یک ایمیل معتبر وارد کنید")
+});
+
+/**
+ * ⭐ Rating Modal Validation
+ * Requires rating and reason based on score
+ */
+export const validationRatingModal = yup.object().shape({
+  rating: yup
+    .number()
+    .min(1, "لطفاً امتیاز خود را ثبت کنید")
+    .required("لطفاً امتیاز خود را ثبت کنید"),
+
+  reason: yup.string().when("rating", {
+    is: (rating) => rating > 0,
+    then: () => yup.string().required("لطفاً دلیل امتیاز خود را انتخاب کنید"),
+    otherwise: () => yup.string(),
+  }),
+
+  comment: yup.string(),
+});
+
+/**
+ * 🧩 useFormValidation Custom Hook
+ * A reusable hook for handling form logic and validation
+ */
 export default function useFormValidation(defaultValues) {
-  // ⚙️ Initialize react-hook-form with yup validation schema
+  // ⚙️ Initialize form with schema validation and default values
   const {
     register,
     handleSubmit,
@@ -74,14 +124,15 @@ export default function useFormValidation(defaultValues) {
     defaultValues,
   });
 
-  // 👁️ Watch all form values for changes
+  // 👁️ Watch all field values
   const formValues = watch();
 
-  // ✅ Check if the form has any filled fields
-  const formIsComplete =
-    Object.values(formValues).some((value) => value && value.length > 0);
+  // ✅ Check if at least one field is filled
+  const formIsComplete = Object.values(formValues).some(
+    (value) => value && value.length > 0
+  );
 
-  // 📦 Return all necessary form utilities and state
+  // 📦 Return all needed tools and state for the form
   return {
     register,
     handleSubmit,
@@ -89,6 +140,6 @@ export default function useFormValidation(defaultValues) {
     errors,
     formIsComplete,
     formValues,
-    schema
+    schema,
   };
 }

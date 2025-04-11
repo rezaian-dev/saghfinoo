@@ -1,86 +1,128 @@
 import React, { memo } from "react";
+import { Controller } from "react-hook-form";
 import clsx from "classnames";
+import { User, Call, Sms, Key, Eye, EyeSlash } from "iconsax-react";
 
-/**
- * 📝 UserProfileFormFields Component
- * Renders a single form field with validation and styling
- */
+const FORM_FIELDS = {
+  fullName: {
+    id: "fullName",
+    type: "text",
+    required: true,
+    label: "نام و نام خانوادگی",
+    shortLabel: "نام",
+    icon: User,
+    dir: "rtl",
+  },
+  mobile: {
+    id: "mobile",
+    type: "text",
+    required: true,
+    label: "شماره موبایل",
+    shortLabel: "شماره",
+    icon: Call,
+    dir: "ltr",
+  },
+  password: {
+    id: "password",
+    type: "password",
+    required: true,
+    label: "رمز عبور",
+    shortLabel: "رمز",
+    icon: Key,
+    dir: "ltr",
+    hasToggle: true,
+  },
+  email: {
+    id: "email",
+    type: "email",
+    required: false,
+    label: "ایمیل (اختیاری)",
+    shortLabel: "ایمیل",
+    icon: Sms,
+    dir: "ltr",
+  },
+};
+
 const UserProfileFormFields = memo(({
+  fieldName,
+  control,
   register,
-  focusState,
   errors,
-  inputErrors,
-  handleFocusInput,
-  handleBlurInput,
-  handlePaste,
-  shouldFloatLabel,
-  id,
-  label,
-  labelShort,
-  icon,
-  eye,
-  type,
-  onKeyPress,
+  showPassword,
+  togglePasswordVisibility,
+  watchAllFields,
 }) => {
-  // 🎨 Determine if field has errors
-  const hasErrors = errors[id] || inputErrors[id];
-  
-  // 🏷️ Determine which label to show
-  const displayLabel = shouldFloatLabel(id) ? labelShort : label;
-  
+  const field = FORM_FIELDS[fieldName];
+  const isPasswordField = fieldName === "password";
+  const inputType = isPasswordField
+    ? showPassword
+      ? "text"
+      : "password"
+    : field.type;
+  const hasValue = !!watchAllFields[fieldName];
+  const errorMessage = errors[fieldName]?.message;
+
   return (
-    <div
-      className={clsx(
-        "user-profile-edit__form-field",
-        focusState[id] && !hasErrors && "user-profile-edit__form-field--focused",
-        hasErrors && "user-profile-edit__form-field--error"
-      )}
-      key={id}
-    >
-      {/* 🔤 Input field container */}
-      <div className="user-profile-edit__input-wrapper">
-        {/* 🔣 Field icon */}
-        {icon}
-        
-        {/* ⌨️ Input element */}
-        <input
-          type={type || "text"}
-          autoComplete="off"
-          id={id}
-          onKeyPress={onKeyPress}
-          onPaste={(e) => handlePaste(e, id)}
-          {...register(id)}
-          onFocus={() => handleFocusInput(id)}
-          onBlur={() => handleBlurInput(id)}
-          className={clsx(
-            "user-profile-edit__input",
-            hasErrors && "user-profile-edit__input--error"
-          )}
-          dir={id === "userEmail" ? "ltr" : "rtl"}
-        />
-        
-        {/* 🏷️ Floating label */}
-        <label
-          htmlFor={id}
-          className={clsx(
-            "user-profile-edit__input-label",
-            hasErrors && "user-profile-edit__input-label--error",
-            shouldFloatLabel(id) && "user-profile-edit__input-label--floating"
-          )}
-        >
-          {displayLabel}
-        </label>
-        
-        {/* 👁️ Password visibility toggle */}
-        {eye}
-      </div>
-      
-      {/* ⚠️ Error message display */}
-      {hasErrors && (
-        <span className="user-profile-edit__input-error-message">
-          {inputErrors[id] || errors[id]?.message}
-        </span>
-      )}
+    <div className="user-profile-field relative">
+      <Controller
+        name={fieldName}
+        control={control}
+        render={({ field: controllerField }) => (
+          <>
+            {/* 🧱 Input wrapper */}
+            <div
+              className={clsx("user-profile-field__input-wrapper",
+                errors[fieldName]
+                  ? "border-primary"
+                  : "user-profile-field__input-wrapper--focus"
+              )}
+            >
+              {/* 🔷 Right Icon */}
+              <div>
+                <field.icon
+                  className="user-profile-field__icon"
+                  color="#505050"
+                />
+              </div>
+
+              {/* 📝 Input */}
+              <input
+                id={field.id}
+                type={inputType}
+                {...controllerField}
+                {...register(fieldName)}
+                className="user-profile-field__input"
+              />
+
+              {isPasswordField && (
+                <div
+                  className="cursor-pointer"
+                  onClick={togglePasswordVisibility}
+                >
+                  {React.createElement(showPassword ? EyeSlash : Eye, {
+                    className: "user-profile-field__icon",
+                    color: "#505050",
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* 🏷 Label */}
+            <label
+              htmlFor={field.id}
+              className={clsx("user-profile-field__label",hasValue && "user-profile-field__label--active",errorMessage && "text-primary"
+              )}
+            >
+              {hasValue ? field.shortLabel : field.label}
+            </label>
+
+            {/* ⚠️ Error message */}
+            <span className={clsx("user-profile-field__error",errorMessage ? "opacity-100" : "opacity-0")}>
+              {errorMessage}
+            </span>
+          </>
+        )}
+      />
     </div>
   );
 });

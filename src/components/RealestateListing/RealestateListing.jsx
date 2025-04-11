@@ -55,7 +55,7 @@ const RealestateListing = memo(({ realestate = true }) => {
 
             {/* 🔽 More Filters Button */}
 
-            <div className="realestate-listing-desktop__more-filters">
+            <div className="realestate-filter-desktop__more-filters">
               <FilterSearch
                 className="realestate-listing__filter-icon"
                 color="#505050"

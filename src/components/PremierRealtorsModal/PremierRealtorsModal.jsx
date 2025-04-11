@@ -3,7 +3,7 @@ import clsx from "classnames";
 import { Call, CloseCircle } from "iconsax-react";
 
 
-const PremierRealtorsModal = memo(({ isOpenModal }) => {
+const PremierRealtorsModal = memo(({ isOpenModal,title=null,image=null }) => {
   // 📞 Contact numbers with their href links
   const contactNumbers = [
     { number: "۰۹۱۲۳۴۵۶۷۸۹", href: "tel:+989123456789" },
@@ -25,16 +25,16 @@ const PremierRealtorsModal = memo(({ isOpenModal }) => {
         </button>
 
         {/* 🏢 Logo section */}
-        <div className="premier-realtors-modal__logo">
+        <div className={clsx("premier-realtors-modal__logo", image && "w-[136px] h-[136px]")}>
           <img
             className="premier-realtors-modal__logo-image"
-            src="../images/landing/home-prouser/logo-tusi.png"
+            src={image ? image : "../images/landing/home-prouser/logo-tusi.png"}
             alt="LogoToosi"
           />
         </div>
 
         {/* 📜 Modal title */}
-        <h4 className="premier-realtors-modal__title">املاک توسی</h4>
+        <h4 className="premier-realtors-modal__title">{title ? title : "املاک توسی"}</h4>
 
         {/* 📞 Contact numbers section */}
         <div className="premier-realtors-modal__contacts">

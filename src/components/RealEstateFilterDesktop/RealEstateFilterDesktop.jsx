@@ -36,7 +36,7 @@ const RealEstateFilterDesktop = memo(() => {
       ))}
 
       {/* ➕ More filters button with dynamic text */}
-      <div className="real-estate-filter-desktop__more-filters">
+      <div className="realestate-filter-desktop__more-filters">
         <FilterSearch
           className="real-estate-filter-desktop__icon"
           color="#505050"

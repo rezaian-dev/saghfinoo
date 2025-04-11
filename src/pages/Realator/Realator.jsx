@@ -1,12 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../../layouts/Header/Header';
 import RealtyIntro from '../../components/RealtyIntro/RealtyIntro';
 import PropertyRatingCard from '../../components/PropertyRatingCard/PropertyRatingCard';
 import RealestateListing from '../../components/RealestateListing/RealestateListing';
 import UserReviews from '../../components/UserReviews/UserReviews';
 import Footer from '../../layouts/Footer/Footer';
+import PremierRealtorsModal from '../../components/PremierRealtorsModal/PremierRealtorsModal';
+import useModal from '../../hooks/useModal';
+import FilterModal from '../../components/FillterModal/FillterModal';
+import ReportAdModal from '../../components/ReportAdModal/ReportAdModal';
+import RatingModal from '../../components/RatingModal/RatingModal';
+import ShareModal from '../../components/ShareModal/ShareModal';
+
 
 export default function Realator() {
+
+  const { handleModal, isOpenModalPremier,isOpenModalFillter,isOpenModalReportAd,isOpenModalRating,setIsOpenModalReportAd,
+    setIsOpenModalRating,isOpenModalShare, setIsOpenModalShare } =useModal();
+
+  useEffect(() => {
+    document.addEventListener("click", handleModal);
+    return () => document.removeEventListener("click", handleModal);
+  }, [isOpenModalPremier]);
   return (
     <>
       {/* 🏠 Header section with logo and navigation */}
@@ -57,6 +72,11 @@ export default function Realator() {
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>
+      <PremierRealtorsModal image={"../images/landing/home-prouser/ali-parto.png"} title={"علی پرتو"} isOpenModal={isOpenModalPremier}/>
+      <FilterModal isOpenModal={isOpenModalFillter}/>
+      <ReportAdModal isOpenModal={isOpenModalReportAd} setIsOpenModal={setIsOpenModalReportAd}/>
+      <RatingModal isOpenModal={isOpenModalRating} setIsOpenModal={setIsOpenModalRating} />
+      <ShareModal isOpenModal={isOpenModalShare} setIsOpenModal={setIsOpenModalShare}/>
     </>
   );
 }

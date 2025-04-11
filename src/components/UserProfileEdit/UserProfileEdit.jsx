@@ -1,148 +1,165 @@
-import React, { useEffect, useState, memo } from "react";
-import useUserProfileForm from "../../hooks/useUserProfileForm";
-import useFormValidation from "../../hooks/useFormValidation";
-import UserProfileFormFields from "../UserProfileFormFields/UserProfileFormFields";
+import React, { useState, memo } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
 import UserProfileImage from "../UserProfileImage/UserProfileImage";
+import { User, Call, Sms, Key } from "iconsax-react";
 import clsx from "classnames";
+import Swal from "sweetalert2";
+import UserProfileFormFields from "../UserProfileFormFields/UserProfileFormFields";
+import { schemaّFieldProfile } from "../../hooks/useFormValidation";
+import { useForm } from "react-hook-form";
 
-/**
- * 👤 UserProfileEdit Component
- * ===========================
- * 🔍 This component handles the user profile editing functionality,
- * including form validation, image uploads, and saving to localStorage.
- */
+const FORM_FIELDS = {
+  fullName: {
+    id: "fullName",
+    type: "text",
+    required: true,
+    label: "نام و نام خانوادگی",
+    shortLabel: "نام",
+    icon: User,
+  },
+  mobile: {
+    id: "mobile",
+    type: "text",
+    required: true,
+    label: "شماره موبایل",
+    shortLabel: "شماره",
+    icon: Call,
+  },
+  password: {
+    id: "password",
+    type: "password",
+    required: true,
+    label: "رمز عبور",
+    shortLabel: "رمز",
+    icon: Key,
+    hasToggle: true,
+  },
+  email: {
+    id: "email",
+    type: "email",
+    required: false,
+    label: "ایمیل (اختیاری)",
+    shortLabel: "ایمیل",
+    icon: Sms,
+  },
+};
 
 const UserProfileEdit = memo(() => {
-  // 🖼️ State for user profile image
-  const [userImage, setUserImage] = useState(null);
+  const [userImage, setUserImage] = useState(null); // 🖼️ Profile image preview
+  const [isImageDirty, setIsImageDirty] = useState(false); // 🔄 Track image changes
+  const [showPassword, setShowPassword] = useState(false); // 🔐 Toggle password visibility
 
-  // 🎛️ Custom hook for form field management
+  // 🎯 Setup React Hook Form
   const {
-    focusState,
-    inputErrors,
-    setFocusState,
-    handleFocusInput,
-    handleBlurInput,
-    handleFileChange,
-    handlePaste,
-    userProfileEditFormFields,
-  } = useUserProfileForm(userImage, setUserImage);
-
-  // ✅ Custom hook for form validation
-  const {
+    control,
     register,
     handleSubmit,
+    formState: { errors, isDirty },
     reset,
-    errors,
-    formIsComplete,
-    formValues,
-  } = useFormValidation(
-    JSON.parse(localStorage.getItem("userProfile")) || { 
-      userName: "", 
-      userNumber: "", 
-      userEmail: "", 
-      userPassword: "" 
+    watch,
+  } = useForm({
+    mode: "onChange",
+    resolver: yupResolver(schemaّFieldProfile),
+    defaultValues: {
+      fullName: "",
+      mobile: "",
+      password: "",
+      email: "",
     },
-    userImage
-  );
+  });
 
-  /**
-   * 💾 Form submission handler
-   * -------------------------
-   * Saves all data to localStorage including the image
-   */
-  const onSubmit = (data) => {
-    localStorage.setItem("userProfile", JSON.stringify({ ...data, userImage }));
-  };
+  const watchAllFields = watch(); // 👀 Watch all form fields
 
-  /**
-   * 🔄 Reset form to initial empty state
-   * ---------------------------------
-   * Clears all fields, image, and localStorage
-   */
-  const resetForm = () => {
-    reset({
-      userName: "",
-      userNumber: "",
-      userEmail: "",
-      userPassword: "",
-    });
+  // 📁 Handle image file change
+  const handleFileChange = ({ target }) => {
+    const file = target.files[0];
+    if (!file) return;
 
-    setUserImage(null);
-    setFocusState({});
-    localStorage.removeItem("userProfile");
-  };
-
-  /**
-   * 🏷️ Helper to determine if label should be floating
-   * -----------------------------------------------
-   * Returns true if field is focused or has content
-   */
-  const shouldFloatLabel = (id) => {
-    return focusState[id] || (formValues[id] && formValues[id].length > 0);
-  };
-
-  /**
-   * 🔄 Load saved profile data on component mount
-   * -----------------------------------------
-   * Restores image from localStorage if available
-   */
-  useEffect(() => {
-    const dataSaved = JSON.parse(localStorage.getItem("userProfile")) || null;
-    if (dataSaved && dataSaved.userImage) {
-      setUserImage(dataSaved.userImage);
+    if (["image/png", "image/jpeg"].includes(file.type)) {
+      setUserImage(URL.createObjectURL(file));
+      setIsImageDirty(true);
+    } else {
+      Swal.fire({
+        title: "خطا!",
+        text: "فقط فایل‌های PNG و JPG مجاز هستند!",
+        icon: "error",
+        confirmButtonText: "باشه",
+        confirmButtonColor: "#3085d6",
+      });
+      target.value = "";
     }
-  }, []); // Added empty dependency array to run effect only once
+  };
+
+  // 👁️ Toggle password visibility
+  const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
+
+  // ✅ Handle form submit
+  const onSubmit = () => {
+    setIsImageDirty(false);
+
+    Swal.fire({
+      title: "موفقیت‌آمیز!",
+      text: "پروفایل شما با موفقیت به‌روز شد!",
+      icon: "success",
+      confirmButtonText: "باشه",
+      confirmButtonColor: "#3085d6",
+    });
+  };
+
+  // ❌ Reset form
+  const handleCancel = () => {
+    reset();
+    setUserImage(null);
+    setIsImageDirty(false);
+  };
+
+  const isFormChanged = isDirty || isImageDirty; // 🧠 Check if anything changed
 
   return (
     <div className="user-profile-edit">
-      {/* 📝 Profile Edit Title */}
       <h4 className="user-profile-edit__title">ویرایش اطلاعات</h4>
-      
-      {/* 📷 Profile image uploader component */}
-      <UserProfileImage 
-        userImage={userImage} 
-        handleFileChange={handleFileChange} 
+
+      <UserProfileImage
+        userImage={userImage}
+        handleFileChange={handleFileChange}
       />
-      
-      {/* 📋 Main form component */}
-      <form onSubmit={handleSubmit(onSubmit)} className="user-profile-edit__form">
-        {/* 🔤 Form fields container */}
-        <div className="user-profile-edit__form-fields">
-          {userProfileEditFormFields.map((item) => (
+
+      <form
+        className="user-profile-edit__form"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="user-profile-edit__fields">
+          {Object.keys(FORM_FIELDS).map((fieldName) => (
             <UserProfileFormFields
-              key={item.id}
-              {...item}
+              key={fieldName}
+              fieldName={fieldName}
+              control={control}
               register={register}
-              focusState={focusState}
               errors={errors}
-              inputErrors={inputErrors}
-              handleFocusInput={handleFocusInput}
-              handleBlurInput={handleBlurInput}
-              handlePaste={handlePaste}
-              shouldFloatLabel={shouldFloatLabel}
+              showPassword={showPassword}
+              togglePasswordVisibility={togglePasswordVisibility}
+              watchAllFields={watchAllFields}
             />
           ))}
         </div>
-        
-        {/* 🔘 Action buttons container */}
+
+        {/* 🔘 Action buttons */}
         <div className="user-profile-edit__buttons">
-          {/* ❌ Cancel button */}
           <button
             type="reset"
             className={clsx(
-              "user-profile-edit__button", 
-              formIsComplete && "user-profile-edit__button--primary"
+              "user-profile-edit__cancel-btn",
+              isFormChanged
+                ? "bg-primary hover:bg-shade-2 text-white"
+                : "bg-white text-primary"
             )}
-            onClick={resetForm}
+            onClick={handleCancel}
           >
             انصراف
           </button>
-          
-          {/* 💾 Save button */}
-          <button 
-            type="submit" 
-            className="user-profile-edit__button user-profile-edit__button--primary"
+          <button
+            type="submit"
+            className="user-profile-edit__submit-btn"
           >
             ذخیره اطلاعات
           </button>
