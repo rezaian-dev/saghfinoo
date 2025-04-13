@@ -65,7 +65,7 @@ const FooterDesktop = memo(() => {
         </div>
 
         {/* 🌆 Footer graphic image */}
-        <div className="footer-desktop__graphic">
+        <div className="mt-[27px]">
           <img className="mx-auto" src="../images/footer_graphic_city.png" loading="lazy" alt="grapphicCity" />
         </div>
       </div>

@@ -50,7 +50,7 @@ const PhoneNumberStepMobile = React.memo(
             className={clsx(
               "phone-step__input-wrapper",
               errors.mobileNumber
-                ? "phone-step__input-wrapper--error"
+                ? "border-primary"
                 : "phone-step__input-wrapper--focus"
             )}
           >
@@ -87,7 +87,7 @@ const PhoneNumberStepMobile = React.memo(
             />
             <span>
               موافق{" "}
-              <a href="#" className="phone-step__terms-link">
+              <a href="#" className="text-primary">
                 قوانین سقفینو
               </a>{" "}
               هستم.
@@ -95,12 +95,12 @@ const PhoneNumberStepMobile = React.memo(
           </label>
 
           {/* 🎯 Submit Button */}
-          <div className="phone-step__submit-container">
+          <div className="my-9">
             <button
               disabled={!isAccept}
               className={clsx(
                 "phone-step__submit-btn",
-                !isAccept && "phone-step__submit-btn--disabled"
+                !isAccept && "bg-tint-4"
               )}
               type="submit"
             >

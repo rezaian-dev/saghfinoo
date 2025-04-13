@@ -11,7 +11,7 @@ import PremierRealtorsModal from "../../../components/PremierRealtorsModal/Premi
 import useModal from "../../../hooks/useModal";
 
 export default function HomeProUser() {
-  const { handleModal, isOpenModalPremier } =useModal();
+  const { handleModal, isOpenModalPremier } = useModal();
 
   useEffect(() => {
     document.addEventListener("click", handleModal);
@@ -35,25 +35,25 @@ export default function HomeProUser() {
           </div>
         </section>
         {/* Saghfinoo Opportunity Section */}
-        <section className="home-pro-user__opportunity">
+        <section className="section-spacing-shared">
           <div className="container">
             <SaghfinooOpportunity />
           </div>
         </section>
         {/* Suggested searches section */}
-        <section className="home-pro-user__suggested-searches">
+        <section className="section-spacing-shared">
           <div className="container">
             <SuggestedSearches />
           </div>
         </section>
         {/* Premier Realtors section */}
-        <section className="home-pro-user__premier-realtors">
+        <section className="section-spacing-shared">
           <div className="container">
             <PremierRealtors text={"املاک برتر تهران"} />
           </div>
         </section>
         {/* Top Consultants section */}
-        <section className="home-pro-user__top-consultants">
+        <section className="section-spacing-shared">
           <div className="container">
             <TopConsultants />
           </div>
@@ -65,11 +65,11 @@ export default function HomeProUser() {
           <Footer />
         </div>
         {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
-        <p className="home-pro-user__footer-copyright">
+        <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>
-      <PremierRealtorsModal isOpenModal={isOpenModalPremier}/>
+      <PremierRealtorsModal isOpenModal={isOpenModalPremier} />
     </>
   );
 }

@@ -6,7 +6,7 @@ const RealEstateAgents = memo(() => {
   const { isCountShowItem, handlerShowItem } = useShowItem(11, agents);
 
   return (
-    <div className="real-estate-agents">
+    <div className="space-y-4">
       {/* 🏡 Section title */}
       <h3 className="real-estate-agents__title">مشاوران توسی</h3>
       {/* 📊 Grid layout for displaying agents */}

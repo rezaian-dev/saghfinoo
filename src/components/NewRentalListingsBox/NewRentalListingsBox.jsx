@@ -49,7 +49,7 @@ import clsx from "classnames";
         ) : (
           <>
             <div className="rental-listing__status">
-              <span className={clsx("rental-listing__status-badge",isAdConfirmed && "rental-listing__status-badge--confirmed")}>
+              <span className={clsx("rental-listing__status-badge",isAdConfirmed && "bg-black/40")}>
                 {isAdConfirmed ? "تائید شده" : "در انتظار تائید"}
               </span>
               {myad && (<span><Trash className="rental-listing__icon" color="#ffffff" variant="Outline"/></span>)}

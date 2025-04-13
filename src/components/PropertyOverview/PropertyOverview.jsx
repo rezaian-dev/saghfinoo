@@ -1,5 +1,11 @@
 import React, { memo } from "react";
-import { Buliding, ExportCurve, RulerPen, TableLamp, Warning2 } from "iconsax-react";
+import {
+  Buliding,
+  ExportCurve,
+  RulerPen,
+  TableLamp,
+  Warning2,
+} from "iconsax-react";
 import clsx from "classnames";
 
 const PropertyOverview = memo(() => {
@@ -17,19 +23,23 @@ const PropertyOverview = memo(() => {
   ];
 
   return (
-    <div className="property-overview">
+    <div className="w-full">
       {/* 🏠 Property Overview Header */}
       <div className="property-overview__header container">
         <div className="property-overview__header-title">
           <span className="property-overview__header-title-text">
             رهن و اجاره آپارتمان تهران
           </span>
-          <span className="property-overview__header-icons">
+          <span className="icon-sizes">
             {/* 📤 Export icon */}
-            <ExportCurve className="property-overview__header-icon" color="#353535" variant="Outline" />
+            <ExportCurve
+              className="icon-size cursor-pointer pointer-events-auto"
+              color="#353535"
+              variant="Outline"
+            />
             {/* 📂 Archive icon */}
             <img
-              className="property-overview__header-icon"
+              className="icon-size"
               src="svgs/icons/archive-minus(bg-gray-11).svg"
               loading="lazy"
               alt="archiveMenu"
@@ -37,7 +47,9 @@ const PropertyOverview = memo(() => {
           </span>
         </div>
         {/* 📍 Location */}
-        <h4 className="property-overview__location">۲۰۰ متر، محدوده ونک، بلوار دانش</h4>
+        <h4 className="property-overview__location">
+          ۲۰۰ متر، محدوده ونک، بلوار دانش
+        </h4>
       </div>
 
       {/* 📌 Property Details */}
@@ -46,7 +58,11 @@ const PropertyOverview = memo(() => {
           {dataBox.map(({ id, title, caption, icon: Icon }) => (
             <div key={id} className="property-overview__box">
               <div className="property-overview__box-header">
-                <Icon className="property-overview__icon" color="#353535" variant="Outline" />
+                <Icon
+                  className="property-overview__icon"
+                  color="#353535"
+                  variant="Outline"
+                />
                 <h4 className="property-overview__box-title">{title}</h4>
               </div>
               <h5 className="property-overview__box-caption">{caption}</h5>
@@ -69,10 +85,18 @@ const PropertyOverview = memo(() => {
         {/* 🚨 Report Section */}
         <div className="property-overview__report">
           <div className="property-overview__report-header">
-            <span className="property-overview__report-time">ساعاتی پیش تهران</span>
+            <span className="property-overview__report-time">
+              ساعاتی پیش تهران
+            </span>
             <div className="property-overview__report-actions">
-              <Warning2 className="property-overview__report-icon" color="#ED2E2E" variant="Outline" />
-              <span className="property-overview__report-text">گزارش تخلف آگهی</span>
+              <Warning2
+                className="icon-size"
+                color="#ED2E2E"
+                variant="Outline"
+              />
+              <span className="property-overview__report-text">
+                گزارش تخلف آگهی
+              </span>
             </div>
           </div>
           {/* 📌 Advertisement ID */}

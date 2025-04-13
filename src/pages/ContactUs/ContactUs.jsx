@@ -8,7 +8,7 @@ export default function ContactUs() {
   return (
     <>
       {/* 🏠 Page Header with Navigation */}
-      <header className="contact-us__header">
+      <header className="md:pt-10">
         <div className="container">
           <Header />
         </div>
@@ -33,7 +33,7 @@ export default function ContactUs() {
         <div className="container">
           <Footer />
         </div>
-        <p className="contact-us__footer-copyright">
+        <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>

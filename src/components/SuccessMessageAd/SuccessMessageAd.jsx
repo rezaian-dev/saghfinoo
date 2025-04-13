@@ -11,7 +11,7 @@ const SuccessMessageAd =memo((()=> {
       {/* 🖼️ Image container */}
       <div className="success-message-ad__image-container">
         <img
-          className="success-message-ad__image"
+          className="image-full"
           src="../images/register/success-ad.gif"
           loading="lazy"
           alt="AdSuccess"

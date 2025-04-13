@@ -13,13 +13,13 @@ import {
 
 const useRealEstateFilter = () => {
   // 🔄 Filter-ha taghir karde? Check mikonim inja
-const [isChanged, setIsChanged] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
 
-// 🆕 Baraye avalin bar render shode? Flag migzarim inja
-const [initialRender, setInitialRender] = useState(true);
+  // 🆕 Baraye avalin bar render shode? Flag migzarim inja
+  const [initialRender, setInitialRender] = useState(true);
 
-// 🔗 Url update darim anjam midim ya na? Inja track mishe
-const [isUpdatingUrl, setIsUpdatingUrl] = useState(false);
+  // 🔗 Url update darim anjam midim ya na? Inja track mishe
+  const [isUpdatingUrl, setIsUpdatingUrl] = useState(false);
 
   // 🧩 Access filter counts from context
   const { setFiltersCountMobile, setFiltersCountDesktop, setFilterCount } =
@@ -79,12 +79,22 @@ const [isUpdatingUrl, setIsUpdatingUrl] = useState(false);
   } = formValues;
 
   // 🏙️ System state options (with selected status)
-  const [listAreasSystem, setListAreasSystem] = useState(LOCATION_OPTIONS.districts);
-  const [listPropertySystem, setListPropertySystem] = useState(LOCATION_OPTIONS.propertyTypes);
+  const [listAreasSystem, setListAreasSystem] = useState(
+    LOCATION_OPTIONS.districts
+  );
+  const [listPropertySystem, setListPropertySystem] = useState(
+    LOCATION_OPTIONS.propertyTypes
+  );
   const [listCitySystem, setListCitySystem] = useState(LOCATION_OPTIONS.cities);
-  const [listCoolSystem, setListCoolSystem] = useState(BUILDING_SYSTEMS_OPTIONS.coolingSystem);
-  const [listHotSystem, setListHotSystem] = useState(BUILDING_SYSTEMS_OPTIONS.heatingSystem);
-  const [listFloorSystem, setListFloorSystem] = useState(BUILDING_SYSTEMS_OPTIONS.floorMaterial);
+  const [listCoolSystem, setListCoolSystem] = useState(
+    BUILDING_SYSTEMS_OPTIONS.coolingSystem
+  );
+  const [listHotSystem, setListHotSystem] = useState(
+    BUILDING_SYSTEMS_OPTIONS.heatingSystem
+  );
+  const [listFloorSystem, setListFloorSystem] = useState(
+    BUILDING_SYSTEMS_OPTIONS.floorMaterial
+  );
 
   // 📱 Mobile filter configurations
   const propertyFilterMobileConfig = [
@@ -283,10 +293,10 @@ const [isUpdatingUrl, setIsUpdatingUrl] = useState(false);
 
   // 📥 Load filters from URL when component mounts
   const processParams = useCallback(() => {
+    const params = new URLSearchParams(location.search);
+
     // First reset form to default values
     reset(defaultValues);
-
-    const params = new URLSearchParams(location.search);
 
     const mapSelection = (options, values) =>
       options.map((item) => ({
@@ -304,7 +314,7 @@ const [isUpdatingUrl, setIsUpdatingUrl] = useState(false);
 
     // Read values from URL and apply to form
     params.forEach((value, key) => {
-      if (!value || value === "any") return; // Ignore empty values or "any"
+      if (!value || value === "any" || params.has("Page")) return; // Ignore empty values or "any"
 
       const parsedValues = value
         .split(",")
@@ -359,56 +369,56 @@ const [isUpdatingUrl, setIsUpdatingUrl] = useState(false);
   }, []);
 
   // 🔄 Update mikonim URL ro ba meghdare filter-ha
-const updateUrlParams = useCallback((data, sourceComponent = null) => {
-  const url = new URL(location);
-  const params = url.searchParams;
+  const updateUrlParams = useCallback((data, sourceComponent = null) => {
+    const url = new URL(location);
+    const params = url.searchParams;
 
-  setIsUpdatingUrl(true); // 🟡 Dar hale update URL hastim
+    setIsUpdatingUrl(true); // 🟡 Dar hale update URL hastim
 
-  // 🧹 Agar az Global omade, hame filter ghadimi ro pak mikonim
-  if (sourceComponent === "Global") {
-    keysToRemove.forEach((key) => params.delete(key));
-  } else {
-    // 🧽 Dar gheire in surat, city ro ham ba filter-ha pak mikonim
-    [...keysToRemove, "city"].forEach((key) => params.delete(key));
-  }
-
-  for (const [key, value] of Object.entries(data)) {
-    // 🗑️ Agar value null, "any" ya khali bood, skip kon
-    if (
-      !value ||
-      value === "any" ||
-      (Array.isArray(value) &&
-        (value.length === 0 ||
-          JSON.stringify(value) === JSON.stringify(["any"])))
-    ) {
-      continue;
-    }
-
-    // 🔠 Format mikonim value ro baraye estefade dar URL
-    let finalValue = null;
-
-    // 🧱 Agar value objecte ba prop "value", az oon estefade mikonim
-    if (
-      Array.isArray(value) &&
-      typeof value[0] === "object" &&
-      value[0]?.hasOwnProperty("value")
-    ) {
-      finalValue = value.map((item) => item.value).join(",");
+    // 🧹 Agar az Global omade, hame filter ghadimi ro pak mikonim
+    if (sourceComponent === "Global") {
+      keysToRemove.forEach((key) => params.delete(key));
     } else {
-      finalValue = Array.isArray(value) ? value.join(",") : value;
+      // 🧽 Dar gheire in surat, city ro ham ba filter-ha pak mikonim
+      [...keysToRemove, "city"].forEach((key) => params.delete(key));
     }
 
-    // ➕ Meghdar ro be URL ezafe mikonim
-    params.set(key, finalValue);
-  }
+    for (const [key, value] of Object.entries(data)) {
+      // 🗑️ Agar value null, "any" ya khali bood, skip kon
+      if (
+        !value ||
+        value === "any" ||
+        (Array.isArray(value) &&
+          (value.length === 0 ||
+            JSON.stringify(value) === JSON.stringify(["any"])))
+      ) {
+        continue;
+      }
 
-  history.pushState({}, "", url); // 📍 Update mikonim address bar ro
+      // 🔠 Format mikonim value ro baraye estefade dar URL
+      let finalValue = null;
 
-  setTimeout(() => {
-    setIsUpdatingUrl(false); // ✅ Update tamam shod
-  }, 50);
-}, []);
+      // 🧱 Agar value objecte ba prop "value", az oon estefade mikonim
+      if (
+        Array.isArray(value) &&
+        typeof value[0] === "object" &&
+        value[0]?.hasOwnProperty("value")
+      ) {
+        finalValue = value.map((item) => item.value).join(",");
+      } else {
+        finalValue = Array.isArray(value) ? value.join(",") : value;
+      }
+
+      // ➕ Meghdar ro be URL ezafe mikonim
+      params.set(key, finalValue);
+    }
+
+    history.pushState({}, "", url); // 📍 Update mikonim address bar ro
+
+    setTimeout(() => {
+      setIsUpdatingUrl(false); // ✅ Update tamam shod
+    }, 50);
+  }, []);
 
   // 🔢 Count applied filters for badges
   const countAppliedFilters = useCallback((data) => {
@@ -521,20 +531,19 @@ const updateUrlParams = useCallback((data, sourceComponent = null) => {
     setIsChanged(!isEqual);
   }, [formValues]);
 
-// 🚀 URL parameters ro mikhonim zamani ke component load mishe
-useEffect(() => {
-  if (initialRender) {
-    // 🔄 Avalin load, parameters ro process mikonim
-    processParams();
-    setInitialRender(false); // 🔄 Flag ro false mikonim baraye render bad
-  } else {
-    // 🛑 Agar update URL nist, parameter-ha ro process mikonim
-    if (!isUpdatingUrl) {
+  // 🚀 URL parameters ro mikhonim zamani ke component load mishe
+  useEffect(() => {
+    if (initialRender) {
+      // 🔄 Avalin load, parameters ro process mikonim
       processParams();
+      setInitialRender(false); // 🔄 Flag ro false mikonim baraye render bad
+    } else {
+      // 🛑 Agar update URL nist, parameter-ha ro process mikonim
+      if (!isUpdatingUrl) {
+        processParams();
+      }
     }
-  }
-}, [location.search]); // 🔍 Harbar location.search taghir kard, in effect run mishe
-
+  }, [location.search]); // 🔍 Harbar location.search taghir kard, in effect run mishe
 
   // 📦 Hook output
   return {

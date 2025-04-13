@@ -7,7 +7,7 @@ export default function NotFoundPage() {
   return (
     <>
       {/* 🏠 Header Section */}
-      <header className="not-found-page__header">
+      <header className="md:pt-10">
         <div className="container">
           <Header />
         </div>
@@ -17,7 +17,7 @@ export default function NotFoundPage() {
       <main className="not-found-page__main">
         <div className="container">
           <NotFoundView
-            image={"../images/404.webp"} 
+            image={"../images/404.webp"}
             title={"صفحه‌ مورد نظر گم شده!"}
             caption={
               "املاک به‌سرعت در حال خرید و فروش و اجاره‌اند، از صفحه اصلی گزینه مورد نظر را جست‌وجو کنید."
@@ -31,9 +31,9 @@ export default function NotFoundPage() {
         <div className="container">
           <Footer />
         </div>
-        
+
         {/* 📜 Copyright Notice */}
-        <p className="not-found-page__footer-copyright news-page__footer-copyright">
+        <p className="footer-copyright-shared footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>

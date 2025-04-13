@@ -26,31 +26,33 @@ export default function HomeNewUser() {
           </div>
         </section>
         {/* Type of Houses Section */}
-        <section className="home-new-user__type-houses">
+        <section className="section-spacing-shared">
           <div className="container">
             <HousingScout />
           </div>
         </section>
         {/* Housing Support Section */}
-        <section className="home-new-user__support">
+        <section className="section-spacing-shared">
           <div className="container">
             <HousingSupport />
           </div>
         </section>
         {/* Housing News Section */}
-        <section className="home-new-user__news">
+        <section className="section-spacing-shared">
           <div className="container">
             <HousingNews />
           </div>
         </section>
       </main>
-        {/* Footer container that holds the Footer component */}
+      {/* Footer container that holds the Footer component */}
       <footer className="home-new-user__footer">
         <div className="container">
           <Footer />
         </div>
-         {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
-        <p className="home-new-user__footer-copyright">حقوق این سایت متعلق به سقفینو است</p>
+        {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
+        <p className="footer-copyright-shared">
+          حقوق این سایت متعلق به سقفینو است
+        </p>
       </footer>
     </>
   );

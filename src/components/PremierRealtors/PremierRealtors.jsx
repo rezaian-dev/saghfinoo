@@ -45,7 +45,7 @@ import useSwiperSlider from "../../hooks/useSwiperSlider";
         >
           <div ref={btnModal}>
           {dataCard.map((item) => (
-            <SwiperSlide className="premier-realtors__slide" key={item.id}>
+            <SwiperSlide className="p-1" key={item.id}>
               <PremierRealtorsBox {...item} /> {/* Render each news item */}
             </SwiperSlide>
           ))}

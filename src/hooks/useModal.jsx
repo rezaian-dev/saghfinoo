@@ -36,12 +36,16 @@ const useModal = (closeMenu) => {
     } else if (!target.closest(".modal-login__content")) {
       setIsOpenModalMobile(false);
     }
-    if(target.closest(".property-rating__question") || target.closest(".realty-intro__more-icon-img")){
-      setIsOpenModalRating(true)
-    }
-
-   else if(!target.closest(".rating-modal__content") || target.closest(".rating-modal__btn-close"))
-      setIsOpenModalRating(false)
+    if (
+      target.closest(".property-rating__question") ||
+      target.closest(".realty-intro__more-icon-img")
+    ) {
+      setIsOpenModalRating(true);
+    } else if (
+      !target.closest(".rating-modal__content") ||
+      target.closest(".rating-modal__btn-close")
+    )
+      setIsOpenModalRating(false);
     if (
       target.closest(".agent-card__contact") ||
       target.closest(".property-location__contact-button")
@@ -55,8 +59,8 @@ const useModal = (closeMenu) => {
     }
 
     if (
-      target.closest(".property-rating__icon") 
-      
+      target.closest(".property-rating__icon") ||
+      target.closest(".icon-size")
     ) {
       setIsOpenModalShare(true);
     } else if (

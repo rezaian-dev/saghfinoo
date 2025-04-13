@@ -7,12 +7,12 @@ export default function AdTextInputField({label, placeholder, name, register, fo
   const addressRegex = /^[\u0600-\u06FF\s،-]+(\d*[\u0600-\u06FF\s،-]*)+$/;
 
   return (
-    <div className="ad-text-input-field">
+    <div className="relative">
       {/* Label for the input field 🏷️ */}
       <span className="ad-text-input-field__label">{label}</span>
       
       {/* Input container with error handling 🎯 */}
-      <div className={clsx("ad-text-input-field__input-container", errors[name] ? "ad-text-input__container--error": "ad-text-input-field__input-container--focus")}>
+      <div className={clsx("ad-text-input-field__input-container", errors[name] ? "border-primary": "ad-text-input-field__input-container--focus")}>
         {/* Input field with form registration and validation 📥 */}
         <input
           autoComplete="off"

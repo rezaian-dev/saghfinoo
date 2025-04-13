@@ -27,7 +27,7 @@ const PremierRealtorsModal = memo(({ isOpenModal,title=null,image=null }) => {
         {/* 🏢 Logo section */}
         <div className={clsx("premier-realtors-modal__logo", image && "w-[136px] h-[136px]")}>
           <img
-            className="premier-realtors-modal__logo-image"
+            className="image-full"
             src={image ? image : "../images/landing/home-prouser/logo-tusi.png"}
             alt="LogoToosi"
           />

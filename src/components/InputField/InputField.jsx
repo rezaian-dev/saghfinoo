@@ -19,7 +19,7 @@ const InputField = memo(({ rangeValue, placeholder, handleInputChange, error, ha
               autoComplete="off"
               className={clsx(
                 "input-field__input group-hover:bg-gray-3",
-                hasError && "input-field__input--error"
+                hasError && "text-primary"
               )}
               type="text"
               placeholder={placeholder}

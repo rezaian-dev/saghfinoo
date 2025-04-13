@@ -21,12 +21,12 @@ const SearchBar = memo(() => {
   }, []);
 
   return (
-    <div className="search-bar">
+    <div className={clsx("search-bar", errorMessage ? "border-primary" : "search-bar--focus")}>
       {/* 🖥️ Input Field */}
       <div className="search-bar__input-wrapper">
         <SearchNormal className="search-bar__icon" color="#505050" variant="Outline" />
         <input
-          className={clsx("search-bar__input", errorMessage && "search-bar__input--error")}
+          className={clsx("search-bar__input", errorMessage && "text-primary")}
           type="text"
           placeholder="شهر مورد نظر را اضافه کنید"
           value={searchCity}
@@ -44,7 +44,7 @@ const SearchBar = memo(() => {
         <div ref={btnRef} className="search-bar__dropdown-wrapper">
           <span>کرج +۲ شهر </span>
           <ArrowDown2
-            className={clsx("search-bar__dropdown-icon", isDropdownOpen && "search-bar__dropdown-icon--open")}
+            className={clsx("search-bar__dropdown-icon", isDropdownOpen && "rotate-180")}
             color="#353535"
             aria-expanded={isDropdownOpen}
           />

@@ -4,7 +4,7 @@ import React, { memo } from "react";
 // 📌 Optimized with memo to prevent unnecessary re-renders
 const MapFocusArea = memo(() => {
   return (
-    <div className="map-focus-area flex-center">
+    <div className="flex-center">
       {/* 📍 Container for the map focus area */}
       <div className="map-focus-area__container">
         {/* 🏢 Office information */}

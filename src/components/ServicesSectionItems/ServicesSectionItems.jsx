@@ -11,10 +11,10 @@ const ServicesSectionItems = memo(({ title, items, mobile }) => {
       {/* 📋 List of items in the service section */}
       <ul
         className={clsx("services-section__list", {
-          "services-section__list--mobile": mobile, // 📱 For mobile view
-          "services-section__list--desktop": !mobile,
-          "services-section__list--with-icons": items.some(({ icon }) => icon),
-          "services-section__list--no-icons": !items.some(({ icon }) => icon),
+          "text-[10px]": mobile, // 📱 For mobile view
+          "text-xs": !mobile,
+          "space-y-1": items.some(({ icon }) => icon),
+          "space-y-[2px]": !items.some(({ icon }) => icon),
         })}
       >
         {/* 🔢 Render each item in the list */}
@@ -31,7 +31,7 @@ const ServicesSectionItems = memo(({ title, items, mobile }) => {
 
         {/* ⭐ Special item for user account section */}
         {title === "حساب کاربری" && (
-          <li className="services-section__trust-logo">
+          <li className="!mt-[93px]">
             <img
               src="../images/logos/Logo-trust.webp"
               loading="lazy"

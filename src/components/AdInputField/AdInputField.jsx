@@ -27,14 +27,14 @@ const AdInputField = memo(({ systemState, setSystemState, placeholder, label, da
     }, []);
 
     return (
-      <div className="ad-input-field">
+      <div className="relative">
         <span className="ad-input-field__label">{label}</span>
         <div
           ref={btnRef}
           className={clsx(
             "ad-input-field__control",
             (isDropdownOpen && !error) && "ad-input-field__control--active",
-            error && "ad-input-field__control--error"
+            error && "border-primary"
           )}
           
         >

@@ -35,19 +35,12 @@ const SortFilterBar = memo(() => {
             isDropdownOpen && "rental-property-listing__sort--open"
           )}
         >
-          <Sort
-            className="rental-property-listing__sort-icon"
-            color="#505050"
-            variant="Outline"
-          />
+          <Sort className="icon-size" color="#505050" variant="Outline" />
           <span className="rental-property-listing__sort-text">
             {sortBy === "newest" ? "جدیدترین" : "قرارداد فوری"}
           </span>
           <ArrowDown2
-            className={clsx(
-              "rental-property-listing__sort-arrow",
-              isDropdownOpen && "rental-property-listing__sort-arrow--rotated"
-            )}
+            className={clsx("icon-size", isDropdownOpen && "rotate-180")}
             color="#505050"
           />
           {/* ⬇️ Dropdown menu for sorting */}
@@ -64,8 +57,7 @@ const SortFilterBar = memo(() => {
                 value={value}
                 className={clsx(
                   "rental-property-listing__sort-option",
-                  sortBy === value &&
-                    "rental-property-listing__sort-option--selected"
+                  sortBy === value && "text-primary"
                 )}
                 onClick={() => setSortBy(value)} // Set the sorting criteria
               >
@@ -77,10 +69,7 @@ const SortFilterBar = memo(() => {
 
         {/* 🔄 Filter Options */}
         <div className="rental-property-listing__filters">
-          <FilterSearch
-            className="realestate-listing__filter-icon"
-            color="#505050"
-          />
+          <FilterSearch className="icon-size" color="#505050" />
           <span className="real-estate-filter-desktop__text">
             {filterCount
               ? `+${filterCount.toLocaleString("fa-IR")} فیلتر`

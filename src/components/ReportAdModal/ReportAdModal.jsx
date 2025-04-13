@@ -1,11 +1,13 @@
 import { CloseCircle } from "iconsax-react";
 import React, { memo, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import clsx from "classnames";
+import useToast from "../../hooks/useToast";
 
 const ReportAdModal = memo(({ isOpenModal, setIsOpenModal }) => {
   const [submitting, setSubmitting] = useState(false); // 🚀 Submission state
+  const {handleToastSuccess} = useToast(setIsOpenModal)
 
   const {control,handleSubmit,formState: { errors, isDirty },reset,} = useForm({
     defaultValues: {
@@ -24,21 +26,11 @@ const ReportAdModal = memo(({ isOpenModal, setIsOpenModal }) => {
 
   const onSubmit = () => {
     setSubmitting(true); // 🕒 Start loading
-
-    toast.success("گزارش شما با موفقیت ارسال شد", {
-      position: innerWidth > 768 ? "top-right" : "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      rtl: true,
-      onClose: () => {
-        setIsOpenModal(false); // ❌ Close modal
-        reset(); // 🔄 Reset form
-        setSubmitting(false); // ✅ Done
-      },
-    });
+    handleToastSuccess("گزارش شما با موفقیت ارسال شد")
+    setTimeout(() => {
+      setSubmitting(false); // ✅ Done
+      reset()
+    }, 3700);
   };
 
   return (

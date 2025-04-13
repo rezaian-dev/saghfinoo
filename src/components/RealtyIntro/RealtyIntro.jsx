@@ -52,7 +52,7 @@ const RealtyIntro = memo(({ realestate = true }) => {
             
                     {/* 📂 Archive button */}
                     <img
-                      className="property-rating__archive"
+                      className="cursor-pointer"
                       src="svgs/icons/archive-minus(bg-gray-11).svg"
                       loading="lazy"
                       alt="archiveMenu"

@@ -15,7 +15,7 @@ const HomeFinder = memo(() => {
       {/* 🖼️ Image container */}
       <div className="home-finder__image-wrapper">
         <img
-          className="home-finder__image"
+          className="image-full"
           src="images/news/housing-news-8.png"
           loading="lazy"
           alt="housing-news-8"

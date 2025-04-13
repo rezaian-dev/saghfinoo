@@ -12,6 +12,7 @@ import Footer from "../../../layouts/Footer/Footer";
 import useModal from "../../../hooks/useModal";
 import AgentCardModal from "../../../components/AgentCardModal/AgentCardModal";
 import ReportAdModal from "../../../components/ReportAdModal/ReportAdModal";
+import ShareModal from "../../../components/ShareModal/ShareModal";
 
 export default function HomeDetails() {
   const {
@@ -20,6 +21,8 @@ export default function HomeDetails() {
     isOpenModalReportAd,
     setIsOpenModalReportAd,
     setIsOpenModalAgentCard,
+    isOpenModalShare,
+    setIsOpenModalShare,
   } = useModal();
 
   useEffect(() => {
@@ -29,7 +32,7 @@ export default function HomeDetails() {
   return (
     <>
       {/* Header with image sliders (desktop and mobile) */}
-      <header className="home-details__header">
+      <header className="md:pt-10">
         <div className="container">
           <Header />
           <PropertyImageSlider />
@@ -39,7 +42,7 @@ export default function HomeDetails() {
 
       {/* Main content section containing property details, amenities, location, and similar listings */}
       <main>
-        <section className="home-details__info">
+        <section className="home-section-spacing">
           <div className="md:container">
             <div className="home-details__grid home-details__grid--info">
               <PropertyOverview />
@@ -48,7 +51,7 @@ export default function HomeDetails() {
           </div>
         </section>
 
-        <section className="home-details__feature">
+        <section className="home-section-spacing">
           <div className="container">
             <div className="home-details__grid home-details__grid--feature">
               <PropertyAmenities />
@@ -56,7 +59,7 @@ export default function HomeDetails() {
           </div>
         </section>
 
-        <section className="home-details__description">
+        <section className="home-section-spacing">
           <div className="container">
             <div className="home-details__grid home-details__grid--description">
               <PropertyDescription />
@@ -64,7 +67,7 @@ export default function HomeDetails() {
           </div>
         </section>
 
-        <section className="home-details__location">
+        <section className="home-section-spacing">
           <div className="container">
             <div className="home-details__grid home-details__grid--location">
               <PropertyLocation />
@@ -84,7 +87,7 @@ export default function HomeDetails() {
           <Footer />
         </div>
         {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
-        <p className="home-details__footer-copyright">
+        <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>
@@ -95,6 +98,10 @@ export default function HomeDetails() {
       <ReportAdModal
         isOpenModal={isOpenModalReportAd}
         setIsOpenModal={setIsOpenModalReportAd}
+      />
+      <ShareModal
+        isOpenModal={isOpenModalShare}
+        setIsOpenModal={setIsOpenModalShare}
       />
     </>
   );

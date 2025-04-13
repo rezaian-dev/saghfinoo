@@ -61,7 +61,7 @@ const RealEstateFilterMobile = memo(() => {
       </div>
 
       {/* 🏡 Logo section */}
-      <div className="real-estate-filter-mobile__logo">
+      <div className="mb-6">
         <img
           className="mx-auto"
           src="images/logos/Logo.png"

@@ -46,21 +46,19 @@ const PhoneNumberStep = ({
 
       {/* 👋 Welcome message */}
       <div className="modal__subtitle">
-        <span className="modal__subtitle-text">به سقفینو خوش آمدید</span>
-        <span className="modal__subtitle-instruction">
+        <span className="text-style">به سقفینو خوش آمدید</span>
+        <span className="text-style">
           لطفا برای ورود شماره موبایل خود را وارد کنید
         </span>
       </div>
 
       {/* 📱 Form starts */}
-      <form onSubmit={handleSubmit(onSubmit)} className="modal__form">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
         {/* 📤 Mobile number input */}
         <div
           className={clsx(
             "modal__form-input",
-            errors.mobileNumber
-              ? "modal__form-input--error"
-              : "modal__form-input--focus"
+            errors.mobileNumber ? "border-primary" : "modal__form-input--focus"
           )}
         >
           <input
@@ -97,7 +95,7 @@ const PhoneNumberStep = ({
           />
           <span className="modal__form-terms__text">
             موافق{" "}
-            <a href="#" className="modal__form-terms__link">
+            <a href="#" className="text-primary">
               قوانین سقفینو
             </a>{" "}
             هستم.

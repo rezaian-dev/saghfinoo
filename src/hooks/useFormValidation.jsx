@@ -6,7 +6,8 @@ import * as yup from "yup";
  * 📋 Form Validation Schema
  * General user form schema including name, mobile, and password validation
  */
-export const schema = yup.object({
+export const schema = yup
+  .object({
     // 🧑‍💼 First Name - Required & must be Persian letters
     firstName: yup
       .string()

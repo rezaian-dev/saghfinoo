@@ -7,7 +7,7 @@ import Footer from "../../layouts/Footer/Footer";
 export default function Realestates() {
   return (
     <>
-      <header className="realestates__header">
+      <header className="md:pt-10">
         <div className="container">
           <Header />
         </div>
@@ -32,7 +32,7 @@ export default function Realestates() {
           <Footer />
         </div>
         {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
-        <p className="realestates__footer-copyright">
+        <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>

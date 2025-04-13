@@ -17,7 +17,7 @@ import React, { memo } from 'react';
       </div>
       
       {/* 🔘 Call to action button */}
-      <div className="no-ad__button-container">
+      <div className="mt-8">
         <a href="#" className="no-ad__button">
           {searchAd ? "املاک اجاره ای" :"ثبت آگهی"}
         </a>

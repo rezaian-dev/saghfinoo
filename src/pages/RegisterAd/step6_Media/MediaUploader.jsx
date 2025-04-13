@@ -54,7 +54,7 @@ export default function MediaUploader() {
           {/* 📌 Right banner */}
           <div className="ad-form__image-container">
             <img
-              className="ad-form__image"
+              className="image-full"
               src="../images/register/register-banner.webp"
               loading="lazy"
               alt="Register Banner"
@@ -64,7 +64,7 @@ export default function MediaUploader() {
           {/* 📝 Form */}
           <form
             onSubmit={handleSubmit(() => navigate("/register/6"))}
-            className={clsx("form-container", uploadedVideo && "ad-form__form-container--extended")}
+            className={clsx("form-container", uploadedVideo && "xl:h-[815px]")}
           >
             <Stepper currentStep={6} />
             <div className="form-content">
@@ -94,7 +94,7 @@ export default function MediaUploader() {
                       ) : uploadedImages[index] ? (
                         <div className="ad-form__image-wrapper">
                           <img
-                            className="ad-form__image-preview"
+                            className="image-full"
                             src={uploadedImages[index].image}
                             alt={`image-${index}`}
                           />

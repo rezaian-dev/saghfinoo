@@ -13,18 +13,22 @@ import ShareModal from "../../components/ShareModal/ShareModal";
 export default function Realestate() {
   // 🔹 Social media links data
   const dataSocialMedia = [
-    { id: 1, link: "t.me/amlaktoosi", image: "images/socialMedia/telegram.png"},
+    {
+      id: 1,
+      link: "t.me/amlaktoosi",
+      image: "images/socialMedia/telegram.png",
+    },
     { id: 2, link: "Toosi_Amlak", image: "images/socialMedia/linkdin.png" },
     { id: 3, link: "Toosi_Amlak", image: "images/socialMedia/instagram.png" },
     { id: 4, link: "Toosi_Amlak.com", image: "images/socialMedia/site.png" },
   ];
 
-  const {handleModal,isOpenModalPremier,isOpenModalShare} = useModal();
+  const { handleModal, isOpenModalPremier, isOpenModalShare } = useModal();
 
-  useEffect(()=>{
-     document.addEventListener("click",handleModal);
-     return ()=> document.removeEventListener("click",handleModal)
-  },[])
+  useEffect(() => {
+    document.addEventListener("click", handleModal);
+    return () => document.removeEventListener("click", handleModal);
+  }, []);
 
   return (
     <>
@@ -71,33 +75,33 @@ export default function Realestate() {
             </div>
           </div>
         </section>
-        <section className="realestate__realtors">
+        <section className="section-spacing">
           <div className="container">
             <RealEstateAgents />
           </div>
         </section>
-        <section className="realestate__property-listing">
+        <section className="section-spacing">
           <div className="container">
-          <RealestateListing/>
+            <RealestateListing />
           </div>
         </section>
-        <section className="realestate__user-comments">
+        <section className="section-spacing">
           <div className="container">
-          <UserReviews/>
+            <UserReviews />
           </div>
         </section>
       </main>
       {/* 🏢 Footer with site information and copyright */}
       <footer className="realestate__footer">
         <div className="container">
-      <Footer/>
+          <Footer />
         </div>
-       <p className="realestate__footer-copyright">
+        <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>
-      <PremierRealtorsModal isOpenModal={isOpenModalPremier}/>
-      <ShareModal isOpenModal={isOpenModalShare}/>
+      <PremierRealtorsModal isOpenModal={isOpenModalPremier} />
+      <ShareModal isOpenModal={isOpenModalShare} />
     </>
   );
 }

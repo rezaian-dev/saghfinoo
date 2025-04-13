@@ -26,7 +26,7 @@ const ContactInfoBox = memo(() => {
         <span className="contact-info-box__title">با ما در ارتباط باشید</span>
 
         {/* 📋 List of contact methods */}
-        <ul className="contact-info-box__list">
+        <ul className="space-y-1">
           {dataItem.map(({ id, icon, text }) => (
             <li key={id} className="contact-info-box__list-item">
               {/* 🔗 Each contact method with its icon */}

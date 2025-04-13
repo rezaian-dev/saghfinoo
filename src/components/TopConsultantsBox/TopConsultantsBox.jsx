@@ -9,7 +9,7 @@ const TopConsultantsBox = memo(({ name, image, agency, ratingText, alt, hover })
         
         {/* 🖼️ Image container */}
         <div className="consultants-box__image-container">
-          <img className="consultants-box__image" loading="lazy" src={image} alt={alt} />
+          <img className="w-full" loading="lazy" src={image} alt={alt} />
         </div>
 
         {/* 👨‍💼 Consultant name */}

@@ -7,7 +7,7 @@ export default function AboutUs() {
   return (
     <>
       {/* Header section containing the main site header 🏠 */}
-      <header className="about-us__header">
+      <header className="md:pt-10">
         <div className="container">
           <Header />
         </div>
@@ -25,7 +25,7 @@ export default function AboutUs() {
         <div className="container">
           <Footer />
         </div>
-        <p className="about-us__footer-copyright">
+        <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>

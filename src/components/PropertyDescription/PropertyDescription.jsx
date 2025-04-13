@@ -18,7 +18,7 @@ import React, { memo } from "react";
       <h4 className="property-description__title">توضیحات</h4>
 
       {/* 📋 List of property details */}
-      <div className="property-description__details">
+      <div className="space-y-3">
         {propertyDetails.map(({ id, label, value }) => (
           <span key={id} className="property-description__item">
             {/* 🏷️ Displaying label and value */}

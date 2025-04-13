@@ -8,7 +8,7 @@ export default function Realators() {
   return (
     <>
       {/* Header section containing the main site navigation */}
-      <header className="realators__header">
+      <header className="md:pt-10">
         <div className="container">
           <Header />
         </div>
@@ -34,7 +34,7 @@ export default function Realators() {
           <Footer />
         </div>
         {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
-        <p className="realators__footer-copyright">
+        <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>

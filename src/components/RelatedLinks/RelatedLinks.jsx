@@ -15,10 +15,8 @@ const RelatedLinks = memo(() => {
   return (
     <div className="container">
       {/* 📌 Title for the related links section */}
-      <h3 className="related-links__title">
-        لینک های مرتبط
-      </h3>
-      
+      <h3 className="title">لینک های مرتبط</h3>
+
       {/* 🔗 Grid to display the related links */}
       <div className="related-links__grid">
         {/* 💬 Map over search suggestions to display each link */}

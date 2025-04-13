@@ -57,7 +57,7 @@ const RangeFilterDesktop = memo(({ setValue, minValue, maxValue, onSubmit, label
         <ArrowDown2
           className={clsx(
             "range-filter-desktop__icon",
-            isDropdownOpen && "range-filter-desktop__icon--rotated"
+            isDropdownOpen && "rotate-180"
           )}
           color="#505050"
         />

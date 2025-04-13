@@ -42,7 +42,7 @@ export default function DescriptionForm() {
           {/* 🖼️ Left section: Image display */}
           <div className="ad-form__image-container">
             <img
-              className="ad-form__image"
+              className="image-full"
               src="../images/register/register-banner.webp"
               loading="lazy"
               alt="Register Banner"
@@ -59,7 +59,7 @@ export default function DescriptionForm() {
               </span>
 
               {/* 🏷️ Input fields container */}
-              <div className="form-content__lines-container">
+              <div className="space-y-5">
                 {numbersLine.map((line) => {
                   return (
                     <div key={line} className="form-content__line-wrapper">

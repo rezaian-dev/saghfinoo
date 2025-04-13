@@ -11,35 +11,35 @@ export default function NewsPage() {
   return (
     <>
       {/* 📰 Header Section */}
-      <header className="news-page__header">
+      <header className="md:pt-10">
         <div className="container">
           <Header />
         </div>
       </header>
 
-        {/* 🏠 Main Content: News and Sections */}
+      {/* 🏠 Main Content: News and Sections */}
       <main>
-        <section className="news-page__real-estate-news">
+        <section className="news-section-spacings">
           <div className="lg:container">
             <RealEstateNews />
           </div>
         </section>
-        <section className="news-page__housing">
+        <section className="news-section-spacing">
           <div className="container">
             <PropertyComparison />
           </div>
         </section>
-        <section className="news-page__construction">
+        <section className="news-section-spacing">
           <div className="container">
             <ConstructionNews />
           </div>
         </section>
-        <section className="news-page__home-support">
+        <section className="news-section-spacing">
           <div className="container">
             <HomeFinder />
           </div>
         </section>
-        <section className="news-page__rent">
+        <section className="news-section-spacing">
           <div className="container">
             <RentalNews />
           </div>
@@ -51,7 +51,7 @@ export default function NewsPage() {
           <Footer />
         </div>
         {/* 📜 Copyright Notice */}
-        <p className="news-page__footer-copyright">
+        <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>

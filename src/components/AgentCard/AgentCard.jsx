@@ -13,7 +13,7 @@ const AgentCard = memo(() => {
 
           {/* 📋 Agent information section */}
           <div className="agent-card__info">
-            <div className="agent-card__content">
+            <div className="w-full">
               {/* 🏢 Header section with agency logo and name */}
               <div className="agent-card__header">
                 <img src="images/landing/home-prouser/logo-valiasr.png" width={36} height={25} alt="logoValiasr" />

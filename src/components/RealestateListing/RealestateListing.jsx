@@ -12,14 +12,20 @@ import { FilterContext } from "../../context/FilterContext";
 
 // Wrap the component with React.memo to optimize re-renders
 const RealestateListing = memo(({ realestate = true }) => {
-  const { setValue, handleSubmit, onSubmit, rangeFilterDesktopConfig, propertyFilterDesktopConfig } = useRealEstateFilter();
+  const {
+    setValue,
+    handleSubmit,
+    onSubmit,
+    rangeFilterDesktopConfig,
+    propertyFilterDesktopConfig,
+  } = useRealEstateFilter();
 
   // 🏙️ Filter data by selected city (Tehran)
   const selectedCity = dataCard.filter((item) => item.label === "Tehran");
 
   // 👀 State management for showing more/less items
   const { isCountShowItem, handlerShowItem } = useShowItem(12, selectedCity);
-  const { filtersCountDesktop,filterCount } = useContext(FilterContext);
+  const { filtersCountDesktop, filterCount } = useContext(FilterContext);
 
   return (
     <>
@@ -56,10 +62,7 @@ const RealestateListing = memo(({ realestate = true }) => {
             {/* 🔽 More Filters Button */}
 
             <div className="realestate-filter-desktop__more-filters">
-              <FilterSearch
-                className="realestate-listing__filter-icon"
-                color="#505050"
-              />
+              <FilterSearch className="icon-size" color="#505050" />
               <span className="real-estate-filter-desktop__text">
                 {filtersCountDesktop
                   ? `+${filtersCountDesktop.toLocaleString("fa-IR")} فیلتر`
@@ -82,10 +85,7 @@ const RealestateListing = memo(({ realestate = true }) => {
 
             {/* 🔍 Filter Button for Mobile */}
             <div className="rental-property-listing__filters">
-              <FilterSearch
-                className="realestate-listing__filter-icon"
-                color="#505050"
-              />
+              <FilterSearch className="icon-size" color="#505050" />
               <span className="real-estate-filter-desktop__text">
                 {filterCount
                   ? `+${filterCount.toLocaleString("fa-IR")} فیلتر`

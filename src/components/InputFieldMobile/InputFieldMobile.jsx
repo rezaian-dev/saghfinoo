@@ -29,7 +29,7 @@ const InputFieldMobile = memo((({
               autoComplete="off"
               className={clsx(
                 "input-field-mobile__input", // 🖌️ Apply styles
-                error && "input-field-mobile__input--error" // ⚠️ Add error class if error exists
+                error && "text-primary" // ⚠️ Add error class if error exists
               )}
               type="text"
               placeholder={placeholder}
@@ -41,7 +41,7 @@ const InputFieldMobile = memo((({
       </div>
 
       {/* 💰 Display the unit label (e.g., "تومان" or "متراژ") next to the input */}
-      <span className="input-field-mobile__unit">{unitLabel}</span>
+      <span className="text-gray-7">{unitLabel}</span>
 
       {/* ⚠️ Show error message if there's any */}
       {hasError && <span className="input-field-mobile__error">{error}</span>}

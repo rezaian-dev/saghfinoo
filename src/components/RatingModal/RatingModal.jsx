@@ -109,7 +109,7 @@ const onSubmit = (data) => {
 
         {/* 👤 User info */}
         <div className="rating-modal__profile">
-          <div className="rating-modal__avatar">
+          <div className="rounded-full">
             <img
               className="rating-modal__image"
               src="../images/landing/home-prouser/ali-parto.png"
@@ -121,7 +121,7 @@ const onSubmit = (data) => {
         </div>
 
         {/* 📝 Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="rating-modal__form">
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
           {/* ⭐ Rating section */}
           <div className="rating-modal__section rating-modal__section--rating">
             <span className="rating-modal__hint">

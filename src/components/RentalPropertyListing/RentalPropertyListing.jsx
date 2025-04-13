@@ -137,7 +137,7 @@ const RentalPropertyListing = memo(() => {
                     "rental-property-listing__pagination-item",
                     item.selected && "selected-page",
                     (item.type === "previous" || item.type === "next") &&
-                      "rotate-arrow" // Rotate arrows for next/previous buttons
+                      "!rotate-180" // Rotate arrows for next/previous buttons
                   )}
                   page={(item.page).toLocaleString("fa-IR")} // Convert page number to Persian digits
                 />

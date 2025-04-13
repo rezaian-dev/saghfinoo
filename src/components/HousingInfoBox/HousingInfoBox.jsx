@@ -5,7 +5,7 @@ const HousingInfoBox = memo(({ title, caption, img, alt, btnContent }) => {
     <div className="housing-info-box">
       {/* 🖼️ Image Container - Visual representation of the property */}
       <div>
-        <img className="housing-info-box__image" loading="lazy" src={img} alt={alt} />
+        <img className="image-full" loading="lazy" src={img} alt={alt} />
       </div>
       
       {/* 📝 Content Section - Displaying property details */}

@@ -29,7 +29,7 @@ const ProfileManagement = memo((({activeLabel}) => {
       
       {/* 📱 Navigation menu section */}
       <div className="profile__menu">
-        <ul className="profile__menu-list">
+        <ul className="space-y-4">
           {/* 🔄 Loop through menu items to create list */}
           {menuItems.map(({ id, title, icon, label }) => (
             <li key={id} className="profile__menu-item">
@@ -38,7 +38,7 @@ const ProfileManagement = memo((({activeLabel}) => {
                 <span className="profile__menu-text  group-hover:text-primary">{title}</span>
               </a>
               {/* 🟢 Active indicator - only active for the selected item */}
-              <span className={clsx("profile__menu-indicator", label === activeLabel && "profile__menu-indicator--active")}></span>
+              <span className={clsx("profile__menu-indicator", label === activeLabel && "block")}></span>
             </li>
           ))}
         </ul>

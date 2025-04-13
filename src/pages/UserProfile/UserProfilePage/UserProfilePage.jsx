@@ -8,7 +8,7 @@ export default function UserProfilePage() {
   return (
     <>
       {/* 🏠 Page Header */}
-      <header className="user-profile__header">
+      <header className="md:pt-10">
         <div className="container">
           <Header />
         </div>

@@ -20,7 +20,7 @@ const PropertyRatingCard = memo(({ realestate = true }) => {
 
         {/* 📂 Archive button */}
         <img
-          className="property-rating__archive"
+          className="cursor-pointer"
           src="svgs/icons/archive-minus(bg-gray-11).svg"
           loading="lazy"
           alt="archiveMenu"
@@ -28,7 +28,7 @@ const PropertyRatingCard = memo(({ realestate = true }) => {
       </div>
 
       {/* 📊 Rating Card */}
-      <div className={clsx("property-rating__content", !realestate && "property-rating__content--expanded")}>
+      <div className={clsx("property-rating__content", !realestate && "!h-auto")}>
         {/* ⭐ User rating (Only if real estate is false) */}
         {!realestate && (
           <div className="property-rating__question">

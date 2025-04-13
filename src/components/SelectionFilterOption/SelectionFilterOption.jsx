@@ -11,7 +11,7 @@ const SelectionFilterOption = memo(({ id, label, selected, handleChangeBox, cont
       className={clsx(
         // 📝 Apply base and selected styles conditionally
         "property-filter-box__check-box",
-        selected && "property-filter-box__check-box--selected",
+        selected && "bg-tint-1",
       )}
       onClick={() => handleChangeBox(id)}  // 🚀 Trigger checkbox change on click
     >
@@ -27,8 +27,8 @@ const SelectionFilterOption = memo(({ id, label, selected, handleChangeBox, cont
           // 📱 Apply mobile or desktop styles based on context
           "property-filter-box__label",
           context === "mobile" 
-            ? "property-filter-box__label--mobile" 
-            : "property-filter-box__label--desktop"
+            ? "text-[10px]" 
+            : "text-sm"
         )}
         // 🏷️ Render the checkbox label
       >

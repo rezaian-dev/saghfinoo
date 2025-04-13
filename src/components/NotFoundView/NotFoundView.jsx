@@ -9,7 +9,7 @@ const NotFoundView = memo(({ image, title, caption, retPage = false }) => {
   return (
     <>
       {/* 🔍 Filter and Search Section */}
-      <div className={clsx("not-found__filters", retPage ? "block":"hidden")}> 
+      <div className={clsx("mb-4", retPage ? "block":"hidden")}> 
         <div className="rent-page__location-selection-container mb-6">
           <RealEstateFilterDesktop />
           <RealEstateFilterMobile />

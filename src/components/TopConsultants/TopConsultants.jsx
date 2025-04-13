@@ -9,17 +9,24 @@ import useSwiperSlider from "../../hooks/useSwiperSlider";
 import { agents } from "../../data/realEstateData";
 
 const TopConsultants = memo(() => {
-  
   // 🔧 Swiper slider hooks and handlers
-  const { isBeginning, setIsBeginning, isEnd, handleNext, handlePrev, setSwiper, setIsEnd } = useSwiperSlider();
+  const {
+    isBeginning,
+    setIsBeginning,
+    isEnd,
+    handleNext,
+    handlePrev,
+    setSwiper,
+    setIsEnd,
+  } = useSwiperSlider();
 
   return (
     <>
       {/* 🏆 Section title */}
-      <h3 className="top-consultants__title">مشاورین برتر تهران</h3>
+      <h3 className="premier-realtors__title">مشاورین برتر تهران</h3>
 
       {/* 🎡 Slider container */}
-      <div className="top-consultants__slider">
+      <div className="premier-realtors__slider">
         <Swiper
           spaceBetween={24}
           slidesPerView={4}

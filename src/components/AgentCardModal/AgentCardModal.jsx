@@ -1,11 +1,13 @@
 import React, { memo, useState } from "react";
 import clsx from "classnames";
 import { Call, CloseCircle, InfoCircle } from "iconsax-react";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import useToast from "../../hooks/useToast";
 
 const AgentCardModal = memo(({ isOpenModal,setIsOpenModal }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isRatingDisabled, setIsRatingDisabled] = useState(false);  // Add this state for disabling ratings
+   const {handleToastSuccess} = useToast(setIsOpenModal);
 
   const pageNumbers = [5, 4, 3, 2, 1]; // 🔢 Rating numbers
   const phones = [
@@ -15,24 +17,14 @@ const AgentCardModal = memo(({ isOpenModal,setIsOpenModal }) => {
 
   const handleUserRating =(num)=>{
 
-    setCurrentPage(num)
-    setIsRatingDisabled(true)
+   let message =  currentPage === num ? "امتیاز شما با موفقیت به روز شد"  : "ممنون از امتیاز شما!‌" ;
+   setCurrentPage(num)
+   setIsRatingDisabled(true)
+   handleToastSuccess(message)
 
-   let message = !currentPage || currentPage === num ? "ممنون از امتیاز شما!‌" : "امتیاز شما با موفقیت به روز شد";
-   
-    toast.success(message, {
-      position: innerWidth > 768 ? "top-right" : "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      rtl: true,
-      onClose: () => {
-        setIsOpenModal(false); // ❌ Close modal
-        setIsRatingDisabled(false)
-      },
-    });
+   setTimeout(() => {
+    setIsRatingDisabled(false)
+   }, 3500);
   } 
   
   return (

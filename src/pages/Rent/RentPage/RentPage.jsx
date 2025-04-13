@@ -15,23 +15,23 @@ import PremierRealtorsModal from "../../../components/PremierRealtorsModal/Premi
 export default function RentPage() {
   const dataBaseCity = dataCard.filter((item) => item.label === "Tehran"); // Filtered data by city 🏙️
 
-  const { handleModal, isOpenModalFillter,isOpenModalPremier } =useModal();
+  const { handleModal, isOpenModalFillter, isOpenModalPremier } = useModal();
 
   useEffect(() => {
     document.addEventListener("click", handleModal);
     return () => document.removeEventListener("click", handleModal);
-  }, [isOpenModalFillter,isOpenModalPremier]);
-  
+  }, [isOpenModalFillter, isOpenModalPremier]);
+
   return (
     <>
       {/* Header with navigation bar 🧭 */}
-      <header className="rent-page__header">
+      <header className="md:pt-10">
         <div className="container">
           <Header />
         </div>
       </header>
 
-       {/* Main content area, handles city data display, filters, map, and property listings 🏙️ */}
+      {/* Main content area, handles city data display, filters, map, and property listings 🏙️ */}
       <main>
         {dataBaseCity.length ? ( // Check if there is data for the city ✅
           <>
@@ -79,12 +79,12 @@ export default function RentPage() {
         </div>
 
         {/* Copyright text visible on medium and larger screens 💼 */}
-        <p className="rent-page__footer-copyright">
+        <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>
-      <FillterModal isOpenModal={isOpenModalFillter}/>
-      <PremierRealtorsModal isOpenModal={isOpenModalPremier}/>
+      <FillterModal isOpenModal={isOpenModalFillter} />
+      <PremierRealtorsModal isOpenModal={isOpenModalPremier} />
     </>
   );
 }

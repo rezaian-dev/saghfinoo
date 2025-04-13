@@ -12,7 +12,7 @@ export default function NewsDetails() {
   return (
     <>
       {/* 🗂 Header Section */}
-      <header className="news-details__header">
+      <header className="md:pt-10">
         <div className="container">
           <Header />
         </div>
@@ -34,19 +34,19 @@ export default function NewsDetails() {
               </div>
             </section>
 
-            <section className="news-details__market-recovery">
+            <section className="section-spacing">
               <div className="container lg:px-0">
                 <MarketRecovery />
               </div>
             </section>
 
-            <section className="news-details__future-predictions">
+            <section className="section-spacing">
               <div className="container lg:px-0">
                 <FuturePredictions />
               </div>
             </section>
 
-            <section className="news-details__housing-tags">
+            <section className="section-spacing">
               <div className="container lg:px-0">
                 <HousingTags />
               </div>
@@ -67,7 +67,7 @@ export default function NewsDetails() {
           <Footer />
         </div>
         {/* 📜 Copyright Notice */}
-        <p className="news-details__footer-copyright">
+        <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>

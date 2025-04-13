@@ -49,13 +49,13 @@ const FilterDropdownMobile = memo(({ systemType, setValue, value, listOptions, l
     }, []);
 
     return (
-      <div className="property-filter-mobile">
+      <div className="w-full">
         {/* 🏷️ Filter label */}
-        <span className="hvac-system-mobile__name">{label}</span>
+        <span className="property-filter-mobile__name">{label}</span>
 
         {/* ⬇️ Dropdown button */}
         <div ref={btnRef} className="property-filter-mobile__button">
-          <span className="hvac-system-mobile__menu-label">
+          <span className="property-filter-mobile__menu-label">
             {getDisplayLabel()}
           </span>
           <ArrowDown2
@@ -82,6 +82,7 @@ const FilterDropdownMobile = memo(({ systemType, setValue, value, listOptions, l
               <SelectionFilterOption
                 key={option.id}
                 {...option}
+                context={"mobile"}
                 handleChangeBox={handleChangeBox}
               />
             ))}

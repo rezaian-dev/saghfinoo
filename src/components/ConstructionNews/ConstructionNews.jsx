@@ -49,7 +49,7 @@ const ConstructionNews = memo((() => {
             </div>
             {/* 🖼️ News image */}
             <div className="construction-news__image-container">
-              <img className="construction-news__image" src={image} loading="lazy" alt={alt} />
+              <img className="image-full" src={image} loading="lazy" alt={alt} />
             </div>
           </div>
         ))}

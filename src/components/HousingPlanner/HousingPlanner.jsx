@@ -35,9 +35,7 @@ const HousingPlanner = memo(() => {
   return (
     <>
       {/* 🏡 Section Title - Helping you find a home */}
-      <h3 className="housing-planner__title">
-        سقفینو چطور به خانه‌دار شدن شما کمک می‌کند
-      </h3>
+      <h3 className="title">سقفینو چطور به خانه‌دار شدن شما کمک می‌کند</h3>
 
       {/* 📦 Grid container for displaying housing information cards */}
       <div className="housing-planner__grid">

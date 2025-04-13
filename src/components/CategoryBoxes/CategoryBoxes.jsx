@@ -13,7 +13,7 @@ const CategoryBoxes = memo(({ title, items }) => {
         {/* 🔍 Title and list of items with dynamic height based on the 'showMore' state */}
         <div
           className={clsx("category-boxes__content", {
-            "category-boxes__content--expanded": showMore,
+            "h-[87px]": showMore,
           })}
         >
           {/* 🏷️ Category title */}
@@ -38,7 +38,7 @@ const CategoryBoxes = memo(({ title, items }) => {
           {showMore ? "مشاهده کمتر" : "مشاهده بیشتر"}
           <ArrowDown2
             className={clsx("category-boxes__toggle-icon", {
-              "category-boxes__toggle-icon--rotated": showMore,
+              "rotate-180": showMore,
             })}
             size="20"
             color="#871212"

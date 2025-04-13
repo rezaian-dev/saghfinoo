@@ -4,7 +4,7 @@ const SaghfinooOpportunityBox = memo(({ image, caption, alt }) => {
   return (
     <div className="saghfinoo-opportunity-box">
       {/* 🖼️ Image Wrapper */}
-      <div className="saghfinoo-opportunity-box__image-wrapper">
+      <div className="min-h-[90px]">
         <img className="saghfinoo-opportunity-box__image" src={image} loading="lazy" alt={alt} />
       </div>
 

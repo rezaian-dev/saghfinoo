@@ -21,7 +21,7 @@ import clsx from "classnames";
       {/* 🖼️ Image container for realtor */}
       <div className="premier-realtors-box__image-container">
         {/* 🏠 Image of the realtor with lazy loading */}
-        <img className="premier-realtors-box__image" src={image} loading="lazy" alt={alt} />
+        <img className="image-full" src={image} loading="lazy" alt={alt} />
       </div>
 
       <div className="premier-realtors-box__header">

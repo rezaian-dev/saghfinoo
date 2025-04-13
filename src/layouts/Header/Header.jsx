@@ -20,7 +20,7 @@ import ModalLogin from "../../components/ModalLogin/ModalLogin";
 import useModal from "../../hooks/useModal";
 import ModalLoginMobile from "../../components/ModalLoginMobile/ModalLoginMobile";
 import { FilterContext } from "../../context/FilterContext";
-import { a } from "@react-spring/web";
+
 
 const Header = memo(() => {
   // Get menu state and refs from custom hook
@@ -124,11 +124,16 @@ const Header = memo(() => {
             pathname === "/realators" ||
             pathname === "/news" ||
             pathname === "/news-details" ||
-            pathname === "/rent",
+            pathname === "/rent" ||
+            pathname === "/my-ad" ||
+            pathname === "/about" ||
+            pathname === "/news/news-details"
+
+
         })}
       >
         <div className="child:md:flex child:hidden">
-          <nav className="menu-desktop__nav">
+          <nav className="flex">
             {/* Logo 🖼️ */}
             <img
               className="menu-desktop__logo"
@@ -144,7 +149,7 @@ const Header = memo(() => {
                   className={clsx(
                     "group relative",
                     pathname.includes(path) &&
-                      "menu-desktop__link-desktop--active"
+                      "text-primary"
                   )}
                 >
                   <a href="#" className="menu-desktop__link">
@@ -179,7 +184,7 @@ const Header = memo(() => {
           {user ? (
             <a
               href="#"
-              className="text-lg text-gray-10 hidden items-center gap-x-2  md:flex"
+              className="header__profile-info"
             >
               <ProfileCircle size="24" color="#505050" />
               <span>{user.firstName}</span>
@@ -190,7 +195,7 @@ const Header = memo(() => {
             </a>
           )}
 
-          <a href="#" className="Register-ad-desktop">
+          <a href="#" className="register-ad-desktop">
             ثبت آگهی
           </a>
         </div>
@@ -218,7 +223,7 @@ const Header = memo(() => {
           )}
         >
           {user ? (
-            <div className={clsx("flex items-center gap-x-4")}>
+            <div className="menu-mobile__profile-info">
               {user.image ? (
                 <img
                   width={70}
@@ -253,7 +258,7 @@ const Header = memo(() => {
                 href="#"
                 className={clsx(
                   "menu-mobile__link",
-                  pathname.includes(path) && "menu-mobile__link-mobile--active"
+                  pathname.includes(path) && "text-primary"
                 )}
               >
                 <div className="menu-mobile__link-content">

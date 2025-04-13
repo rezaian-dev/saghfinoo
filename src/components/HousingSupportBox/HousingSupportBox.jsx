@@ -5,8 +5,8 @@ const HousingSupportBox = memo(({ img, alt, caption }) => {
     <>
       {/* 🖼️ Image container for the housing support box 🖼️ */}
       <div className='housing-support-box'>
-        <div className='housing-support-box__image-container'>
-          <img className='housing-support-box__image' src={img} loading='lazy' alt={alt} />
+        <div className='min-h-20'>
+          <img className='image-full' src={img} loading='lazy' alt={alt} />
         </div>
 
         {/* ✍️ Caption text under the image ✍️ */}

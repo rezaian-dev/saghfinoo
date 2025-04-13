@@ -23,7 +23,7 @@ const UserReviews = memo(() => {
     <div>
       <h3 className="user-reviews__title">نظرات کاربران</h3>
 
-      <div className="user-reviews__slider">
+      <div className="relative">
         <Swiper
           spaceBetween={24}
           slidesPerView={4}
@@ -43,7 +43,7 @@ const UserReviews = memo(() => {
         >
           {/* 🔄 Render reviews from selected consultant */}
           {selectedConsultant[0].reviews.map(({ id, userName, rating, comment, image }) => (
-            <SwiperSlide className="user-reviews__slide" key={id}>
+            <SwiperSlide className="p-1" key={id}>
               <div className="user-reviews__card">
                 <div className="user-reviews__card-header">
                   {/* 🖼️ User avatar */}

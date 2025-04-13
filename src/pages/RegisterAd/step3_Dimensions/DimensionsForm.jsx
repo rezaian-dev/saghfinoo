@@ -37,7 +37,7 @@ export default function DimensionsForm() {
         {/* 🖼️ Left section: Image display */}
         <div className="ad-form__image-container">
           <img
-            className="ad-form__image"
+            className="image-full"
             src="../images/register/register-banner.webp"
             loading="lazy"
             alt="Register Banner"

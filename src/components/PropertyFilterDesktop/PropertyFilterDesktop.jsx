@@ -49,16 +49,15 @@ const PropertyFilterDesktop = memo(({ systemType, setValue, value, listOptions, 
       <ArrowDown2
         className={clsx(
           "property-filter-desktop__arrow",
-          isDropdownOpen && "property-filter-desktop__arrow--open"
+          isDropdownOpen && "rotate-180"
         )}
         color="#505050"
       />
 
       {/* 🏠 Dropdown menu */}
-      {isDropdownOpen && (
         <div
           ref={menuRef}
-          className="property-filter-desktop__menu property-filter-desktop__menu--open"
+          className={clsx("property-filter-desktop__menu", isDropdownOpen && "property-filter-desktop__menu--open")}
         >
           <div className="property-filter-desktop__menu-content">
             {/* Loop through listSystem to display filter options */}
@@ -97,7 +96,6 @@ const PropertyFilterDesktop = memo(({ systemType, setValue, value, listOptions, 
             </button>
           </div>
         </div>
-      )}
     </div>
   );
 });

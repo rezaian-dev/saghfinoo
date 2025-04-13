@@ -149,10 +149,7 @@ const UserProfileEdit = memo(() => {
             type="reset"
             className={clsx(
               "user-profile-edit__cancel-btn",
-              isFormChanged
-                ? "bg-primary hover:bg-shade-2 text-white"
-                : "bg-white text-primary"
-            )}
+              isFormChanged && "profile-edit__cancel--active")}
             onClick={handleCancel}
           >
             انصراف
