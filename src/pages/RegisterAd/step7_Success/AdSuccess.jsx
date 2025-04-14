@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SuccessMessageAd from "../../../components/SuccessMessageAd/SuccessMessageAd";
-import ErrorMessageAd from "../../../components/ErrorMessageAd/ErrorMessageAd";
+import SuccessMessageAd from "../../../components/CoreComponents/Messages/SuccessMessageAd/SuccessMessageAd";
+import ErrorMessageAd from "../../../components/CoreComponents/Messages/ErrorMessageAd/ErrorMessageAd";
 
 export default function AdSuccess() {
   const navigate = useNavigate();

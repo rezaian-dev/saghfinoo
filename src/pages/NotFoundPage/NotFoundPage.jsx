@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../layouts/Header/Header";
-import NotFoundView from "../../components/NotFoundView/NotFoundView";
 import Footer from "../../layouts/Footer/Footer";
+import NotFoundView from "../../components/MiscellaneousComponents/NotFoundView/NotFoundView";
 
 export default function NotFoundPage() {
   return (

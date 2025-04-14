@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Stepper from "../../../components/Stepper/Stepper";
-import AdTextInputField from "../../../components/AdTextInputField/AdTextInputField";
+import Stepper from "../../../components/CoreComponents/Steps/Stepper/Stepper";
+import AdTextInputField from "../../../components/CoreComponents/Form/AdTextInputField/AdTextInputField";
 import { useNavigate } from "react-router-dom";
 
 export default function DimensionsForm() {

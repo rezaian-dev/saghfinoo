@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import Header from "../../layouts/Header/Header";
-import RealtyIntro from "../../components/RealtyIntro/RealtyIntro";
-import PropertyRatingCard from "../../components/PropertyRatingCard/PropertyRatingCard";
-import RealestateListing from "../../components/RealestateListing/RealestateListing";
-import UserReviews from "../../components/UserReviews/UserReviews";
 import Footer from "../../layouts/Footer/Footer";
-import PremierRealtorsModal from "../../components/PremierRealtorsModal/PremierRealtorsModal";
 import useModal from "../../hooks/useModal";
-import FilterModal from "../../components/FillterModal/FillterModal";
-import ReportAdModal from "../../components/ReportAdModal/ReportAdModal";
-import RatingModal from "../../components/RatingModal/RatingModal";
-import ShareModal from "../../components/ShareModal/ShareModal";
+import RealtyIntro from "../../components/MiscellaneousComponents/RealtyIntro/RealtyIntro";
+import PropertyRatingCard from "../../components/RealEstateComponents/Property/PropertyRatingCard/PropertyRatingCard";
+import RealestateListing from "../../components/RealEstateComponents/Listing/RealestateListing/RealestateListing";
+import UserReviews from "../../components/UserComponents/Reviews/UserReviews/UserReviews";
+import PremierRealtorsModal from "../../components/CoreComponents/Modals/PremierRealtorsModal/PremierRealtorsModal";
+import FilterModal from "../../components/CoreComponents/Modals/FillterModal/FillterModal";
+import ReportAdModal from "../../components/CoreComponents/Modals/ReportAdModal/ReportAdModal";
+import RatingModal from "../../components/CoreComponents/Modals/RatingModal/RatingModal";
+import ShareModal from "../../components/CoreComponents/Modals/ShareModal/ShareModal";
 
 export default function Realator() {
   const {

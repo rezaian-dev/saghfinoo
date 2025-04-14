@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../../../layouts/Header/Header";
-import ProfileManagement from "../../../components/ProfileManagement/ProfileManagement";
 import Footer from "../../../layouts/Footer/Footer";
-import UserAds from "../../../components/UserAds/UserAds";
+import ProfileManagement from "../../../components/UserComponents/Profile/ProfileManagement/ProfileManagement";
+import UserAds from "../../../components/UserComponents/Auth/UserAds/UserAds";
 
 export default function SaveAd() {
   return (

@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import Header from "../../../layouts/Header/Header";
-import SearchBar from "../../../components/SearchBar/SearchBar";
-import LeafletMap from "../../../components/LeafletMap/LeafletMap";
-import RentalPropertyListing from "../../../components/RentalPropertyListing/RentalPropertyListing";
-import RealEstateFilterMobile from "../../../components/RealEstateFilterMobile/RealEstateFilterMobile";
-import RealEstateFilterDesktop from "../../../components/RealEstateFilterDesktop/RealEstateFilterDesktop";
 import Footer from "../../../layouts/Footer/Footer";
 import { dataCard } from "../../../data/realEstateData";
-import NotFoundView from "../../../components/NotFoundView/NotFoundView";
-import FillterModal from "../../../components/FillterModal/FillterModal";
 import useModal from "../../../hooks/useModal";
-import PremierRealtorsModal from "../../../components/PremierRealtorsModal/PremierRealtorsModal";
+import SearchBar from "../../../components/InteractiveComponents/Search/SearchBar/SearchBar";
+import LeafletMap from "../../../components/InteractiveComponents/Map/LeafletMap/LeafletMap";
+import RentalPropertyListing from "../../../components/RealEstateComponents/Listing/RentalPropertyListing/RentalPropertyListing";
+import RealEstateFilterMobile from "../../../components/InteractiveComponents/Filters/RealEstateFilterMobile/RealEstateFilterMobile";
+import RealEstateFilterDesktop from "../../../components/InteractiveComponents/Filters/RealEstateFilterDesktop/RealEstateFilterDesktop";
+import NotFoundView from "../../../components/MiscellaneousComponents/NotFoundView/NotFoundView";
+import FillterModal from "../../../components/CoreComponents/Modals/FillterModal/FillterModal";
+import PremierRealtorsModal from "../../../components/CoreComponents/Modals/PremierRealtorsModal/PremierRealtorsModal";
 
 export default function RentPage() {
   const dataBaseCity = dataCard.filter((item) => item.label === "Tehran"); // Filtered data by city 🏙️

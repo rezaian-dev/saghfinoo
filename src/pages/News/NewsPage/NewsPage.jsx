@@ -1,11 +1,11 @@
 import React from "react";
 import Header from "../../../layouts/Header/Header";
-import RealEstateNews from "../../../components/RealEstateNews/RealEstateNews";
-import PropertyComparison from "../../../components/PropertyComparison/PropertyComparison";
-import ConstructionNews from "../../../components/ConstructionNews/ConstructionNews";
-import HomeFinder from "../../../components/HomeFinder/HomeFinder";
-import RentalNews from "../../../components/RentalNews/RentalNews";
 import Footer from "../../../layouts/Footer/Footer";
+import RealEstateNews from "../../../components/InfoComponents/News/RealEstateNews/RealEstateNews";
+import PropertyComparison from "../../../components/RealEstateComponents/Property/PropertyComparison/PropertyComparison";
+import ConstructionNews from "../../../components/InfoComponents/News/ConstructionNews/ConstructionNews";
+import HomeFinder from "../../../components/RealEstateComponents/Finder/HomeFinder/HomeFinder";
+import RentalNews from "../../../components/InfoComponents/News/RentalNews/RentalNews";
 
 export default function NewsPage() {
   return (

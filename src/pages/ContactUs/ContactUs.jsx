@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../../layouts/Header/Header";
-import ContactInfo from "../../components/ContactInfo/ContactInfo";
-import MapFocusArea from "../../components/MapFocusArea/MapFocusArea";
 import Footer from "../../layouts/Footer/Footer";
+import ContactInfo from "../../components/InfoComponents/ContactInfo/ContactInfo/ContactInfo";
+import MapFocusArea from "../../components/InteractiveComponents/Map/MapFocusArea/MapFocusArea";
 
 export default function ContactUs() {
   return (

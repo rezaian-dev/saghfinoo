@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "../../../layouts/Header/Header";
-import MarketTrends from "../../../components/MarketTrends/MarketTrends";
-import NewsSidebar from "../../../components/NewsSidebar/NewsSidebar";
-import MarketAnalysis from "../../../components/MarketAnalysis/MarketAnalysis";
-import MarketRecovery from "../../../components/MarketRecovery/MarketRecovery";
-import FuturePredictions from "../../../components/FuturePredictions/FuturePredictions";
-import HousingTags from "../../../components/HousingTags/HousingTags";
 import Footer from "../../../layouts/Footer/Footer";
+import MarketTrends from "../../../components/AnalyticsComponents/MarketTrends/MarketTrends";
+import NewsSidebar from "../../../components/LayoutComponents/Sidebar/NewsSidebar/NewsSidebar";
+import MarketAnalysis from "../../../components/AnalyticsComponents/MarketAnalysis/MarketAnalysis";
+import MarketRecovery from "../../../components/AnalyticsComponents/MarketRecovery/MarketRecovery";
+import FuturePredictions from "../../../components/AnalyticsComponents/FuturePredictions/FuturePredictions";
+import HousingTags from "../../../components/RealEstateComponents/Housing/HousingTags/HousingTags";
 
 export default function NewsDetails() {
   return (

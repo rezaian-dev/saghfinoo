@@ -1,6 +1,6 @@
 import React, { memo } from "react";
-import FooterDesktop from "../../components/FooterDesktop/FooterDesktop";
-import FooterMobile from "../../components/FooterMobile/FooterMobile";
+import FooterDesktop from "../../components/LayoutComponents/Footer/FooterDesktop/FooterDesktop";
+import FooterMobile from "../../components/LayoutComponents/Footer/FooterMobile/FooterMobile";
 
  const Footer = memo((() => {
   return (

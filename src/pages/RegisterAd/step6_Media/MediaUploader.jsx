@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { GalleryAdd, Trash } from "iconsax-react";
 import { MoonLoader } from "react-spinners";
 import clsx from "classnames";
-import Stepper from "../../../components/Stepper/Stepper";
+import Stepper from "../../../components/CoreComponents/Steps/Stepper/Stepper";
 
 export default function MediaUploader() {
   const navigate = useNavigate();

@@ -1,11 +1,11 @@
 import React from "react";
-import HeaderContent from "../../../components/HeaderContent/HeaderContent";
 import Header from "../../../layouts/Header/Header";
-import HousingPlanner from "../../../components/HousingPlanner/HousingPlanner";
-import HousingScout from "../../../components/HousingScout/HousingScout";
-import HousingSupport from "../../../components/HousingSupport/HousingSupport";
-import HousingNews from "../../../components/HousingNews/HousingNews";
 import Footer from "../../../layouts/Footer/Footer";
+import HeaderContent from "../../../components/LayoutComponents/Header/HeaderContent/HeaderContent";
+import HousingPlanner from "../../../components/RealEstateComponents/Housing/HousingPlanner/HousingPlanner";
+import HousingScout from "../../../components/RealEstateComponents/Housing/HousingScout/HousingScout";
+import HousingSupport from "../../../components/RealEstateComponents/Housing/HousingSupport/HousingSupport";
+import HousingNews from "../../../components/InfoComponents/News/HousingNews/HousingNews";
 
 export default function HomeNewUser() {
   return (

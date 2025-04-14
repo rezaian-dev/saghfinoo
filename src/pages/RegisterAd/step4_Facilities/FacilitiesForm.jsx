@@ -1,9 +1,9 @@
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import Stepper from "../../../components/Stepper/Stepper";
-import AdTextInputField from "../../../components/AdTextInputField/AdTextInputField";
+import Stepper from "../../../components/CoreComponents/Steps/Stepper/Stepper";
+import AdInputField from "../../../components/CoreComponents/Form/AdInputField/AdInputField";
+import AdTextInputField from "../../../components/CoreComponents/Form/AdTextInputField/AdTextInputField";
 import { useNavigate } from "react-router-dom";
-import AdInputField from "../../../components/AdInputField/AdInputField";
 import { toiletTypes, coolingSystems, floorMaterials, heatingSystems } from "../../../data/realEstateData";
 export default function FacilitiesForm() {
   const navigate = useNavigate();

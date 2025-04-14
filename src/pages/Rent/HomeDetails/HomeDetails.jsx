@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import Header from "../../../layouts/Header/Header";
-import PropertyImageSlider from "../../../components/PropertyImageSliderDesktop/PropertyImageSliderDesktop";
-import PropertyImageSliderMobile from "../../../components/PropertyImageSliderMobile/PropertyImageSliderMobile";
-import PropertyOverview from "../../../components/PropertyOverview/PropertyOverview";
-import AgentCard from "../../../components/AgentCard/AgentCard";
-import PropertyAmenities from "../../../components/PropertyAmenities/PropertyAmenities";
-import PropertyDescription from "../../../components/PropertyDescription/PropertyDescription";
-import PropertyLocation from "../../../components/PropertyLocation/PropertyLocation";
-import SimilarListings from "../../../components/SimilarListings/SimilarListings";
 import Footer from "../../../layouts/Footer/Footer";
 import useModal from "../../../hooks/useModal";
-import AgentCardModal from "../../../components/AgentCardModal/AgentCardModal";
-import ReportAdModal from "../../../components/ReportAdModal/ReportAdModal";
-import ShareModal from "../../../components/ShareModal/ShareModal";
+import PropertyImageSliderDesktop from "../../../components/RealEstateComponents/Property/PropertyImageSliderDesktop/PropertyImageSliderDesktop";
+import PropertyImageSliderMobile from "../../../components/RealEstateComponents/Property/PropertyImageSliderMobile/PropertyImageSliderMobile";
+import PropertyOverview from "../../../components/RealEstateComponents/Property/PropertyOverview/PropertyOverview";
+import AgentCard from "../../../components/InfoComponents/Cards/AgentCard/AgentCard";
+import PropertyAmenities from "../../../components/RealEstateComponents/Property/PropertyAmenities/PropertyAmenities";
+import PropertyDescription from "../../../components/RealEstateComponents/Property/PropertyDescription/PropertyDescription";
+import PropertyLocation from "../../../components/RealEstateComponents/Property/PropertyLocation/PropertyLocation";
+import SimilarListings from "../../../components/RealEstateComponents/Listing/SimilarListings/SimilarListings";
+import AgentCardModal from "../../../components/CoreComponents/Modals/AgentCardModal/AgentCardModal";
+import ReportAdModal from "../../../components/CoreComponents/Modals/ReportAdModal/ReportAdModal";
+import ShareModal from "../../../components/CoreComponents/Modals/ShareModal/ShareModal";
 
 export default function HomeDetails() {
   const {
@@ -35,7 +35,7 @@ export default function HomeDetails() {
       <header className="md:pt-10">
         <div className="container">
           <Header />
-          <PropertyImageSlider />
+          <PropertyImageSliderDesktop />
         </div>
         <PropertyImageSliderMobile />
       </header>

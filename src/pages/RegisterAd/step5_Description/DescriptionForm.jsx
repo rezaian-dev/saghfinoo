@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Stepper from "../../../components/Stepper/Stepper";
+import Stepper from "../../../components/CoreComponents/Steps/Stepper/Stepper";
 import { useNavigate } from "react-router-dom";
 import clsx from "classnames";
 

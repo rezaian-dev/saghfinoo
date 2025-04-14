@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import Stepper from "../../../components/Stepper/Stepper";
-import AdInputField from "../../../components/AdInputField/AdInputField";
-import AdTextInputField from "../../../components/AdTextInputField/AdTextInputField";
+import Stepper from "../../../components/CoreComponents/Steps/Stepper/Stepper";
+import AdInputField from "../../../components/CoreComponents/Form/AdInputField/AdInputField";
+import AdTextInputField from "../../../components/CoreComponents/Form/AdTextInputField/AdTextInputField";
 import { useNavigate } from "react-router-dom";
 import { transactionTypes, propertyType } from "../../../data/realEstateData";
 

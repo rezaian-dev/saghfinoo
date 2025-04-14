@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import Header from "../../../layouts/Header/Header";
-import HeaderContent from "../../../components/HeaderContent/HeaderContent";
-import NewRentalListings from "../../../components/NewRentalListings/NewRentalListings";
-import SaghfinooOpportunity from "../../../components/SaghfinooOpportunity/SaghfinooOpportunity";
-import SuggestedSearches from "../../../components/SuggestedSearches/SuggestedSearches";
-import PremierRealtors from "../../../components/PremierRealtors/PremierRealtors";
-import TopConsultants from "../../../components/TopConsultants/TopConsultants";
 import Footer from "../../../layouts/Footer/Footer";
-import PremierRealtorsModal from "../../../components/PremierRealtorsModal/PremierRealtorsModal";
 import useModal from "../../../hooks/useModal";
+import HeaderContent from "../../../components/LayoutComponents/Header/HeaderContent/HeaderContent";
+import NewRentalListings from "../../../components/RealEstateComponents/Listing/NewRentalListings/NewRentalListings";
+import SaghfinooOpportunity from "../../../components/SpecializedComponents/Opportunity/SaghfinooOpportunity/SaghfinooOpportunity";
+import SuggestedSearches from "../../../components/InteractiveComponents/Search/SuggestedSearches/SuggestedSearches";
+import PremierRealtors from "../../../components/SpecializedComponents/Realtors/PremierRealtors/PremierRealtors";
+import TopConsultants from "../../../components/SpecializedComponents/Consultants/TopConsultants/TopConsultants";
+import PremierRealtorsModal from "../../../components/CoreComponents/Modals/PremierRealtorsModal/PremierRealtorsModal";
 
 export default function HomeProUser() {
   const { handleModal, isOpenModalPremier } = useModal();

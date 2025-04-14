@@ -1,5 +1,5 @@
 import React, { memo, useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import clsx from "classnames";
 import {
   AddCircle,
@@ -16,9 +16,10 @@ import {
   ReceiptText,
 } from "iconsax-react";
 import useToggleMenu from "../../hooks/useToggleMenu";
-import ModalLogin from "../../components/ModalLogin/ModalLogin";
 import useModal from "../../hooks/useModal";
-import ModalLoginMobile from "../../components/ModalLoginMobile/ModalLoginMobile";
+
+import ModalLogin from "../../components/CoreComponents/Modals/ModalLogin/ModalLogin";
+import ModalLoginMobile from "../../components/CoreComponents/Modals/ModalLoginMobile/ModalLoginMobile";
 import { FilterContext } from "../../context/FilterContext";
 
 
@@ -33,7 +34,6 @@ const Header = memo(() => {
     handleClick,
     closeMenu, // دریافت تابع closeMenu از هوک
   } = useToggleMenu();
-
   // پاس دادن تابع closeMenu به useModal
   const {
     isOpenModal,
@@ -62,7 +62,7 @@ const Header = memo(() => {
     {
       id: 1,
       label: "ثبت آگهی",
-      path: "/register",
+      path: "/register/1",
       icon: <AddCircle size="20" />,
     },
     {
@@ -135,12 +135,14 @@ const Header = memo(() => {
         <div className="child:md:flex child:hidden">
           <nav className="flex">
             {/* Logo 🖼️ */}
+            <Link to={"/"}>
             <img
               className="menu-desktop__logo"
               src="/images/logos/Logo.png"
               loading="lazy"
               alt="Logo"
             />
+            </Link>
             {/* Desktop Menu Items 📜 */}
             <ul className="menu-desktop__items">
               {menuItemsDesktop.map(({ name, id, path }) => (
@@ -152,9 +154,9 @@ const Header = memo(() => {
                       "text-primary"
                   )}
                 >
-                  <a href="#" className="menu-desktop__link">
+                  <Link to={path} className="menu-desktop__link">
                     {name}
-                  </a>
+                  </Link>
                   <span className="menu-desktop__underline"></span>
                 </li>
               ))}
@@ -167,6 +169,7 @@ const Header = memo(() => {
           <span ref={navToggleRef} className="menu-desktop__hamburger">
             <HambergerMenu size="24" color="#353535" variant="Outline" />
           </span>
+          <Link to={"/"}>
           <img
             src="/images/logos/Logo.png"
             loading="lazy"
@@ -174,30 +177,30 @@ const Header = memo(() => {
             width={72}
             height={35}
           />
-          <a href="#" className="menu-desktop__register-link">
+          </Link>
+          <Link to={"/register/1"} className="menu-desktop__register-link">
             ثبت آگهی
-          </a>
+          </Link>
         </div>
 
         {/* User actions section 👤 */}
         <div className="menu-desktop__user-actions">
           {user ? (
-            <a
-              href="#"
+            <Link to={"/user-profile"}
               className="header__profile-info"
             >
               <ProfileCircle size="24" color="#505050" />
               <span>{user.firstName}</span>
-            </a>
+            </Link>
           ) : (
             <a href="#" className="menu-desktop__login-link">
               ورود
             </a>
           )}
 
-          <a href="#" className="register-ad-desktop">
+          <Link to={"/register/1"} className="register-ad-desktop">
             ثبت آگهی
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -223,7 +226,7 @@ const Header = memo(() => {
           )}
         >
           {user ? (
-            <div className="menu-mobile__profile-info">
+            <Link to={"/user-profile"} className="menu-mobile__profile-info">
               {user.image ? (
                 <img
                   width={70}
@@ -241,7 +244,7 @@ const Header = memo(() => {
                 <span>{user.firstName}</span>
                 <ArrowLeft2 size="20" color="#505050" />
               </div>
-            </div>
+            </Link>
           ) : (
             <a className="menu-mobile__profile-link" href="#">
               <ProfileCircle size="20" color="#505050" variant="Outline" />
@@ -254,8 +257,8 @@ const Header = memo(() => {
         <ul className="menu-mobile__list">
           {filteredMenuItems.map(({ label, icon, id, path }) => (
             <li key={id} className="menu-mobile__list-item">
-              <a
-                href="#"
+              <Link
+                to={path}
                 className={clsx(
                   "menu-mobile__link",
                   pathname.includes(path) && "text-primary"
@@ -266,7 +269,7 @@ const Header = memo(() => {
                   <span>{label}</span>
                 </div>
                 <ArrowLeft2 size="20" color="#505050" variant="Outline" />
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

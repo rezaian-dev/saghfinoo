@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../layouts/Header/Header";
-import SaghfinoStory from "../../components/SaghfinoStory/SaghfinoStory";
 import Footer from "../../layouts/Footer/Footer";
+import SaghfinoStory from "../../components/InfoComponents/Stories/SaghfinoStory/SaghfinoStory";
 
 export default function AboutUs() {
   return (

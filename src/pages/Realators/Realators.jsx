@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../../layouts/Header/Header";
-import ListingHeader from "../../components/ListingHeader/ListingHeader";
-import RealatorsListing from "../../components/RealatorsListing/RealatorsListing";
 import Footer from "../../layouts/Footer/Footer";
+import ListingHeader from "../../components/RealEstateComponents/Listing/ListingHeader/ListingHeader";
+import RealatorsListing from "../../components/RealEstateComponents/Listing/RealatorsListing/RealatorsListing";
 
 export default function Realators() {
   return (

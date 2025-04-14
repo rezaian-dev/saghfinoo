@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import Header from "../../layouts/Header/Header";
-import RealtyIntro from "../../components/RealtyIntro/RealtyIntro";
-import PropertyRatingCard from "../../components/PropertyRatingCard/PropertyRatingCard";
-import RealEstateAgents from "../../components/RealEstateAgents/RealEstateAgents";
-import RealestateListing from "../../components/RealestateListing/RealestateListing";
-import UserReviews from "../../components/UserReviews/UserReviews";
 import Footer from "../../layouts/Footer/Footer";
 import useModal from "../../hooks/useModal";
-import PremierRealtorsModal from "../../components/PremierRealtorsModal/PremierRealtorsModal";
-import ShareModal from "../../components/ShareModal/ShareModal";
+import RealtyIntro from "../../components/MiscellaneousComponents/RealtyIntro/RealtyIntro";
+import PropertyRatingCard from "../../components/RealEstateComponents/Property/PropertyRatingCard/PropertyRatingCard";
+import RealEstateAgents from "../../components/SpecializedComponents/RealEstateAgents/RealEstateAgents";
+import RealestateListing from "../../components/RealEstateComponents/Listing/RealestateListing/RealestateListing";
+import UserReviews from "../../components/UserComponents/Reviews/UserReviews/UserReviews";
+import PremierRealtorsModal from "../../components/CoreComponents/Modals/PremierRealtorsModal/PremierRealtorsModal";
+import ShareModal from "../../components/CoreComponents/Modals/ShareModal/ShareModal";
 
 export default function Realestate() {
   // 🔹 Social media links data
