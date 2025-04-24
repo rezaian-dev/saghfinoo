@@ -1,58 +1,95 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 
 export default function useToggleMenu() {
-  // 🔹 States
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // ⬇️ Dropdown
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // 📂 Menu
-  const [isActiveOverlay, setIsActiveOverlay] = useState(false); // 🌫️ Overlay
+// 🔽 Dropdown states
+// Controls visibility for each dropdown menu
+const [dropdowns, setDropdowns] = useState({
+  city: false,        // 🏙️ City selector
+  property: false,    // 🏠 Property type filter
+  menuMobile: false,  // 📱 Mobile navigation menu
+  menuFilter: false,  // 🎛️ Mobile filter panel
+  sortBy: false,      // 🔽 Sort options
+});
 
-  // 🔹 Refs
-  const btnRef = useRef(null); // 🎯 Button
-  const navToggleRef = useRef(null); // 🎯 Navbar toggle
-  const menuRef = useRef(null); // 🎯 Menu
-  const fillterInteractiveRef = useRef(null); // 🎯 Interactive area
-  const btnCloseRef = useRef(null); // 🎯 Close button
-  const menuModalRef = useRef(null); // 🎯 Modal
+// 📌 Refs for detecting outside clicks
+const btnRef = useRef(null);   // Button that toggles the property dropdown
+const menuRef = useRef(null);  // Property dropdown menu container
 
-  // 🔹 Handle clicks
-  const handleClick = ({ target }) => {
-    const isFilterInteractive = fillterInteractiveRef.current?.contains(target);
-    const isFilterButton = target.closest(".rental-property-listing__filters");
-    const isCloseButton = btnCloseRef.current?.contains(target);
-    const isFilterMenu = menuRef.current?.contains(target);
-    const isFilterButtonRef = btnRef.current?.contains(target);
-    const isNavToggleRef = navToggleRef.current?.contains(target);
+  const handleClick = useCallback(({ target }) => {
+    // 🏠 Property Dropdown
+    const isClickInsidePropertyMenu = menuRef.current?.contains(target);
+    const isClickOnPropertyButton = btnRef.current?.contains(target);
+    const isClickOnRangeOrSelect = target.closest(".range-filter-desktop__search, .property-filter-desktop__btn-select, .property-filter-mobile__select-button");
+    // 🏙️ City Dropdown
+    const isClickInsideCityWrapper = target.closest(".search-bar__dropdown-wrapper");
+    const isClickInsideCityMenu = target.closest(".search-bar__dropdown-menu");
+    // 📱 Mobile Menu
+    const isClickOnHamburgerMenu = target.closest(".menu-desktop__hamburger");
+    const isClickOutsideMobileMenu = !target.closest(".menu-mobile");
+    const isClickOnMobileMenuClose = target.closest(".menu-mobile__close-icon");
+    // 🎛️ Mobile Filter
+    const isClickOnFilterToggle = target.closest(".rental-property-listing__filters");
+    const isClickOutsideFilterMobile = !target.closest(".real-estate-filter-mobile");
+    const isClickOnFilterCloseOrSubmit = target.closest(".real-estate-filter-mobile__close-icon, .real-estate-filter-mobile__submit");
+    // 🔽 Sort Dropdown
+    const isClickOnSortWrapper = target.closest(".rental-property-listing__sort");
+    const isClickInsideSortMenu = target.closest(".rental-property-listing__sort-menu");
 
-    if (isNavToggleRef)
-      return (
-        setIsActiveOverlay((prev) => !prev), setIsMenuOpen((prev) => !prev)
-      );
-    if (isFilterButton || isFilterInteractive) setIsMenuOpen((prev) => !prev);
-    if ((!isFilterMenu && !isFilterButton) || isCloseButton)
-      setIsActiveOverlay(false), setIsMenuOpen(false);
-    if ((isFilterButtonRef && !isFilterMenu) || isFilterInteractive)
-      setIsDropdownOpen((prev) => !prev);
-    else if (!isFilterMenu) setIsDropdownOpen(false);
-  };
+    if (isClickOnPropertyButton && !isClickInsidePropertyMenu) {
+      setDropdowns((prev) => ({ ...prev, property: !prev.property }));
+      return;
+    }
 
-  // ❌ Close menu
+    if (!isClickInsidePropertyMenu || isClickOnRangeOrSelect) {
+      setDropdowns((prev) => ({ ...prev, property: false }));
+    }
+
+    if (isClickInsideCityWrapper && !isClickInsideCityMenu) {
+      setDropdowns((prev) => ({ ...prev, city: !prev.city }));
+      return;
+    }
+
+    if (!isClickInsideCityMenu) {
+      setDropdowns((prev) => ({ ...prev, city: false }));
+    }
+
+    if (isClickOnHamburgerMenu) {
+      setDropdowns((prev) => ({ ...prev, menuMobile: !prev.menuMobile }));
+      return;
+    }
+
+    if (isClickOutsideMobileMenu || isClickOnMobileMenuClose) {
+      setDropdowns((prev) => ({ ...prev, menuMobile: false }));
+    }
+
+    if (isClickOnFilterToggle) {
+      setDropdowns((prev) => ({ ...prev, menuFilter: !prev.menuFilter }));
+      return;
+    }
+
+    if (isClickOutsideFilterMobile || isClickOnFilterCloseOrSubmit) {
+      setDropdowns((prev) => ({ ...prev, menuFilter: false }));
+    }
+
+    if (isClickOnSortWrapper && !isClickInsideSortMenu) {
+      setDropdowns((prev) => ({ ...prev, sortBy: !prev.sortBy }));
+      return;
+    }
+
+    if (!isClickInsideSortMenu) {
+      setDropdowns((prev) => ({ ...prev, sortBy: false }));
+    }
+  }, []);
+
   const closeMenu = () => {
-    setIsMenuOpen(false);
-    setIsActiveOverlay(false);
+    setDropdowns((prev) => ({ ...prev, menuMobile: false }));
   };
 
   return {
-    isDropdownOpen,
-    isMenuOpen,
+    dropdowns,
     btnRef,
-    menuRef,
-    fillterInteractiveRef,
-    btnCloseRef,
     handleClick,
-    navToggleRef,
-    isActiveOverlay,
-    menuModalRef,
+    menuRef,
     closeMenu,
-    setIsMenuOpen,
   };
 }

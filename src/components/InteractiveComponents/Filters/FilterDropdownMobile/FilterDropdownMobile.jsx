@@ -5,30 +5,60 @@ import useToggleMenu from "../../../../hooks/useToggleMenu";
 import useFilterSelection from "../../../../hooks/useFilterSelection";
 import SelectionFilterOption from "../../../LayoutComponents/FilterBars/SelectionFilterOption/SelectionFilterOption";
 
-const FilterDropdownMobile = memo(({ systemType, setValue, value, listOptions, label, listSystem, setListSystem, filterType }) => {
+const FilterDropdownMobile = memo(
+  ({
+    systemType,
+    setValue,
+    value,
+    listOptions,
+    label,
+    listSystem,
+    setListSystem,
+    filterType,
+  }) => {
     // 🔄 Manage toggle state and refs
-    const { isDropdownOpen, btnRef, menuRef, fillterInteractiveRef, handleClick } = useToggleMenu();
+    const { dropdowns, btnRef, menuRef, handleClick } = useToggleMenu();
 
     // 🗺️ Define filter options for different types
     const filterOptions = {
       hvac: {
         hvacSpecialMode: true,
+        labelMap: {
+          coolingSystem: "انتخاب سیستم",
+          heatingSystem: "انتخاب سیستم",
+          floorMaterial: "انتخاب جنس کف",
+        },
+        shortName: {
+          coolingSystem: "سرمایشی",
+          heatingSystem: "گرمایشی",
+          floorMaterial: "",
+        },
       },
       property: {
         labelMap: {
           propertyType: "انتخاب نوع ملک",
           areas: "انتخاب منطقه",
-          floorMaterial: "انتخاب جنس کف",
-          coolingSystem: "انتخاب سیستم سرمایشی",
-          heatingSystem: "انتخاب سیستم گرمایشی",
+          
+        },
+        shortName: {
+          propertyType:"",
+          areas:"",
         },
       },
     };
-
     const options = filterOptions[filterType];
 
     // 🛠️ Manage filter selection and label handling
-    const { handleChangeBox, getDisplayLabel, onReset } = useFilterSelection( setListSystem, listOptions, setValue, systemType, value, label, options );
+    const { handleChangeBox, getDisplayLabel, onReset } = useFilterSelection(
+      setListSystem,
+      listOptions,
+      setValue,
+      systemType,
+      value,
+      label,
+      options,
+      filterType
+    );
 
     // ✨ Sync selected options to state
     useEffect(() => {
@@ -37,7 +67,7 @@ const FilterDropdownMobile = memo(({ systemType, setValue, value, listOptions, l
           (option) =>
             option.selected && (filterType !== "hvac" || option.id !== 1)
         )
-        .map(({ id,value,label}) => ({id,label,value}));
+        .map(({ id, value, label }) => ({ id, label, value }));
 
       setValue(systemType, selectedOptions);
     }, [listSystem]);
@@ -54,14 +84,20 @@ const FilterDropdownMobile = memo(({ systemType, setValue, value, listOptions, l
         <span className="property-filter-mobile__name">{label}</span>
 
         {/* ⬇️ Dropdown button */}
-        <div ref={btnRef} className="property-filter-mobile__button">
+        <div
+          ref={btnRef}
+          className={clsx(
+            "property-filter-mobile__button",
+            dropdowns.property && "shadow-info border-info"
+          )}
+        >
           <span className="property-filter-mobile__menu-label">
             {getDisplayLabel()}
           </span>
           <ArrowDown2
             className={clsx(
               "property-filter-mobile__icon",
-              isDropdownOpen && "property-filter-mobile__icon--open"
+              dropdowns.property && "property-filter-mobile__icon--open"
             )}
             size="16"
             color="#adadad"
@@ -73,7 +109,7 @@ const FilterDropdownMobile = memo(({ systemType, setValue, value, listOptions, l
           ref={menuRef}
           className={clsx(
             "property-filter-mobile__menu",
-            isDropdownOpen && "property-filter-mobile__menu--open"
+            dropdowns.property && "property-filter-mobile__menu--open"
           )}
         >
           {/* 📝 Filter options */}
@@ -95,13 +131,12 @@ const FilterDropdownMobile = memo(({ systemType, setValue, value, listOptions, l
                 "property-filter-mobile__reset-button",
                 value?.length && "property-filter-mobile__reset-button--active"
               )}
-              onClick={onReset}
               type="reset"
+              onClick={onReset}
             >
               حذف
             </button>
             <button
-              ref={fillterInteractiveRef}
               className="property-filter-mobile__select-button"
               type="submit"
             >

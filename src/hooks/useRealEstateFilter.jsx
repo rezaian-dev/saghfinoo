@@ -10,56 +10,67 @@ import {
   PROPERTY_FILTERS,
   keysToRemove,
 } from "./UseFilterData";
+import { useNavigate } from "react-router-dom";
+
+/**
+ * 🏢 REAL ESTATE FILTER HOOK
+ * ==========================
+ * 🌐 Comprehensive filter management system for property listings
+ * 🔄 Synchronizes state with URL parameters
+ * 📊 Tracks active filters for badge counters
+ * 📱📺 Responsive configurations for mobile and desktop
+ */
 
 const useRealEstateFilter = () => {
-  // 🔄 Filter-ha taghir karde? Check mikonim inja
+  // 🔄 STATE MANAGEMENT
+  // ------------------
+  // 🚩 Tracks if filters have been modified from defaults
   const [isChanged, setIsChanged] = useState(false);
-
-  // 🆕 Baraye avalin bar render shode? Flag migzarim inja
-  const [initialRender, setInitialRender] = useState(true);
-
-  // 🔗 Url update darim anjam midim ya na? Inja track mishe
-  const [isUpdatingUrl, setIsUpdatingUrl] = useState(false);
-
-  // 🧩 Access filter counts from context
+  
+  // 🧭 Navigation controller
+  const navigate = useNavigate();
+  
+  // 📊 Filter counter context providers
   const { setFiltersCountMobile, setFiltersCountDesktop, setFilterCount } =
     useContext(FilterContext);
 
-  // 📋 Default form values
+  // 📝 DEFAULT FORM VALUES
+  // ---------------------
   const defaultValues = {
-    // 🏙️ Location filters
-    areas: [],
-    city: [],
-    propertyType: [],
+    // 🌍 Location Filters (multi-select)
+    areas: [],       // Selected districts/neighborhoods
+    city: [],        // Selected cities
+    propertyType: [], // Property categories
 
-    // 🧊 Systems filters
-    coolingSystem: [],
-    heatingSystem: [],
-    floorMaterial: [],
+    // 🏗️ Building Systems
+    coolingSystem: [], // AC types
+    heatingSystem: [], // Heating types
+    floorMaterial: [], // Flooring materials
 
-    // 💰 Price & size ranges
-    minPrice: "",
-    maxPrice: "",
-    minSize: "",
-    maxSize: "",
+    // 🔢 Range Filters
+    minPrice: "",     // Minimum price value
+    maxPrice: "",     // Maximum price value
+    minSize: "",      // Minimum square footage
+    maxSize: "",      // Maximum square footage
 
-    // 🏠 Features
-    bedrooms: "any",
-    parking: "any",
-    storage: "any",
-    elevator: "any",
-    bathroom: "any",
-    bathroomType: "any",
-    floor: "any",
+    // 🛋️ Property Features (single-select)
+    bedrooms: "any",    // Number of bedrooms
+    parking: "any",     // Parking availability
+    storage: "any",     // Storage availability
+    elevator: "any",    // Elevator presence
+    bathroom: "any",    // Number of bathrooms
+    bathroomType: "any",// Bathroom types
+    floor: "any",      // Floor number
   };
 
-  // 📝 Setup form with react-hook-form
+  // 🎛️ FORM CONFIGURATION
+  // --------------------
+  // 📋 React Hook Form initialization
   const { setValue, watch, handleSubmit, reset } = useForm({ defaultValues });
 
-  // 👀 Watch all form values
+  // 👀 Track all form values
   const formValues = watch();
   const {
-    city,
     areas,
     propertyType,
     minSize,
@@ -78,25 +89,22 @@ const useRealEstateFilter = () => {
     heatingSystem,
   } = formValues;
 
-  // 🏙️ System state options (with selected status)
-  const [listAreasSystem, setListAreasSystem] = useState(
-    LOCATION_OPTIONS.districts
-  );
-  const [listPropertySystem, setListPropertySystem] = useState(
-    LOCATION_OPTIONS.propertyTypes
-  );
+  // 🗃️ FILTER OPTIONS STATE
+  // ----------------------
+  // 🌆 Location filter options with selection states
+  const [listAreasSystem, setListAreasSystem] = useState(LOCATION_OPTIONS.districts);
+  const [listPropertySystem, setListPropertySystem] = useState(LOCATION_OPTIONS.propertyTypes);
   const [listCitySystem, setListCitySystem] = useState(LOCATION_OPTIONS.cities);
-  const [listCoolSystem, setListCoolSystem] = useState(
-    BUILDING_SYSTEMS_OPTIONS.coolingSystem
-  );
-  const [listHotSystem, setListHotSystem] = useState(
-    BUILDING_SYSTEMS_OPTIONS.heatingSystem
-  );
-  const [listFloorSystem, setListFloorSystem] = useState(
-    BUILDING_SYSTEMS_OPTIONS.floorMaterial
-  );
+  
+  // ❄️ Heating/Cooling systems
+  const [listCoolSystem, setListCoolSystem] = useState(BUILDING_SYSTEMS_OPTIONS.coolingSystem);
+  const [listHotSystem, setListHotSystem] = useState(BUILDING_SYSTEMS_OPTIONS.heatingSystem);
+  
+  // 🪵 Floor materials
+  const [listFloorSystem, setListFloorSystem] = useState(BUILDING_SYSTEMS_OPTIONS.floorMaterial);
 
-  // 📱 Mobile filter configurations
+  // 📱 MOBILE FILTER CONFIGS
+  // -----------------------
   const propertyFilterMobileConfig = [
     {
       id: 1,
@@ -127,7 +135,7 @@ const useRealEstateFilter = () => {
       maxValue: maxPrice,
       unit: { min: "minPrice", max: "maxPrice" },
       label: "قیمت",
-      placeholders: { min: "حداقل۵‌۰۰۰", max: "حداکثر ۱۰۰۰‌" },
+      placeholders: { min: "حداقل ۵,۰۰۰", max: "حداکثر ۱,۰۰۰" },
     },
     {
       id: 2,
@@ -139,7 +147,8 @@ const useRealEstateFilter = () => {
     },
   ];
 
-  // 🖥️ Desktop filter configurations
+  // 🖥️ DESKTOP FILTER CONFIGS
+  // -------------------------
   const rangeFilterDesktopConfig = [
     {
       id: 1,
@@ -148,8 +157,8 @@ const useRealEstateFilter = () => {
       label: "قیمت",
       minName: "minPrice",
       maxName: "maxPrice",
-      minPlaceholder: "حداقل ۵‌,۰۰۰‌,۰۰۰",
-      maxPlaceholder: "حداکثر ۱۰۰‌,۰۰۰‌,۰۰۰",
+      minPlaceholder: "حداقل ۵,۰۰۰,۰۰۰",
+      maxPlaceholder: "حداکثر ۱۰۰,۰۰۰,۰۰۰",
     },
     {
       id: 2,
@@ -172,7 +181,6 @@ const useRealEstateFilter = () => {
       listOptions: LOCATION_OPTIONS.cities,
       listSystem: listCitySystem,
       setListSystem: setListCitySystem,
-      value: city,
     },
     {
       id: 2,
@@ -182,21 +190,20 @@ const useRealEstateFilter = () => {
       listOptions: LOCATION_OPTIONS.districts,
       listSystem: listAreasSystem,
       setListSystem: setListAreasSystem,
-      value: areas,
     },
     {
       id: 3,
-      systemType: "propertyType",
+      systemType: "property-type",
       condition: true,
       label: FILTER_LABELS.propertyType,
       listOptions: LOCATION_OPTIONS.propertyTypes,
       listSystem: listPropertySystem,
       setListSystem: setListPropertySystem,
-      value: propertyType,
     },
   ];
 
-  // 🧊 Systems filter configuration
+  // 🛠️ SYSTEMS FILTER CONFIG
+  // -----------------------
   const systemsFilterConfig = [
     {
       id: 1,
@@ -227,7 +234,8 @@ const useRealEstateFilter = () => {
     },
   ];
 
-  // 🏠 Property features configuration
+  // 🏠 PROPERTY FEATURES CONFIG
+  // --------------------------
   const propertyFeatureFilters = [
     {
       title: "اتاق خواب",
@@ -272,13 +280,13 @@ const useRealEstateFilter = () => {
       value: floor,
     },
     {
-      title: "سیستم سرمایش",
+      title: "سیستم سرمایشی",
       name: "coolingSystem",
       options: PROPERTY_FILTERS.coolingSystem,
       value: coolingSystem,
     },
     {
-      title: "سیستم گرمایش",
+      title: "سیستم گرمایشی",
       name: "heatingSystem",
       options: PROPERTY_FILTERS.heatingSystem,
       value: heatingSystem,
@@ -291,20 +299,24 @@ const useRealEstateFilter = () => {
     },
   ];
 
-  // 📥 Load filters from URL when component mounts
+  // 🔄 URL PARAMETER PROCESSING
+  // --------------------------
+  /**
+   * 📖 Reads and processes URL parameters
+   * 🔄 Synchronizes form state with URL
+   * 🏗️ Rebuilds filter options with selected states
+   */
   const processParams = useCallback(() => {
     const params = new URLSearchParams(location.search);
 
-    // First reset form to default values
-    reset(defaultValues);
-
+    // Helper function to mark selected options
     const mapSelection = (options, values) =>
       options.map((item) => ({
         ...item,
         selected: values.includes(item.value),
       }));
 
-    // Reset all systems to initial state
+    // Reset all filter options to initial state
     setListAreasSystem(LOCATION_OPTIONS.districts);
     setListPropertySystem(LOCATION_OPTIONS.propertyTypes);
     setListCitySystem(LOCATION_OPTIONS.cities);
@@ -312,23 +324,42 @@ const useRealEstateFilter = () => {
     setListHotSystem(BUILDING_SYSTEMS_OPTIONS.heatingSystem);
     setListFloorSystem(BUILDING_SYSTEMS_OPTIONS.floorMaterial);
 
-    // Read values from URL and apply to form
-    params.forEach((value, key) => {
-      if (!value || value === "any" || params.has("Page")) return; // Ignore empty values or "any"
+    // Parameter name mapping (URL → Form field)
+    const reverseParamMapping = {
+      "min-price": "minPrice",
+      "max-price": "maxPrice",
+      "min-size": "minSize",
+      "max-size": "maxSize",
+      "property-type": "propertyType",
+      "bathroom-type": "bathroomType",
+      "cooling-system": "coolingSystem",
+      "heating-system": "heatingSystem",
+      "floor-material": "floorMaterial"
+    };
 
+    // Process each URL parameter
+    params.forEach((value, key) => {
+      // Skip empty or default values
+      if (!value || value === "any" || ["page","city","sort-by"].includes(key)) return;
+
+      // Parse comma-separated values
       const parsedValues = value
         .split(",")
         .filter((val) => val !== "any" && val !== "");
 
-      if (parsedValues.length === 0) return; // Ignore empty arrays
+      if (parsedValues.length === 0) return;
 
+      // Map URL param to form field
+      const formFieldKey = reverseParamMapping[key] || key;
+
+      // Special handling for different filter types
       switch (key) {
         case "areas":
           setListAreasSystem(
             mapSelection(LOCATION_OPTIONS.districts, parsedValues)
           );
           break;
-        case "propertyType":
+        case "property-type":
           setListPropertySystem(
             mapSelection(LOCATION_OPTIONS.propertyTypes, parsedValues)
           );
@@ -338,94 +369,138 @@ const useRealEstateFilter = () => {
             mapSelection(LOCATION_OPTIONS.cities, parsedValues)
           );
           break;
-        case "coolingSystem":
+        case "cooling-system":
           setListCoolSystem(
             mapSelection(BUILDING_SYSTEMS_OPTIONS.coolingSystem, parsedValues)
           );
           break;
-        case "heatingSystem":
+        case "heating-system":
           setListHotSystem(
             mapSelection(BUILDING_SYSTEMS_OPTIONS.heatingSystem, parsedValues)
           );
           break;
-        case "floorMaterial":
+        case "floor-material":
           setListFloorSystem(
             mapSelection(BUILDING_SYSTEMS_OPTIONS.floorMaterial, parsedValues)
           );
           break;
+        case "min-price":
+        case "max-price":
+        case "min-size":
+        case "max-size":
+        case "bathroom-type":
+          setValue(formFieldKey, value);
+          break;
       }
 
-      // Determine field type (array or simple value)
+      // Set form values based on parameter type
       const isArrayField = [
         "areas",
-        "propertyType",
+        "property-type",
         "city",
-        "coolingSystem",
-        "heatingSystem",
-        "floorMaterial",
+        "cooling-system",
+        "heating-system",
+        "floor-material",
       ].includes(key);
-      setValue(key, isArrayField ? parsedValues : value);
+
+      if (!reverseParamMapping[key] && !key.includes("page") && key !== "sort-by") {
+        setValue(formFieldKey, isArrayField ? parsedValues : value);
+      }
     });
   }, []);
 
-  // 🔄 Update mikonim URL ro ba meghdare filter-ha
+  // 🔗 URL UPDATE FUNCTION
+  // ---------------------
+  /**
+   * 🔄 Synchronizes form state with URL
+   * 📝 Updates URL parameters based on form data
+   * 🧹 Cleans empty/default values from URL
+   */
   const updateUrlParams = useCallback((data, sourceComponent = null) => {
-    const url = new URL(location);
-    const params = url.searchParams;
+    const params = new URLSearchParams(location.search);
 
-    setIsUpdatingUrl(true); // 🟡 Dar hale update URL hastim
+    // Parameter name mapping (Form field → URL)
+    const paramNameMapping = {
+      minPrice: "min-price",
+      maxPrice: "max-price",
+      minSize: "min-size",
+      maxSize: "max-size",
+      propertyType: "property-type",
+      bathroomType: "bathroom-type",
+      floorMaterial: "floor-material",
+      coolingSystem: "cooling-system",
+      heatingSystem: "heating-system",
+    };
 
-    // 🧹 Agar az Global omade, hame filter ghadimi ro pak mikonim
+    // Create reverse mapping
+    const reverseMapping = {};
+    Object.entries(paramNameMapping).forEach(([key, value]) => {
+      reverseMapping[value] = key;
+    });
+
+    // Clear existing filters based on source
     if (sourceComponent === "Global") {
       keysToRemove.forEach((key) => params.delete(key));
+      Object.values(paramNameMapping).forEach((key) => params.delete(key));
     } else {
-      // 🧽 Dar gheire in surat, city ro ham ba filter-ha pak mikonim
-      [...keysToRemove, "city"].forEach((key) => params.delete(key));
+      [...keysToRemove].forEach((key) => params.delete(key));
+      Object.values(paramNameMapping).forEach((key) => params.delete(key));
     }
 
+    // Remove empty/null values
+    Object.entries(paramNameMapping).forEach(([formKey, urlKey]) => {
+      if (formKey in data && (!data[formKey] || data[formKey] === "any")) {
+        params.delete(urlKey);
+      }
+    });
+
+    // Process each form field
     for (const [key, value] of Object.entries(data)) {
-      // 🗑️ Agar value null, "any" ya khali bood, skip kon
-      if (
-        !value ||
-        value === "any" ||
-        (Array.isArray(value) &&
-          (value.length === 0 ||
-            JSON.stringify(value) === JSON.stringify(["any"])))
-      ) {
+      // Skip empty/default values
+      if (!value || value === "any" ||  (Array.isArray(value) && (value.length === 0) ||  JSON.stringify(value) === JSON.stringify(["any"]))) {
+        if (paramNameMapping[key]) {
+          params.delete(paramNameMapping[key]);
+        } else {
+          if(key !== "city"){
+            params.delete(key);
+          }
+        }
         continue;
       }
 
-      // 🔠 Format mikonim value ro baraye estefade dar URL
+      // Format value for URL
       let finalValue = null;
-
-      // 🧱 Agar value objecte ba prop "value", az oon estefade mikonim
-      if (
-        Array.isArray(value) &&
-        typeof value[0] === "object" &&
-        value[0]?.hasOwnProperty("value")
-      ) {
+      if (Array.isArray(value) && typeof value[0] === "object" && value[0]?.hasOwnProperty("value")) {
         finalValue = value.map((item) => item.value).join(",");
       } else {
         finalValue = Array.isArray(value) ? value.join(",") : value;
       }
 
-      // ➕ Meghdar ro be URL ezafe mikonim
-      params.set(key, finalValue);
+      // Use mapped parameter name if available
+      const urlKey = paramNameMapping[key] || key;
+           
+      // Update URL parameter
+      params.set(urlKey, finalValue);
     }
 
-    history.pushState({}, "", url); // 📍 Update mikonim address bar ro
-
-    setTimeout(() => {
-      setIsUpdatingUrl(false); // ✅ Update tamam shod
-    }, 50);
+    // Update browser URL
+    navigate(`${window.location.pathname}?${params.toString()}`, {
+      replace: true,
+    });
   }, []);
 
-  // 🔢 Count applied filters for badges
+  // 🔢 FILTER COUNTING
+  // -----------------
+  /**
+   * 📊 Counts active filters for badge displays
+   * 📱 Separates mobile and desktop filter counts
+   * 💾 Stores counts in localStorage for persistence
+   */
   const countAppliedFilters = useCallback((data) => {
     let desktopCounter = 0;
     let mobileCounter = 0;
 
-    // 🖥️ Desktop filter keys
+    // Desktop-specific filter keys
     const desktopFilterKeys = [
       "floorMaterial",
       "bedrooms",
@@ -439,39 +514,34 @@ const useRealEstateFilter = () => {
       "heatingSystem",
     ];
 
-    // 🚫 Keys to exclude from counting (only on /realestate page)
-    const excludedKeys =
-      window.location.pathname === "/realestate" ? ["city"] : [];
+    // Keys to exclude based on current route
+    const excludedKeys = window.location.pathname === "/realestate" ? ["city"] : [];
 
+    // Count each active filter
     for (const [key, value] of Object.entries(data)) {
-      // Skip excluded keys based on current page
       if (excludedKeys.includes(key)) continue;
 
-      // ✅ Check if filter is actually applied
+      // Determine if filter is active
       let isValidFilter = false;
-
       if (Array.isArray(value)) {
-        isValidFilter =
-          value.length > 0 && JSON.stringify(value) !== JSON.stringify(["any"]);
+        isValidFilter = value.length > 0 && JSON.stringify(value) !== JSON.stringify(["any"]);
       } else {
-        isValidFilter =
-          typeof value === "string" && value !== "any" && value !== "";
+        isValidFilter = typeof value === "string" && value !== "any" && value !== "";
       }
 
       if (isValidFilter) {
-        // 📱 Separate desktop vs mobile filters
         if (desktopFilterKeys.includes(key)) {
           desktopCounter++;
         } else {
-          mobileCounter++;
+          if (key !== "page") {
+            mobileCounter++;
+          }
         }
       }
     }
 
-    // 🧮 Calculate total as sum of desktop and mobile
+    // Calculate and store totals
     const totalCounter = desktopCounter + mobileCounter;
-
-    // 💾 Save all counts in state and localStorage
     setFilterCount(totalCounter);
     localStorage.setItem("filterCount", totalCounter);
 
@@ -482,21 +552,30 @@ const useRealEstateFilter = () => {
     localStorage.setItem("filtersMobileCount", mobileCounter);
   }, []);
 
-  // ✅ Form submit function
+  // ✅ FORM SUBMISSION
+  // -----------------
+  /**
+   * 🚀 Handles form submission
+   * 🔢 Updates filter counts
+   * 🔗 Synchronizes with URL
+   */
   const onSubmit = useCallback((data, sourceComponent) => {
-    // Count active filters
     countAppliedFilters(data);
-
-    // Update URL with filter values
     updateUrlParams(data, sourceComponent);
   }, []);
 
-  // 🗑️ Reset all filters
+  // 🗑️ RESET FUNCTION
+  // ----------------
+  /**
+   * 🔄 Resets all filters to defaults
+   * 🧹 Clears URL parameters
+   * 0️⃣ Resets all counters
+   */
   const handleResetAll = useCallback(() => {
-    // Reset form to default values
+    // Reset form values
     reset(defaultValues);
 
-    // Reset all systems to initial state
+    // Reset all option states
     setListCoolSystem(BUILDING_SYSTEMS_OPTIONS.coolingSystem);
     setListHotSystem(BUILDING_SYSTEMS_OPTIONS.heatingSystem);
     setListFloorSystem(BUILDING_SYSTEMS_OPTIONS.floorMaterial);
@@ -504,7 +583,7 @@ const useRealEstateFilter = () => {
     setListPropertySystem(LOCATION_OPTIONS.propertyTypes);
     setListCitySystem(LOCATION_OPTIONS.cities);
 
-    // Clear counter values
+    // Reset counters
     localStorage.setItem("filtersDesktopCount", 0);
     localStorage.setItem("filtersMobileCount", 0);
     localStorage.setItem("filterCount", 0);
@@ -513,53 +592,70 @@ const useRealEstateFilter = () => {
     setFilterCount(0);
 
     // Clear URL parameters
-    const url = new URL(location);
-    keysToRemove.forEach((key) => url.searchParams.delete(key));
-    history.pushState({}, "", url.toString());
+    const allKeysToRemove = [
+      ...keysToRemove,
+      "min-price",
+      "max-price",
+      "min-size",
+      "max-size",
+      "property-type",
+      "bathroom-type",
+      "floor-material",
+      "cooling-system",
+      "heating-system",
+    ];
+
+    const params = new URLSearchParams(location.search);
+    allKeysToRemove.forEach((key) => params.delete(key));
+
+    navigate(`${window.location.pathname}?${params.toString()}`, {
+      replace: true,
+    });
   }, []);
 
-  // 👀 Check form changes
+  // 🔍 CHANGE DETECTION
+  // ------------------
+  /**
+   * 👀 Watches for form changes
+   * 🚩 Sets isChanged flag when form differs from defaults
+   */
   useEffect(() => {
-    const watchValuesCopy = { ...formValues };
-    const defaultValuesCopy = { ...defaultValues };
 
-    delete watchValuesCopy.city;
-    delete defaultValuesCopy.city;
-
-    const isEqual =
-      JSON.stringify(watchValuesCopy) === JSON.stringify(defaultValuesCopy);
+    const isEqual = JSON.stringify(formValues) === JSON.stringify(defaultValues); 
     setIsChanged(!isEqual);
   }, [formValues]);
 
-  // 🚀 URL parameters ro mikhonim zamani ke component load mishe
+  // 🏁 INITIALIZATION
+  // ----------------
+  /**
+   * 🚀 Initial setup on component mount
+   * 📖 Reads URL parameters
+   * 🔄 Resets form to defaults first
+   */
   useEffect(() => {
-    if (initialRender) {
-      // 🔄 Avalin load, parameters ro process mikonim
-      processParams();
-      setInitialRender(false); // 🔄 Flag ro false mikonim baraye render bad
-    } else {
-      // 🛑 Agar update URL nist, parameter-ha ro process mikonim
-      if (!isUpdatingUrl) {
-        processParams();
-      }
-    }
-  }, [location.search]); // 🔍 Harbar location.search taghir kard, in effect run mishe
+    reset(defaultValues);
+    processParams();
+    
+  }, [location.search]);
 
-  // 📦 Hook output
+  // 📦 HOOK RETURN VALUES
+  // --------------------
   return {
-    // 📝 Form controls
+    // 🎛️ Form Controls
     setValue,
     watch,
     handleSubmit,
     isChanged,
 
-    // 🏙️ System states
+    // 🗺️ Location Filters
     listAreasSystem,
     setListAreasSystem,
     listPropertySystem,
     setListPropertySystem,
     listCitySystem,
     setListCitySystem,
+
+    // 🌡️ Systems Filters
     listCoolSystem,
     setListCoolSystem,
     listHotSystem,
@@ -583,7 +679,7 @@ const useRealEstateFilter = () => {
     propertyFilterDesktopConfig,
     propertyFeatureFilters,
 
-    // 🏠 Filter values
+    // 🔢 Current Values
     floorMaterial,
     bedrooms,
     parking,

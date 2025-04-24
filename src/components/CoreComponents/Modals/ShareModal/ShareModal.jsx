@@ -7,11 +7,11 @@ const ShareModal = memo(({ isOpenModal, url = window.location.href }) => {
   
   // 📱 Social media share links
   const socialMedia = [
-    { id: 1, name: 'تلگرام', icon: '../images/socialMedia/telegram.png', url: `https://t.me/share/url?url=${url}` },
-    { id: 2, name: 'واتساپ', icon: '../images/socialMedia/whatsapp.png', url: `https://api.whatsapp.com/send?text=${url}` },
-    { id: 3, name: 'توییتر', icon: '../images/socialMedia/x.png', url: `https://twitter.com/intent/tweet?text=${url}` },
-    { id: 4, name: 'فیس بوک', icon: '../images/socialMedia/facebook.png', url: `https://www.facebook.com/sharer/sharer.php?u=${url}` },
-    { id: 5, name: 'ایمیل', icon: '../images/socialMedia/formkit_email.png', url: `mailto:?subject=اشتراک‌گذاری&body=${url}` }
+    { id: 1, name: 'تلگرام', icon: '../../images/socialMedia/telegram.png', url: `https://t.me/share/url?url=${url}` },
+    { id: 2, name: 'واتساپ', icon: '../../images/socialMedia/whatsapp.png', url: `https://api.whatsapp.com/send?text=${url}` },
+    { id: 3, name: 'توییتر', icon: '../../images/socialMedia/x.png', url: `https://twitter.com/intent/tweet?text=${url}` },
+    { id: 4, name: 'فیس بوک', icon: '../../images/socialMedia/facebook.png', url: `https://www.facebook.com/sharer/sharer.php?u=${url}` },
+    { id: 5, name: 'ایمیل', icon: '../../images/socialMedia/formkit_email.png', url: `mailto:?subject=اشتراک‌گذاری&body=${url}` }
   ]
 
   // 📋 Copy link to clipboard

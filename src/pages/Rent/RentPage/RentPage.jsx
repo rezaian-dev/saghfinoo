@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Header from "../../../layouts/Header/Header";
 import Footer from "../../../layouts/Footer/Footer";
-import { dataCard } from "../../../data/realEstateData";
+import { dataBase } from "../../../data/realEstateData";
 import useModal from "../../../hooks/useModal";
+import { usePropertyFilter } from "../../../hooks/usePropertyFilters";
 import SearchBar from "../../../components/InteractiveComponents/Search/SearchBar/SearchBar";
 import LeafletMap from "../../../components/InteractiveComponents/Map/LeafletMap/LeafletMap";
 import RentalPropertyListing from "../../../components/RealEstateComponents/Listing/RentalPropertyListing/RentalPropertyListing";
@@ -13,78 +16,98 @@ import FillterModal from "../../../components/CoreComponents/Modals/FillterModal
 import PremierRealtorsModal from "../../../components/CoreComponents/Modals/PremierRealtorsModal/PremierRealtorsModal";
 
 export default function RentPage() {
-  const dataBaseCity = dataCard.filter((item) => item.label === "Tehran"); // Filtered data by city 🏙️
+  // 🔄 State Management
+  const [agencyId, setAgencyId] = useState("");
 
+  // 🎛️ Custom Hooks
   const { handleModal, isOpenModalFillter, isOpenModalPremier } = useModal();
+  const { filteredProperties, mapLocations } = usePropertyFilter({ dataBase });
+
+  // ⚡ Effects
+  useEffect(() => {
+    // 🏢 Get agency ID from URL
+    const agencyId = new URLSearchParams(location.search).get("agency-id");
+    if (agencyId) setAgencyId(agencyId);
+  }, [location.search]);
 
   useEffect(() => {
+    // 🖱️ Modal event listeners
     document.addEventListener("click", handleModal);
     return () => document.removeEventListener("click", handleModal);
-  }, [isOpenModalFillter, isOpenModalPremier]);
+  }, []);
 
   return (
-    <>
-      {/* Header with navigation bar 🧭 */}
+    <div className="rent-page">
+      {/* 🧭 Navigation Header */}
       <header className="md:pt-10">
         <div className="container">
           <Header />
         </div>
       </header>
 
-      {/* Main content area, handles city data display, filters, map, and property listings 🏙️ */}
+      {/* 🏡 Main Content Area */}
       <main>
-        {dataBaseCity.length ? ( // Check if there is data for the city ✅
+        {filteredProperties.length > 0 ? (
           <>
+            {/* 🔍 Search & Filters Section */}
             <section className="rent-page__location-selection">
               <div className="container">
                 <div className="rent-page__location-selection-container">
-                  <RealEstateFilterDesktop /> {/* Filter for desktop 🖥️ */}
-                  <RealEstateFilterMobile /> {/* Filter for mobile 📱 */}
-                  <SearchBar /> {/* Search bar 🔍 */}
+                  <RealEstateFilterDesktop />
+                  <RealEstateFilterMobile />
+                  <SearchBar />
                 </div>
               </div>
             </section>
 
+            {/* 🗺 Interactive Map Section */}
             <section className="rent-page__map">
               <div className="container">
                 <LeafletMap
-                  width={"w-full"}
-                  height={"h-[350px] md:h-[800px]"}
+                  width="w-full"
+                  height="h-[350px] md:h-[800px]"
+                  maps={mapLocations}
                 />
               </div>
             </section>
 
+            {/* 🏘 Property Listings Section */}
             <section className="rent-page__proprty-listing">
-              <RentalPropertyListing />
+              <RentalPropertyListing filteredProperties={filteredProperties} />
             </section>
           </>
         ) : (
+          // ❌ No Results Found
           <section className="rent-page__invalid-city">
             <div className="container">
               <NotFoundView
-                image={"../images/rent/rent-page/404-rent.webp"}
-                title={"ملک با مشخصات مورد نظر پیدا نشد!"}
-                caption={"در صفحه اصلی املاک مشابهی منتظر شما هستند"}
-                retPage={true}
+                image="../images/rent/rent-page/404-rent.webp"
+                title="ملک با مشخصات مورد نظر پیدا نشد!"
+                caption="در صفحه اصلی املاک مشابهی منتظر شما هستند"
+                retPage
               />
             </div>
           </section>
         )}
       </main>
 
-      {/* Footer section with site details 🦶 */}
+      {/* 🦶 Footer Section */}
       <footer className="rent-page__footer">
         <div className="container">
           <Footer />
         </div>
-
-        {/* Copyright text visible on medium and larger screens 💼 */}
         <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>
+
+      {/* 🎛️ Modals & Notifications */}
+      <ToastContainer />
       <FillterModal isOpenModal={isOpenModalFillter} />
-      <PremierRealtorsModal isOpenModal={isOpenModalPremier} />
-    </>
+      <PremierRealtorsModal 
+        isOpenModal={isOpenModalPremier} 
+        agencyId={agencyId}
+      />
+    </div>
   );
 }

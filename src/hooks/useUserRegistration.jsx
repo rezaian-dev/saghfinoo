@@ -4,19 +4,22 @@ import { v4 as uuidv4 } from "uuid";
 import { Eye, EyeSlash, Key, Mobile, User } from "iconsax-react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./useFormValidation";
+import { useNavigate } from "react-router-dom";
 
 // 🔧 Custom hook for handling user registration logic
 export const useUserRegistration = (
-  onToastSuccess,     // ✅ Toast for success
-  onToastError,       // ❌ Toast for error
-  usersDataBase,      // 📦 List of all users
-  setUsersDataBase,   // 🔄 Update users in state
-  setUser             // 👤 Set current logged-in user
+  onToastSuccess, // ✅ Toast for success
+  onToastError, // ❌ Toast for error
+  usersDataBase, // 📦 List of all users
+  setUsersDataBase, // 🔄 Update users in state
+  setUser // 👤 Set current logged-in user
 ) => {
   // 👁️ Toggle password visibility
   const [showPassword, setShowPassword] = useState(false);
   // ⏳ Show loading during submit
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // 🚀 Hook to navigate between pages using React Router
+  const navigate = useNavigate();
 
   // 📋 Setup form with validation
   const {
@@ -81,9 +84,10 @@ export const useUserRegistration = (
 
     // ⏱️ Simulate delay and reset form
     setTimeout(() => {
-      setUser(newUser);    // 👤 Set current user
+      setUser(newUser); // 👤 Set current user
       setIsSubmitting(false);
-      reset();             // 🔄 Clear form
+      reset(); // 🔄 Clear form
+      navigate("/home-pro-user");
     }, 3600);
   };
 

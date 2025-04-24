@@ -1,8 +1,9 @@
 import React, { memo } from "react";
 import clsx from "classnames";
+import { Link } from "react-router-dom";
 
-// 🛠️ Wrapping ServicesSectionItems in React.memo for performance optimization
-const ServicesSectionItems = memo(({ title, items, mobile }) => {
+const ServicesSectionItems = memo(({ title, items, mobile}) => {
+ 
   return (
     <div>
       {/* 🎯 Title of the service section */}
@@ -18,13 +19,13 @@ const ServicesSectionItems = memo(({ title, items, mobile }) => {
         })}
       >
         {/* 🔢 Render each item in the list */}
-        {items.map(({ id, icon, content }) => (
+        {items.map(({ id, icon, content,link }) => (
           <li key={id} className="services-section__list-item">
             {/* 💡 Display icon if available */}
             {icon && icon}
-            <a href="#" aria-label={content}>
+            <Link to={link} aria-label={content}>
               {content}
-            </a>{" "}
+            </Link>{" "}
             {/* Add aria-label for accessibility */}
           </li>
         ))}
@@ -33,7 +34,7 @@ const ServicesSectionItems = memo(({ title, items, mobile }) => {
         {title === "حساب کاربری" && (
           <li className="!mt-[93px]">
             <img
-              src="../images/logos/Logo-trust.webp"
+              src="../../images/logos/Logo-trust.webp"
               loading="lazy"
               alt="trust-logo"
             />

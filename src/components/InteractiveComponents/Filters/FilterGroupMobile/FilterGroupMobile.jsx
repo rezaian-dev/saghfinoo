@@ -1,8 +1,8 @@
-import React, { memo, useCallback } from "react";
+import React, { useCallback } from "react";
 import { PROPERTY_FILTERS } from "../../../../hooks/UseFilterData";
 import FilterButtonMobile from "../../../CoreComponents/Buttons/FilterButtonMobile/FilterButtonMobile";
 
-const FilterGroupMobile = memo(({ value, label, setValue, watch }) => {
+const FilterGroupMobile = ({ value, label, setValue, watch }) => {
   // 🔍 Get current value from form state, default to "any"
   const currentValue = watch(value);
 
@@ -35,6 +35,6 @@ const FilterGroupMobile = memo(({ value, label, setValue, watch }) => {
       </div>
     </div>
   );
-});
+};
 
 export default FilterGroupMobile;

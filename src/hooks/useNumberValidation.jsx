@@ -18,7 +18,7 @@ const useNumberValidation = (fieldName, setValue) => {
   // ✏️ Handles input changes and validates the value
   const handleInputChange = ({ target }) => {
     let value = target.value.replace(/,/g, "");
-
+     
     // ❌ Validate for non-numeric characters
     if (regexInvalidChars.test(value)) {
       showTemporaryError("* لطفاً عدد وارد کنید");

@@ -13,6 +13,9 @@ import SimilarListings from "../../../components/RealEstateComponents/Listing/Si
 import AgentCardModal from "../../../components/CoreComponents/Modals/AgentCardModal/AgentCardModal";
 import ReportAdModal from "../../../components/CoreComponents/Modals/ReportAdModal/ReportAdModal";
 import ShareModal from "../../../components/CoreComponents/Modals/ShareModal/ShareModal";
+import { useParams } from "react-router-dom";
+import { dataBase } from "../../../data/realEstateData";
+
 
 export default function HomeDetails() {
   const {
@@ -25,6 +28,10 @@ export default function HomeDetails() {
     setIsOpenModalShare,
   } = useModal();
 
+  const {id} = useParams();
+
+  const adTarget = dataBase.filter(city => city.id == id);
+
   useEffect(() => {
     document.addEventListener("click", handleModal);
     return () => document.removeEventListener("click", handleModal);
@@ -35,9 +42,9 @@ export default function HomeDetails() {
       <header className="md:pt-10">
         <div className="container">
           <Header />
-          <PropertyImageSliderDesktop />
+          <PropertyImageSliderDesktop images={adTarget[0].images}  />
         </div>
-        <PropertyImageSliderMobile />
+        <PropertyImageSliderMobile images={adTarget[0].images} />
       </header>
 
       {/* Main content section containing property details, amenities, location, and similar listings */}
@@ -45,8 +52,8 @@ export default function HomeDetails() {
         <section className="home-section-spacing">
           <div className="md:container">
             <div className="home-details__grid home-details__grid--info">
-              <PropertyOverview />
-              <AgentCard />
+              <PropertyOverview {...adTarget[0]} />
+              <AgentCard {...adTarget[0]} />
             </div>
           </div>
         </section>
@@ -54,7 +61,7 @@ export default function HomeDetails() {
         <section className="home-section-spacing">
           <div className="container">
             <div className="home-details__grid home-details__grid--feature">
-              <PropertyAmenities />
+              <PropertyAmenities {...adTarget[0]} />
             </div>
           </div>
         </section>
@@ -62,7 +69,7 @@ export default function HomeDetails() {
         <section className="home-section-spacing">
           <div className="container">
             <div className="home-details__grid home-details__grid--description">
-              <PropertyDescription />
+              <PropertyDescription {...adTarget[0]} />
             </div>
           </div>
         </section>
@@ -70,14 +77,14 @@ export default function HomeDetails() {
         <section className="home-section-spacing">
           <div className="container">
             <div className="home-details__grid home-details__grid--location">
-              <PropertyLocation />
+              <PropertyLocation {...adTarget[0]} />
             </div>
           </div>
         </section>
 
         <section className="home-details__similar-ads">
           <div className="container">
-            <SimilarListings />
+            <SimilarListings {...adTarget[0]} />
           </div>
         </section>
       </main>
@@ -94,6 +101,7 @@ export default function HomeDetails() {
       <AgentCardModal
         isOpenModal={isOpenModalAgentCard}
         setIsOpenModal={setIsOpenModalAgentCard}
+        {...adTarget[0]}
       />
       <ReportAdModal
         isOpenModal={isOpenModalReportAd}
@@ -102,6 +110,7 @@ export default function HomeDetails() {
       <ShareModal
         isOpenModal={isOpenModalShare}
         setIsOpenModal={setIsOpenModalShare}
+        
       />
     </>
   );

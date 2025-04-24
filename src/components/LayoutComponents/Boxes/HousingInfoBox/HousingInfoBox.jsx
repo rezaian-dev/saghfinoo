@@ -1,6 +1,7 @@
 import React, { memo } from "react";
+import { Link } from "react-router-dom";
 
-const HousingInfoBox = memo(({ title, caption, img, alt, btnContent }) => {
+const HousingInfoBox = memo(({ title, caption, img, alt, btnContent,link }) => {
   return (
     <div className="housing-info-box">
       {/* 🖼️ Image Container - Visual representation of the property */}
@@ -15,9 +16,9 @@ const HousingInfoBox = memo(({ title, caption, img, alt, btnContent }) => {
       </div>
       
       {/* 🔘 Action Button - User interaction for further action */}
-      <a className="housing-info-box__button" href="#">
+      <Link to={link} className="housing-info-box__button">
         {btnContent}
-      </a>
+      </Link>
     </div>
   );
 });

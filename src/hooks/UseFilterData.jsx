@@ -63,28 +63,28 @@ export const LOCATION_OPTIONS = {
     { id: 60, label: "مراغه", value: "maragheh", selected: false },
   ],
   districts: [
-    { id: 1, label: "منطقه ۱", value: "district_1", selected: false },
-    { id: 2, label: "منطقه ۲", value: "district_2", selected: false },
-    { id: 3, label: "منطقه ۳", value: "district_3", selected: false },
-    { id: 4, label: "منطقه ۴", value: "district_4", selected: false },
-    { id: 5, label: "منطقه ۵", value: "district_5", selected: false },
-    { id: 6, label: "منطقه ۶", value: "district_6", selected: false },
-    { id: 7, label: "منطقه ۷", value: "district_7", selected: false },
-    { id: 8, label: "منطقه ۸", value: "district_8", selected: false },
-    { id: 9, label: "منطقه ۹", value: "district_9", selected: false },
-    { id: 10, label: "منطقه ۱۰", value: "district_10", selected: false },
-    { id: 11, label: "منطقه ۱۱", value: "district_11", selected: false },
-    { id: 12, label: "منطقه ۱۲", value: "district_12", selected: false },
-    { id: 13, label: "منطقه ۱۳", value: "district_13", selected: false },
-    { id: 14, label: "منطقه ۱۴", value: "district_14", selected: false },
-    { id: 15, label: "منطقه ۱۵", value: "district_15", selected: false },
-    { id: 16, label: "منطقه ۱۶", value: "district_16", selected: false },
-    { id: 17, label: "منطقه ۱۷", value: "district_17", selected: false },
-    { id: 18, label: "منطقه ۱۸", value: "district_18", selected: false },
-    { id: 19, label: "منطقه ۱۹", value: "district_19", selected: false },
-    { id: 20, label: "منطقه ۲۰", value: "district_20", selected: false },
-    { id: 21, label: "منطقه ۲۱", value: "district_21", selected: false },
-    { id: 22, label: "منطقه ۲۲", value: "district_22", selected: false },
+    { id: 1, label: "منطقه ۱", value: "district-1", selected: false },
+    { id: 2, label: "منطقه ۲", value: "district-2", selected: false },
+    { id: 3, label: "منطقه ۳", value: "district-3", selected: false },
+    { id: 4, label: "منطقه ۴", value: "district-4", selected: false },
+    { id: 5, label: "منطقه ۵", value: "district-5", selected: false },
+    { id: 6, label: "منطقه ۶", value: "district-6", selected: false },
+    { id: 7, label: "منطقه ۷", value: "district-7", selected: false },
+    { id: 8, label: "منطقه ۸", value: "district-8", selected: false },
+    { id: 9, label: "منطقه ۹", value: "district-9", selected: false },
+    { id: 10, label: "منطقه ۱۰", value: "district-10", selected: false },
+    { id: 11, label: "منطقه ۱۱", value: "district-11", selected: false },
+    { id: 12, label: "منطقه ۱۲", value: "district-12", selected: false },
+    { id: 13, label: "منطقه ۱۳", value: "district-13", selected: false },
+    { id: 14, label: "منطقه ۱۴", value: "district-14", selected: false },
+    { id: 15, label: "منطقه ۱۵", value: "district-15", selected: false },
+    { id: 16, label: "منطقه ۱۶", value: "district-16", selected: false },
+    { id: 17, label: "منطقه ۱۷", value: "district-17", selected: false },
+    { id: 18, label: "منطقه ۱۸", value: "district-18", selected: false },
+    { id: 19, label: "منطقه ۱۹", value: "district-19", selected: false },
+    { id: 20, label: "منطقه ۲۰", value: "district-20", selected: false },
+    { id: 21, label: "منطقه ۲۱", value: "district-21", selected: false },
+    { id: 22, label: "منطقه ۲۲", value: "district-22", selected: false },
   ],
   propertyTypes: [
     { id: 1, label: "آپارتمان", value: "apartment", selected: false },
@@ -293,24 +293,38 @@ export const FILTER_CONFIG = [
   },
 ];
 
+  // 🌍 FA to EN city mapping
+ export const cityMap = {
+    یزد: "yazd", تهران: "tehran", مشهد: "mashhad", شیراز: "shiraz",
+    کرج: "karaj", قم: "qom", ارومیه: "urmia", اصفهان: "isfahan",
+    تبریز: "tabriz", اهواز: "ahvaz", شمال: "shomal"
+  };
+
+  // 🔄 EN to FA mapping (for display)
+ export const cityNamesFa = {
+    tehran: "تهران", mashhad: "مشهد", isfahan: "اصفهان", tabriz: "تبریز",
+    shiraz: "شیراز", ahvaz: "اهواز", karaj: "کرج", qom: "قم",
+    urmia: "ارومیه", yazd: "یزد", shomal: "شمال"
+  };
+
 // List of keys to remove from the filter 🗑️
 export const keysToRemove = [
-  "coolingSystem",
-  "heatingSystem",
-  "floorMaterial",
+  "cooling-system",
+  "heating-system",
+  "floor-material",
   "bedrooms",
   "parking",
   "storage",
   "elevator",
   "bathroom",
-  "bathroomType",
+  "bathroom-type",
   "floor",
-  "minPrice",
-  "maxPrice",
+  "min-price",
+  "max-price",
   "areas",
-  "minSize",
-  "maxSize",
-  "propertyType",
+  "min-size",
+  "max-size",
+  "property-type",
 ];
 
 // Allowed keys for filtering ✅
@@ -319,11 +333,11 @@ export const allowedKeys = [
   "parking",
   "storage",
   "bathroom",
-  "bathroomType",
+  "bathroom-type",
   "elevator",
   "floor",
-  "coolingSystem",
-  "heatingSystem",
-  "floorMaterial",
+  "cooling-system",
+  "heating-system",
+  "floor-material",
 ];
 

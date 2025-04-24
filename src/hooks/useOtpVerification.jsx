@@ -1,5 +1,5 @@
 import { useReducer, useEffect, useRef } from "react";
-
+import { useNavigate } from "react-router-dom";
 // 🔄 Reducer function to manage OTP state
 const otpReducer = (state, { type, payload }) => {
   switch (type) {
@@ -56,6 +56,7 @@ export const useOtpVerification = (
 
   const [state, dispatch] = useReducer(otpReducer, initialState);
   const timerRef = useRef();
+  const navigate = useNavigate();
 
   // ========================
   // Timer and OTP Logic
@@ -103,7 +104,9 @@ export const useOtpVerification = (
   
         setUser(userTarget); // 👤 Set logged-in user
         localStorage.setItem("user", JSON.stringify(userTarget)); // 💾 Save to localStorage
-      }, 3400);
+        
+        navigate("/home-pro-user")
+      }, 3600);
   
     } else {
       // ❌ OTP is incorrect
@@ -112,7 +115,6 @@ export const useOtpVerification = (
     }
   };
   
-
   // ========================
   // Resend OTP Logic
   // ========================
@@ -161,6 +163,7 @@ export const useOtpVerification = (
   // Side Effects
   // ========================
   // 🕒 Start timer and show OTP code after 3 seconds when verification step is active
+  
   useEffect(() => {
     if (showVerificationStep) {
       setTimeout(

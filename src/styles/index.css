@@ -99,7 +99,7 @@ body {
     @apply text-gray-12 font-bold text-[clamp(14px,3vw,32px)] mb-4 md:mb-8;
   }
   .text-style {
-    @apply text-gray-11 text-xs sm:text-[20px] sm:leading-9;
+    @apply text-gray-11 block text-xs sm:text-base sm:leading-9;
   } 
   .home-new-user__footer,
   .home-pro-user__footer {
@@ -107,7 +107,33 @@ body {
   }
   .home-new-user__header,
   .home-pro-user__header {
-    @apply bg-home-desktop mt-[58px] md:mt-0 pt-7 pb-3 bg-no-repeat bg-cover bg-center h-auto md:min-h-[690px] md:pt-10;
+    @apply bg-home-desktop mt-[58px] md:mt-0 pt-7 pb-3 bg-no-repeat bg-cover bg-center min-h-[215px] md:min-h-[690px] md:pt-10;
+  }
+  .home-new-user__empowerment,
+  .home-pro-user__new-houses {
+    @apply section-spacing-lg;
+  }
+  .section-spacing-shared {
+    @apply section-spacing-md;
+  }
+  .news-section-spacing {
+    @apply mt-10 md:mt-14;
+  }
+  .icon-size {
+    @apply w-4 h-4 md:w-6 md:h-6 transform transition-all duration-300;
+  }
+  .menu-desktop {
+    @apply flex-center justify-between px-4 md:px-9 bg-white text-gray-10 h-[58px] md:h-[115px] md:rounded-2xl absolute md:static top-0 left-0 right-0;
+  }
+  .menu-desktop__logo {
+    @apply w-[110px] lg:w-[130px];
+  }
+  .menu-desktop__items {
+    @apply flex items-center mr-2 lg:mr-11 gap-x-4 lg:gap-x-6;
+  }
+  .menu-desktop__link,
+  .menu-desktop__login-link {
+    @apply transition-colors duration-300 hover:text-primary;
   }
   .home-new-user__empowerment,
   .home-pro-user__new-houses {
@@ -215,7 +241,7 @@ body {
     @apply w-full;
   }
   .search-box {
-    @apply flex flex-col bg-white gap-y-[7px] md:gap-y-2.5 max-w-[816px] pb-2 md:pb-3 pt-1 md:pt-3.5 pl-4 pr-5 md:px-7 rounded-lg md:rounded-xl mx-auto mt-[55px] md:mt-[72px] transition-all border focus-within:shadow-info focus-within:border-info;
+    @apply flex flex-col absolute mx-auto bg-white gap-y-[7px] md:gap-y-2.5  left-4 right-4 lg:left-0 lg:right-0 max-w-[816px] pb-2 md:pb-3 pt-1 md:pt-3.5 pl-4 pr-5 md:px-7 rounded-lg md:rounded-xl  mt-[55px] md:mt-[72px] transition-all border focus-within:shadow-info focus-within:border-info;
   }
   .search-box__toggle-buttons {
     @apply flex gap-x-0.5 justify-center text-gray-11 font-medium text-sm sm:text-base md:text-lg lg:text-2xl child:max-w-[379px] child:w-full child:h-[27px] child:md:h-10;
@@ -242,7 +268,7 @@ body {
     @apply text-gray-10;
   }
   .search-box__suggestions {
-    @apply space-y-3 mr-6;
+    @apply space-y-3 mr-6 md:mr-8 text-sm sm:text-base;
   }
   .housing-support__text {
     @apply text-gray-12 text-right md:text-center;
@@ -728,7 +754,7 @@ body {
     @apply inline-block text-gray-11 text-sm mb-1;
   }
   .property-filter-mobile__button {
-    @apply flex-center rounded h-[32px] gap-x-1 px-4 sm:gap-x-2 border border-gray-7;
+    @apply flex-center rounded transition-all duration-300 h-[32px] gap-x-1 px-4 sm:gap-x-2 border border-gray-7;
   }
   .property-filter-mobile__button-text {
     @apply text-gray-7 text-[11px] sm:text-xs;
@@ -850,8 +876,11 @@ body {
   .search-bar__close-icon {
     @apply w-4 h-4 xl:w-5 xl:h-5;
   }
+  .search-bar__close-icon{
+   @apply flex-shrink-0 pointer-events-auto;
+  }
   .search-bar__icon {
-    @apply xl:w-6 xl:h-6;
+    @apply xl:w-6 xl:h-6 shrink-0;
   }
   .search-bar__input {
     @apply outline-none w-full text-xs xl:text-base;
@@ -866,7 +895,7 @@ body {
     @apply hidden md:flex-center text-xs xl:text-sm cursor-pointer gap-x-3 px-2 xl:px-3 py-1 text-gray-11 rounded-lg border border-gray-11;
   }
   .search-bar__dropdown-wrapper {
-    @apply relative text-xs xl:text-sm flex-center cursor-pointer sm:justify-between grow gap-x-1 w-full max-w-[103px] sm:max-w-[165px] h-full max-h-12 py-1 px-2 xl:px-3 md:py-2 text-gray-11 rounded md:rounded-lg border border-gray-11;
+    @apply relative text-xs flex md:hidden xl:text-sm flex-center cursor-pointer justify-between gap-x-1 w-full max-w-[153px] sm:min-w-[155px] h-full max-h-12 py-1 px-2 xl:px-3 md:py-2 text-gray-11 rounded md:rounded-lg border border-gray-11;
   }
   .search-bar__dropdown-icon {
     @apply w-4 h-4 xl:w-5 xl:h-5 shrink-0 transition-all duration-300 transform;
@@ -1787,7 +1816,7 @@ body {
     @apply !w-[6px] !h-[6px] !bg-transparent border !border-white !shadow-border;
   }
   .leaflet-map {
-    @apply relative mx-auto z-10;
+    @apply relative outline-none mx-auto z-10;
   }
   .realator__logo-circle {
     @apply border border-black pointer-events-none;

@@ -16,31 +16,28 @@ const FilterButton = memo(({
     return toArray(optionValue).some((val) => toArray(currentValue).includes(val));
   };
 
-  // 🎯 Handle selection logic
-  const handleSelect = (newValue, defaultValue) => {
-    if (typeof defaultValue === "string") {
-      // 🧩 Set value directly if not array
-      setValue(name, newValue);
-      return;
-    }
+// 🎯 Handle selection logic
+const handleSelect = (newValue, defaultValue) => {
+  if (typeof defaultValue === "string") {
+    return setValue(name, newValue);
+  }
 
-    if (newValue === "any") {
-      // 🔄 Reset to default "any" filter
-      setValue(name, ["any"]);
-      return;
-    }
+  if (newValue === "any") {
+    return setValue(name, ["any"]);
+  }
 
-    // 🧹 Remove "any" if new value is added
-    const filteredValues = value.filter((val) => val !== "any");
+  const filtered = value.filter((val) => val !== "any");
+  const exists = filtered.includes(newValue);
 
-    // 🚫 Avoid duplicates
-    const isDuplicate = filteredValues.includes(newValue);
+  const updated = exists
+    ? filtered.filter((val) => val !== newValue)
+    : [...filtered, newValue];
 
-    if (!isDuplicate) {
-      // ➕ Add new value
-      setValue(name, [...filteredValues, newValue]);
-    }
-  };
+  setValue(name, updated.length ? updated : ["any"]);
+};
+
+  
+  
 
   // ✅ Check if button is currently selected
   const isSelected = isValueMatch(option.value, value);

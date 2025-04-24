@@ -1,10 +1,11 @@
 import React, { memo } from "react";
 import NewRentalListingsBox from "../../../LayoutComponents/Boxes/NewRentalListingsBox/NewRentalListingsBox";
-import { dataCard } from "../../../../data/realEstateData";
+import { dataBase } from "../../../../data/realEstateData";
 
-const SimilarListings = memo(() => {
+const SimilarListings = memo(({city,transactionType}) => {
+  
   // 🏙️ Filter the data to get listings from Tehran
-  const selectedCity = dataCard.filter(item => item.label === "Tehran");
+  const selectedCity = dataBase.filter(item => item.city === city && item.transactionType ===transactionType );
   
   return (
     <div>

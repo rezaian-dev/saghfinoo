@@ -1,10 +1,11 @@
 import React, { memo } from "react";
-import { dataCard } from "../../../../data/realEstateData";
+import { dataBase } from "../../../../data/realEstateData";
 import NewRentalListingsBox from "../../../LayoutComponents/Boxes/NewRentalListingsBox/NewRentalListingsBox";
+import { Link } from "react-router-dom";
 
  const NewRentalListings = memo((() => {
 
-  const selectTehran = dataCard.filter(item => item.label === "Tehran"); 
+  const selectTehran = dataBase.filter(item => item.city === "tehran"); 
   
   return (
     <>
@@ -15,9 +16,9 @@ import NewRentalListingsBox from "../../../LayoutComponents/Boxes/NewRentalListi
           جدیدترین خانه‌های اجاره‌ای تهران
         </h3>
         {/* 🔗 Link to view all listings */}
-        <a className="new-rental__link" href="#">
+        <Link to={"/rent?city=tehran"} className="new-rental__link">
           مشاهده همه
-        </a>
+        </Link>
       </div>
   
       {/* 🧩 Grid layout to display rental listings */}

@@ -10,16 +10,14 @@ export const FilterContext = createContext();
 const FilterProvider = ({ children }) => {
   // 🔄 General reset trigger
 
-  const [sortBy, setSortBy] = useState("newest"); // Sorting option
   const [searchCity, setSearchCity] = useState(""); // City search
   const [usersDataBase, setUsersDataBase] = useState([]);
   const [userRegister, setUserRegister] = useState(false);
   const [showVerificationStep, setShowVerificationStep] = useState(false);
-  const [userPhoneNumber,setUserPhoneNumber] = useState("");
+  const [userPhoneNumber, setUserPhoneNumber] = useState("");
 
-  const [user,setUser] = useState({});
+  const [user, setUser] = useState({});
 
- 
   const [selectedCity, setSelectedCity] = useState([]); // 🏙️ Selected cities
 
   // 📜 OPTION LISTS (For dropdowns/selects)
@@ -30,37 +28,32 @@ const FilterProvider = ({ children }) => {
   const [listFloorMaterial, setListFloorMaterial] = useState([]); // Floor materials list
   const [listCities, setListCities] = useState([]); // Cities list
 
-  
+  const [filtersCountDesktop, setFiltersCountDesktop] = useState(0);
+  const [filtersCountMobile, setFiltersCountMobile] = useState(0);
+  const [filterCount, setFilterCount] = useState(0);
 
-    
-    const [filtersCountDesktop, setFiltersCountDesktop] = useState(0);
-    const [filtersCountMobile, setFiltersCountMobile] = useState(0);
-    const[filterCount,setFilterCount] = useState(0);
+  useEffect(() => {
+    setFiltersCountDesktop(+localStorage.getItem("filtersDesktopCount"));
+    setFiltersCountMobile(+localStorage.getItem("filtersMobileCount"));
+    setFilterCount(+localStorage.getItem("filterCount"));
+  }, [location.search]);
 
-    useEffect(()=>{
-      setFiltersCountDesktop(+localStorage.getItem("filtersDesktopCount"))
-      setFiltersCountMobile(+localStorage.getItem("filtersMobileCount"))
-      setFilterCount(+localStorage.getItem("filterCount"))
-    },[filtersCountDesktop,filtersCountMobile,filterCount])
-
-    useEffect(()=>{
-      setUsersDataBase(JSON.parse(localStorage.getItem("usersDataBase")))
-      setUser(JSON.parse(localStorage.getItem("user")))
-    },[])
+  useEffect(() => {
+    setUsersDataBase(JSON.parse(localStorage.getItem("usersDataBase")));
+    setUser(JSON.parse(localStorage.getItem("user")));
+  }, []);
   // 🔗 Context Provider with all state values and setters
   return (
     <FilterContext.Provider
       value={{
-       
         filterCount,
         setFilterCount,
         userRegister,
         setUserRegister,
         // 📋 Single selection filters
-       
-        sortBy,
+
         searchCity,
-        setSortBy,
+
         setSearchCity,
         listCities,
         setListCities,
@@ -69,7 +62,6 @@ const FilterProvider = ({ children }) => {
 
         usersDataBase,
         setUsersDataBase,
-
 
         user,
         setUser,
@@ -93,8 +85,6 @@ const FilterProvider = ({ children }) => {
         setFiltersCountDesktop,
         filtersCountMobile,
         setFiltersCountMobile,
-
-
       }}
     >
       {children}

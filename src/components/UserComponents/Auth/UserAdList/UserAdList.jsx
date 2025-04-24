@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Trash } from "iconsax-react";
-import { userAdlist } from "../../../../data/realEstateData";
+import { dataBase } from "../../../../data/realEstateData";
 import NewRentalListingsBox from "../../../LayoutComponents/Boxes/NewRentalListingsBox/NewRentalListingsBox";
 
 /**
@@ -20,7 +20,7 @@ const UserAdList = memo(({ myad, savead }) => {
       {/* 🏘️ Grid container for property listings */}
       <div className="user-ad-list__grid">
         {/* 🔄 Map through user's advertisements data */}
-        {userAdlist.map((item) => (
+        {dataBase.slice(0,3).map((item) => (
           <NewRentalListingsBox key={item.id} {...item} myad={myad} savead={savead} />
         ))}
       </div>

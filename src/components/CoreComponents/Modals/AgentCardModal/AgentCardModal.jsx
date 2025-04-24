@@ -4,15 +4,15 @@ import { Call, CloseCircle, InfoCircle } from "iconsax-react";
 import { ToastContainer } from "react-toastify";
 import useToast from "../../../../hooks/useToast";
 
-const AgentCardModal = memo(({ isOpenModal,setIsOpenModal }) => {
+const AgentCardModal = memo(({ isOpenModal,setIsOpenModal,advisor,propertyCode }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isRatingDisabled, setIsRatingDisabled] = useState(false);  // Add this state for disabling ratings
    const {handleToastSuccess} = useToast(setIsOpenModal);
 
   const pageNumbers = [5, 4, 3, 2, 1]; // 🔢 Rating numbers
   const phones = [
-    { number: "09123456789", href: "tel:09123456789" },
-    { number: "02112345678", href: "tel:02112345678" },
+    { number: advisor.mobileNumber, href: `tel:${advisor.mobileNumber}` },
+    { number:advisor.officeNumber, href: `tel:${advisor.officeNumber}` },
   ];
 
   const handleUserRating =(num)=>{
@@ -26,7 +26,11 @@ const AgentCardModal = memo(({ isOpenModal,setIsOpenModal }) => {
     setIsRatingDisabled(false)
    }, 3500);
   } 
-  
+  const toPersianNumber = (num) => {
+    return String(num).replace(/\d/g, (digit) =>
+      "۰۱۲۳۴۵۶۷۸۹"[digit]
+    );
+  }
   return (
     <div
       className={clsx("agent-card-modal",isOpenModal ? "agent-card-modal--open" : "agent-card-modal--closed")}>
@@ -40,18 +44,18 @@ const AgentCardModal = memo(({ isOpenModal,setIsOpenModal }) => {
         <div className="agent-card-modal__logo-container">
           <div className="agent-card-modal__logo">
             <img
-              src="../images/landing/home-prouser/logo-tusi.png"
+              src={advisor.logo}
               loading="lazy"
               alt="Logo"
             />
           </div>
           <a className="agent-card-modal__company-name" href="#">
-            املاک توسی
+            {advisor.office.slice(6)}
           </a>
         </div>
 
         {/* 👤 Agent Name */}
-        <h3 className="agent-card-modal__agent-name">علی پرتو</h3>
+        <h3 className="agent-card-modal__agent-name">{advisor.name}</h3>
 
         {/* ☎️ Phone Numbers */}
         <div className="agent-card-modal__phone-list">
@@ -70,7 +74,7 @@ const AgentCardModal = memo(({ isOpenModal,setIsOpenModal }) => {
           <div className="agent-card-modal__info-row">
             <InfoCircle className="agent-card-modal__info-icon" color="#2F80ED" />
             <span className="agent-card-modal__info-label">شناسه آگهی ملک:</span>
-            <span className="agent-card-modal__info-value">۲۳۴۴</span>
+            <span className="agent-card-modal__info-value">{toPersianNumber(propertyCode)}</span>
           </div>
           <span className="agent-card-modal__info-hint">
             لطفاً این شناسه را هنگام تماس با مشاور به‌ یاد داشته باشید

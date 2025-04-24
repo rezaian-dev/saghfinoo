@@ -3,31 +3,28 @@ import { Dislike, Like1 } from "iconsax-react";
 import clsx from "classnames";
 import LeafletMap from "../../../InteractiveComponents/Map/LeafletMap/LeafletMap";
 
-const PropertyLocation = memo(() => {
+const PropertyLocation = memo(({locationOnMap,releaseTime,viewCount,saveCount}) => {
+ 
   // ℹ️ Property details (Listing time, views, and saves)
   const infoItems = [
-    { id: 1, label: "زمان ثبت آگهی", value: "ساعاتی پیش" },
+    { id: 1, label: "زمان ثبت آگهی", value: releaseTime },
     {
       id: 2,
       label: "تعداد مشاهده این آگهی",
-      value: "۲۲",
+      value: viewCount.toLocaleString("fa-IR"),
       extraClass: "property-location__info-item--view",
     },
     {
       id: 3,
       label: "تعداد ذخیره این آگهی",
-      value: "۶",
+      value: saveCount.toLocaleString("fa-IR"),
       extraClass: "property-location__info-item--save",
     },
   ];
 
   // 👍👎 Feedback icons with their respective actions
   const feedbackIcons = [
-    {
-      id: 1,
-      icon: <Dislike color="#353535" variant="Outline" />,
-      alt: "Dislike",
-    },
+    { id: 1, icon: <Dislike color="#353535" variant="Outline" />, alt: "Dislike"},
     { id: 2, icon: <Like1 color="#353535" variant="Outline" />, alt: "Like" },
   ];
 
@@ -38,7 +35,7 @@ const PropertyLocation = memo(() => {
 
       {/* 🗺️ Map container */}
       <div className="mx-auto">
-        <LeafletMap width="w-full" height="h-60 md:h-[353px]" />
+        <LeafletMap width="w-full" height="h-60 md:h-[353px]" maps={locationOnMap} />
       </div>
 
       {/* ℹ️ Property details (views, saves, listing time) */}

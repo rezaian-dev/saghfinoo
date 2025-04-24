@@ -15,9 +15,9 @@ const FooterDesktop = memo(() => {
       id: 1,
       title: "بازارهای املاک و مستغلات", // 🏠 Real estate markets category
       items: [
-        { id: 1, content: "بازار املاک و مستغلات تهران" },
-        { id: 2, content: "بازار املاک و مستغلات اصفهان" },
-        { id: 3, content: "بازار املاک و مستغلات شمال" },
+        { id: 1, content: "بازار املاک و مستغلات تهران",link:"/buy?city=tehran" },
+        { id: 2, content: "بازار املاک و مستغلات اصفهان",link:"/buy?city=isfahan" },
+        { id: 3, content: "بازار املاک و مستغلات شمال",link:"/buy?city=shomal" },
       ],
     },
     {
@@ -66,7 +66,7 @@ const FooterDesktop = memo(() => {
 
         {/* 🌆 Footer graphic image */}
         <div className="mt-[27px]">
-          <img className="mx-auto" src="../images/footer_graphic_city.png" loading="lazy" alt="grapphicCity" />
+          <img className="mx-auto" src="../../images/footer_graphic_city.png" loading="lazy" alt="grapphicCity" />
         </div>
       </div>
     </>

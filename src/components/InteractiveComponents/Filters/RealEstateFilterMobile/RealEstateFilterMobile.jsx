@@ -10,7 +10,7 @@ import RangeFilterMobile from "../RangeFilterMobile/RangeFilterMobile";
 
 const RealEstateFilterMobile = memo(() => {
   const [isShowMore, setIsShowMore] = useState(0); // 👀 Track status for "show more" button
-  const { isMenuOpen, menuRef, btnCloseRef, handleClick } = useToggleMenu(); // 🍔 Menu toggle state
+  const { dropdowns, menuRef,isFilterInteractive, btnCloseRef, handleClick } = useToggleMenu(); // 🍔 Menu toggle state
 
   const {
     setValue,
@@ -45,7 +45,7 @@ const RealEstateFilterMobile = memo(() => {
       ref={menuRef}
       className={clsx(
         "real-estate-filter-mobile",
-        isMenuOpen
+        dropdowns.menuFilter
           ? "real-estate-filter-mobile--open"
           : "real-estate-filter-mobile--close"
       )}
@@ -157,6 +157,7 @@ const RealEstateFilterMobile = memo(() => {
           type="submit"
           className="real-estate-filter-mobile__submit"
           onClick={handleSubmit(sendData)}
+          ref={isFilterInteractive}
         >
           جستجو
         </button>

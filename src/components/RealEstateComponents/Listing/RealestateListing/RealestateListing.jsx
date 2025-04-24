@@ -3,7 +3,7 @@ import { FilterSearch } from "iconsax-react";
 import clsx from "classnames";
 import PropertyFilterDesktop from "../../../InteractiveComponents/Filters/PropertyFilterDesktop/PropertyFilterDesktop";
 import RealEstateFilterMobile from "../../../InteractiveComponents/Filters/RealEstateFilterMobile/RealEstateFilterMobile";
-import { dataCard } from "../../../../data/realEstateData";
+import { dataBase } from "../../../../data/realEstateData";
 import NewRentalListingsBox from "../../../LayoutComponents/Boxes/NewRentalListingsBox/NewRentalListingsBox";
 import useShowItem from "../../../../hooks/useShowItem";
 import RangeFilterDesktop from "../../../InteractiveComponents/Filters/RangeFilterDesktop/RangeFilterDesktop";
@@ -21,7 +21,7 @@ const RealestateListing = memo(({ realestate = true }) => {
   } = useRealEstateFilter();
 
   // 🏙️ Filter data by selected city (Tehran)
-  const selectedCity = dataCard.filter((item) => item.label === "Tehran");
+  const selectedCity = dataBase.filter((item) => item.city === "tehran");
 
   // 👀 State management for showing more/less items
   const { isCountShowItem, handlerShowItem } = useShowItem(12, selectedCity);

@@ -6,8 +6,8 @@ import RangeFilterDesktop from "../RangeFilterDesktop/RangeFilterDesktop";
 import PropertyFilterDesktop from "../PropertyFilterDesktop/PropertyFilterDesktop";
 
 const RealEstateFilterDesktop = memo(() => {
-  const { handleSubmit, onSubmit, setValue, rangeFilterDesktopConfig, propertyFilterDesktopConfig } = useRealEstateFilter();
 
+  const {rangeFilterDesktopConfig,propertyFilterDesktopConfig } = useRealEstateFilter();
   const { filtersCountDesktop } = useContext(FilterContext); // 🔢 Get the count of filters applied
 
   return (
@@ -19,8 +19,6 @@ const RealEstateFilterDesktop = memo(() => {
             <PropertyFilterDesktop
               key={option.id}
               {...option}
-              setValue={setValue}
-              onSubmit={handleSubmit(onSubmit)}
             />
           )
       )}
@@ -30,8 +28,6 @@ const RealEstateFilterDesktop = memo(() => {
         <RangeFilterDesktop
           key={option.id}
           {...option}
-          setValue={setValue}
-          onSubmit={handleSubmit(onSubmit)}
         />
       ))}
 
@@ -45,7 +41,8 @@ const RealEstateFilterDesktop = memo(() => {
         <span className="real-estate-filter-desktop__text">
           {filtersCountDesktop
             ? `+${filtersCountDesktop.toLocaleString("fa-IR")} فیلتر` // 💡 If filters applied, show count
-            : "فیلترهای بیشتر"} {/* 🔍 Show more filters button text */}
+            : "فیلترهای بیشتر"}{" "}
+          {/* 🔍 Show more filters button text */}
         </span>
       </div>
     </form>

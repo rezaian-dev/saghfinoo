@@ -26,7 +26,7 @@ import { FilterContext } from "../../context/FilterContext";
 const Header = memo(() => {
   // Get menu state and refs from custom hook
   const {
-    isMenuOpen,
+    dropdowns,
     navToggleRef,
     menuRef,
     btnCloseRef,
@@ -94,7 +94,7 @@ const Header = memo(() => {
     { id: 8, label: "اخبار روز", path: "/news", icon: <Receipt21 size="20" /> },
   ];
 
-  const userProfilePages = ["/user-profile", "/my-ad", "/save-ad"];
+  const userProfilePages = ["/profile", "/my-ad", "/save-ad"];
   const isUserProfilePage = userProfilePages.includes(pathname);
 
   // Filter menu items based on the page type 🔍
@@ -127,6 +127,7 @@ const Header = memo(() => {
             pathname === "/rent" ||
             pathname === "/my-ad" ||
             pathname === "/about" ||
+            pathname === "/buy" ||
             pathname === "/news/news-details"
 
 
@@ -186,7 +187,7 @@ const Header = memo(() => {
         {/* User actions section 👤 */}
         <div className="menu-desktop__user-actions">
           {user ? (
-            <Link to={"/user-profile"}
+            <Link to={"/profile"}
               className="header__profile-info"
             >
               <ProfileCircle size="24" color="#505050" />
@@ -208,7 +209,7 @@ const Header = memo(() => {
       <div
         ref={menuRef}
         className={clsx("menu-mobile", {
-          "menu-mobile--open": isMenuOpen,
+          "menu-mobile--open": dropdowns.menuMobile,
         })}
       >
         {/* Close button for mobile menu ❌ */}
@@ -226,7 +227,7 @@ const Header = memo(() => {
           )}
         >
           {user ? (
-            <Link to={"/user-profile"} className="menu-mobile__profile-info">
+            <Link to={"/profile"} className="menu-mobile__profile-info">
               {user.image ? (
                 <img
                   width={70}
@@ -276,7 +277,7 @@ const Header = memo(() => {
       </div>
 
       {/* Overlay background for mobile menu 🌫️ */}
-      <div className={clsx("overlay", isActiveOverlay && "overlay--active")} />
+      <div className={clsx("overlay", dropdowns.menuMobile && "overlay--active")} />
 
       {/* Login Modal using Headless UI 🛠️ */}
       <div className="hidden md:block">

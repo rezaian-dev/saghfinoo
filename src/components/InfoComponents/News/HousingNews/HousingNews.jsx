@@ -25,6 +25,7 @@ const HousingNews = memo(() => {
         "رکود بازار مسکن؛فروشندگان در انتظار خریداران و خریداران در انتظار شکست نرخ فروشندگان",
       img: "images/landing/home-newuser/rokod_bazaar_maskan.webp",
       alt: "rokodBazaar",
+      link:"/news/news-details"
     },
     {
       id: 2,
@@ -32,6 +33,7 @@ const HousingNews = memo(() => {
         "خطر ویرانی زلزله در آسمان‌خراش‌ها بیشتر است یا در آپارتمان‌های کم‌ارتفاع و یا خانه‌های ویلایی ؟",
       img: "images/landing/home-newuser/khatar_zelze_asemankharash.webp",
       alt: "khatarZelzeAsemankharash",
+      link:"/news/news-details"
     },
     {
       id: 3,
@@ -39,6 +41,7 @@ const HousingNews = memo(() => {
         "بازار کساد کسب و کار معماران داخلی در پی بالا رفتن قیمت مواد و متریال اولیه و مصالح خارجی",
       img: "images/landing/home-newuser/kasad_bazaar_memaran.webp",
       alt: "kasadBazaar",
+      link:"/news/news-details"
     },
     {
       id: 4,
@@ -46,6 +49,7 @@ const HousingNews = memo(() => {
         "شهرک ساحلی زمزم در منطقه نور استان مازندران از سوم شهریور وارد بازار مزایده شده است.",
       img: "images/landing/home-newuser/shahrek_sahli_mazandaran.webp",
       alt: "shahrekSahli",
+      link:"/news/news-details"
     },
     {
       id: 5,
@@ -53,6 +57,7 @@ const HousingNews = memo(() => {
         "شهرک ساحلی زمزم در منطقه نور استان مازندران از سوم شهریور وارد بازار مزایده شده است.",
       img: "images/landing/home-newuser/shahrek_sahli_mazandaran.webp",
       alt: "shahrekSahli",
+      link:"/news/news-details"
     },
   ];
 

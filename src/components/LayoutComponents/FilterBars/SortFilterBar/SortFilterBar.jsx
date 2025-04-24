@@ -1,39 +1,62 @@
 import { ArrowDown2, FilterSearch, Sort } from "iconsax-react";
-import React, { memo, useContext, useEffect } from "react";
+import React, { memo, useContext, useEffect, useState } from "react";
 import clsx from "classnames";
 import { FilterContext } from "../../../../context/FilterContext";
 import useToggleMenu from "../../../../hooks/useToggleMenu";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SortFilterBar = memo(() => {
-  const { isDropdownOpen, btnRef, menuRef, handleClick } = useToggleMenu(); // Dropdown menu state
-  const { sortBy, setSortBy } = useContext(FilterContext); // Sorting context
-
+  const { dropdowns, handleClick } = useToggleMenu(); // 👇 Controls dropdown visibility
+  const [sortBy, setSortBy] = useState("newest"); // 🔀 Current sorting option
+  const location = useLocation(); // 📍 Get current route location
+  const navigate = useNavigate(); // 🔄 Navigation helper
+  
+  // Sorting options
   const category = [
-    // Sorting categories
-    { id: 1, name: "جدیدترین", value: "newest" },
-    { id: 2, name: "قرارداد فوری", value: "urgent" },
+    { id: 1, name: "جدیدترین", value: "newest" }, // 🆕 Newest
+    { id: 2, name: "قرارداد فوری", value: "urgent" }, // ⚡ Urgent
   ];
-
-  const { filterCount } = useContext(FilterContext);
-
-  // 📝 Effect hook to handle page setup and loading state on component mount
+  
+  const { filterCount } = useContext(FilterContext); // 🔢 Get filter count from context
+  
+  // Initialize component on mount
   useEffect(() => {
-    document.addEventListener("click", handleClick); // Event listener for click handling
+    const url = new URL(window.location.href);
+    const sortByParam = url.searchParams.get("sort-by") || "newest";
+    
+    setSortBy(sortByParam);
+    
+    // 🖱️ Close dropdown on document click
+    document.addEventListener("click", handleClick);
     return () => {
-      document.removeEventListener("click", handleClick); // Clean up event listener on unmount
+      document.removeEventListener("click", handleClick);
     };
   }, []);
+  
+  // Handle sort option selection
+  const handleSortBy = (value) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("sort-by", value);
+  
+    navigate(`${location.pathname}?${url.searchParams.toString()}`, { replace: true });
+    setSortBy(value);
+  };
+
+  // Update sorting when URL changes
+  useEffect(() => {
+    const url = new URL(window.location).searchParams.get("sort-by") || "newest";
+    if(url) {
+      setSortBy(url);
+    }
+  }, [location.search]);
 
   return (
     <>
-      {/* 🛠️ Controls for sorting and filtering */}
-      <div className="rental-property-listing__controls">
-        {/* 🧹 Sorting Options */}
+      <div className="rental-property-listing__controls"> {/* 🎛️ Controls bar */}
         <div
-          ref={btnRef}
           className={clsx(
             "rental-property-listing__sort",
-            isDropdownOpen && "rental-property-listing__sort--open"
+            dropdowns.sortBy && "rental-property-listing__sort--open"
           )}
         >
           <Sort className="icon-size" color="#505050" variant="Outline" />
@@ -41,15 +64,15 @@ const SortFilterBar = memo(() => {
             {sortBy === "newest" ? "جدیدترین" : "قرارداد فوری"}
           </span>
           <ArrowDown2
-            className={clsx("icon-size", isDropdownOpen && "rotate-180")}
+            className={clsx("icon-size", dropdowns.sortBy && "rotate-180")}
             color="#505050"
           />
-          {/* ⬇️ Dropdown menu for sorting */}
+          
+          {/* 📝 Sort options dropdown */}
           <div
-            ref={menuRef}
             className={clsx(
               "rental-property-listing__sort-menu",
-              isDropdownOpen && "rental-property-listing__sort-menu--open"
+              dropdowns.sortBy && "rental-property-listing__sort-menu--open"
             )}
           >
             {category.map(({ id, name, value }) => (
@@ -60,7 +83,7 @@ const SortFilterBar = memo(() => {
                   "rental-property-listing__sort-option",
                   sortBy === value && "text-primary"
                 )}
-                onClick={() => setSortBy(value)} // Set the sorting criteria
+                onClick={() => handleSortBy(value)}
               >
                 {name}
               </span>
@@ -68,13 +91,13 @@ const SortFilterBar = memo(() => {
           </div>
         </div>
 
-        {/* 🔄 Filter Options */}
+        {/* 🔍 Filter button */}
         <div className="rental-property-listing__filters">
           <FilterSearch className="icon-size" color="#505050" />
           <span className="real-estate-filter-desktop__text">
             {filterCount
               ? `+${filterCount.toLocaleString("fa-IR")} فیلتر`
-              : "فیلترها"}
+              : "فیلتر ها"}
           </span>
         </div>
       </div>

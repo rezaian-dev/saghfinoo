@@ -49,7 +49,7 @@ const FooterMobile = memo(() => {
       items:[
         {id: 1, content: "تلفن", icon:<Call size="16" color="#CB1B1B" variant="Bold"/>},
         {id: 2, content: "اینستاگرام", icon:<Instagram size="16" color="#CB1B1B" variant="Bold"/>},
-        {id: 3, content: "تلگرام", icon:<img src="../svgs/icons/telegram.svg" width={16} loading='lazy' alt="telegram"/>},
+        {id: 3, content: "تلگرام", icon:<img src="../../svgs/icons/telegram.svg" width={16} loading='lazy' alt="telegram"/>},
       ]
     },
     {
@@ -75,7 +75,7 @@ const FooterMobile = memo(() => {
         
         {/* 🔹 Footer logo */}
         <div>
-          <img src="../images/logos/Logo-footer.png" width={64} height={31} loading='lazy' alt="logoFooter" />
+          <img src="../../images/logos/Logo-footer.png" width={64} height={31} loading='lazy' alt="logoFooter" />
         </div>
 
         {/* 🔹 Footer description and slogan */}
@@ -101,12 +101,12 @@ const FooterMobile = memo(() => {
 
         {/* 🔹 Trust logo */}
         <div className='footer-mobile__trust-logo'>
-          <img src="../images/logos/Logo-trust.webp" width={35} loading='lazy' alt="logoTrust" />
+          <img src="../../images/logos/Logo-trust.webp" width={35} loading='lazy' alt="logoTrust" />
         </div>
 
         {/* 🔹 Footer graphic image */}
         <div>
-          <img className='mx-auto' src="../images/footer_graphic_city.png" width={324} height={60} loading='lazy' alt="grapphicCity" />
+          <img className='mx-auto' src="../../images/footer_graphic_city.png" width={324} height={60} loading='lazy' alt="grapphicCity" />
         </div>
       </div>
     </>

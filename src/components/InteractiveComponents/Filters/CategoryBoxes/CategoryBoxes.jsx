@@ -1,6 +1,7 @@
 import React, { memo,useState } from "react";
 import { ArrowDown2 } from "iconsax-react";
 import clsx from "classnames";
+import { Link } from "react-router-dom";
 
 // 📑 CategoryBoxes component that renders a list of categories with a toggle for showing more/less items
 const CategoryBoxes = memo(({ title, items }) => {
@@ -22,10 +23,10 @@ const CategoryBoxes = memo(({ title, items }) => {
           </span>
           {/* 📋 List of items in the category */}
           <ul className="category-boxes__list">
-            {items.map(({ id, content }) => (
-              <li key={id} className="category-boxes__list-item">
+            {items.map(({ id, content,link }) => (
+              <Link to={link} key={id} className="category-boxes__list-item">
                 {content}
-              </li>
+              </Link>
             ))}
           </ul>
         </div>

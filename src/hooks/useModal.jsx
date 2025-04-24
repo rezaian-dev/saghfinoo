@@ -94,6 +94,11 @@ const useModal = (closeMenu) => {
       target.closest(".premier-realtors-modal__close-button")
     ) {
       setIsOpenModalPremier(false);
+      const url = new URL(window.location);
+      if (url.searchParams.has("agency-id")) {
+        url.searchParams.delete("agency-id");
+        history.replaceState({}, "", url);
+      }
     }
     if (target.closest(".realestate-filter-desktop__more-filters")) {
       setIsOpenModalFillter(true);

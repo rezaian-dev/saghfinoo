@@ -1,54 +1,62 @@
 import { useState, useCallback, useRef } from "react";
 import { toast } from "react-toastify";
 
-const useToast = (setIsOpenModal) => {
+const useToast = (setIsOpenModal = null) => {
+  // 🔄 Force Update Mechanism
   const [_, forceUpdate] = useState(0);
-  const shouldCloseModal = useRef(false); // ✅ Only set to true on success toast
+  
+  // 🚦 Modal Control Flag
+  const shouldCloseModal = useRef(false);
 
-  // 🎛️ Toast settings
+  // ⚙️ Toast Configuration
   const toastOptions = {
     position: window.innerWidth < 480 ? "top-center" : "top-right",
     autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
-    pauseOnHover: true,
+    pauseOnHover: false,
     draggable: true,
     rtl: true,
     onClose: () => {
-      // 🔄 Force re-render after toast closes
-      setTimeout(() => {
-        forceUpdate((prev) => prev + 1);
-      }, 0);
-
-      // ❎ Close modal if toast was success
-      if (shouldCloseModal.current) {
+      // 🎬 Post-Toast Actions
+      setTimeout(() => forceUpdate((prev) => prev + 1), 0);
+      
+      // 🚪 Conditional Modal Closing
+      if (shouldCloseModal.current && setIsOpenModal) {
         setIsOpenModal(false);
-        shouldCloseModal.current = false; // 🔁 Reset flag
+        shouldCloseModal.current = false; // 🔄 Reset flag
       }
     },
   };
 
-  // 🔁 Helper to force re-render
+  // 🔄 Re-render Trigger
   const triggerRerender = useCallback(() => {
     forceUpdate((prev) => prev + 1);
   }, []);
 
-  // ✅ Show success toast & close modal after
+  // 🌟 Success Toast (with modal closing)
   const handleToastSuccess = useCallback((message) => {
-    shouldCloseModal.current = true; // 🔓 Allow modal to close on toast close
+    shouldCloseModal.current = true; // 🏁 Set close flag
     triggerRerender();
     toast.success(message, toastOptions);
   }, []);
 
-  // ❌ Show error toast (no modal closing)
+  // ❗ Error Toast
   const handleToastError = useCallback((message) => {
     triggerRerender();
     toast.error(message, toastOptions);
   }, []);
 
+  // ℹ️ Info Toast
+  const handleToastInfo = useCallback((message) => {
+    triggerRerender();
+    toast.info(message, toastOptions);
+  }, []);
+
   return {
     handleToastSuccess,
     handleToastError,
+    handleToastInfo
   };
 };
 

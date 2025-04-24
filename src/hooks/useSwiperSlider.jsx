@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function useSwiperSlider() {
   const [isBeginning, setIsBeginning] = useState(true); // Track if the slider is at the beginning
