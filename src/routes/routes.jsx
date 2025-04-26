@@ -34,7 +34,7 @@ const routes = [
   { path: "/realestates", element: <Realestates /> },
   { path: "/realators", element: <Realators /> },
   { path: "/realestate", element: <Realestate /> },
-  { path: "/realator", element: <Realator /> },
+  { path: "/realator/:id", element: <Realator /> },
   { path: "/profile", element: <UserProfilePage /> },
   { path: "/my-ads", element: <MyAd /> },
   { path: "/saved-ads", element: <SaveAd /> },

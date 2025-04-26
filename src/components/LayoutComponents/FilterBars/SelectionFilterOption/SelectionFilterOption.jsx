@@ -17,7 +17,7 @@ const SelectionFilterOption = memo(({ id, label, selected, handleChangeBox, cont
     >
       <img
         // 🖼️ Display appropriate checkbox icon based on selection state
-        src={selected ? "svgs/icons/checked.svg" : "svgs/icons/checkBox.svg"}
+        src={selected ? "../../svgs/icons/checked.svg" : "../../svgs/icons/checkBox.svg"}
         loading="lazy"  // ⚡ Improve performance with lazy loading
         alt="checkBox"  // 🌟 Accessible description for screen readers
       />

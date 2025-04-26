@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { ExportCurve, Warning2 } from "iconsax-react";
 import clsx from "classnames";
 
-const PropertyRatingCard = memo(({ realestate = true }) => {
+const PropertyRatingCard = memo(({ realestate = true, dataRelator }) => {
   const numberRating = [
     { id: 1, value: "۵" },
     { id: 2, value: "۴" },
@@ -21,22 +21,25 @@ const PropertyRatingCard = memo(({ realestate = true }) => {
         {/* 📂 Archive button */}
         <img
           className="cursor-pointer"
-          src="svgs/icons/archive-minus(bg-gray-11).svg"
+          src="../../svgs/icons/archive-minus(bg-gray-11).svg"
           loading="lazy"
           alt="archiveMenu"
         />
       </div>
 
       {/* 📊 Rating Card */}
-      <div className={clsx("property-rating__content", !realestate && "!h-auto")}>
+      <div
+        className={clsx("property-rating__content", !realestate && "!h-auto")}
+      >
         {/* ⭐ User rating (Only if real estate is false) */}
         {!realestate && (
           <div className="property-rating__question">
             <span className="property-rating__question-text">
-              چه امتیازی به علی پرتو میدی؟
+              {`چه امتیازی به ${dataRelator?.name} میدی؟`}
             </span>
+
             <div className="property-rating__stars">
-              {numberRating.reverse().map(({id,value}) => (
+              {numberRating.reverse().map(({ id, value }) => (
                 <span key={id} className="property-rating__star">
                   {value}
                 </span>
@@ -47,13 +50,17 @@ const PropertyRatingCard = memo(({ realestate = true }) => {
 
         {/* ⭐ User Satisfaction Score */}
         <span className="property-rating__score">
-          میزان رضایتمندی کاربران: ۴/۹ از ۵
+          میزان رضایتمندی کاربران: {dataRelator?.ratingText.slice(7, 8)} از ۵
         </span>
 
         {/* 🚨 Report Section */}
         <div className="property-rating__report">
           {/* ⚠️ Warning Icon */}
-          <Warning2 className="property-rating__warning-icon" size="32" color="#ED2E2E" />
+          <Warning2
+            className="property-rating__warning-icon"
+            size="32"
+            color="#ED2E2E"
+          />
 
           {/* 📢 Report Text */}
           <span className="property-rating__report-text">گزارش تخلف</span>

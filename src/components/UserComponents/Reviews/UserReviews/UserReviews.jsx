@@ -5,16 +5,21 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import useSwiperSlider from "../../../../hooks/useSwiperSlider";
-import { dataCardRealestates } from "../../../../data/realEstateData";
+import { agents, dataCardRealestates } from "../../../../data/realEstateData";
+import { useParams } from "react-router-dom";
 
 /**
  * 📝 UserReviews Component
  * Displays user reviews for a selected consultant with swiper slider functionality
  */
 const UserReviews = memo(() => {
+  const {id} = useParams();
+ 
+  const target = agents.find(item => item.id === +id)
 
   // 🔍 Filter selected consultant's reviews
-  const selectedConsultant = dataCardRealestates.filter((item) => item.label === "Toosi");
+  const selectedConsultant = dataCardRealestates.filter((item) => item.title ===target.agency);
+
 
   // 🔄 Swiper slider state and handlers
   const { isBeginning, setIsBeginning, isEnd, handleNext, handlePrev, setSwiper, setIsEnd } = useSwiperSlider();

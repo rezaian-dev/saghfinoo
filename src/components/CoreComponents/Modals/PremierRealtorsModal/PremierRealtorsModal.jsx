@@ -3,7 +3,8 @@ import clsx from "classnames";
 import { Call, CloseCircle } from "iconsax-react";
 
 const PremierRealtorsModal = memo(
-  ({ isOpenModal, title = null, image = null, agencyId }) => {
+  ({ isOpenModal, agencyId, dataRelator }) => {
+    // Original dataCard array
     const dataCard = [
       {
         id: 1,
@@ -132,7 +133,8 @@ const PremierRealtorsModal = memo(
       },
     ];
 
-    const foundAgency = dataCard.find((item) => item.id === +agencyId);
+    // Decide which data source to use - prioritize dataRelator if available
+    const agencyData = dataRelator || (agencyId ? dataCard.find((item) => item.id === +agencyId) : null);
 
     return (
       <div
@@ -150,24 +152,24 @@ const PremierRealtorsModal = memo(
           <div
             className={clsx(
               "premier-realtors-modal__logo",
-              image && "w-[136px] h-[136px]"
+              agencyData?.image && "w-[136px] h-[136px]"
             )}
           >
             <img
               className="image-full object-none"
-              src={image ? image : foundAgency?.image}
-              alt={foundAgency?.alt || "AgencyLogo"}
+              src={agencyData?.image || ""}
+              alt={agencyData?.alt || "AgencyLogo"}
             />
           </div>
 
           {/* 📜 Modal title */}
           <h4 className="premier-realtors-modal__title">
-            {title ? title : foundAgency?.title}
+            {agencyData?.title || agencyData?.name || ""}
           </h4>
 
           {/* 📞 Contact numbers section */}
           <div className="premier-realtors-modal__contacts">
-            {foundAgency?.contactNumbers?.map((contact, index) => (
+            {agencyData?.contactNumbers?.map((contact, index) => (
               <a
                 key={index}
                 className="premier-realtors-modal__contact-item"

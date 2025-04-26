@@ -1,4 +1,4 @@
-import React, { memo, useContext } from "react";
+import React, { memo, useContext, useMemo } from "react";
 import { FilterSearch } from "iconsax-react";
 import clsx from "classnames";
 import PropertyFilterDesktop from "../../../InteractiveComponents/Filters/PropertyFilterDesktop/PropertyFilterDesktop";
@@ -9,26 +9,70 @@ import useShowItem from "../../../../hooks/useShowItem";
 import RangeFilterDesktop from "../../../InteractiveComponents/Filters/RangeFilterDesktop/RangeFilterDesktop";
 import useRealEstateFilter from "../../../../hooks/useRealEstateFilter";
 import { FilterContext } from "../../../../context/FilterContext";
+import { usePropertyFilter } from "../../../../hooks/usePropertyFilters";
 
-// Wrap the component with React.memo to optimize re-renders
-const RealestateListing = memo(({ realestate = true }) => {
-  const {
-    setValue,
-    handleSubmit,
-    onSubmit,
-    rangeFilterDesktopConfig,
-    propertyFilterDesktopConfig,
-  } = useRealEstateFilter();
+// 🏠 Real Estate Listing Component
+const RealestateListing = memo(
+  ({ realestate = true, ignoreTransactionType = true, dataRelator }) => {
+    const {
+      setValue,
+      handleSubmit,
+      onSubmit,
+      rangeFilterDesktopConfig,
+      propertyFilterDesktopConfig,
+    } = useRealEstateFilter();
 
-  // 🏙️ Filter data by selected city (Tehran)
-  const selectedCity = dataBase.filter((item) => item.city === "tehran");
+    // 🔢 Get expected count from dataRelator
+    const expectedCount = dataRelator?.listings?.length || 0;
 
-  // 👀 State management for showing more/less items
-  const { isCountShowItem, handlerShowItem } = useShowItem(12, selectedCity);
-  const { filtersCountDesktop, filterCount } = useContext(FilterContext);
+    // 🔍 Create deterministic list of properties
+    const finalList = useMemo(() => {
+      if (!dataRelator) return [];
 
-  return (
-    <>
+      // 1️⃣ First, get listings from this advisor
+      let advisorListings = dataBase.filter((item) => item.advisor?.name === dataRelator.name);
+
+      // 2️⃣ If we need more listings, add them from others
+      // BUT in a deterministic way (not random)
+      if (advisorListings.length < expectedCount) {
+        // Get other listings
+        const otherListings = dataBase.filter((item) => !item.advisor || item.advisor.name !== dataRelator.name);
+
+        // Sort them by ID to ensure consistent order
+        const sortedOthers = [...otherListings].sort((a, b) => {
+          // Convert string IDs to numbers if needed
+          const idA = typeof a.id === "string" ? a.id.replace(/\D/g, "") : a.id;
+          const idB = typeof b.id === "string" ? b.id.replace(/\D/g, "") : b.id;
+          return parseInt(idA) - parseInt(idB);
+        });
+
+        // Add enough to reach expected count
+        const additionalNeeded = expectedCount - advisorListings.length;
+        advisorListings = [
+          ...advisorListings,
+          ...sortedOthers.slice(0, additionalNeeded),
+        ];
+      }
+
+      // 3️⃣ Ensure we have exactly the expected count
+      return advisorListings.slice(0, expectedCount);
+    }, [dataRelator, expectedCount]);
+    
+
+    // 🧩 Apply property filters to our stable list
+    const { filteredProperties } = usePropertyFilter({
+      dataBase: finalList,
+      ignoreTransactionType,
+    });
+
+    // 👀 Show/hide items functionality
+    const { isCountShowItem, handlerShowItem } = useShowItem(
+      12,
+      filteredProperties
+    );
+    const { filtersCountDesktop, filterCount } = useContext(FilterContext);
+
+    return (
       <div>
         {/* 📝 Listing Title */}
         <h3 className="realestate-listing__title">
@@ -39,7 +83,6 @@ const RealestateListing = memo(({ realestate = true }) => {
         <div className="realestate-listing__filters">
           {/* 🖥️ Desktop Filters */}
           <div className="realestate-listing__filters-desktop">
-            {/* 🔍 Render property filter categories */}
             {propertyFilterDesktopConfig.map((option) => (
               <PropertyFilterDesktop
                 key={option.id}
@@ -48,8 +91,6 @@ const RealestateListing = memo(({ realestate = true }) => {
                 onSubmit={handleSubmit(onSubmit)}
               />
             ))}
-
-            {/* 🎛️ Additional filters */}
             {rangeFilterDesktopConfig.map((option) => (
               <RangeFilterDesktop
                 key={option.id}
@@ -60,7 +101,6 @@ const RealestateListing = memo(({ realestate = true }) => {
             ))}
 
             {/* 🔽 More Filters Button */}
-
             <div className="realestate-filter-desktop__more-filters">
               <FilterSearch className="icon-size" color="#505050" />
               <span className="real-estate-filter-desktop__text">
@@ -73,7 +113,6 @@ const RealestateListing = memo(({ realestate = true }) => {
 
           {/* 📱 Mobile Filters */}
           <div className="realestate-listing__filters-mobile">
-            {/* 🏠 First Property Filter for Mobile */}
             {propertyFilterDesktopConfig.slice(0, 1).map((option) => (
               <PropertyFilterDesktop
                 key={option.id}
@@ -82,8 +121,6 @@ const RealestateListing = memo(({ realestate = true }) => {
                 onSubmit={handleSubmit(onSubmit)}
               />
             ))}
-
-            {/* 🔍 Filter Button for Mobile */}
             <div className="rental-property-listing__filters">
               <FilterSearch className="icon-size" color="#505050" />
               <span className="real-estate-filter-desktop__text">
@@ -99,31 +136,37 @@ const RealestateListing = memo(({ realestate = true }) => {
         </div>
 
         {/* 🏢 Listing Grid */}
-        <div className="realestate-listing__grid">
-          {selectedCity.slice(0, isCountShowItem).map((item) => (
-            <NewRentalListingsBox key={item.id} {...item} />
-          ))}
-        </div>
+        {filteredProperties.length > 0 ? (
+          <div className="realestate-listing__grid">
+            {filteredProperties.slice(0, isCountShowItem).map((item) => (
+              <NewRentalListingsBox key={item.id} {...item} />
+            ))}
+          </div>
+        ) : (
+          <h2 className="empty-state__title">
+            ملک با مشخصات مورد نظر پیدا نشد!
+          </h2>
+        )}
 
         {/* 🛑 Show More/Less Button */}
         <div
           className={clsx(
             "realestate-listing__show-more",
-            selectedCity.length > 12 ? "block" : "hidden"
+            filteredProperties.length > 12 ? "block" : "hidden"
           )}
         >
           <span
             onClick={handlerShowItem}
             className="realestate-listing__show-more-button"
           >
-            {isCountShowItem > selectedCity.length
+            {isCountShowItem > filteredProperties.length
               ? "مشاهده کمتر"
               : "مشاهده بیشتر"}
           </span>
         </div>
       </div>
-    </>
-  );
-});
+    );
+  }
+);
 
 export default RealestateListing;

@@ -29,11 +29,14 @@ const PropertyFilterDesktop = memo(
 
     // 🔢 Update localStorage and total filter count
     const updateFilterCounters = () => {
-      const systemTypeParam = new URL(window.location).searchParams.get(systemType);
-      let filtersMobileCount = JSON.parse(localStorage.getItem("filtersMobileCount")) || 0;
+      const systemTypeParam = new URL(window.location).searchParams.get(
+        systemType
+      );
+      let filtersMobileCount =
+        JSON.parse(localStorage.getItem("filtersMobileCount")) || 0;
 
       // ➕ If no URL param but selected values exist => add 1
-      if (!systemTypeParam && valueSystemType.length) {
+      if (!systemTypeParam && valueSystemType.length && systemType !== "city") {
         filtersMobileCount += 1;
       }
 
@@ -43,10 +46,14 @@ const PropertyFilterDesktop = memo(
       }
 
       // 💾 Update mobile filter count
-      localStorage.setItem("filtersMobileCount", JSON.stringify(filtersMobileCount));
+      localStorage.setItem(
+        "filtersMobileCount",
+        JSON.stringify(filtersMobileCount)
+      );
 
       // 🔁 Update total filter count (mobile + desktop)
-      const filtersDesktopCount = JSON.parse(localStorage.getItem("filtersDesktopCount")) || 0;
+      const filtersDesktopCount =
+        JSON.parse(localStorage.getItem("filtersDesktopCount")) || 0;
       const totalFilters = filtersMobileCount + filtersDesktopCount;
 
       localStorage.setItem("filterCount", JSON.stringify(totalFilters));
@@ -77,14 +84,18 @@ const PropertyFilterDesktop = memo(
       updateFilterCounters();
       const currentParams = new URLSearchParams(location.search);
 
-      const joinedValues = data[systemType]?.map((item) => item.value).join(",");
+      const joinedValues = data[systemType]
+        ?.map((item) => item.value)
+        .join(",");
       if (joinedValues) {
         currentParams.set(systemType, joinedValues);
       } else {
         currentParams.delete(systemType);
       }
 
-      navigate(`${location.pathname}?${currentParams.toString()}`, { replace: true });
+      navigate(`${location.pathname}?${currentParams.toString()}`, {
+        replace: true,
+      });
     };
 
     // 🔄 Sync selected options with props

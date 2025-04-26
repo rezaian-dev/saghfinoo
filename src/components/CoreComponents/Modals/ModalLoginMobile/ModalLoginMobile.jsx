@@ -28,7 +28,7 @@ const ModalLoginMobile = memo(({ isOpenModal, menuModal, setIsOpenModal }) => {
         <div className="modal-login__logo">
           <div className="modal-login__logo-wrapper">
             <img
-              src="../images/logos/Logo.png"
+              src="../../images/logos/Logo.png"
               width={80}
               height={40}
               loading="lazy"

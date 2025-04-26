@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../layouts/Header/Header";
 import Footer from "../../layouts/Footer/Footer";
 import useModal from "../../hooks/useModal";
@@ -11,8 +11,16 @@ import FilterModal from "../../components/CoreComponents/Modals/FillterModal/Fil
 import ReportAdModal from "../../components/CoreComponents/Modals/ReportAdModal/ReportAdModal";
 import RatingModal from "../../components/CoreComponents/Modals/RatingModal/RatingModal";
 import ShareModal from "../../components/CoreComponents/Modals/ShareModal/ShareModal";
+import { agents } from "../../data/realEstateData";
+import { useLocation, useParams } from "react-router-dom";
+import { generateAgentListings } from "../../data/relator";
 
 export default function Realator() {
+  const location = useLocation();
+  const { id } = useParams();
+  const [dataRelator, setDataRelator] = useState([]);
+  
+  // 🧩 Modal state and handlers from custom hook
   const {
     handleModal,
     isOpenModalPremier,
@@ -24,11 +32,19 @@ export default function Realator() {
     isOpenModalShare,
     setIsOpenModalShare,
   } = useModal();
-
+  
+  // 🎯 Add/remove global click event listener for modal handling
   useEffect(() => {
     document.addEventListener("click", handleModal);
     return () => document.removeEventListener("click", handleModal);
-  }, [isOpenModalPremier]);
+  }, []);
+  
+  // 🔎 Find and set the selected agent based on URL param id
+  useEffect(() => {
+    const result = agents.filter((item) => item.id === +id);
+    setDataRelator(result);
+  }, [location.search]);
+  
   return (
     <>
       {/* 🏠 Header section with logo and navigation */}
@@ -40,7 +56,7 @@ export default function Realator() {
         <div className={"realestate__logo-circle realator__logo-circle"}>
           <img
             className="image-full"
-            src="images\landing\home-prouser\ali-parto.png"
+            src={dataRelator[0]?.image}
             loading="lazy"
             alt="logo"
           />
@@ -51,15 +67,21 @@ export default function Realator() {
         <section className="realestate__profile">
           <div className="container">
             <div className="realestate__grid">
-              <RealtyIntro realestate={false} />
-              <PropertyRatingCard realestate={false} />
+              <RealtyIntro realestate={false} dataRelator={dataRelator[0]} />
+              <PropertyRatingCard
+                realestate={false}
+                dataRelator={dataRelator[0]}
+              />
             </div>
           </div>
         </section>
 
         <section className="section-spacing">
           <div className="container">
-            <RealestateListing realestate={false} />
+            <RealestateListing
+              realestate={false}
+              dataRelator={dataRelator[0]}
+            />
           </div>
         </section>
         <section className="section-spacing">
@@ -79,9 +101,8 @@ export default function Realator() {
         </p>
       </footer>
       <PremierRealtorsModal
-        image={"../images/landing/home-prouser/ali-parto.png"}
-        title={"علی پرتو"}
         isOpenModal={isOpenModalPremier}
+        dataRelator={dataRelator[0]}
       />
       <FilterModal isOpenModal={isOpenModalFillter} />
       <ReportAdModal
@@ -91,11 +112,13 @@ export default function Realator() {
       <RatingModal
         isOpenModal={isOpenModalRating}
         setIsOpenModal={setIsOpenModalRating}
+        dataRelator={dataRelator[0]}
       />
       <ShareModal
         isOpenModal={isOpenModalShare}
         setIsOpenModal={setIsOpenModalShare}
       />
+      {/* <generateAgentListings/> */}
     </>
   );
 }

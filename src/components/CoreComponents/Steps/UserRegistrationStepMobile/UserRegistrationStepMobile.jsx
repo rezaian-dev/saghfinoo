@@ -19,14 +19,13 @@ const UserRegistrationStepMobile = memo(({ onToastSuccess, onToastError, usersDa
       {/* 🔹 Logo */}
       <div className="user-registration-mobile__logo">
         <img
-          src="../images/logos/Logo.png"
+          src="../../images/logos/Logo.png"
           width={80}
           height={40}
           loading="lazy"
           alt="Logo"
           className="mx-auto"
         />
-        <div className="w-5" />
       </div>
 
       {/* 📝 Title */}

@@ -1,23 +1,25 @@
 import { useMemo } from "react";
 import { useSearchParams, useLocation } from "react-router-dom";
 
-export const usePropertyFilter = ({ dataBase }) => {
+// 🔍 Custom hook for filtering properties
+export const usePropertyFilter = ({ dataBase, ignoreTransactionType = false }) => {
   const [searchParams] = useSearchParams();
   const location = useLocation();
 
-  // Extract transaction type from URL path 🛠️
+  // 🛣️ Extract transaction type from URL path
   const transactionType = useMemo(
     () => location.pathname.slice(1),
     [location.pathname]
   );
 
-  // Get cities from searchParams or default to "tehran" 🌆
+  // 🌆 Get cities from searchParams or default to "tehran"
   const cities = useMemo(() => {
+    const allCities = ["tehran", "tabriz", "mashhad", "yazd", "shomal", "isfahan", "qom", "tabriz", "urmia", "karaj","shiraz","ahvaz"];
     const cityParams = searchParams.get("city");
-    return cityParams ? cityParams : ["tehran"]; // Default to tehran if no city specified
-  }, [searchParams]);
+    return cityParams ? cityParams.split(",") : ignoreTransactionType ? allCities : ["tehran"];
+  }, [searchParams, ignoreTransactionType]);
 
-  // Parse filters from search parameters 🧩
+  // 🧩 Parse filters from search parameters
   const filters = useMemo(() => {
     // Helper to get array parameters from URL
     const getArrayParam = (param) => {
@@ -52,81 +54,112 @@ export const usePropertyFilter = ({ dataBase }) => {
     };
   }, [searchParams]);
 
-  // Convert release time (in Persian) to a numerical value for comparison ⏳
+  // ⏳ Fixed function for converting Persian release time to numeric value
   function convertReleaseTimeToValue(releaseTime) {
+    // Safety check
+    if (!releaseTime || typeof releaseTime !== 'string') {
+      return Number.MAX_SAFE_INTEGER;
+    }
+
+    // Convert Persian digits to English
     const persianToEnglish = (str) => {
       const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return str.replace(/[۰-۹]/g, d => persianDigits.indexOf(d));
     };
 
-    const timeText = persianToEnglish(releaseTime);
+    try {
+      const timeText = persianToEnglish(releaseTime);
 
-    // Convert release time string to hours
-    if (timeText.includes("لحظاتی پیش")) return 0; // Just now ⏱️
-    else if (timeText.includes("ساعت پیش")) {
-      const hours = parseInt(timeText.match(/\d+/)[0]);
-      return hours; // Hours ago 🕒
-    } else if (timeText.includes("روز پیش")) {
-      const days = parseInt(timeText.match(/\d+/)[0]);
-      return days * 24; // Convert days to hours 🌅
-    } else if (timeText.includes("ماه پیش")) {
-      const months = parseInt(timeText.match(/\d+/)[0]);
-      return months * 30 * 24; // Convert months to hours 📅
+      if (timeText.includes("لحظاتی پیش")) {
+        return 0; // Just now
+      } else if (timeText.includes("ساعت پیش")) {
+        const matches = timeText.match(/\d+/);
+        return matches && matches[0] ? parseInt(matches[0]) : 0;
+      } else if (timeText.includes("روز پیش")) {
+        const matches = timeText.match(/\d+/);
+        return matches && matches[0] ? parseInt(matches[0]) * 24 : 0;
+      } else if (timeText.includes("ماه پیش")) {
+        const matches = timeText.match(/\d+/);
+        return matches && matches[0] ? parseInt(matches[0]) * 30 * 24 : 0;
+      }
+    } catch (e) {
+      return Number.MAX_SAFE_INTEGER;
     }
 
-    return Number.MAX_SAFE_INTEGER; // For unknown cases 🚫
+    return Number.MAX_SAFE_INTEGER;
   }
 
-  // Apply filters to database based on current search parameters 🧹
+  // 🧹 Fixed function to filter properties
   const filteredProperties = useMemo(() => {
-    let results = dataBase.filter(
-      (item) => cities.includes(item.city) && item.transactionType === transactionType
-    );
+    // Safety check
+    if (!dataBase || !Array.isArray(dataBase) || dataBase.length === 0) {
+      return [];
+    }
 
-    // Filter by area (district) 📍
+    // Key fix: Create a copy to work with to avoid side effects
+    let results = [...dataBase];
+    
+    // Apply city and transaction type filters
+    results = ignoreTransactionType 
+      ? results.filter((item) => cities.includes(item.city))
+      : results.filter((item) => cities.includes(item.city) && item.transactionType === transactionType);
+    console.log(results);
+    
+    // Filter by area (district)
     if (filters.areas.length > 0) {
       results = results.filter((item) =>
         filters.areas.includes(`district-${item.district}`)
       );
     }
 
-    // Filter by property type 🏠
+    // Filter by property type
     if (filters.propertyType.length > 0) {
       results = results.filter((item) =>
         filters.propertyType.includes(item.propertyType)
       );
     }
 
-    // Urgent filter 🔥
+    // Urgent filter
     if (filters.sortBy === "urgent") {
       results = results.filter(item => item.immediate === true);
     }
-
-    // Default to sorting by release time (newest) 🕰️
+  
+    // Sort by release time - FIXED
     if (!filters.sortBy || filters.sortBy === "newest") {
-      results = results.sort((a, b) => {
+      // Important: Use slice() to create a copy before sorting to prevent side effects
+      results = results.slice().sort((a, b) => {
         const timeA = convertReleaseTimeToValue(a.releaseTime);
         const timeB = convertReleaseTimeToValue(b.releaseTime);
-        return timeA - timeB; // Sort ascending (oldest to newest)
+        return timeA - timeB;
       });
     }
 
-    // Filter by price depending on transaction type 💸
-    const priceField = transactionType === "buy" ? "price" : "rent";
-    results = results.filter(
-      (item) =>
-        item[priceField] >= filters.minPrice &&
-        (filters.maxPrice === Infinity || item[priceField] <= filters.maxPrice)
-    );
+    // Filter by price
+    if (!ignoreTransactionType) {
+      const priceField = transactionType === "buy" ? "price" : "rent";
+      results = results.filter(
+        (item) =>
+          item[priceField] >= filters.minPrice &&
+          (filters.maxPrice === Infinity || item[priceField] <= filters.maxPrice)
+      );
+    } else {
+      results = results.filter(
+        (item) => {
+          const priceField = item.transactionType === "buy" ? "price" : "rent";
+          return item[priceField] >= filters.minPrice &&
+            (filters.maxPrice === Infinity || item[priceField] <= filters.maxPrice);
+        }
+      );
+    }
 
-    // Filter by size (area) 📏
+    // Filter by size
     results = results.filter(
       (item) =>
         item.size >= filters.minSize &&
         (filters.maxSize === Infinity || item.size <= filters.maxSize)
     );
 
-    // Apply simple equality filters (bedrooms, parking, etc.) 🛏️🚗
+    // Apply simple equality filters
     const simpleFilters = ["bedrooms", "parking", "storage", "bathroom", "elevator"];
     simpleFilters.forEach((filterKey) => {
       if (filters[filterKey] !== null) {
@@ -136,14 +169,14 @@ export const usePropertyFilter = ({ dataBase }) => {
       }
     });
 
-    // Special handling for bathroomType 🚻
+    // Handle bathroom type
     if (filters.bathroomType !== null) {
       results = results.filter(
         (item) => item.bathroomType === filters.bathroomType
       );
     }
 
-    // Special handling for floor 🏢
+    // Handle floor filter
     if (filters.floor === "5+") {
       results = results.filter((item) => item.floor >= 5);
     } else if (filters.floor !== null) {
@@ -152,7 +185,7 @@ export const usePropertyFilter = ({ dataBase }) => {
       );
     }
 
-    // Filter by array properties (e.g., coolingSystem, heatingSystem) 🌡️
+    // Filter array properties
     const arrayFilters = ["coolingSystem", "heatingSystem", "floorMaterial"];
     arrayFilters.forEach((filterKey) => {
       if (filters[filterKey].length > 0) {
@@ -164,20 +197,21 @@ export const usePropertyFilter = ({ dataBase }) => {
       }
     });
 
-    return results;
-  }, [cities, transactionType, filters, dataBase]);
+    // Important: Return a stable copy to ensure React detects changes properly
+    return [...results];
+  }, [cities, transactionType, filters, dataBase, ignoreTransactionType]);
 
-  // Extract map locations for filtered properties 🗺️
+  // 🗺️ Extract map locations
   const mapLocations = useMemo(
     () => filteredProperties.map((item) => item.locationOnMap[0]),
     [filteredProperties]
   );
 
   return {
-    cities, // List of cities 🌍
-    transactionType, // Transaction type (buy/rent) 🛒
-    filters, // Active filters 🛠️
-    filteredProperties, // Filtered list of properties 🏡
-    mapLocations, // Locations for map view 🗺️
+    cities,
+    transactionType,
+    filters,
+    filteredProperties,
+    mapLocations,
   };
 };

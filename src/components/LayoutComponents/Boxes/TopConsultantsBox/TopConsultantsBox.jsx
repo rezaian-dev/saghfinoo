@@ -1,7 +1,9 @@
 import React, { memo } from "react";
 import clsx from "classnames";
+import { Link } from "react-router-dom";
 
-const TopConsultantsBox = memo(({ name, image, agency, ratingText, alt, hover }) => {
+const TopConsultantsBox = memo(({ id,name, image, agency, ratingText, alt, hover }) => {
+  
   return (
     <>
       {/* 🖼️ Card container with hover effect */}
@@ -18,11 +20,12 @@ const TopConsultantsBox = memo(({ name, image, agency, ratingText, alt, hover })
         {/* 🏢 Agency and 🌟 Rating */}
         <div className="consultants-box__info">
           <span>{agency}</span>
-          <span>{ratingText}</span>
+          <span>{(ratingText.slice(7,8))} از ۵</span>
+
         </div>
 
         {/* 🔗 Profile button */}
-        <a href="#" className="consultants-box__button">نمایش پروفایل</a>
+        <Link to={`/realator/${id}`} className="consultants-box__button">نمایش پروفایل</Link>
       </div>
     </>
   );

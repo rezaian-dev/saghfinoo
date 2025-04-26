@@ -39,7 +39,6 @@ const useRealEstateFilter = () => {
   const defaultValues = {
     // 🌍 Location Filters (multi-select)
     areas: [],       // Selected districts/neighborhoods
-    city: [],        // Selected cities
     propertyType: [], // Property categories
 
     // 🏗️ Building Systems
@@ -340,7 +339,7 @@ const useRealEstateFilter = () => {
     // Process each URL parameter
     params.forEach((value, key) => {
       // Skip empty or default values
-      if (!value || value === "any" || ["page","city","sort-by"].includes(key)) return;
+      if (!value || value === "any" || ["page","sort-by"].includes(key)) return;
 
       // Parse comma-separated values
       const parsedValues = value
@@ -403,7 +402,7 @@ const useRealEstateFilter = () => {
         "floor-material",
       ].includes(key);
 
-      if (!reverseParamMapping[key] && !key.includes("page") && key !== "sort-by") {
+      if (!reverseParamMapping[key] && !key.includes("page") && key !== "sort-by" && key!== "city") {
         setValue(formFieldKey, isArrayField ? parsedValues : value);
       }
     });

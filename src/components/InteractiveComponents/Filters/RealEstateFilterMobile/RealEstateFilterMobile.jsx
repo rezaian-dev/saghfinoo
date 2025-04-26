@@ -64,7 +64,7 @@ const RealEstateFilterMobile = memo(() => {
       <div className="mb-6">
         <img
           className="mx-auto"
-          src="images/logos/Logo.png"
+          src="../../images/logos/Logo.png"
           width={72}
           height={35}
           loading="lazy"
@@ -143,7 +143,7 @@ const RealEstateFilterMobile = memo(() => {
       {/* 🎯 Actions: Reset filters & submit */}
       <div className="real-estate-filter-mobile__actions">
         <button
-          type="button"
+          type="reset"
           className={clsx(
             "real-estate-filter-mobile__reset",
             isChanged && "real-estate-filter-mobile__reset--active"

@@ -16,7 +16,6 @@ import ShareModal from "../../../components/CoreComponents/Modals/ShareModal/Sha
 import { useParams } from "react-router-dom";
 import { dataBase } from "../../../data/realEstateData";
 
-
 export default function HomeDetails() {
   const {
     handleModal,
@@ -28,27 +27,29 @@ export default function HomeDetails() {
     setIsOpenModalShare,
   } = useModal();
 
-  const {id} = useParams();
-
+  const { id } = useParams();
   const adTarget = dataBase.filter(city => city.id == id);
 
   useEffect(() => {
+    // 🎯 Add and clean up click event listener for modals
     document.addEventListener("click", handleModal);
     return () => document.removeEventListener("click", handleModal);
   }, []);
+
   return (
     <>
-      {/* Header with image sliders (desktop and mobile) */}
+      {/* 🧭 Header with main navigation and property image sliders */}
       <header className="md:pt-10">
         <div className="container">
           <Header />
-          <PropertyImageSliderDesktop images={adTarget[0].images}  />
+          <PropertyImageSliderDesktop images={adTarget[0].images} />
         </div>
         <PropertyImageSliderMobile images={adTarget[0].images} />
       </header>
 
-      {/* Main content section containing property details, amenities, location, and similar listings */}
+      {/* 🏡 Main content section containing property details */}
       <main>
+        {/* 📋 Overview and Agent Info */}
         <section className="home-section-spacing">
           <div className="md:container">
             <div className="home-details__grid home-details__grid--info">
@@ -58,6 +59,7 @@ export default function HomeDetails() {
           </div>
         </section>
 
+        {/* 🛋️ Property Features and Amenities */}
         <section className="home-section-spacing">
           <div className="container">
             <div className="home-details__grid home-details__grid--feature">
@@ -66,6 +68,7 @@ export default function HomeDetails() {
           </div>
         </section>
 
+        {/* 📝 Property Description */}
         <section className="home-section-spacing">
           <div className="container">
             <div className="home-details__grid home-details__grid--description">
@@ -74,6 +77,7 @@ export default function HomeDetails() {
           </div>
         </section>
 
+        {/* 📍 Property Location */}
         <section className="home-section-spacing">
           <div className="container">
             <div className="home-details__grid home-details__grid--location">
@@ -82,6 +86,7 @@ export default function HomeDetails() {
           </div>
         </section>
 
+        {/* 🏘️ Similar Listings */}
         <section className="home-details__similar-ads">
           <div className="container">
             <SimilarListings {...adTarget[0]} />
@@ -89,28 +94,32 @@ export default function HomeDetails() {
         </section>
       </main>
 
+      {/* 🔻 Footer with additional information */}
       <footer className="home-details__footer">
         <div className="container">
           <Footer />
         </div>
-        {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
+        {/* ©️ Copyright text displayed at the bottom */}
         <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>
+
+      {/* 📇 Agent Info Modal */}
       <AgentCardModal
         isOpenModal={isOpenModalAgentCard}
         setIsOpenModal={setIsOpenModalAgentCard}
         {...adTarget[0]}
       />
+      {/* 🚨 Report Ad Modal */}
       <ReportAdModal
         isOpenModal={isOpenModalReportAd}
         setIsOpenModal={setIsOpenModalReportAd}
       />
+      {/* 📤 Share Ad Modal */}
       <ShareModal
         isOpenModal={isOpenModalShare}
         setIsOpenModal={setIsOpenModalShare}
-        
       />
     </>
   );

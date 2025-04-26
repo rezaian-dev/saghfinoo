@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useToast from "../../../../hooks/useToast";
 import { validationRatingModal } from "../../../../hooks/useFormValidation";
 
-const RatingModal = memo(({ isOpenModal, setIsOpenModal }) => {
+const RatingModal = memo(({ isOpenModal, setIsOpenModal,dataRelator }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isFormDisabled, setIsFormDisabled] = useState(false);
   const [previousReason, setPreviousReason] = useState("");
@@ -112,12 +112,12 @@ const onSubmit = (data) => {
           <div className="rounded-full">
             <img
               className="rating-modal__image"
-              src="../images/landing/home-prouser/ali-parto.png"
+              src={dataRelator?.image}
               alt="aliParto"
               loading="lazy"
             />
           </div>
-          <span className="rating-modal__name">علی پرتو</span>
+          <span className="rating-modal__name">{dataRelator?.name}</span>
         </div>
 
         {/* 📝 Form */}
