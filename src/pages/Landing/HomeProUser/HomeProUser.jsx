@@ -11,18 +11,18 @@ import TopConsultants from "../../../components/SpecializedComponents/Consultant
 import PremierRealtorsModal from "../../../components/CoreComponents/Modals/PremierRealtorsModal/PremierRealtorsModal";
 
 /**
- * 🏠 HomeProUser - The main landing page for professional users  
- * 🏡 Features rental listings, opportunities, searches, and realtor information  
+ * 🏠 HomeProUser - The main landing page for professional users
+ * 🏡 Features rental listings, opportunities, searches, and realtor information
  */
 export default function HomeProUser() {
   // 🪟 Modal handling
-  const { handleModal, isOpenModalPremier } = useModal();
+  const { handleModalClick, modalState } = useModal();
   const [agencyId, setAgencyId] = useState("");
 
   // 🖱️ Setup modal click handler
   useEffect(() => {
-    document.addEventListener("click", handleModal);
-    return () => document.removeEventListener("click", handleModal);
+    document.addEventListener("click", handleModalClick);
+    return () => document.removeEventListener("click", handleModalClick);
   }, []);
 
   // 🔍 Check URL for agency ID parameter
@@ -92,9 +92,9 @@ export default function HomeProUser() {
       </footer>
 
       {/* 🪟 Premier Realtors Modal */}
-      <PremierRealtorsModal 
-        isOpenModal={isOpenModalPremier} 
-        agencyId={agencyId} 
+      <PremierRealtorsModal
+        isOpenModal={modalState.premier}
+        agencyId={agencyId}
       />
     </>
   );

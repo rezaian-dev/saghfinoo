@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Header from "../../../layouts/Header/Header";
 import Footer from "../../../layouts/Footer/Footer";
@@ -20,20 +19,19 @@ export default function RentPage() {
   const [agencyId, setAgencyId] = useState("");
 
   // 🎛️ Custom Hooks
-  const { handleModal, isOpenModalFillter, isOpenModalPremier } = useModal();
+  const { modalState, handleModalClick } = useModal();
   const { filteredProperties, mapLocations } = usePropertyFilter({ dataBase });
 
   // ⚡ Effects
   useEffect(() => {
-    // 🏢 Get agency ID from URL
     const agencyId = new URLSearchParams(location.search).get("agency-id");
     if (agencyId) setAgencyId(agencyId);
   }, [location.search]);
+  
 
   useEffect(() => {
-    // 🖱️ Modal event listeners
-    document.addEventListener("click", handleModal);
-    return () => document.removeEventListener("click", handleModal);
+    document.addEventListener("click", handleModalClick);
+    return () => document.removeEventListener("click", handleModalClick);
   }, []);
 
   return (
@@ -103,9 +101,9 @@ export default function RentPage() {
 
       {/* 🎛️ Modals & Notifications */}
       <ToastContainer />
-      <FillterModal isOpenModal={isOpenModalFillter} />
-      <PremierRealtorsModal 
-        isOpenModal={isOpenModalPremier} 
+      <FillterModal isOpenModal={modalState.filter} />
+      <PremierRealtorsModal
+        isOpenModal={modalState.premier}
         agencyId={agencyId}
       />
     </div>

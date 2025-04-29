@@ -16,7 +16,7 @@ const FilterProvider = ({ children }) => {
   const [showVerificationStep, setShowVerificationStep] = useState(false);
   const [userPhoneNumber, setUserPhoneNumber] = useState("");
 
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
   const [selectedCity, setSelectedCity] = useState([]); // 🏙️ Selected cities
 
@@ -41,6 +41,7 @@ const FilterProvider = ({ children }) => {
   useEffect(() => {
     setUsersDataBase(JSON.parse(localStorage.getItem("usersDataBase")));
     setUser(JSON.parse(localStorage.getItem("user")));
+    
   }, []);
   // 🔗 Context Provider with all state values and setters
   return (

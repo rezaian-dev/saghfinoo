@@ -10,46 +10,50 @@ import HousingNews from "../../../components/InfoComponents/News/HousingNews/Hou
 export default function HomeNewUser() {
   return (
     <>
-      {/* Header component & Header content section */}
+      {/* 🏗️ Header section with navigation and hero content */}
       <header className="home-new-user__header">
         <div className="container">
           <Header />
           <HeaderContent />
         </div>
       </header>
-      {/* Main section of the page which contains all the core content */}
+
+      {/* 🏠 Main content sections */}
       <main className="home-new-user__main">
-        {/* Empowerment Section */}
+        {/* 🗓️ Housing planning tools */}
         <section className="home-new-user__empowerment">
           <div className="container">
             <HousingPlanner />
           </div>
         </section>
-        {/* Type of Houses Section */}
+
+        {/* 🔍 Property discovery section */}
         <section className="section-spacing-shared">
           <div className="container">
             <HousingScout />
           </div>
         </section>
-        {/* Housing Support Section */}
+
+        {/* 🛟 Support resources */}
         <section className="section-spacing-shared">
           <div className="container">
             <HousingSupport />
           </div>
         </section>
-        {/* Housing News Section */}
+
+        {/* 📰 Real estate news */}
         <section className="section-spacing-shared">
           <div className="container">
             <HousingNews />
           </div>
         </section>
       </main>
-      {/* Footer container that holds the Footer component */}
+
+      {/* 🦶 Footer with copyright */}
       <footer className="home-new-user__footer">
         <div className="container">
           <Footer />
         </div>
-        {/* Copyright text displayed at the bottom of the footer (visible only on medium and larger screens) */}
         <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>

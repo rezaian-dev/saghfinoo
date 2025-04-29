@@ -87,8 +87,8 @@ const PhoneNumberStep = memo(({
             className="modal__form-terms__checkbox"
             src={
               isAccept
-                ? "../svgs/icons/checked.svg"
-                : "../svgs/icons/tick-square.svg"
+                ? "../../svgs/icons/checked.svg"
+                : "../../svgs/icons/tick-square.svg"
             }
             loading="lazy"
             alt="tickSquare"

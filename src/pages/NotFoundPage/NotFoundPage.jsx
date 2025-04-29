@@ -6,14 +6,14 @@ import NotFoundView from "../../components/MiscellaneousComponents/NotFoundView/
 export default function NotFoundPage() {
   return (
     <>
-      {/* 🏠 Header Section */}
+      {/* 🏡 Page Header with Navigation */}
       <header className="md:pt-10">
         <div className="container">
           <Header />
         </div>
       </header>
 
-      {/* 🚫 Not Found Content */}
+      {/* ❗ 404 Error Content Section */}
       <main className="not-found-page__main">
         <div className="container">
           <NotFoundView
@@ -26,13 +26,13 @@ export default function NotFoundPage() {
         </div>
       </main>
 
-      {/* 🔻 Footer Section */}
+      {/* 🏻 Page Footer with Copyright */}
       <footer className="not-found-page__footer">
         <div className="container">
           <Footer />
         </div>
-
-        {/* 📜 Copyright Notice */}
+        
+        {/* © Copyright Notice (Persian) */}
         <p className="footer-copyright-shared footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>

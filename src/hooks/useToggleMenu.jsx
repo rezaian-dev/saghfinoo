@@ -81,9 +81,10 @@ const menuRef = useRef(null);  // Property dropdown menu container
     }
   }, []);
 
-  const closeMenu = () => {
+  const closeMenu = useCallback(() => {
     setDropdowns((prev) => ({ ...prev, menuMobile: false }));
-  };
+    
+  },[]);
 
   return {
     dropdowns,

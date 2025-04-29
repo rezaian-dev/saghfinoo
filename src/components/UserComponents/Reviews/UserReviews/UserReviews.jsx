@@ -18,7 +18,7 @@ const UserReviews = memo(() => {
   const target = agents.find(item => item.id === +id)
 
   // 🔍 Filter selected consultant's reviews
-  const selectedConsultant = dataCardRealestates.filter((item) => item.title ===target.agency);
+  const selectedConsultant = id ? dataCardRealestates.filter((item) => item.title ===target.agency) : dataCardRealestates;
 
 
   // 🔄 Swiper slider state and handlers

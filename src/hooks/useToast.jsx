@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from "react";
 import { toast } from "react-toastify";
 
-const useToast = (setIsOpenModal = null) => {
+const useToast = (setIsOpenModal = null,type) => {
   // 🔄 Force Update Mechanism
   const [_, forceUpdate] = useState(0);
   
@@ -23,7 +23,7 @@ const useToast = (setIsOpenModal = null) => {
       
       // 🚪 Conditional Modal Closing
       if (shouldCloseModal.current && setIsOpenModal) {
-        setIsOpenModal(false);
+        setIsOpenModal(prev => ({...prev,[type]:false}));
         shouldCloseModal.current = false; // 🔄 Reset flag
       }
     },

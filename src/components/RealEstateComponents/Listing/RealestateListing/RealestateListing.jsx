@@ -12,8 +12,7 @@ import { FilterContext } from "../../../../context/FilterContext";
 import { usePropertyFilter } from "../../../../hooks/usePropertyFilters";
 
 // 🏠 Real Estate Listing Component
-const RealestateListing = memo(
-  ({ realestate = true, ignoreTransactionType = true, dataRelator }) => {
+const RealestateListing = memo(({realestate = true,ignoreTransactionType = true,dataRelator,dataList }) => {
     const {
       setValue,
       handleSubmit,
@@ -30,13 +29,17 @@ const RealestateListing = memo(
       if (!dataRelator) return [];
 
       // 1️⃣ First, get listings from this advisor
-      let advisorListings = dataBase.filter((item) => item.advisor?.name === dataRelator.name);
+      let advisorListings = dataBase.filter(
+        (item) => item.advisor?.name === dataRelator.name
+      );
 
       // 2️⃣ If we need more listings, add them from others
       // BUT in a deterministic way (not random)
       if (advisorListings.length < expectedCount) {
         // Get other listings
-        const otherListings = dataBase.filter((item) => !item.advisor || item.advisor.name !== dataRelator.name);
+        const otherListings = dataBase.filter(
+          (item) => !item.advisor || item.advisor.name !== dataRelator.name
+        );
 
         // Sort them by ID to ensure consistent order
         const sortedOthers = [...otherListings].sort((a, b) => {
@@ -57,11 +60,10 @@ const RealestateListing = memo(
       // 3️⃣ Ensure we have exactly the expected count
       return advisorListings.slice(0, expectedCount);
     }, [dataRelator, expectedCount]);
-    
 
     // 🧩 Apply property filters to our stable list
     const { filteredProperties } = usePropertyFilter({
-      dataBase: finalList,
+      dataBase: finalList.length ? finalList : dataList,
       ignoreTransactionType,
     });
 
@@ -76,7 +78,9 @@ const RealestateListing = memo(
       <div>
         {/* 📝 Listing Title */}
         <h3 className="realestate-listing__title">
-          {realestate ? "آگهی های املاک توسی" : "لیست آگهی ها"}
+          {realestate
+            ? ` لیست آگهی های${dataList[0]?.advisor.office.slice(5)}`
+            : "لیست آگهی ها"}
         </h3>
 
         {/* 📋 Filters Section */}

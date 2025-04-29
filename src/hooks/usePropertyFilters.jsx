@@ -103,7 +103,6 @@ export const usePropertyFilter = ({ dataBase, ignoreTransactionType = false }) =
     results = ignoreTransactionType 
       ? results.filter((item) => cities.includes(item.city))
       : results.filter((item) => cities.includes(item.city) && item.transactionType === transactionType);
-    console.log(results);
     
     // Filter by area (district)
     if (filters.areas.length > 0) {

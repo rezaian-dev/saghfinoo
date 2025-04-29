@@ -100,7 +100,7 @@ body {
   }
   .text-style {
     @apply text-gray-11 block text-xs sm:text-base sm:leading-9;
-  } 
+  }
   .home-new-user__footer,
   .home-pro-user__footer {
     @apply section-spacing-lg bg-gray-2;
@@ -177,7 +177,10 @@ body {
     @apply fixed right-0 top-0 bottom-0 w-full max-w-[360px] z-40 bg-white pt-10 text-xs text-gray-13 font-medium overflow-y-auto transition-all duration-300 ease-in-out transform translate-x-[100%] opacity-0;
   }
   .menu-mobile__close-button {
-    @apply flex justify-end px-4 mb-2 cursor-pointer;
+    @apply flex justify-end px-4 mb-2;
+  }
+  .menu-mobile__close-icon {
+    @apply cursor-pointer;
   }
   .menu-mobile__profile-section {
     @apply py-[29px] px-4 bg-gray-1;
@@ -277,7 +280,7 @@ body {
     @apply font-bold text-base sm:text-lg md:text-2xl lg:text-[32px];
   }
   .housing-support__description {
-    @apply text-xs md:text-2xl;
+    @apply text-xs mt-2 md:text-2xl;
   }
   .housing-support__grid {
     @apply grid grid-cols-2 sm:grid-cols-[repeat(auto-fit,188px)] auto-rows-[172px] md:auto-rows-[220px] justify-center gap-4 lg:gap-32 mt-5 lg:mt-10;
@@ -535,7 +538,7 @@ body {
     @apply absolute left-6 top-6;
   }
   .premier-realtors-modal__logo {
-    @apply w-[121px] rounded-full overflow-hidden h-[76px] md:w-[136px] md:h-[82px];
+    @apply w-[121px] h-[76px] md:w-[136px] md:h-[82px];
   }
   .premier-realtors-modal__title {
     @apply text-gray-11 text-base md:text-2xl font-bold mt-5 md:mt-8;
@@ -876,8 +879,8 @@ body {
   .search-bar__close-icon {
     @apply w-4 h-4 xl:w-5 xl:h-5;
   }
-  .search-bar__close-icon{
-   @apply flex-shrink-0 pointer-events-auto;
+  .search-bar__close-icon {
+    @apply flex-shrink-0 pointer-events-auto;
   }
   .search-bar__icon {
     @apply xl:w-6 xl:h-6 shrink-0;
@@ -1220,7 +1223,7 @@ body {
   .property-overview__report-time {
     @apply text-xs sm:text-sm md:text-base text-gray-11;
   }
-  .property-overview__report-actions {
+  .report-button {
     @apply flex items-center gap-x-1 md:gap-x-2 cursor-pointer;
   }
   .property-overview__report-text {
@@ -1339,7 +1342,7 @@ body {
     @apply flex-center cursor-pointer text-gray-8 border rounded-lg border-gray-8 w-[31px] h-[22px];
   }
   .property-rating__question {
-    @apply space-y-4 mb-6;
+    @apply space-y-4;
   }
   .property-rating__question-text {
     @apply text-gray-10 text-base;
@@ -1355,14 +1358,15 @@ body {
     @apply cursor-pointer pointer-events-auto !w-4 !h-4 md:!w-6 md:!h-6;
   }
   .property-rating__content {
-    @apply mt-[52px] w-[288px] h-[146px] py-8 px-9 space-y-6 bg-white shadow-1 rounded-2xl border border-gray-4;
+    @apply mt-[52px] w-[288px] h-[146px] py-8 px-9 space-y-6 bg-white shadow-1 flex-center flex-col rounded-2xl border border-gray-4;
   }
   .property-rating__score,
-  .property-rating__report-text {
+  .report-button-text {
     @apply text-base text-gray-10 whitespace-nowrap;
   }
-  .property-rating__report {
-    @apply flex-center gap-x-2 cursor-pointer;
+
+  .report-button {
+    @apply flex-center w-max gap-x-2 cursor-pointer;
   }
   .realty-intro__header {
     @apply flex items-center justify-between sm:gap-x-4;
@@ -1550,17 +1554,17 @@ body {
   }
   .user-profile-edit__button,
   .user-profile-edit__cancel-btn {
-    @apply border text-xs sm:text-sm font-medium border-primary bg-white text-primary md:w-[130px] rounded-lg transition-all  outline-none duration-300;
+    @apply border text-xs sm:text-sm cursor-not-allowed outline-none font-medium border-primary bg-white text-primary md:w-[130px] rounded-lg transition-all  duration-300;
   }
   .user-profile-edit__cancel-btn {
     @apply order-2 md:-order-none;
   }
   .profile-edit__cancel--active {
-    @apply bg-primary hover:bg-shade-2 text-white;
+    @apply bg-primary hover:bg-shade-2 text-white cursor-pointer;
   }
   .user-profile-edit__button--primary,
   .user-profile-edit__submit-btn {
-    @apply bg-primary text-white rounded-lg text-xs sm:text-sm  cursor-pointer hover:bg-shade-2;
+    @apply bg-primary text-white rounded-lg outline-none text-xs sm:text-sm  cursor-pointer hover:bg-shade-2;
   }
   .profile {
     @apply flex flex-col gap-y-2;

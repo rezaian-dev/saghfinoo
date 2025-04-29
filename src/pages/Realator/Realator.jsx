@@ -13,41 +13,30 @@ import RatingModal from "../../components/CoreComponents/Modals/RatingModal/Rati
 import ShareModal from "../../components/CoreComponents/Modals/ShareModal/ShareModal";
 import { agents } from "../../data/realEstateData";
 import { useLocation, useParams } from "react-router-dom";
-import { generateAgentListings } from "../../data/relator";
+import { ToastContainer } from "react-toastify";
 
 export default function Realator() {
+  // 🧭 Routing and State Management
   const location = useLocation();
   const { id } = useParams();
   const [dataRelator, setDataRelator] = useState([]);
-  
-  // 🧩 Modal state and handlers from custom hook
-  const {
-    handleModal,
-    isOpenModalPremier,
-    isOpenModalFillter,
-    isOpenModalReportAd,
-    isOpenModalRating,
-    setIsOpenModalReportAd,
-    setIsOpenModalRating,
-    isOpenModalShare,
-    setIsOpenModalShare,
-  } = useModal();
-  
-  // 🎯 Add/remove global click event listener for modal handling
-  useEffect(() => {
-    document.addEventListener("click", handleModal);
-    return () => document.removeEventListener("click", handleModal);
-  }, []);
-  
-  // 🔎 Find and set the selected agent based on URL param id
+  const { modalState, setModalState, handleModalClick } = useModal();
+
+  // 🔍 Fetch Realtor Data
   useEffect(() => {
     const result = agents.filter((item) => item.id === +id);
     setDataRelator(result);
   }, [location.search]);
-  
+
+  // 🖱️ Modal Event Listeners
+  useEffect(() => {
+    document.addEventListener("click", handleModalClick);
+    return () => document.removeEventListener("click", handleModalClick);
+  }, []);
+
   return (
     <>
-      {/* 🏠 Header section with logo and navigation */}
+      {/* 🏢 Page Header with Realtor Logo */}
       <header className="realestate__header">
         <div className="container">
           <Header />
@@ -58,24 +47,32 @@ export default function Realator() {
             className="image-full"
             src={dataRelator[0]?.image}
             loading="lazy"
-            alt="logo"
+            alt="Realtor profile"
           />
         </div>
       </header>
-      {/* 📑 Main content section - Contains all primary page content */}
+
+      {/* 🏡 Main Content Sections */}
       <main>
+        {/* 👤 Realtor Profile Section */}
         <section className="realestate__profile">
           <div className="container">
             <div className="realestate__grid">
-              <RealtyIntro realestate={false} dataRelator={dataRelator[0]} />
+              <RealtyIntro
+                realestate={false}
+                dataRelator={dataRelator[0]}
+                handleModalClick={handleModalClick}
+              />
               <PropertyRatingCard
                 realestate={false}
                 dataRelator={dataRelator[0]}
+                handleModalClick={handleModalClick}
               />
             </div>
           </div>
         </section>
 
+        {/* 🏘️ Property Listings */}
         <section className="section-spacing">
           <div className="container">
             <RealestateListing
@@ -84,6 +81,8 @@ export default function Realator() {
             />
           </div>
         </section>
+
+        {/* ⭐ User Reviews Section */}
         <section className="section-spacing">
           <div className="container">
             <UserReviews />
@@ -91,34 +90,36 @@ export default function Realator() {
         </section>
       </main>
 
-      {/* 🏢 Footer with site information and copyright */}
+      {/* 🏁 Page Footer */}
       <footer className="realestate__footer">
         <div className="container">
           <Footer />
         </div>
+        {/* © Copyright Notice (Persian) */}
         <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>
+
+      {/* 🪟 Modal Components */}
       <PremierRealtorsModal
-        isOpenModal={isOpenModalPremier}
+        isOpenModal={modalState.premier}
         dataRelator={dataRelator[0]}
       />
-      <FilterModal isOpenModal={isOpenModalFillter} />
+      <FilterModal isOpenModal={modalState.filter} />
       <ReportAdModal
-        isOpenModal={isOpenModalReportAd}
-        setIsOpenModal={setIsOpenModalReportAd}
+        isOpenModal={modalState.reportAd}
+        setIsOpenModal={setModalState}
       />
       <RatingModal
-        isOpenModal={isOpenModalRating}
-        setIsOpenModal={setIsOpenModalRating}
+        isOpenModal={modalState.rating}
+        setIsOpenModal={setModalState}
         dataRelator={dataRelator[0]}
       />
-      <ShareModal
-        isOpenModal={isOpenModalShare}
-        setIsOpenModal={setIsOpenModalShare}
-      />
-      {/* <generateAgentListings/> */}
+      <ShareModal isOpenModal={modalState.share} />
+      
+      {/* 💬 Notification System */}
+      <ToastContainer />
     </>
   );
 }

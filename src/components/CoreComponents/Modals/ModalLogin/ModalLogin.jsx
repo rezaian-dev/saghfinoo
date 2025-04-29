@@ -1,5 +1,6 @@
-import React, { memo, useContext } from "react";
+import React, { memo, useContext, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
+import { useLocation } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import clsx from "classnames";
 import useToast from "../../../../hooks/useToast";
@@ -8,6 +9,8 @@ import { FilterContext } from "../../../../context/FilterContext";
 
 // Modal component for login flow 💻🔐
 const ModalLogin = memo(({ isOpenModal, setIsOpenModal }) => {
+  const location = useLocation();
+
   const {
     showVerificationStep,
     setShowVerificationStep,
@@ -20,14 +23,22 @@ const ModalLogin = memo(({ isOpenModal, setIsOpenModal }) => {
     setUser,
   } = useContext(FilterContext);
 
-  // Toast handlers for success and error messages 🎉❌
-  const { handleToastSuccess, handleToastError } = useToast(setIsOpenModal);
+  const { handleToastSuccess, handleToastError } = useToast(setIsOpenModal, "main");
+
+  // 🧹 Reset auth steps when pathname changes and modal opens
+  useEffect(() => {
+    if (isOpenModal) {
+      setShowVerificationStep(false);
+      setUserPhoneNumber("");
+      setUserRegister(false);
+    }
+  }, [location.pathname, isOpenModal]);
 
   return (
-    <div className={clsx("modal__overlay",isOpenModal && "modal__overlay--visible")}>
+    <div className={clsx("modal__overlay", isOpenModal && "modal__overlay--visible")}>
       <ToastContainer />
       <AuthStep
-        isMobile={false} // For desktop version
+        isMobile={false}
         showVerificationStep={showVerificationStep}
         setShowVerificationStep={setShowVerificationStep}
         userPhoneNumber={userPhoneNumber}

@@ -15,25 +15,16 @@ import ReportAdModal from "../../../components/CoreComponents/Modals/ReportAdMod
 import ShareModal from "../../../components/CoreComponents/Modals/ShareModal/ShareModal";
 import { useParams } from "react-router-dom";
 import { dataBase } from "../../../data/realEstateData";
+import { ToastContainer } from "react-toastify";
 
 export default function HomeDetails() {
-  const {
-    handleModal,
-    isOpenModalAgentCard,
-    isOpenModalReportAd,
-    setIsOpenModalReportAd,
-    setIsOpenModalAgentCard,
-    isOpenModalShare,
-    setIsOpenModalShare,
-  } = useModal();
+  const { modalState, setModalState, handleModalClick } = useModal();
 
   const { id } = useParams();
-  const adTarget = dataBase.filter(city => city.id == id);
-
+  const adTarget = dataBase.filter((city) => city.id == id);
   useEffect(() => {
-    // 🎯 Add and clean up click event listener for modals
-    document.addEventListener("click", handleModal);
-    return () => document.removeEventListener("click", handleModal);
+    document.addEventListener("click", handleModalClick);
+    return () => document.removeEventListener("click", handleModalClick);
   }, []);
 
   return (
@@ -53,7 +44,10 @@ export default function HomeDetails() {
         <section className="home-section-spacing">
           <div className="md:container">
             <div className="home-details__grid home-details__grid--info">
-              <PropertyOverview {...adTarget[0]} />
+              <PropertyOverview
+                {...adTarget[0]}
+                handleModalClick={handleModalClick}
+              />
               <AgentCard {...adTarget[0]} />
             </div>
           </div>
@@ -107,20 +101,21 @@ export default function HomeDetails() {
 
       {/* 📇 Agent Info Modal */}
       <AgentCardModal
-        isOpenModal={isOpenModalAgentCard}
-        setIsOpenModal={setIsOpenModalAgentCard}
+        isOpenModal={modalState.agentCard}
+        setIsOpenModal={setModalState}
         {...adTarget[0]}
       />
       {/* 🚨 Report Ad Modal */}
       <ReportAdModal
-        isOpenModal={isOpenModalReportAd}
-        setIsOpenModal={setIsOpenModalReportAd}
+        isOpenModal={modalState.reportAd}
+        setIsOpenModal={setModalState}
       />
       {/* 📤 Share Ad Modal */}
       <ShareModal
-        isOpenModal={isOpenModalShare}
-        setIsOpenModal={setIsOpenModalShare}
+        isOpenModal={modalState.share}
+        setIsOpenModal={setModalState}
       />
+      <ToastContainer />
     </>
   );
 }

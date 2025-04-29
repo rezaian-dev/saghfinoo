@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { Controller } from "react-hook-form";
 import clsx from "classnames";
 import { User, Call, Sms, Key, Eye, EyeSlash } from "iconsax-react";
@@ -62,6 +62,9 @@ const UserProfileFormFields = memo(({
   const hasValue = !!watchAllFields[fieldName];
   const errorMessage = errors[fieldName]?.message;
 
+  // وضعیت فوکوس برای برچسب
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <div className="user-profile-field relative">
       <Controller
@@ -92,6 +95,8 @@ const UserProfileFormFields = memo(({
                 {...controllerField}
                 {...register(fieldName)}
                 className="user-profile-field__input"
+                onFocus={() => setIsFocused(true)} // فوکوس
+                onBlur={() => setIsFocused(false)} // از فوکوس خارج شدن
               />
 
               {isPasswordField && (
@@ -110,14 +115,18 @@ const UserProfileFormFields = memo(({
             {/* 🏷 Label */}
             <label
               htmlFor={field.id}
-              className={clsx("user-profile-field__label",hasValue && "user-profile-field__label--active",errorMessage && "text-primary"
+              className={clsx(
+                "user-profile-field__label",
+                hasValue && "user-profile-field__label--active",
+                isFocused && "user-profile-field__label--active", // فعال شدن برچسب هنگام فوکوس
+                errorMessage && "text-primary"
               )}
             >
               {hasValue ? field.shortLabel : field.label}
             </label>
 
             {/* ⚠️ Error message */}
-            <span className={clsx("user-profile-field__error",errorMessage ? "opacity-100" : "opacity-0")}>
+            <span className={clsx("user-profile-field__error", errorMessage ? "opacity-100" : "opacity-0")}>
               {errorMessage}
             </span>
           </>

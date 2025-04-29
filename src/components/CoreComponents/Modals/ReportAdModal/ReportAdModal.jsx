@@ -7,9 +7,9 @@ import useToast from "../../../../hooks/useToast";
 
 const ReportAdModal = memo(({ isOpenModal, setIsOpenModal }) => {
   const [submitting, setSubmitting] = useState(false); // 🚀 Submission state
-  const {handleToastSuccess} = useToast(setIsOpenModal)
+  const {handleToastSuccess} = useToast(setIsOpenModal,"reportAd")
 
-  const {control,handleSubmit,formState: { errors, isDirty },reset,} = useForm({
+  const {control,handleSubmit,reset,formState: { errors, isDirty }} = useForm({
     defaultValues: {
       reasons: [],
       comment: "",
@@ -78,8 +78,8 @@ const ReportAdModal = memo(({ isOpenModal, setIsOpenModal }) => {
                       <img
                         src={
                           field.value.includes(reason)
-                            ? "../svgs/icons/checked.svg"
-                            : "../svgs/icons/checkBox.svg"
+                            ? "../../svgs/icons/checked.svg"
+                            : "../../svgs/icons/checkBox.svg"
                         }
                         className="w-5 h-5"
                         loading="lazy"

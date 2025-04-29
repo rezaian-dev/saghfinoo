@@ -12,7 +12,7 @@ const RatingModal = memo(({ isOpenModal, setIsOpenModal,dataRelator }) => {
   const [isFormDisabled, setIsFormDisabled] = useState(false);
   const [previousReason, setPreviousReason] = useState("");
 
-  const {handleToastSuccess} = useToast(setIsOpenModal);
+  const {handleToastSuccess} = useToast(setIsOpenModal,"rating");
 
   const {
     register,

@@ -8,51 +8,58 @@ import { agents } from "../../data/realEstateData";
 import { ToastContainer } from "react-toastify";
 
 export default function Realators() {
-
+  // 🧭 Routing and State Management
   const location = useLocation();
-  const [result, setResult] = useState([]);
-  
+  const [filteredAgents, setFilteredAgents] = useState([]);
+
+  // 🔍 Filter agents based on URL city parameters
   useEffect(() => {
-    // 🔍 Extract city names from URL and filter agents based on it
-    const cities = new URLSearchParams(location.search).get("city")?.split(",");
-    setResult(cities ? agents.filter(agent => cities.includes(agent.city)) : agents);
+    const cityParams = new URLSearchParams(location.search).get("city")?.split(",");
+    setFilteredAgents(
+      cityParams 
+        ? agents.filter(agent => cityParams.includes(agent.city))
+        : agents
+    );
   }, [location.search]);
 
   return (
     <>
-      {/* 🧭 Header section containing main site navigation */}
+      {/* 🏢 Page Header with Navigation */}
       <header className="md:pt-10">
         <div className="container">
           <Header />
         </div>
       </header>
 
-      {/* 🏡 Main content area displaying real estate consultants */}
+      {/* 🏡 Main Content Area */}
       <main>
+        {/* 🔎 Listing Search Header */}
         <section className="realators__city-listing-search">
           <div className="container">
             <ListingHeader title={"مشاورین املاک"} />
           </div>
         </section>
+
+        {/* 👥 Realtors Listing Section */}
         <section className="realators__listing">
           <div className="container">
-            <RealatorsListing result={result} />
+            <RealatorsListing result={filteredAgents} />
           </div>
         </section>
       </main>
 
-      {/* 🔻 Footer section containing site information and credits */}
+      {/* 🏁 Page Footer with Copyright */}
       <footer className="realators__footer">
         <div className="container">
           <Footer />
         </div>
-        {/* ©️ Copyright text visible only on medium and larger screens */}
+        {/* ©️ Copyright Notice (Persian) */}
         <p className="footer-copyright-shared">
           حقوق این سایت متعلق به سقفینو است
         </p>
       </footer>
 
-      {/* 🚀 Toast notifications container */}
+      {/* 💬 Notification System */}
       <ToastContainer />
     </>
   );
