@@ -2,14 +2,7 @@ import React, { memo } from "react";
 import clsx from "classnames";
 
 // 🚀 Memoized FilterButton to avoid unnecessary re-renders
-const FilterButton = memo(({
-  option,
-  value,
-  setValue,
-  isFirstButton,
-  name,
-  isLastButton,
-}) => {
+const FilterButton = memo(({ option, value, setValue, isFirstButton, name, isLastButton }) => {
   // 🔍 Check if option value matches current value
   const isValueMatch = (optionValue, currentValue) => {
     const toArray = (val) => (Array.isArray(val) ? val : [val]);
@@ -36,8 +29,6 @@ const handleSelect = (newValue, defaultValue) => {
   setValue(name, updated.length ? updated : ["any"]);
 };
 
-  
-  
 
   // ✅ Check if button is currently selected
   const isSelected = isValueMatch(option.value, value);

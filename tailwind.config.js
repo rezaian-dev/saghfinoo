@@ -71,11 +71,11 @@ module.exports = {
         Shabnam: ["shabnam", "sans-serif"],
       },
       backgroundImage: {
-        "home-desktop": "url('../../images/backgrounds/background.webp')",
-        "realestate-banner": "url('../../images/backgrounds/banner.webp')",
-        "city-map": "url('../../images/backgrounds/map.png')",
-        "news-banner": "url('../../images/backgrounds/housing-news-1.webp')",
-        "register": "url('../images/register/register-banner.webp')",
+        "home-desktop": "url('/images/backgrounds/background.webp')",
+        "realestate-banner": "url('/images/backgrounds/banner.webp')",
+        "city-map": "url('/images/backgrounds/map.png')",
+        "news-banner": "url('/images/news/housing-news-1.webp')",
+        "register": "url('/images/register/register-banner.webp')",
       },
       boxShadow: {
         info: "0 0 4px 0 rgba(47, 128, 23, .19)",

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import Stepper from "../../../components/CoreComponents/Steps/Stepper/Stepper";
 import { useNavigate } from "react-router-dom";
 import clsx from "classnames";
+import { FilterContext } from "../../../context/FilterContext";
 
 export default function DescriptionForm() {
   const navigate = useNavigate();
+  const {setAdDraft} = useContext(FilterContext);
 
   // 🎯 Initialize form handling with default values and validation settings
   const { handleSubmit, register } = useForm({
@@ -27,11 +29,17 @@ export default function DescriptionForm() {
 
   const numbersLine = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
+  const handleGoBack = () => {
+    navigate("/register/4");
+  };
+
   // ✅ Handle form submission and navigate to the next step
   const onSubmit = (data) => {
     const filteredData = Object.fromEntries(
       Object.entries(data).filter(([_, value]) => value.trim() !== "")
     );
+setAdDraft(prev => ({...prev,description:[filteredData]}))
+    
     navigate("/register/6"); // 🔄 Redirect to the next step
   };
 
@@ -90,7 +98,7 @@ export default function DescriptionForm() {
 
               {/* 🔘 Navigation buttons */}
               <div className="form-buttons md:!mt-10">
-                <button type="button" className="form-buttons__prev">
+                <button type="button" className="form-buttons__prev" onClick={handleGoBack}>
                   قبلی
                 </button>
                 <button type="submit" className="form-buttons__next">

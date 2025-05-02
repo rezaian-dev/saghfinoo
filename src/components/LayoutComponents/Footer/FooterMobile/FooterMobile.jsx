@@ -1,72 +1,10 @@
 import React, {memo} from 'react';
-import { Call, Instagram } from 'iconsax-react';
 import CategoryBoxes from '../../../InteractiveComponents/Filters/CategoryBoxes/CategoryBoxes';
 import ServicesSectionItems from '../../Sections/ServicesSectionItems/ServicesSectionItems';
+import { mobileFooterCategories, mobileFooterSections } from '../../../../data/realEstateData';
 
 // 📌 Footer component for mobile version
 const FooterMobile = memo(() => {
-  // 🔹 Categories for quick access in the footer
-  const dataCategory = [
-    {
-      id: 1,
-      title: "بیشترین جست‌وجوها", // 🔍 Most searched properties
-      items: [
-        { id: 1, content: "آپارتمان کوچک مترو" },
-        { id: 2, content: "خانه ویلایی در اطراف شهر" },
-        { id: 3, content: "آپارتمان‌های تازه‌ساز" },
-      ],
-    },
-    {
-      id: 2,
-      title: "بازارهای املاک و مستغلات", // 🏠 Real estate markets
-      items: [
-        { id: 1, content: "بازار املاک و مستغلات تهران" },
-        { id: 2, content: "بازار املاک و مستغلات اصفهان" },
-        { id: 3, content: "بازار املاک و مستغلات شمال" },
-      ],
-    }
-  ];
-
-  // 🔹 Footer sections including services and contact info
-  const sections = [
-    {
-      id: 1,
-      title: "خدمات", // ⚙️ Services
-      items: [
-        { id: 1, content: "اجاره" },
-        { id: 2, content: "خرید" },
-        { id: 3, content: "ثبت رایگان آگهی ملک" },
-        { id: 4, content: "املاک و مستغلات" },
-        { id: 5, content: "مشاورین املاک" },
-        { id: 6, content: "اخبار روز املاک" },
-        { id: 7, content: "سوال ملکی دارید؟" },
-      ],
-      mobile: true
-    },
-    {
-      id:2,
-      title:"ارتباط با ما", // 📞 Contact us
-      items:[
-        {id: 1, content: "تلفن", icon:<Call size="16" color="#CB1B1B" variant="Bold"/>},
-        {id: 2, content: "اینستاگرام", icon:<Instagram size="16" color="#CB1B1B" variant="Bold"/>},
-        {id: 3, content: "تلگرام", icon:<img src="../../svgs/icons/telegram.svg" width={16} loading='lazy' alt="telegram"/>},
-      ]
-    },
-    {
-      id: 3,
-      title: "اطلاعات", // ℹ️ Information
-      items: [
-        { id: 1, content: "دانلود اپلیکیشن سقفینو" },
-        { id: 2, content: "تماس با ما" },
-        { id: 3, content: "داستان سقفینو" },
-        { id: 4, content: "پرسش‌های پرتکرار" },
-        { id: 5, content: "یک سقف؛ بلاگ سقفینو" },
-        { id: 6, content: "حریم شخصی شما" },
-        { id: 7, content: "تعهدات ما و شما" },
-      ],
-      mobile: true
-    },
-  ];
 
   return (
     <>
@@ -86,7 +24,7 @@ const FooterMobile = memo(() => {
 
         {/* 🔹 Categories section */}
         <div className='footer-mobile__categories'>
-          {dataCategory.map(item => <CategoryBoxes key={item.id} {...item} />)} {/* 📦 Render categories */}
+          {mobileFooterCategories.map(item => <CategoryBoxes key={item.id} {...item} />)} {/* 📦 Render categories */}
         </div>
 
         {/* 🔹 Footer main description text */}
@@ -96,7 +34,7 @@ const FooterMobile = memo(() => {
 
         {/* 🔹 Services section */}
         <div className='footer-mobile__services'>
-          {sections.map(item => <ServicesSectionItems key={item.id} {...item} />)} {/* 🔧 Render services */}
+          {mobileFooterSections.map(item => <ServicesSectionItems key={item.id} {...item} />)} {/* 🔧 Render services */}
         </div>
 
         {/* 🔹 Trust logo */}

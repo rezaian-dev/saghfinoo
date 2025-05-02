@@ -4,15 +4,7 @@ import clsx from "classnames";
 import useLabelAndUnit from "../../../../hooks/useLabelAndUnit";
 
 // 📝 InputFieldMobile component for rendering mobile input fields with validation
-const InputFieldMobile = memo((({
-  rangeValue,
-  placeholder,
-  handleInputChange,
-  error,
-  hasError,
-  control,
-  unit,
-}) => {
+const InputFieldMobile = memo((({ rangeValue, placeholder, handleInputChange, error, hasError, control, unit }) => {
   const { label, unitLabel } = useLabelAndUnit(unit);
   
   return (

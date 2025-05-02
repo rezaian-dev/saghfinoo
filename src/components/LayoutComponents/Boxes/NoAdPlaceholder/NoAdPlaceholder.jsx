@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { Link } from 'react-router-dom';
 
  const NoAdPlaceholder = memo((({title,description,image,searchAd}) => {
   return (
@@ -18,9 +19,9 @@ import React, { memo } from 'react';
       
       {/* 🔘 Call to action button */}
       <div className="mt-8">
-        <a href="#" className="no-ad__button">
+        <Link to={searchAd ? "/rent" :"/register/1"} className="no-ad__button">
           {searchAd ? "املاک اجاره ای" :"ثبت آگهی"}
-        </a>
+        </Link>
       </div>
       
     </div>

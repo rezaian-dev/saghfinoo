@@ -8,18 +8,24 @@ import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import clsx from "classnames";
 import useSwiperSlider from "../../../../hooks/useSwiperSlider";
 
-const PropertyImageSliderDesktop = memo(({images}) => {
+const PropertyImageSliderDesktop = memo(({images = []}) => {
   // 🧑‍💻 Destructure hook values for handling slider state
   const { isBeginning, setIsBeginning, isEnd, handleNext, handlePrev, setSwiper, setIsEnd } = useSwiperSlider();
 
-  // 🧷 Create a shallow copy to avoid mutating the original images array
-  const filledImages = [...images];
+  // 🧷 Create a deep copy to avoid mutating the original images array
+  const filledImages = images.map(img => ({...img}));
+
+  // ⛔ Generate unique IDs for default images to avoid key conflicts
+  const generateUniqueId = (prefix, index) => {
+    // Use a prefix to ensure uniqueness between real images and placeholder images
+    return `placeholder-${prefix}-${index}`;
+  };
 
   // ⛔ Fill remaining space with default images if there are less than 5 images (for first slide)
   const minImagesForFirstSlide = 5;
   for (let i = filledImages.length; i < minImagesForFirstSlide; i++) {
     filledImages.push({
-      id: i, // Fixed ID generation
+      id: generateUniqueId('first-slide', i), // Unique ID with prefix
       img: "../../images/rent/rent-page/no-image.webp",
       alt: "noImage"
     });
@@ -33,7 +39,7 @@ const PropertyImageSliderDesktop = memo(({images}) => {
     // Fill up to 10 total images for second slide if needed
     for (let i = filledImages.length; i < 10; i++) {
       filledImages.push({
-        id: i, // Fixed ID generation
+        id: generateUniqueId('second-slide', i), // Unique ID with different prefix
         img: "../../images/rent/rent-page/no-image.webp",
         alt: "noImage"
       });
@@ -67,7 +73,10 @@ const PropertyImageSliderDesktop = memo(({images}) => {
         <SwiperSlide>
           <div className="property-image-slider__grid">
             {filledImages.slice(0, 5).map(({ id, img, alt }, index) => (
-              <div key={id} className={clsx("property-image-slider__item", index === 0 && "row-span-2")}>
+              <div 
+                key={`first-slide-item-${id}-${index}`} 
+                className={clsx("property-image-slider__item", index === 0 && "row-span-2")}
+              >
                 <img className="property-image-slider__image" src={img} alt={alt} loading="lazy" />
               </div>
             ))}
@@ -79,7 +88,10 @@ const PropertyImageSliderDesktop = memo(({images}) => {
           <SwiperSlide>
             <div className="property-image-slider__grid">
               {filledImages.slice(5, 10).map(({ id, img, alt }, index) => (
-                <div key={id} className={clsx("property-image-slider__item", index === 0 && "row-span-2")}>
+                <div 
+                  key={`second-slide-item-${id}-${index}`} 
+                  className={clsx("property-image-slider__item", index === 0 && "row-span-2")}
+                >
                   <img className="property-image-slider__image" src={img} alt={alt} loading="lazy" />
                 </div>
               ))}

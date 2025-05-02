@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useToast from "../../../../hooks/useToast";
 import { validationRatingModal } from "../../../../hooks/useFormValidation";
+import { ratingReasonsByScore } from "../../../../data/realEstateData";
 
 const RatingModal = memo(({ isOpenModal, setIsOpenModal,dataRelator }) => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -32,43 +33,6 @@ const RatingModal = memo(({ isOpenModal, setIsOpenModal,dataRelator }) => {
   const reason = watch("reason");
 
   const pageNumbers = [5, 4, 3, 2, 1];
-
-  const reasonOptions = {
-    1: [
-      "دریافت کمیسیون اضافی",
-      "عدم پاسخگویی",
-      "برخورد نامناسب",
-      "عدم شناخت بازار",
-    ],
-    2: [
-      "دریافت کمیسیون اضافی",
-      "عدم پاسخگویی",
-      "برخورد نامناسب",
-      "عدم شناخت بازار",
-    ],
-    3: [
-      "متعهد و پیگیر بودن",
-      "عدم پاسخگویی",
-      "داشتن تخصص و مهارت کافی",
-      "عدم شناخت بازار",
-      "وقت شناسی",
-      "دریافت کمیسیون اضافی",
-      "برخورد و رفتار محترمانه",
-      "برخورد نامناسب",
-    ],
-    4: [
-      "وقت شناسی",
-      "دریافت کمیسیون اضافه",
-      "برخورد و رفتار محترمانه",
-      "برخورد نامناسب",
-    ],
-    5: [
-      "وقت شناسی",
-      "دریافت کمیسیون اضافه",
-      "برخورد و رفتار محترمانه",
-      "برخورد نامناسب",
-    ],
-  };
 
   // ⭐ Set user rating and reset reason
   const handleUserRating = (num) => {
@@ -159,7 +123,7 @@ const onSubmit = (data) => {
                 لطفاً دلیل این امتیاز را انتخاب کنید
               </span>
               <div className="rating-modal__reasons-grid">
-                {reasonOptions[currentPage].map((option, index) => (
+                {ratingReasonsByScore[currentPage].map((option, index) => (
                   <button
                     key={index}
                     type="button"

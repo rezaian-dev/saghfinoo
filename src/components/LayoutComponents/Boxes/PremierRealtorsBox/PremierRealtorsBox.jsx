@@ -2,22 +2,10 @@ import React, { memo } from "react";
 import clsx from "classnames";
 import { Link, useLocation } from "react-router-dom";
 
-const PremierRealtorsBox = memo(
-  ({
-    id,
-    title,
-    image,
-    location,
-    popularity,
-    activeAd,
-    comment,
-    tikBlue,
-    alt,
-    hover,
-  }) => {
+const PremierRealtorsBox = memo(({ id, title, image, location, popularity, activeAd, comment, tikBlue, alt, hover }) => {
     // Get current location to check the pathname
     const { pathname } = useLocation();
-    
+  
     // Check if the current path is buy or rent
     const isBuyOrRent = ["/home-pro-user","/buy","/rent"].includes(pathname);
     

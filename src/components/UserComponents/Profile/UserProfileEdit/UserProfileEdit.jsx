@@ -1,21 +1,15 @@
 import React, { useState, memo, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { User, Call, Sms, Key } from "iconsax-react";
 import clsx from "classnames";
 import Swal from "sweetalert2";
 import { FilterContext } from "../../../../context/FilterContext";
 import { schemaّFieldProfile } from "../../../../hooks/useFormValidation";
 import UserProfileImage from "../UserProfileImage/UserProfileImage";
 import UserProfileFormFields from "../../../CoreComponents/Form/UserProfileFormFields/UserProfileFormFields";
-
+import { FORM_FIELDS } from "../../../../data/realEstateData";
 // 📋 Form field definitions
-const FORM_FIELDS = {
-  fullName: { id: "fullName", type: "text", required: true, label: "نام و نام خانوادگی", shortLabel: "نام", icon: User },
-  mobile: { id: "mobile", type: "text", required: true, label: "شماره موبایل", shortLabel: "شماره", icon: Call },
-  password: { id: "password", type: "password", required: true, label: "رمز عبور", shortLabel: "رمز", icon: Key, hasToggle: true },
-  email: { id: "email", type: "email", required: false, label: "ایمیل (اختیاری)", shortLabel: "ایمیل", icon: Sms },
-};
+
 
 const UserProfileEdit = memo(() => {
   // 🔄 State hooks
@@ -24,18 +18,18 @@ const UserProfileEdit = memo(() => {
   const [showPassword, setShowPassword] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [removeImage, setRemoveImage] = useState(false);
-  
+
   const { user, setUser } = useContext(FilterContext);
 
   // 📝 Form setup
-  const { 
-    control, 
-    register, 
-    handleSubmit, 
-    formState: { errors, isDirty }, 
-    reset, 
-    watch, 
-    setError 
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors, isDirty },
+    reset,
+    watch,
+    setError,
   } = useForm({
     mode: "onChange",
     resolver: yupResolver(schemaّFieldProfile),
@@ -54,7 +48,7 @@ const UserProfileEdit = memo(() => {
           fullName: userData.fullName || userData.firstName || "",
           mobile: userData.mobile || "",
           password: userData.password || "",
-          email: userData.email || ""
+          email: userData.email || "",
         });
         if (userData.image) setUserImage(userData.image);
       }
@@ -78,7 +72,7 @@ const UserProfileEdit = memo(() => {
         title: "خطا!",
         text: "فقط فایل‌های PNG و JPG مجاز هستند!",
         icon: "error",
-        confirmButtonText: "باشه"
+        confirmButtonText: "باشه",
       });
       target.value = "";
     }
@@ -96,18 +90,21 @@ const UserProfileEdit = memo(() => {
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
   // 💾 Convert file to base64
-  const getFileBase64 = (file) => new Promise((resolve) => {
-    if (!file) return resolve("");
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result);
-    reader.readAsDataURL(file);
-  });
+  const getFileBase64 = (file) =>
+    new Promise((resolve) => {
+      if (!file) return resolve("");
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.readAsDataURL(file);
+    });
 
   // 🔍 Check for duplicate mobile numbers
   const isMobileDuplicate = (newMobile, currentMobile) => {
     try {
       const usersDB = JSON.parse(localStorage.getItem("usersDataBase") || "[]");
-      return usersDB.some(u => u.mobile === newMobile && u.mobile !== currentMobile);
+      return usersDB.some(
+        (u) => u.mobile === newMobile && u.mobile !== currentMobile
+      );
     } catch (err) {
       console.error("Mobile check error:", err);
       return false;
@@ -118,18 +115,17 @@ const UserProfileEdit = memo(() => {
   const updateUserDB = (userData, originalMobile) => {
     try {
       let usersDB = JSON.parse(localStorage.getItem("usersDataBase") || "[]");
-      const index = usersDB.findIndex(u => u.mobile === originalMobile);
+      const index = usersDB.findIndex((u) => u.mobile === originalMobile);
       console.log(userData);
-      
+
       if (index !== -1) {
         console.log("yes");
-        
+
         usersDB[index] = { ...usersDB[index], ...userData };
       } else {
-        
         usersDB.push(userData);
       }
-      
+
       localStorage.setItem("usersDataBase", JSON.stringify(usersDB));
       return true;
     } catch (err) {
@@ -140,23 +136,31 @@ const UserProfileEdit = memo(() => {
   // ✅ Form submission handler
   const onSubmit = async (data) => {
     const currentMobile = user?.mobile || "";
-    
+
     // Check for duplicate mobile
-    if (data.mobile !== currentMobile && isMobileDuplicate(data.mobile, currentMobile)) {
+    if (
+      data.mobile !== currentMobile &&
+      isMobileDuplicate(data.mobile, currentMobile)
+    ) {
       Swal.fire({
         title: "خطا!",
         text: "این شماره موبایل قبلاً ثبت شده است!",
         icon: "error",
-        confirmButtonText: "باشه"
+        confirmButtonText: "باشه",
       });
-      setError("mobile", { type: "manual", message: "شماره موبایل تکراری است" });
+      setError("mobile", {
+        type: "manual",
+        message: "شماره موبایل تکراری است",
+      });
       return;
     }
 
     // Process profile image
-    const imageData = imageFile 
-      ? await getFileBase64(imageFile) 
-      : removeImage ? "" : userImage || "";
+    const imageData = imageFile
+      ? await getFileBase64(imageFile)
+      : removeImage
+      ? ""
+      : userImage || "";
 
     // Update user data
     const updatedUser = { ...data, image: imageData };
@@ -169,7 +173,7 @@ const UserProfileEdit = memo(() => {
       title: "موفقیت‌آمیز!",
       text: "پروفایل با موفقیت بروزرسانی شد!",
       icon: "success",
-      confirmButtonText: "باشه"
+      confirmButtonText: "باشه",
     });
   };
 
@@ -196,7 +200,10 @@ const UserProfileEdit = memo(() => {
         handleRemoveImage={handleRemoveImage}
       />
 
-      <form className="user-profile-edit__form" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="user-profile-edit__form"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         {/* 📝 Form fields */}
         <div className="user-profile-edit__fields">
           {Object.keys(FORM_FIELDS).map((field) => (
@@ -218,7 +225,7 @@ const UserProfileEdit = memo(() => {
           <button
             type="button"
             className={clsx(
-              "user-profile-edit__cancel-btn", 
+              "user-profile-edit__cancel-btn",
               isFormChanged && "profile-edit__cancel--active"
             )}
             onClick={handleCancel}

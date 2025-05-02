@@ -1,57 +1,62 @@
 import React, { memo, useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import clsx from "classnames";
-import {AddCircle, ArrowLeft2, CloseCircle, Edit, HambergerMenu,House, House2, Key, People, ProfileCircle, Receipt21, ReceiptText } from "iconsax-react";
+import {ArrowLeft2, CloseCircle, Edit, HambergerMenu,ProfileCircle } from "iconsax-react";
 import useToggleMenu from "../../hooks/useToggleMenu";
 import useModal from "../../hooks/useModal";
 import ModalLogin from "../../components/CoreComponents/Modals/ModalLogin/ModalLogin";
 import ModalLoginMobile from "../../components/CoreComponents/Modals/ModalLoginMobile/ModalLoginMobile";
 import { FilterContext } from "../../context/FilterContext";
 import useToast from "../../hooks/useToast";
+import Swal from "sweetalert2"; // 🚨 Make sure Swal is imported
+import { menuItemsDesktop,menuItemsMobile } from "../../data/realEstateData";
 
 const Header = memo(() => {
-  // 🔄 Menu state and toggle functions
+  // 🎮 State management hooks
   const { dropdowns, navToggleRef, menuRef, btnCloseRef, handleClick, closeMenu } = useToggleMenu();
   const { handleModalClick, modalState, setModalState } = useModal(closeMenu);
-  const { user } = useContext(FilterContext);
+  const { user, setUser } = useContext(FilterContext);
   const { handleToastError } = useToast();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  // 📱 Menu items for desktop & mobile
-  const menuItemsDesktop = [
-    { id: 1, name: "اجاره", path: "/rent" },
-    { id: 2, name: "خرید", path: "/buy" },
-    { id: 3, name: "املاک و مستغلات", path: "/realestates" },
-    { id: 4, name: "مشاورین املاک", path: "/realators" },
-    { id: 5, name: "اخبار روز", path: "/news" },
-  ];
-
-  const menuItemsMobile = [
-    { id: 1, label: "ثبت آگهی", path: "/register/1", icon: <AddCircle size="20" /> },
-    { id: 2, label: "آگهی های من", path: "/my-ad", icon: <ReceiptText size="20" /> },
-    { id: 3, label: "آگهی های ذخیره شده", path: "/rent", icon: <img src="svgs\icons\archive-minus(bg-gray-11).svg" width={20} /> },
-    { id: 4, label: "اجاره خانه", path: "/rent", icon: <House size="20" /> },
-    { id: 5, label: "خرید خانه", path: "/buy", icon: <Key size="20" /> },
-    { id: 6, label: "املاک و مستغلات", path: "/realestates", icon: <House2 size="20" /> },
-    { id: 7, label: "مشاورین املاک", path: "/realators", icon: <People size="20" /> },
-    { id: 8, label: "اخبار روز", path: "/news", icon: <Receipt21 size="20" /> },
-  ];
-
-  // 👤 User related logic
-  const userProfilePages = ["/profile", "/my-ad", "/save-ad"];
+  // 👤 User profile setup
+  const userProfilePages = ["/profile", "/profile/my-ads", "/profile/saved-ads"];
   const isUserProfilePage = userProfilePages.includes(pathname);
   let userName = user?.fullName?.split(" ")[0] || user?.firstName?.split(" ")[0];
   
-  // 🖱️ Handle clicks
+  // 🔘 Click handler for ad registration
   const handleRegisterClick = () => {
     user ? navigate("/register/1") : handleToastError("لطفاً ابتدا وارد حساب کاریری خود شوید!");
   };
 
-  // 🔍 Filter menu items based on page
+  // 📤 Logout handler
+  const handleLogout = (e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: "خروج از حساب کاربری",
+      text: "آیا مطمئن هستید که می‌خواهید از حساب کاربری خود خارج شوید؟",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#2F80ED",
+      cancelButtonColor: "#CB1B1B",
+      confirmButtonText: "بله",
+      cancelButtonText: "خیر",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("user");
+        setTimeout(() => {
+          setUser(null);
+        }, 500);
+        navigate("/", { replace: true });
+      }
+    });
+  };
+
+  // 🧮 Filter menu items based on page
   const filteredMenuItems = isUserProfilePage
     ? menuItemsMobile
-    : menuItemsMobile.filter((item) => item.id !== 2 && item.id !== 3);
+    : menuItemsMobile.filter((item) => item.id !== 2 && item.id !== 3 && item.id !== 9);
 
   // 🎯 Setup event listeners
   useEffect(() => {
@@ -63,27 +68,27 @@ const Header = memo(() => {
     };
   }, []);
 
-  // 🎨 Check if we need gray background
+  // 🎨 Check if current page needs gray background
   const needsGrayBg = [
     "/realestates", "/realators", "/news", "/news-details", 
-    "/rent", "/my-ad", "/about", "/buy", "/news/news-details"
+    "/rent", "/profile/saved-ads","/profile/my-ads", "/about", "/buy", "/news/news-details"
   ].includes(pathname);
 
   return (
     <>
-      {/* 🖥️ Desktop menu */}
+      {/* 🖥️ Desktop header */}
       <div className={clsx("menu-desktop", {
         "md:bg-gray-2": pathname !== "/" || pathname !== "/home-pro-user",
         "bg-gray-2": needsGrayBg
       })}>
         <div className="child:md:flex child:hidden">
           <nav className="flex">
-            {/* 🖼️ Logo */}
+            {/* 🏠 Logo */}
             <Link to={"/"}>
               <img className="menu-desktop__logo" src="/images/logos/Logo.png" loading="lazy" alt="Logo" />
             </Link>
             
-            {/* 📜 Desktop Menu Items */}
+            {/* 📑 Navigation menu */}
             <ul className="menu-desktop__items">
               {menuItemsDesktop.map(({ name, id, path }) => (
                 <li key={id} className={clsx("group relative", pathname.includes(path) && "text-primary")}>
@@ -95,7 +100,7 @@ const Header = memo(() => {
           </nav>
         </div>
 
-        {/* 🍔 Mobile menu trigger */}
+        {/* 📱 Mobile menu trigger */}
         <div className="menu-desktop__mobile-trigger">
           <span ref={navToggleRef} className="menu-desktop__hamburger">
             <HambergerMenu size="24" color="#353535" variant="Outline" />
@@ -108,7 +113,7 @@ const Header = memo(() => {
           </button>
         </div>
 
-        {/* 👤 User actions section */}
+        {/* 👤 User actions area */}
         <div className="menu-desktop__user-actions">
           {user ? (
             <Link to={"/profile"} className="header__profile-info">
@@ -130,7 +135,7 @@ const Header = memo(() => {
         </div>
       </div>
 
-      {/* 📱 Mobile menu */}
+      {/* 📱 Mobile menu panel */}
       <div ref={menuRef} className={clsx("menu-mobile", { "menu-mobile--open": dropdowns.menuMobile })}>
         {/* ❌ Close button */}
         <div className="menu-mobile__close-button">
@@ -139,7 +144,7 @@ const Header = memo(() => {
           </span>
         </div>
 
-        {/* 📝 Profile section */}
+        {/* 👤 Profile section */}
         <div className={clsx("menu-mobile__profile-section", (user && (user.firstName || userName)) && "py-1")}>
           {user ? (
             <Link to={"/profile"} className="menu-mobile__profile-info">
@@ -163,13 +168,22 @@ const Header = memo(() => {
           )}
         </div>
 
-        {/* 📱 Mobile Menu Items */}
+        {/* 📋 Mobile menu items */}
         <ul className="menu-mobile__list">
-          {filteredMenuItems.map(({ label, icon, id, path }) => (
+          {filteredMenuItems.map(({ label, icon, id, path, type }) => (
             <li key={id} className="menu-mobile__list-item">
               {id === 1 ? (
                 <div onClick={handleRegisterClick}
                   className={clsx("menu-mobile__link cursor-pointer", pathname.includes(path) && "text-primary")}>
+                  <div className="menu-mobile__link-content">
+                    {icon}
+                    <span>{label}</span>
+                  </div>
+                  <ArrowLeft2 size="20" color="#505050" variant="Outline" />
+                </div>
+              ) : type === "logout" ? (
+                <div onClick={handleLogout}
+                  className={clsx("menu-mobile__link cursor-pointer")}>
                   <div className="menu-mobile__link-content">
                     {icon}
                     <span>{label}</span>
@@ -190,10 +204,10 @@ const Header = memo(() => {
         </ul>
       </div>
 
-      {/* 🌫️ Overlay background */}
+      {/* 🌫️ Background overlay */}
       <div className={clsx("overlay", dropdowns.menuMobile && "overlay--active")} />
 
-      {/* 🛠️ Login Modals */}
+      {/* 🔐 Login modals */}
       <div className="hidden md:block">
         <ModalLogin isOpenModal={modalState.main} setIsOpenModal={setModalState} />
       </div>

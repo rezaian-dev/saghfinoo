@@ -1,12 +1,14 @@
 import React, { memo } from "react";
 import clsx from "classnames";
+import { Link } from "react-router-dom";
 
 const MainNewsCard = memo(({ image, readTime, title, subtitle, description,height }) => {
     return (
       <div className="main-news-card">
-        <a href="#">
+    
           {/* 🖼️ News Image */}
           <div className={clsx("main-news-card__image-container", height)}>
+            <Link to="/news/news-details">
             <img
               className="main-news-card__image"
               src={image}
@@ -16,6 +18,7 @@ const MainNewsCard = memo(({ image, readTime, title, subtitle, description,heigh
             <span className="main-news-card__read-time">
               زمان مطالعه: {readTime}
             </span>
+            </Link>
           </div>
 
           {/* 📰 News Content */}
@@ -24,7 +27,7 @@ const MainNewsCard = memo(({ image, readTime, title, subtitle, description,heigh
             <h5 className="main-news-card__subtitle">{subtitle}</h5>
             <p className="main-news-card__description">{description}</p>
           </div>
-        </a>
+     
       </div>
     );
   }

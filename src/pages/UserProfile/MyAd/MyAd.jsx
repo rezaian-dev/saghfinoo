@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../../../layouts/Header/Header";
 import Footer from "../../../layouts/Footer/Footer";
 import ProfileManagement from "../../../components/UserComponents/Profile/ProfileManagement/ProfileManagement";
 import UserAds from "../../../components/UserComponents/Auth/UserAds/UserAds";
-
+import { FilterContext } from "../../../context/FilterContext";
 
 export default function MyAd() {
+  const { userAdlists, setUserAdLists } = useContext(FilterContext);
+
   return (
     <>
       {/* 🏠 Page Header */}
@@ -26,11 +28,13 @@ export default function MyAd() {
               <UserAds
                 text={"آگهی های من"}
                 title={"هنوز آگهی‌ای ثبت نکردید!"}
-                image={"images/myAd/pana.png"}
+                image={"../../images/myAd/pana.png"}
                 description={
                   "با ثبت رایگان آگهی هر جا که هستید به‌سرعت ملک‌تان را معامله کنید"
                 }
                 myad={true}
+                adList={userAdlists}
+                setAdList={setUserAdLists}
               />
             </div>
           </div>

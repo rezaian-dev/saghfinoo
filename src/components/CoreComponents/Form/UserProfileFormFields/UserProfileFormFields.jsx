@@ -1,47 +1,8 @@
 import React, { memo, useState } from "react";
 import { Controller } from "react-hook-form";
 import clsx from "classnames";
-import { User, Call, Sms, Key, Eye, EyeSlash } from "iconsax-react";
-
-const FORM_FIELDS = {
-  fullName: {
-    id: "fullName",
-    type: "text",
-    required: true,
-    label: "نام و نام خانوادگی",
-    shortLabel: "نام",
-    icon: User,
-    dir: "rtl",
-  },
-  mobile: {
-    id: "mobile",
-    type: "text",
-    required: true,
-    label: "شماره موبایل",
-    shortLabel: "شماره",
-    icon: Call,
-    dir: "ltr",
-  },
-  password: {
-    id: "password",
-    type: "password",
-    required: true,
-    label: "رمز عبور",
-    shortLabel: "رمز",
-    icon: Key,
-    dir: "ltr",
-    hasToggle: true,
-  },
-  email: {
-    id: "email",
-    type: "email",
-    required: false,
-    label: "ایمیل (اختیاری)",
-    shortLabel: "ایمیل",
-    icon: Sms,
-    dir: "ltr",
-  },
-};
+import { Eye, EyeSlash } from "iconsax-react";
+import { FORM_FIELDS } from "../../../../data/realEstateData";
 
 const UserProfileFormFields = memo(({
   fieldName,

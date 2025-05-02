@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../../../layouts/Header/Header";
 import Footer from "../../../layouts/Footer/Footer";
 import ProfileManagement from "../../../components/UserComponents/Profile/ProfileManagement/ProfileManagement";
 import UserAds from "../../../components/UserComponents/Auth/UserAds/UserAds";
+import { FilterContext } from "../../../context/FilterContext";
 
 export default function SaveAd() {
+  const { userAdSaveLists, setUserAdSaveLists } = useContext(FilterContext);
   return (
     <>
       {/* 🏠 Page Header */}
@@ -26,11 +28,13 @@ export default function SaveAd() {
                 text={"آگهی های ذخیره شده"}
                 savead={true}
                 searchAd={true}
-                image={"images/saveAd/no-save-ad.png"}
+                image={"../../images/saveAd/no-save-ad.png"}
                 title={"هنوز آگهی‌ای ذخیره نکردید!"}
                 description={
                   "صفحه املاک اجاره‌ای سقفینو را ببینید و از میان آن‌ها آگهی‌های دلخواه را ذخیره کنید"
                 }
+                adList={userAdSaveLists}
+                setAdList={setUserAdSaveLists}
               />
             </div>
           </div>

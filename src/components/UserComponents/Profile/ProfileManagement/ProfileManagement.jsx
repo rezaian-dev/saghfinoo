@@ -1,84 +1,41 @@
-import { AddCircle, Edit, Logout, ProfileCircle, ReceiptText } from "iconsax-react";
+import { ProfileCircle } from "iconsax-react";
 import React, { memo, useContext } from "react";
 import clsx from "classnames";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FilterContext } from "../../../../context/FilterContext";
-
+import { profileMenuItems } from "../../../../data/realEstateData";
 /**
  * 🧑‍💼 Profile Management Component
  * Displays user profile with navigation menu
  */
 const ProfileManagement = memo(({ activeLabel }) => {
-  const { setUser } = useContext(FilterContext);
-
+  const { user,setUser } = useContext(FilterContext);
   const navigate = useNavigate();
-  // 📋 Menu items configuration array
-  const menuItems = [
-    {
-      id: 1,
-      title: "ویرایش اطلاعات",
-      label: "editInfo",
-      icon: <Edit size="24" color="#717171" variant="Outline" />,
-      link: "/profile",
-    },
-    {
-      id: 2,
-      title: "ثبت آگهی جدید",
-      label: "newAd",
-      icon: <AddCircle size="24" color="#717171" variant="Outline" />,
-      link: "/register/1",
-    },
-    {
-      id: 3,
-      title: "آگهی‌های من",
-      label: "myAds",
-      icon: <ReceiptText size="24" color="#717171" variant="Outline" />,
-      link: "/profile/my-ads",
-    },
-    {
-      id: 4,
-      title: "آگهی‌های ذخیره‌شده",
-      label: "savedAds",
-      icon: (
-        <img
-          src="../../svgs/icons/archive-minus.svg"
-          alt="archiveMenu"
-          loading="lazy"
-        />
-      ),
-      link: "/profile/saved-ads",
-    },
-    {
-      id: 5,
-      title: "خروج",
-      label: "logout",
-      icon: <Logout size="24" color="#717171" variant="Outline" />,
-      link: "",
-    },
-  ];
 
   return (
     <div className="profile">
       {/* 👤 User profile header section */}
       <div className="profile__header">
-        <ProfileCircle size="40" color="#717171" />
+        {user?.image ?  <img className="w-10 h-10 rounded-full" src={user?.image} alt="userImage" />:<ProfileCircle size="40" color="#717171" />}
+        
         <div className="profile__info">
-          <span className="profile__name">نام کاربر</span>
-          <span className="profile__activity">نوع فعالیت</span>
+          <span className="profile__name">{user?.fullName ||user?.firstName}</span>
+          <span className="profile__activity">کاربر</span>
         </div>
       </div>
+
       {/* 📱 Navigation menu section */}
       <div className="profile__menu">
         <ul className="space-y-4">
           {/* 🔄 Loop through menu items to create list */}
-          {menuItems.map(({ id, title, icon, label, link }) => (
+          {profileMenuItems.map(({ id, title, icon, label, link }) => (
             <li
               key={id}
               className="profile__menu-item"
               onClick={(e) => {
                 if (label === "logout") {
-                  e.preventDefault(); // ❗ جلوگیری از رفتن به لینک
+                  e.preventDefault();
                   Swal.fire({
                     title: "خروج از حساب کاربری",
                     text: "آیا مطمئن هستید که می‌خواهید از حساب کاربری خود خارج شوید؟",

@@ -9,5 +9,8 @@ export default defineConfig({
     postcss: {
       plugins: [tailwindcss(), autoprefixer()],
     },
+    optimizeDeps: {
+      include: ["leaflet", "leaflet/dist/leaflet.css"],
+    },
   },
 });

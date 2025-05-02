@@ -5,7 +5,7 @@ import { FilterContext } from "../../../context/FilterContext";
 
 const RealtyIntro = memo(({ realestate = true, dataRelator, realestateData, handleModalClick }) => {
     // 📋 Data list for agency or real estate details
-    const dataList = [
+    const introDetails  = [
       {
         id: 1,
         caption: dataRelator?.agency,
@@ -28,7 +28,7 @@ const RealtyIntro = memo(({ realestate = true, dataRelator, realestateData, hand
       },
     ];
 
-    const { handleToastError } = useToast();
+    const { handleToastError,handleToastInfo } = useToast();
     const { user } = useContext(FilterContext);
 
     // ✉️ Handle report button click
@@ -36,6 +36,12 @@ const RealtyIntro = memo(({ realestate = true, dataRelator, realestateData, hand
       user ? handleModalClick(e) : handleToastError("لطفاً ابتدا وارد حساب کاریری خود شوید!");
     };
 
+   const showMessage = ()=>{
+    
+    handleToastInfo("این بخش فقط نمایشی است.");
+
+    
+   }
     return (
       <div className="realty-intro">
         {/* 🔹 Header Section */}
@@ -50,20 +56,25 @@ const RealtyIntro = memo(({ realestate = true, dataRelator, realestateData, hand
 
             {/* ➡️ More Options */}
             <div className="realty-intro__more-icon">
-              <More
-                className="realty-intro__more-icon-img"
-                color="#505050"
-                variant="Outline"
-              />
+              {!realestate &&
+                  <More
+                  className="realty-intro__more-icon-img pointer-events-auto"
+                  color="#505050"
+                  variant="Outline"
+                  onClick={handleMessageModal}
+           
+                />}
+          
 
               {/* 📤 Export & Archive Actions */}
               <div className="property-rating__actions">
                 <ExportCurve className="property-rating__icon !w-6 !h-6" color="#505050" />
                 <img
-                  className="cursor-pointer"
+                  className="cursor-pointer pointer-events-auto"
                   src="../../svgs/icons/archive-minus(bg-gray-11).svg"
                   loading="lazy"
                   alt="archiveMenu"
+                  onClick={showMessage}
                 />
               </div>
             </div>
@@ -87,13 +98,13 @@ const RealtyIntro = memo(({ realestate = true, dataRelator, realestateData, hand
         {/* 📍 Detail Section */}
         <div className="realty-intro__details">
           {realestate
-            ? dataList.slice(2).map(({ id, caption, icon }) => (
+            ? introDetails.slice(2).map(({ id, caption, icon }) => (
                 <div key={id} className="realty-intro__detail">
                   {icon}
                   <h4 className="realty-intro__detail-caption">{caption}</h4>
                 </div>
               ))
-            : dataList.slice(0, 2).map(({ id, caption, icon }) => (
+            : introDetails.slice(0, 2).map(({ id, caption, icon }) => (
                 <div key={id} className="realty-intro__detail">
                   {icon}
                   <h4 className="realty-intro__detail-caption">{caption}</h4>

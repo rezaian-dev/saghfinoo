@@ -1,5 +1,6 @@
 import { Calendar } from "iconsax-react";
 import React, { memo } from "react";
+import { Link } from "react-router-dom";
 
 // Memoize the component to prevent unnecessary re-renders 🚀
 const RealEstateNews = memo(() => {
@@ -45,9 +46,9 @@ const RealEstateNews = memo(() => {
             </div>
 
             {/* Read more link to see full news article 👁️ */}
-            <a className="real-estate-news__link" href="#">
+            <Link className="real-estate-news__link" to={"news-details"}>
               ادامه مطالب
-            </a>
+            </Link>
           </div>
           </div>
         </div>

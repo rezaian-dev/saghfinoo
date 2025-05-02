@@ -6,16 +6,9 @@ import { Navigation } from "swiper/modules";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import PremierRealtorsBox from "../../../LayoutComponents/Boxes/PremierRealtorsBox/PremierRealtorsBox";
 import useSwiperSlider from "../../../../hooks/useSwiperSlider";
+import { premierRealtorsData } from "../../../../data/realEstateData";
 
  const PremierRealtors = memo(({text,btnModal}) => {
-
-  const dataCard = [
-    {id: 1, title: "مشاور املاک توسی", image: "images/landing/home-prouser/logo-tusi.png", location: "تهران، نیاوران", popularity: "۴/۹ از ۵", activeAd: "بیش از ۴۰۰۰", comment: " (۱۲ نظر)", tikBlue: true, alt: "logoTusi"},
-    {id: 2, title: "مشاوراملاک ولیعصر", image: "images/landing/home-prouser/logo-valiasr.png", location: "تهران، خیابان ولیعصر", popularity: "۴ از ۵", activeAd: "بیش از ۳۵۰۰", comment: " (۱۲ نظر)", tikBlue: true, alt: "logoValiasr"},
-    {id: 3, title: "مشاور املاک فرشته", image: "images/landing/home-prouser/logo-freshteh.png", location: "تهران، خیابان فرشته", popularity: "۴ از ۵", activeAd: "بیش از ۲۰۰۰", comment: " (۱۲ نظر)", tikBlue: false, alt: "logoFreshteh"},
-    {id: 4, title: "مشاور املاک سبز", image: "images/landing/home-prouser/logo-sabz.png", location: "تهران، پاسداران", popularity: "۴ از ۵", activeAd: "بیش از  ۲۰۰۰", comment: " (۱۲ نظر)", tikBlue: false, alt: "logoSabz"},
-    {id: 5, title: "مشاور املاک سبز", image: "images/landing/home-prouser/logo-sabz.png", location: "تهران، پاسداران", popularity: "۴ از ۵", activeAd: "بیش از  ۲۰۰۰", comment: " (۱۲ نظر)", tikBlue: false, alt: "logoSabz"},
-  ];
 
   const { isBeginning, setIsBeginning, isEnd, handleNext, handlePrev, setSwiper, setIsEnd } = useSwiperSlider();
          
@@ -44,7 +37,7 @@ import useSwiperSlider from "../../../../hooks/useSwiperSlider";
           }}
         >
           <div ref={btnModal}>
-          {dataCard.map((item) => (
+          {premierRealtorsData.map((item) => (
             <SwiperSlide className="p-1" key={item.id}>
               <PremierRealtorsBox {...item} /> {/* Render each news item */}
             </SwiperSlide>

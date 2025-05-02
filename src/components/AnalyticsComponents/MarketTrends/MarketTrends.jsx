@@ -30,7 +30,7 @@ const MarketTrends = memo(() => {
       <div className="market-trends__image">
         <img
           className="market-trends__image-content"
-          src="../images/backgrounds/housing-news-1.webp"
+          src="../../images/news/housing-news-1.webp"
           loading="lazy"
           alt="housing-news-1"
         />

@@ -1,21 +1,12 @@
 import React, { memo } from "react";
 import clsx from "classnames";
-import { Home, Image, Location, NoteText, RulerPen, Setting2 } from "iconsax-react";
+import { stepperStages } from "../../../../data/realEstateData";
 
 const Stepper = memo(({ currentStep = 1 }) => {
-  // 🏁 Define the steps of the stepper
-  const steps = [
-    { label: "موقعیت", id: 1, icon: <Location className="!w-4 !h-4 xl:!w-6 xl:!h-6"  color="#FFFFFF" /> },
-    { label: "نوع ملک", id: 2, icon: <Home className="!w-4 !h-4 xl:!w-6 xl:!h-6"  color="#FFFFFF" /> },
-    { label: "ابعاد", id: 3, icon: <RulerPen className="!w-4 !h-4 xl:!w-6 xl:!h-6"  color="#FFFFFF" /> },
-    { label: "امکانات", id: 4, icon: <Setting2 className="!w-4 !h-4 xl:!w-6 xl:!h-6" color="#FFFFFF" /> },
-    { label: "توضیحات", id: 5, icon: <NoteText className="!w-4 !h-4 xl:!w-6 xl:!h-6"  color="#FFFFFF" /> },
-    { label: "رسانه", id: 6, icon: <Image className="!w-4 !h-4 xl:!w-6 xl:!h-6"  color="#FFFFFF" /> },
-  ];
 
-  // 📊 Define the progress bar width for each step
-  const progressWidths = [11, 31, 50, 70, 90, 100];
-  const progressWidth = `${progressWidths[currentStep - 1]}%`;
+  // 📊 Define the progress bar percentage for each stage
+  const stageProgressPercentages = [11, 31, 50, 70, 90, 100];
+  const progressWidth = `${stageProgressPercentages[currentStep - 1]}%`;
 
   return (
     <div className="stepper">
@@ -29,7 +20,7 @@ const Stepper = memo(({ currentStep = 1 }) => {
         
         {/* 🏆 Step indicators */}
         <div className="stepper__steps">
-          {steps.map(({ id, label, icon }) => (
+          {stepperStages.map(({ id, label, icon }) => (
             <div key={id} className="stepper__step">
               {/* 🔘 Step circle with animation */}
               <span

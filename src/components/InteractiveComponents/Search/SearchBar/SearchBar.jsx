@@ -5,7 +5,7 @@ import useLanguageValidation from "../../../../hooks/useLanguageValidation";
 import useToggleMenu from "../../../../hooks/useToggleMenu";
 import { useNavigate } from "react-router-dom";
 import useToast from "../../../../hooks/useToast";
-import { cityMap,cityNamesFa } from "../../../../hooks/UseFilterData";
+import { cityMap, cityNamesFa } from "../../../../data/realEstateData";
 
 // 🚀 Optimized with React.memo
 const SearchBar = memo(() => {

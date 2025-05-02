@@ -21,21 +21,41 @@ const ModalLogin = memo(({ isOpenModal, setIsOpenModal }) => {
     usersDataBase,
     setUsersDataBase,
     setUser,
+    protectedRedirect,
+    setProtectedRedirect,
   } = useContext(FilterContext);
 
-  const { handleToastSuccess, handleToastError } = useToast(setIsOpenModal, "main");
+  const { handleToastSuccess, handleToastError } = useToast(
+    setIsOpenModal,
+    "main"
+  );
 
   // 🧹 Reset auth steps when pathname changes and modal opens
   useEffect(() => {
+    // 🔄 RESET AUTH FLOW WHEN MODAL OPENS
     if (isOpenModal) {
-      setShowVerificationStep(false);
-      setUserPhoneNumber("");
-      setUserRegister(false);
+      setShowVerificationStep(false); // 🔙 Reset verification progress
+      setUserPhoneNumber(""); // 📱 Clear entered phone number
+      setUserRegister(false); // ✋ Cancel registration process
     }
-  }, [location.pathname, isOpenModal]);
+
+    // 💻 HANDLE DESKTOP PROTECTED ROUTE REDIRECT
+    if (protectedRedirect && window.innerWidth >= 768) {
+      setIsOpenModal((prev) => ({
+        ...prev,
+        main: true, // 🖥️ Open main auth modal on desktop
+      }));
+      setProtectedRedirect(false); // 🚫 Clear redirect flag after handling
+    }
+  }, [location.pathname,isOpenModal,protectedRedirect,]);
 
   return (
-    <div className={clsx("modal__overlay", isOpenModal && "modal__overlay--visible")}>
+    <div
+      className={clsx(
+        "modal__overlay",
+        isOpenModal && "modal__overlay--visible"
+      )}
+    >
       <ToastContainer />
       <AuthStep
         isMobile={false}

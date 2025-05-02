@@ -4,6 +4,7 @@ import clsx from "classnames";
 import useToggleMenu from "../../../../hooks/useToggleMenu";
 import useFilterSelection from "../../../../hooks/useFilterSelection";
 import SelectionFilterOption from "../../../LayoutComponents/FilterBars/SelectionFilterOption/SelectionFilterOption";
+import { filterOptions } from "../../../../data/realEstateData";
 
 const FilterDropdownMobile = memo(
   ({
@@ -20,32 +21,6 @@ const FilterDropdownMobile = memo(
     const { dropdowns, btnRef, menuRef, handleClick } = useToggleMenu();
 
     // 🗺️ Define filter options for different types
-    const filterOptions = {
-      hvac: {
-        hvacSpecialMode: true,
-        labelMap: {
-          coolingSystem: "انتخاب سیستم",
-          heatingSystem: "انتخاب سیستم",
-          floorMaterial: "انتخاب جنس کف",
-        },
-        shortName: {
-          coolingSystem: "سرمایشی",
-          heatingSystem: "گرمایشی",
-          floorMaterial: "",
-        },
-      },
-      property: {
-        labelMap: {
-          propertyType: "انتخاب نوع ملک",
-          areas: "انتخاب منطقه",
-          
-        },
-        shortName: {
-          propertyType:"",
-          areas:"",
-        },
-      },
-    };
     const options = filterOptions[filterType];
 
     // 🛠️ Manage filter selection and label handling

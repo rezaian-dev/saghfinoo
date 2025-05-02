@@ -96,10 +96,10 @@ body {
     @apply text-base sm:text-lg md:text-2xl lg:text-[32px] font-bold text-gray-11 mb-8;
   }
   .title-style {
-    @apply text-gray-12 font-bold text-[clamp(14px,3vw,32px)] mb-4 md:mb-8;
+    @apply text-gray-12 font-bold  text-[clamp(14px,3vw,32px)] mb-4 md:mb-8;
   }
   .text-style {
-    @apply text-gray-11 block text-xs sm:text-base sm:leading-9;
+    @apply text-gray-11 block text-xs sm:text-base md:text-lg md:leading-10 leading-6 sm:leading-9;
   }
   .home-new-user__footer,
   .home-pro-user__footer {
@@ -123,17 +123,17 @@ body {
     @apply w-4 h-4 md:w-6 md:h-6 transform transition-all duration-300;
   }
   .menu-desktop {
-    @apply flex-center justify-between px-4 md:px-9 bg-white text-gray-10 h-[58px] md:h-[115px] md:rounded-2xl absolute md:static top-0 left-0 right-0;
+    @apply flex-center justify-between px-4 xl:px-9 bg-white text-gray-10 h-[58px] md:h-[115px] md:rounded-2xl absolute md:static top-0 left-0 right-0;
   }
   .menu-desktop__logo {
-    @apply w-[110px] lg:w-[130px];
+    @apply  w-28 lg:w-[130px];
   }
   .menu-desktop__items {
-    @apply flex items-center mr-2 lg:mr-11 gap-x-4 lg:gap-x-6;
+    @apply flex items-center mr-2 lg:mr-11 gap-x-3 lg:gap-x-6;
   }
   .menu-desktop__link,
   .menu-desktop__login-link {
-    @apply transition-colors duration-300 hover:text-primary;
+    @apply transition-colors text-sm lg:text-base duration-300 hover:text-primary;
   }
   .home-new-user__empowerment,
   .home-pro-user__new-houses {
@@ -148,14 +148,11 @@ body {
   .icon-size {
     @apply w-4 h-4 md:w-6 md:h-6 transform transition-all duration-300;
   }
-  .menu-desktop {
-    @apply flex-center justify-between px-4 md:px-9 bg-white text-gray-10 h-[58px] md:h-[115px] md:rounded-2xl absolute md:static top-0 left-0 right-0;
-  }
   .menu-desktop__logo {
     @apply w-[110px] lg:w-[130px];
   }
   .menu-desktop__items {
-    @apply flex items-center mr-2 lg:mr-11 gap-x-4 lg:gap-x-6;
+    @apply flex items-center mr-2 lg:mr-11 gap-x-3 lg:gap-x-6;
   }
   .menu-desktop__link,
   .menu-desktop__login-link {
@@ -439,7 +436,7 @@ body {
     @apply xl:pr-[104px] xl:pl-[83px] flex justify-between items-start;
   }
   .register-ad-desktop {
-    @apply text-primary py-2 px-4 border border-primary rounded-lg transition-all duration-300 hover:bg-primary hover:text-white;
+    @apply text-primary py-2 text-sm lg:text-base px-3 lg:px-4 border border-primary rounded-lg transition-all duration-300 hover:bg-primary hover:text-white;
   }
   .housing-planner__grid {
     @apply grid grid-cols-1 auto-rows-[1fr] sm:grid-cols-2 lg:grid-cols-3 justify-center gap-6;
@@ -565,7 +562,7 @@ body {
     @apply font-medium md:font-bold text-base md:text-lg lg:text-xl my-1 text-gray-12 line-clamp-1;
   }
   .consultants-box__info {
-    @apply text-gray-9 text-xs sm:text-sm md:text-base lg:text-lg space-y-1 flex-center flex-col mb-1;
+    @apply text-gray-9 text-xs text-center !line-clamp-2 sm:text-sm md:text-base lg:text-lg space-y-1 flex-center flex-col mb-1;
   }
   .consultants-box__button {
     @apply inline-block whitespace-nowrap rounded md:rounded-lg text-primary px-[22px] py-[5px] text-xs lg:text-sm lg:px-[34px] lg:py-[7.5px] border border-primary transition-all duration-300 hover:bg-primary hover:text-white;
@@ -712,7 +709,7 @@ body {
     @apply flex items-center gap-x-2 cursor-pointer;
   }
   .property-filter-box__label {
-    @apply text-gray-11 text-[10px] md:text-sm;
+    @apply text-gray-11 text-xs md:text-sm;
   }
   .property-filter-desktop__btn {
     @apply flex-center gap-x-1 transition-all duration-300 xl:gap-x-2 text-gray-10 border-gray-7 p-2 whitespace-nowrap xl:px-4 h-8 md:h-12 rounded md:rounded-lg border cursor-pointer relative hover:bg-gray-3 hover:text-gray-11;
@@ -720,8 +717,11 @@ body {
   .property-filter-desktop__btn--open {
     @apply border-info shadow-info;
   }
+  .rental-listing__archive-icon{
+    @apply w-5 md:w-6 md:h-6 h-5;
+  }
   .property-filter-desktop__label {
-    @apply pointer-events-none text-gray-10 text-xs sm:text-sm xl:text-base;
+    @apply pointer-events-none text-gray-10 text-xs xl:text-base;
   }
   .property-filter-desktop__arrow {
     @apply flex-shrink-0 h-full max-w-4 max-h-4 xl:max-w-5 xl:max-h-5 transform transition-all;
@@ -733,7 +733,7 @@ body {
     @apply opacity-100 pointer-events-auto;
   }
   .property-filter-desktop__menu-content {
-    @apply max-h-[140px] md:max-h-[170px] overflow-y-auto w-full px-4 space-y-1;
+    @apply max-h-[140px] md:max-h-[170px] overflow-y-auto overflow-x-hidden w-full px-4 space-y-1;
   }
   .property-filter-desktop__actions {
     @apply flex-center mt-2 px-4 gap-x-[10px] pointer-events-none;
@@ -1121,7 +1121,7 @@ body {
     @apply text-sm sm:text-lg md:text-2xl text-gray-12 font-bold;
   }
   .property-amenities__grid {
-    @apply grid grid-cols-[1.2fr_1.4fr] justify-items-start mt-4 md:mt-6;
+    @apply grid grid-cols-1 gap-3 md:grid-cols-[1.2fr_1.4fr] justify-items-start mt-4 md:mt-6;
   }
   .property-amenities__section {
     @apply space-y-2 md:space-y-3;
@@ -1133,7 +1133,7 @@ body {
     @apply flex-center gap-x-1 lg:gap-x-2;
   }
   .property-amenities__item-value {
-    @apply text-gray-11 text-xs sm:text-sm md:text-lg lg:text-xl;
+    @apply text-gray-11 text-xs sm:text-sm md:text-lg lg:text-xl whitespace-nowrap line-clamp-1;
   }
   .overlay {
     @apply fixed inset-0 bg-info z-30 opacity-0 pointer-events-none transition-all;
@@ -1145,7 +1145,7 @@ body {
     @apply text-sm sm:text-lg md:text-2xl text-gray-12 font-bold mb-6 md:mb-7;
   }
   .property-location__info {
-    @apply flex-center gap-x-3 md:gap-x-5 justify-start mt-3 md:mt-14 text-sm/6 sm:text-base;
+    @apply flex-center gap-x-3 md:gap-x-5 justify-start mt-3 md:mt-14 text-xs/4 sm:text-base;
   }
   .property-location__info-item--view,
   .property-location__info-item--save {
@@ -1345,7 +1345,7 @@ body {
     @apply space-y-4;
   }
   .property-rating__question-text {
-    @apply text-gray-10 text-base;
+    @apply text-gray-10 text-base whitespace-nowrap;
   }
   .property-rating__stars {
     @apply flex-center gap-x-1;
@@ -1573,7 +1573,7 @@ body {
     @apply border border-gray-5 rounded-xl flex items-center gap-x-2 h-[105px] pr-[25px];
   }
   .header__profile-info {
-    @apply text-lg text-gray-10 hidden items-center gap-x-2 md:flex;
+    @apply text-sm lg:text-lg text-gray-10 hidden items-center gap-x-1 lg:gap-x-2 md:flex;
   }
   .profile__info {
     @apply flex flex-col gap-y-1;
@@ -1690,8 +1690,7 @@ body {
   .contact-info__header {
     @apply text-center mt-8 md:mt-[54px];
   }
-  .saghfino-story__header-title,
-  .contact-info__header-title {
+  .saghfino-story__header-title {
     @apply font-bold md:font-medium text-[clamp(16px,4vw,40px)] text-shade-3;
   }
   .saghfino-story__header-subtitle {
@@ -1725,7 +1724,7 @@ body {
     @apply text-gray-11 font-bold text-[clamp(12px,4vw,24px)];
   }
   .contact-info__header-title {
-    @apply text-lg font-bold md:font-medium text-[clamp(16px,4vw,40px)] text-shade-3;
+    @apply text-lg font-bold mb-4 md:font-medium text-[clamp(16px,4vw,40px)] text-shade-3;
   }
   .contact-info__header-subtitle {
     @apply text-gray-9 text-[clamp(16px,4vw,28px)] font-medium md:font-normal;
@@ -2102,7 +2101,7 @@ body {
     @apply pointer-events-auto !w-4 !h-4 md:!w-5 md:!h-5;
   }
   .form-container {
-    @apply bg-white flex items-center overflow-x-hidden overflow-y-auto md:items-center h-max md:min-h-full flex-col px-4 pt-14 pb-[59px] relative;
+    @apply bg-white flex items-center min-h-[654px]   md:items-center h-max md:min-h-full flex-col px-4 pt-14 pb-[59px] relative;
   }
   .form-container--centered {
     @apply justify-center items-center h-[498px];
@@ -2635,5 +2634,29 @@ body {
   }
   .rating-modal__submit {
     @apply flex-center mb-6 bg-primary text-white rounded-lg hover:bg-shade-2 transition-all w-full font-medium h-8 text-sm max-w-[184px];
+  }
+  .leaflet-map__shadow{
+    @apply absolute inset-0 pointer-events-none transition-opacity duration-1000 shadow-[inset_0_0_15px_rgba(0,0,0,0.3)] z-[1];
+  }
+  .leaflet-map__container{
+    @apply  w-full h-full transition-all duration-1000
+  }
+  .leaflet-map__container--visible{
+    @apply opacity-100 scale-100;
+  }
+  .leaflet-map__container--hidden{
+    @apply opacity-0 scale-95;
+  }
+  .leaflet-map__loading-text{
+    @apply mt-4 text-gray-700;
+  }
+  .leaflet-map__spinner{
+    @apply w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin;
+  }
+  .leaflet-map__loading__content{
+    @apply flex flex-col items-center;
+  }
+  .leaflet-map__loading{
+    @apply absolute inset-0 flex items-center justify-center bg-gray-100 z-10;
   }
 }

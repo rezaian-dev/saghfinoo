@@ -293,20 +293,6 @@ export const FILTER_CONFIG = [
   },
 ];
 
-  // 🌍 FA to EN city mapping
- export const cityMap = {
-    یزد: "yazd", تهران: "tehran", مشهد: "mashhad", شیراز: "shiraz",
-    کرج: "karaj", قم: "qom", ارومیه: "urmia", اصفهان: "isfahan",
-    تبریز: "tabriz", اهواز: "ahvaz", شمال: "shomal"
-  };
-
-  // 🔄 EN to FA mapping (for display)
- export const cityNamesFa = {
-    tehran: "تهران", mashhad: "مشهد", isfahan: "اصفهان", tabriz: "تبریز",
-    shiraz: "شیراز", ahvaz: "اهواز", karaj: "کرج", qom: "قم",
-    urmia: "ارومیه", yazd: "یزد", shomal: "شمال"
-  };
-
 // List of keys to remove from the filter 🗑️
 export const keysToRemove = [
   "cooling-system",

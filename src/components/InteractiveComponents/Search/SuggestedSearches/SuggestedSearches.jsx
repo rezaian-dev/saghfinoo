@@ -1,20 +1,14 @@
 import React, { memo } from "react";
+import useToast from "../../../../hooks/useToast";
+import { suggestedAreas } from "../../../../data/realEstateData";
 
 const SuggestedSearches = memo(() => {
-  const searchSuggestions = [
-    { id: 1, title: "املاک در نارمک" },
-    { id: 2, title: "املاک در پونک" },
-    { id: 3, title: "املاک در ولنجک" },
-    { id: 4, title: "املاک در فرمانیه" },
-    { id: 5, title: "املاک در نیاوران" },
-    { id: 6, title: "املاک در امانیه" },
-    { id: 7, title: "املاک در دروس" },
-    { id: 8, title: "املاک در الهیه" },
-    { id: 9, title: "املاک در قیطریه" },
-    { id: 10, title: "املاک در دولت" },
-    { id: 11, title: "املاک در قلهک" },
-    { id: 12, title: "املاک در ظفر" },
-  ];
+  const { handleToastInfo } = useToast();
+
+  const message = (e) => {
+    e.preventDefault();
+    handleToastInfo("این قسمت در نسخه دمو فعال نیست.");
+  };
 
   return (
     <>
@@ -23,11 +17,12 @@ const SuggestedSearches = memo(() => {
 
       {/* 🧭 Grid displaying each search suggestion */}
       <div className="suggested-searches__grid">
-        {searchSuggestions.map(({ title, id }) => (
+        {suggestedAreas.map(({ title, id }) => (
           <a
             key={id}
-            href="#"
+            href=""
             className="suggested-searches__item suggested-searches__item--link"
+            onClick={(e) => message(e)}
           >
             {title}
           </a>

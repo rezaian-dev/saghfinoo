@@ -6,60 +6,10 @@ import { Navigation } from "swiper/modules";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import HousingNewsBox from "../../../LayoutComponents/Boxes/HousingNewsBox/HousingNewsBox";
 import useSwiperSlider from "../../../../hooks/useSwiperSlider";
+import { housingNewsArticles } from "../../../../data/realEstateData";
 
 const HousingNews = memo(() => {
-  const {
-    isBeginning,
-    setIsBeginning,
-    isEnd,
-    handleNext,
-    handlePrev,
-    setSwiper,
-    setIsEnd,
-  } = useSwiperSlider();
-
-  const dataCard = [
-    {
-      id: 1,
-      caption:
-        "رکود بازار مسکن؛فروشندگان در انتظار خریداران و خریداران در انتظار شکست نرخ فروشندگان",
-      img: "images/landing/home-newuser/rokod_bazaar_maskan.webp",
-      alt: "rokodBazaar",
-      link:"/news/news-details"
-    },
-    {
-      id: 2,
-      caption:
-        "خطر ویرانی زلزله در آسمان‌خراش‌ها بیشتر است یا در آپارتمان‌های کم‌ارتفاع و یا خانه‌های ویلایی ؟",
-      img: "images/landing/home-newuser/khatar_zelze_asemankharash.webp",
-      alt: "khatarZelzeAsemankharash",
-      link:"/news/news-details"
-    },
-    {
-      id: 3,
-      caption:
-        "بازار کساد کسب و کار معماران داخلی در پی بالا رفتن قیمت مواد و متریال اولیه و مصالح خارجی",
-      img: "images/landing/home-newuser/kasad_bazaar_memaran.webp",
-      alt: "kasadBazaar",
-      link:"/news/news-details"
-    },
-    {
-      id: 4,
-      caption:
-        "شهرک ساحلی زمزم در منطقه نور استان مازندران از سوم شهریور وارد بازار مزایده شده است.",
-      img: "images/landing/home-newuser/shahrek_sahli_mazandaran.webp",
-      alt: "shahrekSahli",
-      link:"/news/news-details"
-    },
-    {
-      id: 5,
-      caption:
-        "شهرک ساحلی زمزم در منطقه نور استان مازندران از سوم شهریور وارد بازار مزایده شده است.",
-      img: "images/landing/home-newuser/shahrek_sahli_mazandaran.webp",
-      alt: "shahrekSahli",
-      link:"/news/news-details"
-    },
-  ];
+  const { isBeginning, setIsBeginning, isEnd, handleNext, handlePrev, setSwiper, setIsEnd } = useSwiperSlider();
 
   return (
     <>
@@ -85,7 +35,7 @@ const HousingNews = memo(() => {
             1280: { slidesPerView: 4, spaceBetween: 24 },
           }}
         >
-          {dataCard.map((item) => (
+          {housingNewsArticles.map((item) => (
             <SwiperSlide key={item.id}>
               <HousingNewsBox {...item} /> {/* 🏠 Render each news item */}
             </SwiperSlide>

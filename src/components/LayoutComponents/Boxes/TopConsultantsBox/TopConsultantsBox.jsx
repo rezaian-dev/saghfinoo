@@ -19,7 +19,7 @@ const TopConsultantsBox = memo(({ id,name, image, agency, ratingText, alt, hover
 
         {/* 🏢 Agency and 🌟 Rating */}
         <div className="consultants-box__info">
-          <span>{agency}</span>
+          <span className="block">{agency}</span>
           <span>{(ratingText.slice(7,8))} از ۵</span>
 
         </div>

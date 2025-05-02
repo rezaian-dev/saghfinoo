@@ -1,50 +1,157 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { GalleryAdd, Trash } from "iconsax-react";
 import { MoonLoader } from "react-spinners";
+import Swal from "sweetalert2";
 import clsx from "classnames";
 import Stepper from "../../../components/CoreComponents/Steps/Stepper/Stepper";
+import { FilterContext } from "../../../context/FilterContext";
 
 export default function MediaUploader() {
+  // 🚀 Navigation and context hooks
   const navigate = useNavigate();
+  const { adDraft, setAdDraft, setUser, user } = useContext(FilterContext);
+
+  // 📝 Form configuration
   const { handleSubmit, watch, setValue } = useForm({
     defaultValues: { images: [], video: "" },
     mode: "onChange",
     shouldFocusError: false,
   });
 
+  // 👀 Watched form values
   const uploadedImages = watch("images");
   const uploadedVideo = watch("video");
 
-  // 🔄 Manage loading state for each image separately
+  // 🔄 Loading states for each image slot
   const [loadingStates, setLoadingStates] = useState(Array(6).fill(false));
 
-  // 📸 Handle image upload
+  // 🖼️ Handle image upload with validation
   const handleImageChange = (event, index) => {
     const file = event.target.files[0];
-    if (file) {
-      let newLoadingStates = [...loadingStates];
-      newLoadingStates[index] = true; // 🔄 Show loader only for this image
-      setLoadingStates(newLoadingStates);
+    if (!file) return;
 
-      // Simulate upload
-      setTimeout(() => {
-        const imageUrl = URL.createObjectURL(file);
-        setValue("images", [...uploadedImages, { image: imageUrl }]);
+    // ✅ File type validation
+    const validImageTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/jpg",
+      "image/webp",
+    ];
+    if (!validImageTypes.includes(file.type)) {
+      showErrorAlert(
+        "لطفا فقط فایل های تصویری با فرمت jpg، jpeg، png یا webp بارگذاری کنید."
+      );
+      return;
+    }
 
-        newLoadingStates[index] = false; // ✅ Hide loader
-        setLoadingStates(newLoadingStates);
-      }, 1000);
+    // ⚖️ File size validation (1MB max)
+    if (file.size > 1 * 1024 * 1024) {
+      showErrorAlert(
+        "حجم فایل بیش از 1 مگابایت است. لطفا تصویر با حجم کمتر بارگذاری کنید."
+      );
+      return;
+    }
+
+    // 🔄 Set loading state
+    updateLoadingState(index, true);
+
+    // 📤 Read file as base64
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      updateImageArray(index, reader.result, file);
+      updateLoadingState(index, false);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // 🗑️ Remove image from array
+  const removeImage = (index) => {
+    const updatedImages = [...uploadedImages];
+    updatedImages.splice(index, 1);
+    setValue("images", updatedImages);
+  };
+
+  // ⏪ Navigation handler
+  const handleGoBack = () => navigate("/register/5");
+
+  // 🛠️ Prepare images for storage
+  const prepareImagesForStorage = (images) => {
+    return images.map((img) => ({
+      img: img.img || img.fileName || "image.jpg",
+      alt: img.alt || "عکس آگهی",
+    }));
+  };
+
+  const onSubmit = (data) => {
+    try {
+      // 🖼️ Optimize image data
+      const compressedImages = prepareImagesForStorage(data.images || []);
+
+      // 📦 Create new ad object
+      const newAd = {
+        ...adDraft,
+        images: compressedImages,
+        video: data.video || "",
+      };
+
+      // 👤 Update user data
+      const updatedUser = {
+        ...user,
+        adList: user.adList ? [...user.adList, newAd] : [newAd],
+      };
+
+      // 🧠 Load users database (assumed to be an array of users)
+      let usersDataBase =
+        JSON.parse(localStorage.getItem("usersDataBase")) || [];
+
+      let updateUsersDataBase = usersDataBase.map((item) =>
+        item.id === user.id ? updatedUser : item
+      );
+
+      // 💾 Save updated database
+
+      // 💾 Save current user and ad
+      setAdDraft(newAd);
+      setUser(updatedUser);
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      localStorage.setItem(
+        "usersDataBase",
+        JSON.stringify(updateUsersDataBase)
+      );
+
+      // ➡️ Navigate to next step
+      navigate("/register/7");
+    } catch (error) {
+      showErrorAlert("خطایی رخ داد. لطفا دوباره تلاش کنید.");
     }
   };
 
-  // 🗑 Remove image
-  const removeImage = (imageUrl) => {
-    const updatedImages = uploadedImages.filter(
-      (item) => item.image !== imageUrl
-    );
-    setValue("images", updatedImages);
+  // 🛠️ Helper functions
+  const updateLoadingState = (index, state) => {
+    setLoadingStates((prev) => prev.map((s, i) => (i === index ? state : s)));
+  };
+
+  const updateImageArray = (index, imgData, file) => {
+    const newImages = [...uploadedImages];
+    newImages[index] = {
+      img: imgData,
+      alt: "عکس آگهی",
+      fileName: file.name,
+      fileSize: file.size,
+    };
+    setValue("images", newImages);
+  };
+
+  const showErrorAlert = (message) => {
+    Swal.fire({
+      title: "خطا!",
+      text: message,
+      icon: "error",
+      confirmButtonText: "متوجه شدم",
+      confirmButtonColor: "#CB1B1B",
+    });
   };
 
   return (
@@ -63,7 +170,7 @@ export default function MediaUploader() {
 
           {/* 📝 Form */}
           <form
-            onSubmit={handleSubmit(() => navigate("/register/6"))}
+            onSubmit={handleSubmit(onSubmit)}
             className={clsx("form-container", uploadedVideo && "xl:h-[815px]")}
           >
             <Stepper currentStep={6} />
@@ -76,7 +183,8 @@ export default function MediaUploader() {
                   اضافه کردن عکس و ویدئو باعث افزایش بازدید آگهی شما می‌شود.
                 </span>
                 <span className="ad-form__text ad-form__text--secondary">
-                  فرمت عکس‌ها باید webp، jpg، jpeg یا png باشد.
+                  فرمت عکس‌ها باید webp، jpg، jpeg یا png باشد (حداکثر 1
+                  مگابایت).
                 </span>
               </div>
 
@@ -95,14 +203,15 @@ export default function MediaUploader() {
                         <div className="ad-form__image-wrapper">
                           <img
                             className="image-full"
-                            src={uploadedImages[index].image}
-                            alt={`image-${index}`}
+                            src={
+                              uploadedImages[index].img ||
+                              uploadedImages[index].image
+                            }
+                            alt={uploadedImages[index].alt || `image-${index}`}
                           />
                           <div
                             className="ad-form__delete-icon"
-                            onClick={() =>
-                              removeImage(uploadedImages[index].image)
-                            }
+                            onClick={() => removeImage(index)}
                           >
                             <Trash
                               className="ad-form__delete-icon__trash"
@@ -172,7 +281,11 @@ export default function MediaUploader() {
 
               {/* 🔘 Navigation buttons */}
               <div className="form-buttons md:!mt-6">
-                <button type="button" className="form-buttons__prev">
+                <button
+                  type="button"
+                  className="form-buttons__prev"
+                  onClick={handleGoBack}
+                >
                   قبلی
                 </button>
                 <button type="submit" className="form-buttons__next">

@@ -1,10 +1,11 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { Dislike, Like1 } from "iconsax-react";
 import clsx from "classnames";
 import LeafletMap from "../../../InteractiveComponents/Map/LeafletMap/LeafletMap";
 
-const PropertyLocation = memo(({locationOnMap,releaseTime,viewCount,saveCount}) => {
- 
+const PropertyLocation = memo(({ locationOnMap, releaseTime, viewCount, saveCount }) => {
+  const [selectedFeedback, setSelectedFeedback] = useState(null); // 🌟 Selected feedback state
+
   // ℹ️ Property details (Listing time, views, and saves)
   const infoItems = [
     { id: 1, label: "زمان ثبت آگهی", value: releaseTime },
@@ -24,8 +25,28 @@ const PropertyLocation = memo(({locationOnMap,releaseTime,viewCount,saveCount}) 
 
   // 👍👎 Feedback icons with their respective actions
   const feedbackIcons = [
-    { id: 1, icon: <Dislike color="#353535" variant="Outline" />, alt: "Dislike"},
-    { id: 2, icon: <Like1 color="#353535" variant="Outline" />, alt: "Like" },
+    {
+      id: 1,
+      icon: (isSelected) => (
+        <Dislike
+          color={isSelected ? "#FF0000" : "#353535"}
+          className="pointer-events-auto cursor-pointer"
+          variant="Outline"
+        />
+      ),
+      alt: "Dislike",
+    },
+    {
+      id: 2,
+      icon: (isSelected) => (
+        <Like1
+          color={isSelected ? "#FF0000" : "#353535"}
+          className="pointer-events-auto cursor-pointer"
+          variant="Outline"
+        />
+      ),
+      alt: "Like",
+    },
   ];
 
   return (
@@ -41,10 +62,7 @@ const PropertyLocation = memo(({locationOnMap,releaseTime,viewCount,saveCount}) 
       {/* ℹ️ Property details (views, saves, listing time) */}
       <div className="property-location__info">
         {infoItems.map(({ id, label, value, extraClass }) => (
-          <span
-            key={id}
-            className={clsx("text-gray-12", extraClass)}
-          >
+          <span key={id} className={clsx("text-gray-12", extraClass)}>
             {label}: <strong>{value}</strong>
           </span>
         ))}
@@ -61,17 +79,16 @@ const PropertyLocation = memo(({locationOnMap,releaseTime,viewCount,saveCount}) 
               key={id}
               className="property-location__feedback-icon"
               aria-label={alt}
+              onClick={() => setSelectedFeedback(id)}
             >
-              {icon}
+              {icon(selectedFeedback === id)}
             </span>
           ))}
         </div>
       </div>
 
       {/* 📞 Contact information button (mobile only) */}
-      <button className="property-location__contact-button">
-        اطلاعات تماس
-      </button>
+      <button className="property-location__contact-button">اطلاعات تماس</button>
     </div>
   );
 });

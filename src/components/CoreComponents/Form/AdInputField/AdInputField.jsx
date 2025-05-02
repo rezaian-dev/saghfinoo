@@ -3,10 +3,9 @@ import useToggleMenu from "../../../../hooks/useToggleMenu";
 import { ArrowDown2, CloseCircle } from "iconsax-react";
 import clsx from "classnames";
 
-const AdInputField = memo(({ systemState, setSystemState, placeholder, label, dataList, error, errorMessage,customStyle=false }) => {
+const AdInputField = memo(({ systemState, setSystemState, placeholder, label, dataList, error, errorMessage,customStyle=false,disabled }) => {
   
-
-    const { isDropdownOpen, btnRef, fillterInteractiveRef, handleClick } = useToggleMenu();
+    const { dropdowns, btnRef, handleClick } = useToggleMenu();
 
     // 🎯 Handles the selection of a location
     const handleAdLocationSelect = (city) => {
@@ -28,13 +27,13 @@ const AdInputField = memo(({ systemState, setSystemState, placeholder, label, da
     }, []);
 
     return (
-      <div className="relative">
+      <div className={clsx("relative",disabled && "pointer-events-none !cursor-not-allowed")}>
         <span className="ad-input-field__label">{label}</span>
         <div
           ref={btnRef}
           className={clsx(
             "ad-input-field__control",
-            (isDropdownOpen && !error) && "ad-input-field__control--active",
+            ( dropdowns.property && !error) && "ad-input-field__control--active", disabled && "pointer-events-none bg-gray-3",
             error && "border-primary"
           )}
           
@@ -55,10 +54,10 @@ const AdInputField = memo(({ systemState, setSystemState, placeholder, label, da
             <div
               className={clsx(
                 "ad-input-field__arrow",
-                isDropdownOpen && "rotate-180"
+                (dropdowns.property && !disabled) && "rotate-180"
               )}
             >
-              <ArrowDown2 className="ad-input__arrow-icon"  color="#737373" />
+              <ArrowDown2 className={clsx("ad-input__arrow-icon",disabled && "pointer-events-none")}   color="#737373" />
             </div>
           )}
 
@@ -66,14 +65,13 @@ const AdInputField = memo(({ systemState, setSystemState, placeholder, label, da
           <div
             className={clsx(
               "ad-input-field__dropdown",
-              isDropdownOpen && "ad-input-field__dropdown--visible",
+              (dropdowns.property && !disabled) && "ad-input-field__dropdown--visible",
               customStyle && "ad-input-field__dropdown--custom"
             )}
           >
             <ul className="ad-input-field__dropdown-list">
               {dataList.map(({ id, name }) => (
                 <li
-                  ref={fillterInteractiveRef}
                   key={id}
                   onClick={() => handleAdLocationSelect(name)}
                   className="ad-input-field__dropdown-item"

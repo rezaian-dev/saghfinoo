@@ -4,6 +4,7 @@ import SearchBar from "../../InteractiveComponents/Search/SearchBar/SearchBar";
 import RealEstateFilterDesktop from "../../InteractiveComponents/Filters/RealEstateFilterDesktop/RealEstateFilterDesktop";
 import RealEstateFilterMobile from "../../InteractiveComponents/Filters/RealEstateFilterMobile/RealEstateFilterMobile";
 import SortFilterBar from "../../LayoutComponents/FilterBars/SortFilterBar/SortFilterBar";
+import { Link } from "react-router-dom";
 
 const NotFoundView = memo(({ image, title, caption, retPage = false }) => {
   return (
@@ -32,9 +33,9 @@ const NotFoundView = memo(({ image, title, caption, retPage = false }) => {
         <h5 className="not-found__caption">{caption}</h5>
         
         {/* 🔙 Back to Home Button */}
-        <a href="#" className="not-found__back-btn">
+        <Link to={"/"} className="not-found__back-btn">
           بازگشت به صفحه اصلی
-        </a>
+        </Link>
       </div>
     </>
   );

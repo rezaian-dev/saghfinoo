@@ -8,7 +8,7 @@ const PropertyRatingCard = memo(
   ({ realestate = true, dataRelator, realestateData, handleModalClick }) => {
     // 🧠 Context & Hooks
     const { user } = useContext(FilterContext);
-    const { handleToastError } = useToast();
+    const { handleToastError,handleToastInfo } = useToast();
 
     // ⭐ Rating numbers
     const numberRating = [
@@ -24,6 +24,11 @@ const PropertyRatingCard = memo(
       user ? handleModalClick(e) : handleToastError("لطفاً ابتدا وارد حساب کاریری خود شوید!");
     };
 
+    const showMessage = ()=>{
+      handleToastInfo("این بخش فقط نمایشی است.");
+
+     }
+
     return (
       <div className="property-rating">
         {/* 🎯 Action buttons (Export & Archive) */}
@@ -34,6 +39,7 @@ const PropertyRatingCard = memo(
             alt="archiveMenu"
             className="cursor-pointer"
             loading="lazy"
+            onClick={showMessage}
           />
         </div>
 

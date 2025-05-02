@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Stepper from "../../../components/CoreComponents/Steps/Stepper/Stepper";
 import AdInputField from "../../../components/CoreComponents/Form/AdInputField/AdInputField";
 import AdTextInputField from "../../../components/CoreComponents/Form/AdTextInputField/AdTextInputField";
 import { useNavigate } from "react-router-dom";
 import { toiletTypes, coolingSystems, floorMaterials, heatingSystems } from "../../../data/realEstateData";
+import { FilterContext } from "../../../context/FilterContext";
 export default function FacilitiesForm() {
   const navigate = useNavigate();
+  const {setAdDraft} = useContext(FilterContext);
 
   // 🎯 Initialize form handling with default values and validation settings
   const {
@@ -28,11 +30,20 @@ export default function FacilitiesForm() {
     mode: "onChange",
     shouldFocusError: false,
   });
-
+  const handleGoBack = () => {
+    navigate("/register/3");
+  };
 
   // ✅ Handle form submission and navigate to the next step
   const onSubmit = (data) => {
-    console.log(data); // 📌 Debugging: Log form data
+    setAdDraft(prev => ({...prev,parking:data.parking,
+      bathroom:data.bathroom,
+      storage:data.storage,
+      toiletType:data.toiletType,
+      elevator:data.elevator,
+      coolingSystem:data.coolingSystem,
+      flooringMaterial:data.flooringMaterial,
+      heatingSystem:data.heatingSystem,}))
     navigate("/register/5");
   };
 
@@ -67,6 +78,7 @@ export default function FacilitiesForm() {
                 register={register}
                 formState={{ errors }}
                 required="*لطفاً تعداد پارکینگ را وارد کنید"
+                inputType={"number"}
               />
 
               {/* 🚽 Bathroom input field */}
@@ -77,6 +89,7 @@ export default function FacilitiesForm() {
                 register={register}
                 formState={{ errors }}
                 required="*لطفاً تعداد سرویس بهداشتی را بنویسید"
+                inputType={"number"}
               />
 
               {/* 🏠 Storage input field */}
@@ -87,6 +100,7 @@ export default function FacilitiesForm() {
                 register={register}
                 formState={{ errors }}
                 required="*لطفاً تعداد انباری را بنویسید"
+                inputType={"number"}
               />
 
               {/* 🚿 Toilet Type selection */}
@@ -115,6 +129,7 @@ export default function FacilitiesForm() {
                 register={register}
                 formState={{ errors }}
                 required="*لطفاً تعداد آسانسور را وارد کنید"
+                inputType={"number"}
               />
 
               {/* ❄️ Cooling System selection */}
@@ -176,7 +191,7 @@ export default function FacilitiesForm() {
 
             {/* 🔘 Navigation buttons */}
             <div className="form-buttons md:!mt-10">
-              <button type="button" className="form-buttons__prev">
+              <button type="button" className="form-buttons__prev" onClick={handleGoBack}>
                 قبلی
               </button>
               <button type="submit" className="form-buttons__next">

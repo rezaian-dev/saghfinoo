@@ -2,46 +2,45 @@ import React, { memo, useContext } from "react";
 import { Buliding, ExportCurve, RulerPen, TableLamp, Warning2 } from "iconsax-react";
 import { FilterContext } from "../../../../context/FilterContext";
 import useToast from "../../../../hooks/useToast";
-
+import { dataBase } from "../../../../data/realEstateData";
+import { convertToPersianNumber, formatPrice } from "../../../../utils/priceUtils";
+import { handleSaveAd } from "../../../../utils/adUtils";
+/**
+ * 🏢 PropertyOverview Component
+ * Displays comprehensive property information including:
+ * - Basic details (size, bedrooms, floor)
+ * - Pricing (mortgage, rent, or sale price)
+ * - Reporting functionality
+ */
 const PropertyOverview = memo(({
-  transactionType,
-  labelCity,
-  shortLocation,
-  size,
-  bedrooms,
-  floor,
-  totalFloors,
-  mortgage,
-  rent,
-  propertyCode,
-  releaseTime,
-  price,
-  handleModalClick,
+  transactionType,  // 🔄 'rent' or 'sale'
+  labelCity,        // 🏙️ City name
+  shortLocation,    // 📍 Short address
+  size,             // 📏 Property size in sqm
+  bedrooms,         // 🛏️ Number of bedrooms
+  floor,            // 🏢 Current floor
+  totalFloors,      // 🏢 Total floors in building
+  mortgage,         // 💰 Mortgage amount
+  rent,             // 💵 Monthly rent
+  propertyCode,     // 🔢 Unique property ID
+  releaseTime,      // ⏰ When ad was posted
+  price,            // 💲 Sale price
+  handleModalClick, // 🖱️ Report modal handler
+  id                // #️⃣ Property ID
 }) => {
 
-  const { user } = useContext(FilterContext);
+  // 🔍 Context hooks
+  const { user: acountUser, userAdSaveLists, setUserAdSaveLists } = useContext(FilterContext);
   const { handleToastError } = useToast();
 
-  const formatPrice = (amount) => {
-    if (+amount % 1000000 !== 0) {
-      return `${amount.toLocaleString("fa-IR")} تومان`;
-    } else if (amount >= 1_000_000_000) {
-      return `${(amount / 1_000_000_000).toLocaleString("fa-IR")} میلیارد تومان`;
-    } else if (amount >= 1_000_000) {
-      return `${(amount / 1_000_000).toLocaleString("fa-IR")} میلیون تومان`;
-    } else {
-      return `${amount.toLocaleString("fa-IR")} تومان`;
-    }
-  };
-
-  const convertToPersianNumber = (number) => {
-    return String(number).replace(/\d/g, (digit) => "۰۱۲۳۴۵۶۷۸۹"[digit]);
-  };
-
+  /**
+   * 🚨 Handle report ad click
+   **/
   const handleReportAdClick = (e) => {
-    user ? handleModalClick(e) : handleToastError("لطفاً ابتدا وارد حساب کاریری خود شوید!");
+    acountUser ? handleModalClick(e) : handleToastError("لطفاً ابتدا وارد حساب کاریری خود شوید!");
   };
 
+  // 📋 Property detail items
   const propertyDetails = [
     {
       id: 1,
@@ -63,15 +62,19 @@ const PropertyOverview = memo(({
     },
   ];
 
+  // 💰 Pricing information based on transaction type
   const leaseDetails = [
     { id: 1, title: "ودیعه", value: mortgage && formatPrice(mortgage) },
     { id: 2, title: "اجاره ماهیانه", value: rent && formatPrice(rent) },
     { id: 3, title: "فروش", value: price && formatPrice(price) },
   ];
 
+  // Check if current property is saved
+  const isSaved = userAdSaveLists?.some((ad) => ad.id === id);
+
   return (
     <div className="w-full">
-      {/* 🏠 Property Overview Header */}
+      {/* 🏠 Header Section */}
       <div className="property-overview__header container">
         <div className="property-overview__header-title">
           <span className="property-overview__header-title-text">
@@ -80,17 +83,18 @@ const PropertyOverview = memo(({
               : `خرید آپارتمان ${labelCity}`}
           </span>
 
+          {/* 🛠️ Action Icons */}
           <span className="icon-sizes">
-            <ExportCurve
-              className="icon-size property-rating__icon cursor-pointer pointer-events-auto"
-              color="#353535"
-              variant="Outline"
-            />
+            <ExportCurve className="icon-size property-rating__icon pointer-events-auto cursor-pointer" 
+              color="#353535" variant="Outline" />
             <img
-              className="icon-size"
-              src="../../svgs/icons/archive-minus(bg-gray-11).svg"
+              className="icon-size pointer-events-auto cursor-pointer"
+              src={isSaved 
+                ? "../../svgs/icons/archive-minus-red.svg" 
+                : "../../svgs/icons/archive-minus(bg-gray-11).svg"}
               loading="lazy"
               alt="archiveMenu"
+              onClick={(e) => handleSaveAd(e, id, acountUser, dataBase, setUserAdSaveLists,handleToastError)}
             />
           </span>
         </div>
@@ -99,17 +103,13 @@ const PropertyOverview = memo(({
         <h4 className="property-overview__location">{shortLocation}</h4>
       </div>
 
-      {/* 📌 Property Details */}
+      {/* 📊 Property Details Grid */}
       <div className="property-overview__details">
         <div className="property-overview__grid">
           {propertyDetails.map(({ id, title, value, Icon }) => (
             <div key={id} className="property-overview__box">
               <div className="property-overview__box-header">
-                <Icon
-                  className="property-overview__icon"
-                  color="#353535"
-                  variant="Outline"
-                />
+                <Icon className="property-overview__icon" color="#353535" variant="Outline" />
                 <h4 className="property-overview__box-title">{title}</h4>
               </div>
               <h5 className="property-overview__box-caption">{value}</h5>
@@ -118,7 +118,7 @@ const PropertyOverview = memo(({
         </div>
       </div>
 
-      {/* 💸 Lease Information */}
+      {/* 💸 Pricing Information */}
       <div className="property-overview__lease-info">
         <div className="property-overview__lease-list">
           {transactionType === "rent"
@@ -136,7 +136,7 @@ const PropertyOverview = memo(({
               ))}
         </div>
 
-        {/* 🚨 Report Section */}
+        {/* ⚠️ Report Section */}
         <div className="property-overview__report">
           <div className="property-overview__report-header">
             <span className="property-overview__report-time">
@@ -151,7 +151,7 @@ const PropertyOverview = memo(({
             </div>
           </div>
 
-          {/* 📌 Advertisement ID */}
+          {/* 🔢 Property ID */}
           <span className="property-overview__report-id">
             شناسه آگهی: {convertToPersianNumber(propertyCode)}
           </span>

@@ -18,10 +18,11 @@ export default function AdSuccess() {
       setTimeout(() => {
         if (isSuccess) {
           resolve({ message: "Your ad was successfully submitted!" }); // Success ✅
+          navigate("/home-pro-user")
         } else {
           reject({ message: "There was an issue with submitting your ad." }); // Error ⚠️
         }
-      }, 1000); // Simulated delay ⏳
+      }, 2000); // Simulated delay ⏳
     });
   };
 

@@ -36,28 +36,55 @@ export default function Realestate() {
     {
       id: 1,
       link: "t.me/amlaktoosi",
+      url: "https://t.me/amlaktoosi",
       image: "../../images/socialMedia/telegram.png",
       alt: "Telegram",
     },
     {
       id: 2,
       link: "Toosi_Amlak",
+      url: "https://www.linkedin.com/in/Toosi_Amlak",
       image: "../../images/socialMedia/linkdin.png",
       alt: "LinkedIn",
     },
     {
       id: 3,
       link: "Toosi_Amlak",
+      url: "https://www.instagram.com/Toosi_Amlak",
       image: "../../images/socialMedia/instagram.png",
       alt: "Instagram",
     },
     {
       id: 4,
       link: "Toosi_Amlak.com",
+      url: "https://www.Toosi_Amlak.com",
       image: "../../images/socialMedia/site.png",
       alt: "Website",
     },
   ];
+  
+
+  // 🔍 Data Initialization Effect
+  useEffect(() => {
+    const targetAgency = dataCardRealestates.find((item) => item.id === +id);
+    const agencyProperties = dataBase.filter(
+      (item) => item.advisor.office === targetAgency?.title
+    );
+    const agencyRealtors = agents.filter(
+      (item) => item.agency === targetAgency?.title
+    );
+
+    setReviewsList(targetAgency?.reviews || []);
+    setRealestateData(targetAgency || {});
+    setPropertyListings(agencyProperties);
+    setRealtorList(agencyRealtors);
+  }, [id, location.search]);
+
+  // 🖱️ Modal Event Listeners
+  useEffect(() => {
+    document.addEventListener("click", handleModalClick);
+    return () => document.removeEventListener("click", handleModalClick);
+  }, [handleModalClick]);
 
   // 🔍 Data Initialization Effect
   useEffect(() => {
@@ -91,9 +118,9 @@ export default function Realestate() {
 
         {/* 📱 Social Media Links */}
         <div className="realestate__social-box">
-          {socialMediaLinks.map(({ id, link, image, alt }) => (
+          {socialMediaLinks.map(({ id, link, image, alt,url }) => (
             <span key={id} className="realestate__social-item">
-              <a className="realestate__social-link" href="#">
+              <a className="realestate__social-link" target="_blank" href={url}>
                 {link}
                 <img
                   className="realestate__social-icon"

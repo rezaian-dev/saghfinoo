@@ -28,7 +28,7 @@ const SelectionFilterOption = memo(({ id, label, selected, handleChangeBox, cont
           "property-filter-box__label",
           context === "mobile" 
             ? "text-[10px]" 
-            : "text-sm"
+            : "md:text-sm"
         )}
         // 🏷️ Render the checkbox label
       >

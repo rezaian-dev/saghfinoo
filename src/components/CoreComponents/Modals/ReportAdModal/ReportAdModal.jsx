@@ -4,6 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { ToastContainer } from "react-toastify";
 import clsx from "classnames";
 import useToast from "../../../../hooks/useToast";
+import { adReportIssues } from "../../../../data/realEstateData";
 
 const ReportAdModal = memo(({ isOpenModal, setIsOpenModal }) => {
   const [submitting, setSubmitting] = useState(false); // 🚀 Submission state
@@ -15,14 +16,6 @@ const ReportAdModal = memo(({ isOpenModal, setIsOpenModal }) => {
       comment: "",
     },
   });
-
-  const reasons = [
-    "ملک واگذار شده",
-    "قیمت اشتباهه",
-    "عکس ها مرتبط نیست",
-    "کسی پاسخگو نیست",
-    "توضیحات ناقصه",
-  ];
 
   const onSubmit = () => {
     setSubmitting(true); // 🕒 Start loading
@@ -59,25 +52,25 @@ const ReportAdModal = memo(({ isOpenModal, setIsOpenModal }) => {
               }}
               render={({ field }) => (
                 <>
-                  {reasons.map((reason) => (
+                  {adReportIssues.map((issue) => (
                     // ☑️ Single checkbox item
                     <li
-                      key={reason}
+                      key={issue}
                       className={clsx(
                         "report-ad-modal__checkbox-item",
                         submitting && "pointer-events-none"
                       )}
                       onClick={() => {
-                        const isSelected = field.value.includes(reason);
+                        const isSelected = field.value.includes(issue);
                         const newValue = isSelected
-                          ? field.value.filter((r) => r !== reason)
-                          : [...field.value, reason];
+                          ? field.value.filter((r) => r !== issue)
+                          : [...field.value, issue];
                         field.onChange(newValue);
                       }}
                     >
                       <img
                         src={
-                          field.value.includes(reason)
+                          field.value.includes(issue)
                             ? "../../svgs/icons/checked.svg"
                             : "../../svgs/icons/checkBox.svg"
                         }
@@ -86,7 +79,7 @@ const ReportAdModal = memo(({ isOpenModal, setIsOpenModal }) => {
                         alt="checkbox"
                       />
                       <span className="report-ad-modal__checkbox-label">
-                        {reason}
+                        {issue}
                       </span>
                     </li>
                   ))}
