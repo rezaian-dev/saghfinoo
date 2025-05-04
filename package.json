@@ -19,7 +19,6 @@
     "@react-spring/web": "^9.7.5",
     "autoprefixer": "10.4.20",
     "classnames": "^2.5.1",
-    "framer-motion": "^12.4.12",
     "iconsax-react": "^0.0.8",
     "postcss": "8.5.1",
     "react": "^18.3.1",
