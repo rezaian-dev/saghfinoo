@@ -16,12 +16,12 @@ const FilterProvider = ({ children }) => {
   const [userPhoneNumber, setUserPhoneNumber] = useState("");
   const [showVerificationStep, setShowVerificationStep] = useState(false);
   const [protectedRedirect, setProtectedRedirect] = useState(false);
-
+  
   // 📦 AD MANAGEMENT
   const [adDraft, setAdDraft] = useState({});
   const [userAdlists, setUserAdLists] = useState([]);
   const [userAdSaveLists, setUserAdSaveLists] = useState([]);
-
+  
   // 🏷️ FILTER OPTIONS DATA
   const [listPropertyType, setListPropertyType] = useState([]);
   const [listArea, setListArea] = useState([]);
@@ -29,12 +29,12 @@ const FilterProvider = ({ children }) => {
   const [listHotSystem, setListHotSystem] = useState([]);
   const [listFloorMaterial, setListFloorMaterial] = useState([]);
   const [listCities, setListCities] = useState([]);
-
+  
   // 🔢 FILTER COUNTERS
   const [filtersCountDesktop, setFiltersCountDesktop] = useState(0);
   const [filtersCountMobile, setFiltersCountMobile] = useState(0);
   const [filterCount, setFilterCount] = useState(0);
-
+  
   // 📥 INITIAL DATA LOADING
   useEffect(() => {
     // Load filter counts from localStorage
@@ -42,25 +42,38 @@ const FilterProvider = ({ children }) => {
     setFiltersCountMobile(+localStorage.getItem("filtersMobileCount") || 0);
     setFilterCount(+localStorage.getItem("filterCount") || 0);
   }, [location.search]);
+  
+  // 🧹 RESET FILTERS WHEN NAVIGATING TO NEW PAGE
+  useEffect(() => {
+    // Reset filter counts in localStorage when pathname changes
+    localStorage.setItem("filtersDesktopCount", "0");
+    localStorage.setItem("filtersMobileCount", "0");
+    localStorage.setItem("filterCount", "0");
+    
+    // Also update state values
+    setFiltersCountDesktop(0);
+    setFiltersCountMobile(0);
+    setFilterCount(0);
+  }, [location.pathname]);
 
   useEffect(() => {
     // 🗄️ Load persisted data
     const loadPersistedData = () => {
       const storedUsers = localStorage.getItem("usersDataBase");
       const storedUser = localStorage.getItem("user");
-
+      
       setUsersDataBase(storedUsers ? JSON.parse(storedUsers) : []);
-
+      
       if (storedUser) {
         const parsedUser = JSON.parse(storedUser);
         setUser(parsedUser);
         setUserAdSaveLists(parsedUser.userAdSaveLists || []);
       }
     };
-
+    
     loadPersistedData();
   }, [location.pathname]);
-
+  
   // 📦 Context value object
   const contextValue = {
     // 👤 User related states
@@ -76,7 +89,7 @@ const FilterProvider = ({ children }) => {
     setProtectedRedirect,
     usersDataBase,
     setUsersDataBase,
-
+    
     // 🏠 Ad related states
     adDraft,
     setAdDraft,
@@ -84,7 +97,7 @@ const FilterProvider = ({ children }) => {
     setUserAdLists,
     userAdSaveLists,
     setUserAdSaveLists,
-
+    
     // 🏷️ Filter option lists
     listPropertyType,
     setListPropertyType,
@@ -98,7 +111,7 @@ const FilterProvider = ({ children }) => {
     setListFloorMaterial,
     listCities,
     setListCities,
-
+    
     // 🔢 Filter counters
     filterCount,
     setFilterCount,
@@ -107,7 +120,7 @@ const FilterProvider = ({ children }) => {
     filtersCountMobile,
     setFiltersCountMobile,
   };
-
+  
   return (
     <FilterContext.Provider value={contextValue}>
       {children}
